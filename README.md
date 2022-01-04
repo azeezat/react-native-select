@@ -1,6 +1,7 @@
 # react-native-select
 
-Dropdown package for react-native
+Dropdown package for react-native.
+Works perfectly on android and iOS.
 
 ## Installation
 
@@ -47,6 +48,8 @@ export default function App() {
 }
 ```
 
+## Props
+
 | Proptypes              | Datatype            | Example                                          |
 | ---------------------- | ------------------- | ------------------------------------------------ |
 | label                  | `string`            | `Countries`                                      |
@@ -55,7 +58,7 @@ export default function App() {
 | optionLabel            | `string`            | `name`                                           |
 | optionValue            | `string`            | `code`                                           |
 | selectedValue          | `string` or `Array` | `AL` or `[AL, AX]`                               |
-| onValueChange          | `function`          | `()=>{`                                          |
+| onValueChange          | `function`          | `()=>{}`                                          |
 | isMultiple             | `Boolean`           | `true`                                           |
 | labelStyle             | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}` |
 | dropdownStyle          | `Object`            | `{backgroundColor: 'red', margin: 5, ...}`       |

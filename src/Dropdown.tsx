@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
   inputFocusErrorState: {
     borderWidth: 2,
     borderStyle: 'solid',
-    borderColor: colors.cliqkiRed,
+    borderColor: colors.red,
   },
   iconStyle: { position: 'absolute', right: 25, top: 25 },
-  error: { color: colors.cliqkiRed, marginTop: 8, ...typography.caption },
+  error: { color: colors.red, marginTop: 8, ...typography.caption },
   helper: { marginTop: 8, color: colors.primary, ...typography.caption },
   dropdownInputContainer: { marginBottom: 23, width: '100%' },
   selectedItemsContainer: { flexDirection: 'row', flexWrap: 'nowrap' },
