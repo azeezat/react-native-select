@@ -8,10 +8,8 @@ Dropdown package for react-native
 npm install react-native-select
 ```
 ## Demo
-![Preview Multiple select](https://user-images.githubusercontent.com/9849221/148039859-9eb4ef87-60ca-4300-9899-fbe81dcb0fb6.mov)
-
-
-![Preview Single select](https://user-images.githubusercontent.com/9849221/148039800-9c30509a-6115-415e-aa3c-0402d64ec578.mov)
+<video src='https://user-images.githubusercontent.com/9849221/148039859-9eb4ef87-60ca-4300-9899-fbe81dcb0fb6.mov' width=180/>
+<video src='https://user-images.githubusercontent.com/9849221/148039800-9c30509a-6115-415e-aa3c-0402d64ec578.mov' width=180/>
 
 ## Usage
 
