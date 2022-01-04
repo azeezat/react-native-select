@@ -24,7 +24,11 @@ export const DropdownSelect = ({
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(selectedValue); //for single selection
   const [selectedItems, setSelectedItems] = useState(
-    Array.isArray(selectedValue) ? selectedValue : []
+    Array.isArray(selectedValue)
+      ? selectedValue
+      : selectedValue === ''
+      ? []
+      : [selectedValue]
   ); //for multiple selection
 
   /*===========================================
