@@ -43,6 +43,37 @@ export default function App() {
 }
 ```
 
+| Proptypes                   |Datatype                      | Example                                              |
+| ------------------          |------------------------------| ---------------------------------------              |
+| label                       | `string`                     | `Countries`                                          |
+| placeholder                 | `string`                     | `Select a country`                                   |
+| options                     | `Array`                      | `[{ name: 'Albania', code: 'AL' },
+                                                                { name: 'Åland Islands', code: 'AX' },
+                                                                { name: 'Algeria', code: 'DZ' },
+                                                                { name: 'American Samoa', code: 'AS' },
+                                                                { name: 'Andorra', code: 'AD' },
+                                                                { name: 'Angola', code: 'AO' },
+                                                                { name: 'Anguilla', code: 'AI' },
+                                                                { name: 'Antarctica', code: 'AQ' },
+                                                                { name: 'Antigua and Barbuda', code: 'AG' },]`      |
+| optionLabel                 | `string`                     | `name`                                               |
+| optionValue                 | `string`                     | `code`                                               |
+| selectedValue               | `string` or `Array`          | `AL`                                                 |
+| onValueChange               | `function`                   | `()=>{`                                              |
+| isMultiple                  | `Boolean`                    | `true`                                               |
+| labelStyle                  | `Object`                     | `{backgroundColor: 'red', borderRadius: 0, ...}`     |
+| dropdownStyle               | `Object`                     | `{backgroundColor: 'red', margin: 5, ...}`    |
+| dropdownContainerStyle      | `Object`                     | `{backgroundColor: 'red', borderRadius: 0, ...}`     |
+| selectedItemStyle           | `Object`                     | `{backgroundColor: 'red', color: 'yellow', ...}`     |
+| modalBackgroundStyle        | `Object`                     | `{backgroundColor: 'blue', ...}`                     |
+| modalOptionsContainer       | `Object`                     | `{padding: 5}`                                       |
+
+
+ labelStyle={labelStyle}
+        dropdownStyle={dropdownStyle}
+        dropdownContainerStyle={dropdownContainerStyle}
+        selectedItemStyle={selectedItemStyle}
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
