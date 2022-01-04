@@ -47,15 +47,7 @@ export default function App() {
 | ---------------------- | ------------------- | ------------------------------------------------ |
 | label                  | `string`            | `Countries`                                      |
 | placeholder            | `string`            | `Select a country`                               |
-| options                | `Array`             | `[{ name: 'Albania', code: 'AL' },               |
-|                        |                     | { name: 'Åland Islands', code: 'AX' },           |
-|                        |                     | { name: 'Algeria', code: 'DZ' },                 |
-|                        |                     | { name: 'American Samoa', code: 'AS' },          |
-|                        |                     | { name: 'Andorra', code: 'AD' },                 |
-|                        |                     | { name: 'Angola', code: 'AO' },                  |
-|                        |                     | { name: 'Anguilla', code: 'AI' },                |
-|                        |                     | { name: 'Antarctica', code: 'AQ' },              |
-|                        |                     | { name: 'Antigua and Barbuda', code: 'AG' },]`   |
+| options                | `Array`             | `[{ name: 'Albania', code: 'AL' }, { name: 'Åland Islands', code: 'AX' }]` |
 | optionLabel            | `string`            | `name`                                           |
 | optionValue            | `string`            | `code`                                           |
 | selectedValue          | `string` or `Array` | `AL`                                             |
@@ -67,11 +59,6 @@ export default function App() {
 | selectedItemStyle      | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}` |
 | modalBackgroundStyle   | `Object`            | `{backgroundColor: 'blue', ...}`                 |
 | modalOptionsContainer  | `Object`            | `{padding: 5}`                                   |
-
-labelStyle={labelStyle}
-dropdownStyle={dropdownStyle}
-dropdownContainerStyle={dropdownContainerStyle}
-selectedItemStyle={selectedItemStyle}
 
 ## Contributing
 
