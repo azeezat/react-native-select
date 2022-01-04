@@ -9,6 +9,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@react-native-community/checkbox": "^0.5.9",
     "react": "16.13.1",
     "react-native": "0.63.4"
   },
