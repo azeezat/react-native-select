@@ -50,7 +50,7 @@ export default function App() {
 | options                | `Array`             | `[{ name: 'Albania', code: 'AL' }, { name: 'Åland Islands', code: 'AX' }]` |
 | optionLabel            | `string`            | `name`                                           |
 | optionValue            | `string`            | `code`                                           |
-| selectedValue          | `string` or `Array` | `AL`                                             |
+| selectedValue          | `string` or `Array` | `AL` or `[AL, AX]`                               |
 | onValueChange          | `function`          | `()=>{`                                          |
 | isMultiple             | `Boolean`           | `true`                                           |
 | labelStyle             | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}` |

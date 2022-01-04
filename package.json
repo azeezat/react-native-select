@@ -1,5 +1,5 @@
 {
-  "name": "react-native-select",
+  "name": "react-native-input-select",
   "version": "0.1.0",
   "description": "Dropdown package for react-native",
   "main": "lib/commonjs/index",
@@ -26,7 +26,7 @@
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
-    "release": "release-it",
+    "release": "release-it -- minor --ci",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods"
@@ -64,13 +64,13 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-builder-bob": "^0.18.2",
-    "release-it": "^14.2.2",
+    "release-it": "^14.11.8",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
+    "@react-native-community/checkbox": "^0.5.9",
     "react": "*",
-    "react-native": "*",
-    "@react-native-community/checkbox": "^0.5.9"
+    "react-native": "*"
   },
   "jest": {
     "preset": "react-native",
