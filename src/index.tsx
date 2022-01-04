@@ -26,7 +26,7 @@ export const DropdownSelect = ({
   const [selectedItems, setSelectedItems] = useState(
     Array.isArray(selectedValue)
       ? selectedValue
-      : selectedValue === ''
+      : selectedValue === '' || selectedValue === undefined
       ? []
       : [selectedValue]
   ); //for multiple selection
