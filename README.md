@@ -67,6 +67,7 @@ export default function App() {
 | labelStyle             | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
 | dropdownStyle          | `Object`            | `{backgroundColor: 'red', margin: 5, ...}`                                 |
 | dropdownContainerStyle | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| searchInputStyle       | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                     |
 | selectedItemStyle      | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
 | modalBackgroundStyle   | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
 | modalOptionsContainer  | `Object`            | `{padding: 5}`                                                             |
