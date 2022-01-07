@@ -8,10 +8,12 @@ Works perfectly on android and iOS.
 ```sh
 npm install react-native-select
 ```
+
 ## Demo
-Multiple Select | Single Select
-:-: | :-:
-<video src='https://user-images.githubusercontent.com/9849221/148039859-9eb4ef87-60ca-4300-9899-fbe81dcb0fb6.mov' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148039800-9c30509a-6115-415e-aa3c-0402d64ec578.mov' width=90/>
+
+|                                                       Multiple Select                                                        |                                                        Single Select                                                         |
+| :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
+| <video src='https://user-images.githubusercontent.com/9849221/148039859-9eb4ef87-60ca-4300-9899-fbe81dcb0fb6.mov' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148039800-9c30509a-6115-415e-aa3c-0402d64ec578.mov' width=90/> |
 
 ## Usage
 
@@ -22,7 +24,7 @@ import { StyleSheet, View } from 'react-native';
 import DropdownSelect from 'react-native-select';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [country, setCountry] = React.useState<number | undefined>();
 
   return (
       <DropdownSelect
@@ -41,8 +43,9 @@ export default function App() {
         ]}
         optionLabel={'name'}
         optionValue={'code'}
-        selectedValue={result}
-        onValueChange={(itemValue) => setResult(itemValue)}
+        selectedValue={country}
+        onValueChange={(value) => setCountry(value)}
+        primaryColor={'green'}
       />
   );
 }
@@ -50,22 +53,24 @@ export default function App() {
 
 ## Props
 
-| Proptypes              | Datatype            | Example                                          |
-| ---------------------- | ------------------- | ------------------------------------------------ |
-| label                  | `string`            | `Countries`                                      |
-| placeholder            | `string`            | `Select a country`                               |
+| Proptypes              | Datatype            | Example                                                                    |
+| ---------------------- | ------------------- | -------------------------------------------------------------------------- |
+| label                  | `string`            | `Countries`                                                                |
+| placeholder            | `string`            | `Select a country`                                                         |
 | options                | `Array`             | `[{ name: 'Albania', code: 'AL' }, { name: 'Åland Islands', code: 'AX' }]` |
-| optionLabel            | `string`            | `name`                                           |
-| optionValue            | `string`            | `code`                                           |
-| selectedValue          | `string` or `Array` | `AL` or `[AL, AX]`                               |
-| onValueChange          | `function`          | `()=>{}`                                          |
-| isMultiple             | `Boolean`           | `true`                                           |
-| labelStyle             | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}` |
-| dropdownStyle          | `Object`            | `{backgroundColor: 'red', margin: 5, ...}`       |
-| dropdownContainerStyle | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}` |
-| selectedItemStyle      | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}` |
-| modalBackgroundStyle   | `Object`            | `{backgroundColor: 'blue', ...}`                 |
-| modalOptionsContainer  | `Object`            | `{padding: 5}`                                   |
+| optionLabel            | `string`            | `name`                                                                     |
+| optionValue            | `string`            | `code`                                                                     |
+| selectedValue          | `string` or `Array` | `AL` or `[AL, AX]`                                                         |
+| onValueChange          | `function`          | `()=>{}`                                                                   |
+| isMultiple             | `Boolean`           | `true`                                                                     |
+| isSearchable           | `Boolean`           | `true`                                                                     |
+| labelStyle             | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| dropdownStyle          | `Object`            | `{backgroundColor: 'red', margin: 5, ...}`                                 |
+| dropdownContainerStyle | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| selectedItemStyle      | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
+| modalBackgroundStyle   | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
+| modalOptionsContainer  | `Object`            | `{padding: 5}`                                                             |
+| primaryColor           | `string`            | `blue`                                                                     |
 
 ## Contributing
 

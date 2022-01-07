@@ -29,12 +29,17 @@
     "release": "release-it -- minor --ci",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "start": "yarn example start",
+    "android": "yarn example android",
+    "ios": "yarn example ios"
   },
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "dropdown",
+    "selection"
   ],
   "repository": "https://github.com/azeezat/react-native-select",
   "author": "Azeezat <azeezat94@gmail.com> (https://github.com/azeezat)",

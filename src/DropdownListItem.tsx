@@ -10,6 +10,7 @@ const DropdownListItem = ({
   isMultiple,
   selectedOption,
   onChange,
+  primaryColor,
 }: any) => {
   const selectedOptionValue = optionValue ?? 'value';
   return (
@@ -26,9 +27,9 @@ const DropdownListItem = ({
           }
           onChange={() => onChange(item[selectedOptionValue])}
           boxType="circle" //works on ios only
-          tintColors={{ true: colors.primary }} //android control
-          onCheckColor={colors.primary} //ios checkmark colour control
-          onTintColor={colors.primary} //ios box colour control
+          tintColors={{ true: primaryColor || colors.primary }} //android control
+          onCheckColor={primaryColor || colors.primary} //ios checkmark colour control
+          onTintColor={primaryColor || colors.primary} //ios box colour control
         />
       </View>
       <View>

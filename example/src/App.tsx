@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import DropdownSelect from 'react-native-select';
+import DropdownSelect from 'react-native-input-select';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>(null);
+  const [country, setCountry] = React.useState<any>('');
 
   return (
     <View style={styles.container}>
@@ -24,9 +24,11 @@ export default function App() {
         ]}
         optionLabel={'name'}
         optionValue={'code'}
-        selectedValue={result}
-        onValueChange={(itemValue: any) => setResult(itemValue)}
+        selectedValue={country}
+        onValueChange={(itemValue: any) => setCountry(itemValue)}
         isMultiple
+        isSearchable
+        primaryColor={'green'}
       />
     </View>
   );

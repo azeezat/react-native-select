@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import CustomModal from './Modal';
 import DropdownList from './DropdownList';
+import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
+import { Input } from './Input';
 
 export const DropdownSelect = ({
   placeholder,
@@ -14,13 +16,17 @@ export const DropdownSelect = ({
   onValueChange,
   selectedValue,
   isMultiple,
+  isSearchable,
   labelStyle,
   dropdownStyle,
   dropdownContainerStyle,
   selectedItemStyle,
   modalBackgroundStyle,
   modalOptionsContainer,
+  searchInputStyle,
+  primaryColor,
 }: any) => {
+  const [newOptions, setNewOptions] = useState(options ? options : []);
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(selectedValue); //for single selection
   const [selectedItems, setSelectedItems] = useState(
@@ -30,6 +36,7 @@ export const DropdownSelect = ({
       ? []
       : [selectedValue]
   ); //for multiple selection
+  const [searchValue, setSearchValue] = useState('');
 
   /*===========================================
    * Selection handlers
@@ -66,7 +73,8 @@ export const DropdownSelect = ({
           let selectedItemLabel =
             options &&
             options.find(
-              (item: string) => item[optionValue ?? 'value'] === element
+              (item: string) =>
+                item[optionValue ?? DEFAULT_OPTION_VALUE] === element
             )?.[optionLabel];
           selectedLabels.push(selectedItemLabel);
         });
@@ -76,9 +84,32 @@ export const DropdownSelect = ({
     let selectedItemLabel =
       options &&
       options.find(
-        (item: string) => item[optionValue ?? 'value'] === selectedItem
+        (item: string) =>
+          item[optionValue ?? DEFAULT_OPTION_VALUE] === selectedItem
       );
-    return selectedItemLabel?.[optionLabel];
+    return selectedItemLabel?.[optionLabel ?? DEFAULT_OPTION_LABEL];
+  };
+
+  /*===========================================
+   * Search
+   *==========================================*/
+  const onSearch = (value: string) => {
+    setSearchValue(value);
+    let searchTerm = value.toString().toLocaleLowerCase();
+    const searchResults = options.filter((item: any) => {
+      return (
+        item[optionLabel ?? DEFAULT_OPTION_LABEL]
+          .toString()
+          .toLowerCase()
+          .includes(searchTerm) ||
+        item[optionValue ?? DEFAULT_OPTION_VALUE]
+          .toString(searchTerm)
+          .toLowerCase()
+          .includes()
+      );
+    });
+
+    setNewOptions(searchResults);
   };
 
   return (
@@ -98,6 +129,7 @@ export const DropdownSelect = ({
         dropdownContainerStyle={dropdownContainerStyle}
         selectedItemStyle={selectedItemStyle}
         isMultiple={isMultiple}
+        primaryColor={primaryColor}
       />
       <CustomModal
         open={open}
@@ -106,8 +138,15 @@ export const DropdownSelect = ({
         modalOptionsContainer={modalOptionsContainer}
         onRequestClose={() => {}}
       >
+        {isSearchable && (
+          <Input
+            value={searchValue}
+            onChangeText={(text: string) => onSearch(text)}
+            style={searchInputStyle}
+          />
+        )}
         <DropdownList
-          options={options}
+          options={newOptions}
           optionLabel={optionLabel}
           optionValue={optionValue}
           isMultiple={isMultiple}
@@ -115,6 +154,7 @@ export const DropdownSelect = ({
           selectedItem={selectedItem}
           handleMultipleSelections={handleMultipleSelections}
           handleSingleSelection={handleSingleSelection}
+          primaryColor={primaryColor}
         />
       </CustomModal>
     </>

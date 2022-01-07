@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import { colors } from './styles/colors';
+import { inputStyles } from './styles/input';
 import { typography } from './styles/typography';
 
 const Dropdown = ({
@@ -25,6 +26,7 @@ const Dropdown = ({
   dropdownStyle,
   dropdownContainerStyle,
   selectedItemStyle,
+  primaryColor,
 }: any) => {
   return (
     <View style={[styles.dropdownInputContainer, dropdownContainerStyle]}>
@@ -34,8 +36,8 @@ const Dropdown = ({
       <Pressable
         onPress={() => setOpen(!open)}
         style={({ pressed }) => [
-          pressed && styles.inputFocusState,
-          styles.input,
+          pressed && inputStyles.inputFocusState,
+          inputStyles.input,
           dropdownStyle,
         ]}
       >
@@ -52,7 +54,11 @@ const Dropdown = ({
               getSelectedItemsLabel().map((item: any, i: Number) => (
                 <Text
                   key={`SelectedItems${i}`}
-                  style={[styles.selectedItems, selectedItemStyle]}
+                  style={[
+                    styles.selectedItems,
+                    { backgroundColor: primaryColor },
+                    selectedItemStyle,
+                  ]}
                 >
                   {item}
                 </Text>
@@ -84,23 +90,6 @@ const Dropdown = ({
 
 const styles = StyleSheet.create({
   label: { marginBottom: 16, color: colors.gray, ...typography.caption },
-  input: {
-    paddingVertical: 18,
-    paddingHorizontal: 23,
-    backgroundColor: colors.lightGray,
-    borderRadius: 8,
-    borderColor: colors.dark,
-    borderWidth: 1,
-    color: colors.dark,
-    width: '100%',
-    minHeight: 64,
-  },
-  inputFocusState: {
-    borderWidth: 2,
-    borderStyle: 'solid',
-    borderColor: colors.primary,
-    borderRadius: 8,
-  },
   inputFocusErrorState: {
     borderWidth: 2,
     borderStyle: 'solid',

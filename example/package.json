@@ -6,7 +6,9 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start"
+    "start": "react-native start",
+    "android:clean-build": "rm -rf android/app/build && rm -rf tmp/metro-* && rm -rf tmp/haste-map-*"
+
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.9",

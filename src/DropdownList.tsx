@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, Text } from 'react-native';
 import DropdownListItem from './DropdownListItem';
 import { colors } from './styles/colors';
 
@@ -12,18 +12,18 @@ const DropdownList = ({
   selectedItem,
   handleMultipleSelections,
   handleSingleSelection,
+  primaryColor,
 }: any) => {
   return (
     <FlatList
       data={options}
       extraData={isMultiple ? selectedItems : selectedItem}
       initialNumToRender={5}
-      // ListEmptyComponent={
-      //   <EmptyStateComponent
-      //     style={{alignItems: 'flex-start', marginTop: 30}}
-      //     message="Be the first to reply"
-      //   />
-      // }
+      ListEmptyComponent={
+        <View style={styles.emptyListStyle}>
+          <Text>No options available</Text>
+        </View>
+      }
       ItemSeparatorComponent={() => <View style={styles.itemSeparatorStyle} />}
       renderItem={(item) =>
         _renderItem(item, {
@@ -34,6 +34,7 @@ const DropdownList = ({
           onChange: isMultiple
             ? handleMultipleSelections
             : handleSingleSelection,
+          primaryColor,
         })
       }
       keyExtractor={(_item, index) => `Options${index}`}
@@ -50,6 +51,7 @@ const _renderItem = ({ item }: any, props: any) => {
       isMultiple={props.isMultiple}
       selectedOption={props.selectedOption}
       onChange={props.onChange}
+      primaryColor={props.primaryColor}
     />
   );
 };
@@ -71,6 +73,7 @@ const styles = StyleSheet.create({
     height: 1,
     opacity: 0.15,
   },
+  emptyListStyle: { alignItems: 'center', width: '100%', marginVertical: 20 },
 });
 
 export default DropdownList;
