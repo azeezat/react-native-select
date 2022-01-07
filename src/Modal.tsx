@@ -9,7 +9,7 @@ import { colors } from './styles/colors';
 
 const CustomModal = ({
   open,
-  setOpen,
+  handleToggleModal,
   onRequestClose,
   modalBackgroundStyle,
   modalOptionsContainerStyle,
@@ -23,7 +23,7 @@ const CustomModal = ({
       animationType="fade"
     >
       <TouchableOpacity
-        onPress={() => setOpen(!open)}
+        onPress={() => handleToggleModal()}
         style={[
           styles.modalContainer,
           styles.modalBackgroundStyle,

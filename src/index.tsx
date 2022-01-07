@@ -112,6 +112,15 @@ export const DropdownSelect = ({
     setNewOptions(searchResults);
   };
 
+  /*===========================================
+   * Modal
+   *==========================================*/
+  const handleToggleModal = () => {
+    setOpen(!open);
+    setSearchValue('');
+    setNewOptions(options);
+  };
+
   return (
     <>
       <Dropdown
@@ -122,8 +131,7 @@ export const DropdownSelect = ({
         getSelectedItemsLabel={getSelectedItemsLabel}
         selectedItem={selectedItem}
         selectedItems={selectedItems}
-        setOpen={setOpen}
-        open={open}
+        handleToggleModal={handleToggleModal}
         labelStyle={labelStyle}
         dropdownStyle={dropdownStyle}
         dropdownContainerStyle={dropdownContainerStyle}
@@ -133,7 +141,7 @@ export const DropdownSelect = ({
       />
       <CustomModal
         open={open}
-        setOpen={setOpen}
+        handleToggleModal={handleToggleModal}
         modalBackgroundStyle={modalBackgroundStyle}
         modalOptionsContainer={modalOptionsContainer}
         onRequestClose={() => {}}

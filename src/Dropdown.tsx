@@ -17,8 +17,7 @@ const Dropdown = ({
   helperText,
   error,
   getSelectedItemsLabel,
-  setOpen,
-  open,
+  handleToggleModal,
   isMultiple,
   selectedItem,
   selectedItems,
@@ -34,7 +33,7 @@ const Dropdown = ({
         <Text style={[styles.label, labelStyle]}>{label}</Text>
       )}
       <Pressable
-        onPress={() => setOpen(!open)}
+        onPress={() => handleToggleModal()}
         style={({ pressed }) => [
           pressed && inputStyles.inputFocusState,
           inputStyles.input,
