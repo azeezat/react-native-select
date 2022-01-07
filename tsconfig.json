@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-select": ["./src/index"]
+      "react-native-input-select": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
