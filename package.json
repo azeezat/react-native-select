@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-select",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Dropdown package for react-native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
