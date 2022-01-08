@@ -1,7 +1,7 @@
 {
   "name": "react-native-input-select",
   "version": "0.7.0",
-  "description": "Dropdown package for react-native",
+  "description": "A customizable dropdown selection package for react-native for android and iOS with multiple select and search capabilities.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

@@ -1,12 +1,11 @@
-# react-native-select
+# react-native-input-select
 
-Dropdown package for react-native.
-Works perfectly on android and iOS.
+A customizable dropdown selection package for react-native for android and iOS with multiple select and search capabilities.
 
 ## Installation
 
 ```sh
-npm install react-native-select
+npm install react-native-input-select
 ```
 
 ## Demo
@@ -18,10 +17,10 @@ npm install react-native-select
 ## Usage
 
 ```js
-import * as React from 'react';
+import React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import DropdownSelect from 'react-native-select';
+import DropdownSelect from 'react-native-input-select';
 
 export default function App() {
   const [country, setCountry] = React.useState<number | undefined>();

@@ -54,9 +54,11 @@ const Dropdown = ({
           >
             {isMultiple ? (
               getSelectedItemsLabel().map((item: any, i: Number) => (
-                <TouchableOpacity onPress={() => handleToggleModal()}>
+                <TouchableOpacity
+                  onPress={() => handleToggleModal()}
+                  key={`SelectedItems${i}`}
+                >
                   <Text
-                    key={`SelectedItems${i}`}
                     style={[
                       styles.selectedItems,
                       { backgroundColor: primaryColor },
