@@ -21,6 +21,7 @@ export const DropdownSelect = ({
   dropdownStyle,
   dropdownContainerStyle,
   selectedItemStyle,
+  multipleSelectedItemStyle,
   modalBackgroundStyle,
   modalOptionsContainer,
   searchInputStyle,
@@ -136,6 +137,7 @@ export const DropdownSelect = ({
         dropdownStyle={dropdownStyle}
         dropdownContainerStyle={dropdownContainerStyle}
         selectedItemStyle={selectedItemStyle}
+        multipleSelectedItemStyle={multipleSelectedItemStyle}
         isMultiple={isMultiple}
         primaryColor={primaryColor}
       />
@@ -151,6 +153,7 @@ export const DropdownSelect = ({
             value={searchValue}
             onChangeText={(text: string) => onSearch(text)}
             style={searchInputStyle}
+            primaryColor={primaryColor}
           />
         )}
         <DropdownList

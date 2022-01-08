@@ -17,6 +17,5 @@ export const inputStyles: any = StyleSheet.create({
     borderWidth: 2,
     borderStyle: 'solid',
     borderColor: colors.primary,
-    borderRadius: 8,
   },
 });

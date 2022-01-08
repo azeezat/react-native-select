@@ -53,25 +53,26 @@ export default function App() {
 
 ## Props
 
-| Proptypes              | Datatype            | Example                                                                    |
-| ---------------------- | ------------------- | -------------------------------------------------------------------------- |
-| label                  | `string`            | `Countries`                                                                |
-| placeholder            | `string`            | `Select a country`                                                         |
-| options                | `Array`             | `[{ name: 'Albania', code: 'AL' }, { name: 'Åland Islands', code: 'AX' }]` |
-| optionLabel            | `string`            | `name`                                                                     |
-| optionValue            | `string`            | `code`                                                                     |
-| selectedValue          | `string` or `Array` | `AL` or `[AL, AX]`                                                         |
-| onValueChange          | `function`          | `()=>{}`                                                                   |
-| isMultiple             | `Boolean`           | `true`                                                                     |
-| isSearchable           | `Boolean`           | `true`                                                                     |
-| labelStyle             | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
-| dropdownStyle          | `Object`            | `{backgroundColor: 'red', margin: 5, ...}`                                 |
-| dropdownContainerStyle | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
-| searchInputStyle       | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                     |
-| selectedItemStyle      | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
-| modalBackgroundStyle   | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
-| modalOptionsContainer  | `Object`            | `{padding: 5}`                                                             |
-| primaryColor           | `string`            | `blue`                                                                     |
+| Proptypes                 | Datatype            | Example                                                                    |
+| ------------------------- | ------------------- | -------------------------------------------------------------------------- |
+| label                     | `string`            | `Countries`                                                                |
+| placeholder               | `string`            | `Select a country`                                                         |
+| options                   | `Array`             | `[{ name: 'Albania', code: 'AL' }, { name: 'Åland Islands', code: 'AX' }]` |
+| optionLabel               | `string`            | `name`                                                                     |
+| optionValue               | `string`            | `code`                                                                     |
+| selectedValue             | `string` or `Array` | `AL` or `[AL, AX]`                                                         |
+| onValueChange             | `function`          | `()=>{}`                                                                   |
+| isMultiple                | `Boolean`           | `true`                                                                     |
+| isSearchable              | `Boolean`           | `true`                                                                     |
+| labelStyle                | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| dropdownStyle             | `Object`            | `{backgroundColor: 'red', margin: 5, ...}`                                 |
+| dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| selectedItemStyle         | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
+| multipleSelectedItemStyle | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
+| modalBackgroundStyle      | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
+| modalOptionsContainer     | `Object`            | `{padding: 5}`                                                             |
+| primaryColor              | `string`            | `blue`                                                                     |
 
 ## Contributing
 

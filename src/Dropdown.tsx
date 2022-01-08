@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import { colors } from './styles/colors';
 import { inputStyles } from './styles/input';
@@ -25,6 +26,7 @@ const Dropdown = ({
   dropdownStyle,
   dropdownContainerStyle,
   selectedItemStyle,
+  multipleSelectedItemStyle,
   primaryColor,
 }: any) => {
   return (
@@ -35,7 +37,8 @@ const Dropdown = ({
       <Pressable
         onPress={() => handleToggleModal()}
         style={({ pressed }) => [
-          pressed && inputStyles.inputFocusState,
+          pressed &&
+            inputStyles.inputFocusState && { borderColor: primaryColor },
           inputStyles.input,
           dropdownStyle,
         ]}
@@ -51,19 +54,23 @@ const Dropdown = ({
           >
             {isMultiple ? (
               getSelectedItemsLabel().map((item: any, i: Number) => (
-                <Text
-                  key={`SelectedItems${i}`}
-                  style={[
-                    styles.selectedItems,
-                    { backgroundColor: primaryColor },
-                    selectedItemStyle,
-                  ]}
-                >
-                  {item}
-                </Text>
+                <TouchableOpacity onPress={() => handleToggleModal()}>
+                  <Text
+                    key={`SelectedItems${i}`}
+                    style={[
+                      styles.selectedItems,
+                      { backgroundColor: primaryColor },
+                      multipleSelectedItemStyle,
+                    ]}
+                  >
+                    {item}
+                  </Text>
+                </TouchableOpacity>
               ))
             ) : (
-              <Text style={styles.blackText}>{getSelectedItemsLabel()}</Text>
+              <Text style={[styles.blackText, selectedItemStyle]}>
+                {getSelectedItemsLabel()}
+              </Text>
             )}
           </View>
 

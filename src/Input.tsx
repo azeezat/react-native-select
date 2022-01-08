@@ -7,6 +7,7 @@ export const Input = ({
   value,
   onChangeText,
   style,
+  primaryColor,
   ...rest
 }: any) => {
   const [isFocused, setFocus] = useState(false);
@@ -17,7 +18,8 @@ export const Input = ({
         placeholder={placeholder}
         style={[
           inputStyles.input,
-          isFocused && inputStyles.inputFocusState,
+          isFocused &&
+            inputStyles.inputFocusState && { borderColor: primaryColor },
           style,
         ]}
         onFocus={() => {
