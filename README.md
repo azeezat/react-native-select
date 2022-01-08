@@ -6,7 +6,7 @@ Works perfectly on android and iOS.
 ## Installation
 
 ```sh
-npm install react-native-select
+npm install react-native-input-select
 ```
 
 ## Demo
