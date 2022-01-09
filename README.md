@@ -64,6 +64,7 @@ export default function App() {
 | onValueChange             | `function`          | `()=>{}`                                                                   |
 | isMultiple                | `Boolean`           | `true`                                                                     |
 | isSearchable              | `Boolean`           | `true`                                                                     |
+| disabled                  | `Boolean`           | `true`                                                                     |
 | labelStyle                | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
 | dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
 | dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
@@ -72,7 +73,7 @@ export default function App() {
 | multipleSelectedItemStyle | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
 | modalBackgroundStyle      | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
 | modalOptionsContainer     | `Object`            | `{padding: 5}`                                                             |
-| dropdownErrorStyle        | `Object`            | `{borderWidth: 2, borderStyle: 'solid'}`                           |
+| dropdownErrorStyle        | `Object`            | `{borderWidth: 2, borderStyle: 'solid'}`                                   |
 | dropdownErrorTextStyle    | `Object`            | `{color: 'red', fontWeight:500}`                                           |
 | dropdownHelperTextStyle   | `Object`            | `{color: 'green', fontWeight:500}`                                         |
 | primaryColor              | `string`            | `blue`                                                                     |

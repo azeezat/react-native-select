@@ -84,9 +84,14 @@ const Dropdown = ({
                 </TouchableOpacity>
               ))
             ) : (
-              <Text style={[styles.blackText, selectedItemStyle]}>
-                {getSelectedItemsLabel()}
-              </Text>
+              <TouchableOpacity
+                onPress={() => handleToggleModal()}
+                disabled={disabled}
+              >
+                <Text style={[styles.blackText, selectedItemStyle]}>
+                  {getSelectedItemsLabel()}
+                </Text>
+              </TouchableOpacity>
             )}
           </View>
 
