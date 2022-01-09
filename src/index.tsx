@@ -97,7 +97,6 @@ export const DropdownSelect = ({
    * Search
    *==========================================*/
   const onSearch = (value: string) => {
-    console.log(value);
     setSearchValue(value);
 
     let searchTerm = value.toString().toLocaleLowerCase().trim();
