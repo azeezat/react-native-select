@@ -6,29 +6,35 @@ import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
 import type { DropdownProps } from './types/index.types';
 import { Input } from './Input';
 
-export const DropdownSelect = ({
-  placeholder,
-  label,
-  error,
-  helperText,
-  options,
-  optionLabel,
-  optionValue,
-  onValueChange,
-  selectedValue,
-  isMultiple,
-  isSearchable,
-  labelStyle,
-  dropdownStyle,
-  dropdownContainerStyle,
-  selectedItemStyle,
-  multipleSelectedItemStyle,
-  modalBackgroundStyle,
-  modalOptionsContainer,
-  searchInputStyle,
-  primaryColor,
-  disabled,
-}: DropdownProps) => {
+export const DropdownSelect = (
+  {
+    placeholder,
+    label,
+    error,
+    helperText,
+    options,
+    optionLabel,
+    optionValue,
+    onValueChange,
+    selectedValue,
+    isMultiple,
+    isSearchable,
+    labelStyle,
+    dropdownStyle,
+    dropdownContainerStyle,
+    dropdownErrorStyle,
+    dropdownErrorTextStyle,
+    dropdownHelperTextStyle,
+    selectedItemStyle,
+    multipleSelectedItemStyle,
+    modalBackgroundStyle,
+    modalOptionsContainer,
+    searchInputStyle,
+    primaryColor,
+    disabled,
+  }: DropdownProps,
+  rest: any
+) => {
   const [newOptions, setNewOptions] = useState(options ? options : []);
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(selectedValue); //for single selection
@@ -138,11 +144,15 @@ export const DropdownSelect = ({
         labelStyle={labelStyle}
         dropdownStyle={dropdownStyle}
         dropdownContainerStyle={dropdownContainerStyle}
+        dropdownErrorStyle={dropdownErrorStyle}
+        dropdownErrorTextStyle={dropdownErrorTextStyle}
+        dropdownHelperTextStyle={dropdownHelperTextStyle}
         selectedItemStyle={selectedItemStyle}
         multipleSelectedItemStyle={multipleSelectedItemStyle}
         isMultiple={isMultiple}
         primaryColor={primaryColor}
         disabled={disabled}
+        {...rest}
       />
       <CustomModal
         open={open}

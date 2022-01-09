@@ -46,13 +46,13 @@ const Dropdown = ({
             borderColor: primaryColor,
           },
           inputStyles.input,
-          error &&
+          dropdownStyle,
+          error && //order matters
             error !== '' &&
             !pressed && {
               ...inputStyles.inputFocusErrorState,
               ...dropdownErrorStyle,
             },
-          dropdownStyle,
         ]}
         disabled={disabled}
       >

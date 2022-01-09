@@ -26,6 +26,8 @@ export default function App() {
         optionValue={'code'}
         selectedValue={country}
         onValueChange={(itemValue: any) => setCountry(itemValue)}
+        dropdownErrorStyle={{ borderColor: 'green' }}
+        error="ggdgd"
         isMultiple
         isSearchable
         primaryColor={'green'}
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
   },
   box: {
     width: 60,

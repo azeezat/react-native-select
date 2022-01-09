@@ -15,6 +15,9 @@ export type DropdownProps = {
   labelStyle: string;
   dropdownStyle: CSSProperties;
   dropdownContainerStyle: CSSProperties;
+  dropdownErrorStyle: CSSProperties;
+  dropdownErrorTextStyle: CSSProperties;
+  dropdownHelperTextStyle: CSSProperties;
   selectedItemStyle: CSSProperties;
   multipleSelectedItemStyle: CSSProperties;
   modalBackgroundStyle: CSSProperties;
