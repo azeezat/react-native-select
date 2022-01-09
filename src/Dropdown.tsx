@@ -27,7 +27,11 @@ const Dropdown = ({
   dropdownContainerStyle,
   selectedItemStyle,
   multipleSelectedItemStyle,
+  dropdownErrorStyle,
+  dropdownErrorTextStyle,
+  dropdownHelperTextStyle,
   primaryColor,
+  disabled,
 }: any) => {
   return (
     <View style={[styles.dropdownInputContainer, dropdownContainerStyle]}>
@@ -37,11 +41,20 @@ const Dropdown = ({
       <Pressable
         onPress={() => handleToggleModal()}
         style={({ pressed }) => [
-          pressed &&
-            inputStyles.inputFocusState && { borderColor: primaryColor },
+          pressed && {
+            ...inputStyles.inputFocusState,
+            borderColor: primaryColor,
+          },
           inputStyles.input,
+          error &&
+            error !== '' &&
+            !pressed && {
+              ...inputStyles.inputFocusErrorState,
+              ...dropdownErrorStyle,
+            },
           dropdownStyle,
         ]}
+        disabled={disabled}
       >
         <ScrollView
           horizontal
@@ -57,6 +70,7 @@ const Dropdown = ({
                 <TouchableOpacity
                   onPress={() => handleToggleModal()}
                   key={`SelectedItems${i}`}
+                  disabled={disabled}
                 >
                   <Text
                     style={[
@@ -87,10 +101,14 @@ const Dropdown = ({
         </View>
       </Pressable>
 
-      {error && error !== '' && <Text style={styles.error}>{error}</Text>}
+      {error && error !== '' && (
+        <Text style={[styles.error, dropdownErrorTextStyle]}>{error}</Text>
+      )}
 
       {helperText && helperText !== '' && !error && (
-        <Text style={styles.helper}>{helperText}</Text>
+        <Text style={[styles.helper, dropdownHelperTextStyle]}>
+          {helperText}
+        </Text>
       )}
     </View>
   );

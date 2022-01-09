@@ -3,6 +3,7 @@ import Dropdown from './Dropdown';
 import CustomModal from './Modal';
 import DropdownList from './DropdownList';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
+import type { DropdownProps } from './types/index.types';
 import { Input } from './Input';
 
 export const DropdownSelect = ({
@@ -26,7 +27,8 @@ export const DropdownSelect = ({
   modalOptionsContainer,
   searchInputStyle,
   primaryColor,
-}: any) => {
+  disabled,
+}: DropdownProps) => {
   const [newOptions, setNewOptions] = useState(options ? options : []);
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(selectedValue); //for single selection
@@ -74,7 +76,7 @@ export const DropdownSelect = ({
           let selectedItemLabel =
             options &&
             options.find(
-              (item: string) =>
+              (item: any) =>
                 item[optionValue ?? DEFAULT_OPTION_VALUE] === element
             )?.[optionLabel];
           selectedLabels.push(selectedItemLabel);
@@ -85,7 +87,7 @@ export const DropdownSelect = ({
     let selectedItemLabel =
       options &&
       options.find(
-        (item: string) =>
+        (item: any) =>
           item[optionValue ?? DEFAULT_OPTION_VALUE] === selectedItem
       );
     return selectedItemLabel?.[optionLabel ?? DEFAULT_OPTION_LABEL];
@@ -95,10 +97,12 @@ export const DropdownSelect = ({
    * Search
    *==========================================*/
   const onSearch = (value: string) => {
+    console.log(value);
     setSearchValue(value);
-    let searchTerm = value.toString().toLocaleLowerCase();
-    const searchResults = options.filter((item: any) => {
-      return (
+
+    let searchTerm = value.toString().toLocaleLowerCase().trim();
+    const searchResults = options.filter(
+      (item: any) =>
         item[optionLabel ?? DEFAULT_OPTION_LABEL]
           .toString()
           .toLowerCase()
@@ -107,8 +111,7 @@ export const DropdownSelect = ({
           .toString(searchTerm)
           .toLowerCase()
           .includes()
-      );
-    });
+    );
 
     setNewOptions(searchResults);
   };
@@ -140,6 +143,7 @@ export const DropdownSelect = ({
         multipleSelectedItemStyle={multipleSelectedItemStyle}
         isMultiple={isMultiple}
         primaryColor={primaryColor}
+        disabled={disabled}
       />
       <CustomModal
         open={open}

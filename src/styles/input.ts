@@ -13,6 +13,11 @@ export const inputStyles: any = StyleSheet.create({
     width: '100%',
     minHeight: 64,
   },
+  inputFocusErrorState: {
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: colors.red,
+  },
   inputFocusState: {
     borderWidth: 2,
     borderStyle: 'solid',

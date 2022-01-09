@@ -6,6 +6,7 @@ A customizable dropdown selection package for react-native for android and iOS w
 
 ```sh
 npm install react-native-input-select
+yarn add react-native-input-select
 ```
 
 ## Demo
@@ -18,15 +19,13 @@ npm install react-native-input-select
 
 ```js
 import React from 'react';
-
-import { StyleSheet, View } from 'react-native';
-import DropdownSelect from 'react-native-input-select';
+import Dropdown from 'react-native-input-select';
 
 export default function App() {
   const [country, setCountry] = React.useState<number | undefined>();
 
   return (
-      <DropdownSelect
+      <Dropdown
         label="Country"
         placeholder="Select an option..."
         options={[
@@ -59,18 +58,23 @@ export default function App() {
 | options                   | `Array`             | `[{ name: 'Albania', code: 'AL' }, { name: 'Åland Islands', code: 'AX' }]` |
 | optionLabel               | `string`            | `name`                                                                     |
 | optionValue               | `string`            | `code`                                                                     |
+| error                     | `string`            | `This is a required field`                                                 |
+| helperText                | `string`            | `Only countries in the east are listed`                                    |
 | selectedValue             | `string` or `Array` | `AL` or `[AL, AX]`                                                         |
 | onValueChange             | `function`          | `()=>{}`                                                                   |
 | isMultiple                | `Boolean`           | `true`                                                                     |
 | isSearchable              | `Boolean`           | `true`                                                                     |
 | labelStyle                | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
-| dropdownStyle             | `Object`            | `{backgroundColor: 'red', margin: 5, ...}`                                 |
-| dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
+| dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
 | searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
 | selectedItemStyle         | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
 | multipleSelectedItemStyle | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
 | modalBackgroundStyle      | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
 | modalOptionsContainer     | `Object`            | `{padding: 5}`                                                             |
+| dropdownErrorStyle        | `Object`            | `{borderWidth: 2, borderStyle: 'solid'}`                           |
+| dropdownErrorTextStyle    | `Object`            | `{color: 'red', fontWeight:500}`                                           |
+| dropdownHelperTextStyle   | `Object`            | `{color: 'green', fontWeight:500}`                                         |
 | primaryColor              | `string`            | `blue`                                                                     |
 
 ## Contributing
