@@ -106,8 +106,8 @@ export const DropdownSelect = (
     setSearchValue(value);
 
     let searchTerm = value.toString().toLocaleLowerCase().trim();
-    const searchResults = options.filter(
-      (item: any) =>
+    const searchResults = options.filter((item: any) => {
+      if (
         item[optionLabel ?? DEFAULT_OPTION_LABEL]
           .toString()
           .toLowerCase()
@@ -116,7 +116,10 @@ export const DropdownSelect = (
           .toString(searchTerm)
           .toLowerCase()
           .includes()
-    );
+      ) {
+        return item;
+      }
+    });
 
     setNewOptions(searchResults);
   };
