@@ -11,9 +11,9 @@ yarn add react-native-input-select
 
 ## Demo
 
-|                                                       Multiple Select                                                        |                                                        Single Select                                                         |                                                            Search                                                            |
-| :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
-| <video src='https://user-images.githubusercontent.com/9849221/148039859-9eb4ef87-60ca-4300-9899-fbe81dcb0fb6.mov?raw=true' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148039800-9c30509a-6115-415e-aa3c-0402d64ec578.mov?raw=true' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148668734-a48aad4d-99bb-4942-a167-561ed59fe38e.mov?raw=true' width=90/> |
+|                                                         Multiple Select                                                          |                                                         Single Select                                                          |                                                        Search                                                        |
+| :------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
+| <video src='https://raw.githubusercontent.com/azeezat/react-native-select/main/.github/videos/multiple-selection.mov' width=90/> | <video src='https://raw.githubusercontent.com/azeezat/react-native-select/main/.github/videos/single-selection.mov' width=90/> | <video src='https://raw.githubusercontent.com/azeezat/react-native-select/main/.github/videos/search.mov' width=90/> |
 
 ## Usage
 
