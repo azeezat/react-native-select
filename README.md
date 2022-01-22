@@ -22,7 +22,7 @@ import React from 'react';
 import Dropdown from 'react-native-input-select';
 
 export default function App() {
-  const [country, setCountry] = React.useState<number | undefined>();
+  const [country, setCountry] = React.useState();
 
   return (
       <Dropdown

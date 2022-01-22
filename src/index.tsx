@@ -105,17 +105,20 @@ export const DropdownSelect = (
   const onSearch = (value: string) => {
     setSearchValue(value);
 
-    let searchTerm = value.toString().toLocaleLowerCase().trim();
+    let searchText = value.toString().toLocaleLowerCase().trim();
+
+    const regexFilter = new RegExp(searchText, 'i');
+
     const searchResults = options.filter((item: any) => {
       if (
         item[optionLabel ?? DEFAULT_OPTION_LABEL]
           .toString()
           .toLowerCase()
-          .includes(searchTerm) ||
+          .search(regexFilter) !== -1 ||
         item[optionValue ?? DEFAULT_OPTION_VALUE]
-          .toString(searchTerm)
+          .toString(regexFilter)
           .toLowerCase()
-          .includes()
+          .search(regexFilter) !== -1
       ) {
         return item;
       }
