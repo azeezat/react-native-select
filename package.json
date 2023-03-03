@@ -39,7 +39,8 @@
     "ios",
     "android",
     "dropdown",
-    "selection"
+    "selection",
+    "multiple select"
   ],
   "repository": "https://github.com/azeezat/react-native-select",
   "author": "Azeezat <azeezat94@gmail.com> (https://github.com/azeezat)",
