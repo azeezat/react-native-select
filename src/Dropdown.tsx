@@ -32,6 +32,7 @@ const Dropdown = ({
       )}
       <SelectedItemsView
         placeholder={placeholder}
+        error={error}
         getSelectedItemsLabel={getSelectedItemsLabel}
         handleToggleModal={handleToggleModal}
         isMultiple={isMultiple}

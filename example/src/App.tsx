@@ -46,8 +46,11 @@ export default function App() {
         selectedValue={gender}
         onValueChange={(itemValue: any) => setGender(itemValue)}
         dropdownErrorStyle={{
-          borderColor: 'blue',
+          borderColor: 'red',
+          borderWidth: 2,
+          borderStyle: 'solid',
         }}
+        dropdownErrorTextStyle={{color: 'red', fontWeight: 500}}
         error="An error has occurred"
         primaryColor={'green'}
       />
@@ -80,9 +83,10 @@ export default function App() {
         optionValue={'value'}
         selectedValue={item}
         onValueChange={(itemValue: any) => setItem(itemValue)}
-        labelStyle={{color: 'teal'}}
+        labelStyle={{color: 'teal', fontSize: 15, fontWeight: 500}}
         dropdownHelperTextStyle={{
-          color: 'blue',
+          color: 'green',
+          fontWeight: 900,
         }}
         modalBackgroundStyle={{backgroundColor: 'rgba(196, 198, 246, 0.5)'}}
         helperText="This is an helper text"

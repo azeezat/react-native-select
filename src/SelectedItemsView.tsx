@@ -36,7 +36,7 @@ const SelectedItemsView = ({
         },
         inputStyles.input,
         dropdownStyle,
-        error && //order matters
+        error && //this must be last
           error !== '' &&
           !pressed && {
             ...inputStyles.inputFocusErrorState,
