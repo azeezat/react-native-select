@@ -5,6 +5,7 @@ import DropdownList from './DropdownList';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
 import type { DropdownProps } from './types/index.types';
 import { Input } from './Input';
+import { colors } from './styles/colors';
 
 export const DropdownSelect = (
   {
@@ -136,6 +137,7 @@ export const DropdownSelect = (
     setNewOptions(options);
   };
 
+  let primary = primaryColor || colors.gray;
   return (
     <>
       <Dropdown
@@ -156,7 +158,7 @@ export const DropdownSelect = (
         selectedItemStyle={selectedItemStyle}
         multipleSelectedItemStyle={multipleSelectedItemStyle}
         isMultiple={isMultiple}
-        primaryColor={primaryColor}
+        primaryColor={primary}
         disabled={disabled}
         {...rest}
       />
@@ -172,7 +174,7 @@ export const DropdownSelect = (
             value={searchValue}
             onChangeText={(text: string) => onSearch(text)}
             style={searchInputStyle}
-            primaryColor={primaryColor}
+            primaryColor={primary}
           />
         )}
         <DropdownList
@@ -184,7 +186,7 @@ export const DropdownSelect = (
           selectedItem={selectedItem}
           handleMultipleSelections={handleMultipleSelections}
           handleSingleSelection={handleSingleSelection}
-          primaryColor={primaryColor}
+          primaryColor={primary}
         />
       </CustomModal>
     </>
