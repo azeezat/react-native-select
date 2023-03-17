@@ -1,4 +1,9 @@
-import type { CSSProperties } from 'react';
+import type {
+  ViewStyle,
+  ColorValue,
+  TextStyle,
+  BackgroundPropType,
+} from 'react-native';
 
 export type DropdownProps = {
   placeholder?: string;
@@ -12,17 +17,20 @@ export type DropdownProps = {
   selectedValue?: string | any[] | null;
   isMultiple?: boolean;
   isSearchable?: boolean;
-  labelStyle?: CSSProperties;
-  dropdownStyle?: CSSProperties;
-  dropdownContainerStyle?: CSSProperties;
-  dropdownErrorStyle?: CSSProperties;
-  dropdownErrorTextStyle?: CSSProperties;
-  dropdownHelperTextStyle?: CSSProperties;
-  selectedItemStyle?: CSSProperties;
-  multipleSelectedItemStyle?: CSSProperties;
-  modalBackgroundStyle?: CSSProperties;
-  modalOptionsContainer?: CSSProperties;
-  searchInputStyle?: CSSProperties;
-  primaryColor?: string;
+  labelStyle?: TextStyle;
+  dropdownStyle?: ViewStyle;
+  dropdownContainerStyle?: ViewStyle;
+  dropdownErrorStyle?: ViewStyle;
+  dropdownErrorTextStyle?: TextStyle;
+  dropdownHelperTextStyle?: TextStyle;
+  selectedItemStyle?: ViewStyle;
+  multipleSelectedItemStyle?: ViewStyle;
+  modalBackgroundStyle?: ViewStyle;
+  modalOptionsContainer?: ViewStyle;
+  searchInputStyle?: ViewStyle;
+  primaryColor?: ColorValue;
   disabled?: boolean;
+  checkboxSize?: number;
+  checkboxStyle?: ViewStyle;
+  checkboxLabelStyle?: TextStyle;
 };

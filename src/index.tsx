@@ -1,41 +1,42 @@
 import React, { useState } from 'react';
-import Dropdown from './Dropdown';
-import CustomModal from './Modal';
-import DropdownList from './DropdownList';
+import Dropdown from './components/Dropdown/Dropdown';
+import DropdownList from './components/Dropdown/DropdownList';
+import CustomModal from './components/CustomModal';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
 import type { DropdownProps } from './types/index.types';
-import { Input } from './Input';
+import { Input } from './components/Input';
 import { colors } from './styles/colors';
 
-export const DropdownSelect = (
-  {
-    placeholder,
-    label,
-    error,
-    helperText,
-    options,
-    optionLabel,
-    optionValue,
-    onValueChange,
-    selectedValue,
-    isMultiple,
-    isSearchable,
-    labelStyle,
-    dropdownStyle,
-    dropdownContainerStyle,
-    dropdownErrorStyle,
-    dropdownErrorTextStyle,
-    dropdownHelperTextStyle,
-    selectedItemStyle,
-    multipleSelectedItemStyle,
-    modalBackgroundStyle,
-    modalOptionsContainer,
-    searchInputStyle,
-    primaryColor,
-    disabled,
-  }: DropdownProps,
-  rest: any
-) => {
+export const DropdownSelect = ({
+  placeholder,
+  label,
+  error,
+  helperText,
+  options,
+  optionLabel,
+  optionValue,
+  onValueChange,
+  selectedValue,
+  isMultiple,
+  isSearchable,
+  labelStyle,
+  dropdownStyle,
+  dropdownContainerStyle,
+  dropdownErrorStyle,
+  dropdownErrorTextStyle,
+  dropdownHelperTextStyle,
+  selectedItemStyle,
+  multipleSelectedItemStyle,
+  modalBackgroundStyle,
+  modalOptionsContainer,
+  searchInputStyle,
+  primaryColor,
+  disabled,
+  checkboxSize,
+  checkboxStyle,
+  checkboxLabelStyle,
+  ...rest
+}: DropdownProps) => {
   const [newOptions, setNewOptions] = useState(options ? options : []);
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(selectedValue); //for single selection
@@ -70,6 +71,7 @@ export const DropdownSelect = (
       selectedValues.push(value);
     }
     setSelectedItems(selectedValues);
+    onValueChange(selectedValues); //send value to parent
   };
 
   /*===========================================
@@ -187,6 +189,9 @@ export const DropdownSelect = (
           handleMultipleSelections={handleMultipleSelections}
           handleSingleSelection={handleSingleSelection}
           primaryColor={primary}
+          checkboxSize={checkboxSize}
+          checkboxStyle={checkboxStyle}
+          checkboxLabelStyle={checkboxLabelStyle}
         />
       </CustomModal>
     </>

@@ -1660,11 +1660,6 @@
   dependencies:
     "@octokit/openapi-types" "^11.2.0"
 
-"@react-native-community/checkbox@^0.5.9":
-  version "0.5.9"
-  resolved "https://registry.npmjs.org/@react-native-community/checkbox/-/checkbox-0.5.9.tgz"
-  integrity sha512-2y/MW8zwXgzRN6fApZbYov3xKkR4vyWSOPo69OWSfa5emTbtKpSl7BY9xlKgu2pzGlLg5EyE8yogp0U7vFk+sQ==
-
 "@react-native-community/cli-debugger-ui@^4.13.1":
   version "4.13.1"
   resolved "https://registry.npmjs.org/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-4.13.1.tgz"

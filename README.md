@@ -77,6 +77,9 @@ export default function App() {
 | dropdownErrorTextStyle    | `Object`            | `{color: 'red', fontWeight:500}`                                           |
 | dropdownHelperTextStyle   | `Object`            | `{color: 'green', fontWeight:500}`                                         |
 | primaryColor              | `string`            | `blue`                                                                     |
+| checkboxStyle             | `Object`            | `blue`                                                                     |
+| checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:500}`                                                                    |
+
 
 ## Contributing
 

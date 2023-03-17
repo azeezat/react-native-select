@@ -38,11 +38,11 @@ export default function App() {
         label="Gender"
         placeholder="Select an option..."
         options={[
-          {name: 'Male', value: '1'},
-          {name: 'Female', value: '2'},
+          {name: 'Male', id: '1'},
+          {name: 'Female', id: '2'},
         ]}
         optionLabel={'name'}
-        optionValue={'value'}
+        optionValue={'id'}
         selectedValue={gender}
         onValueChange={(itemValue: any) => setGender(itemValue)}
         dropdownErrorStyle={{
@@ -50,7 +50,7 @@ export default function App() {
           borderWidth: 2,
           borderStyle: 'solid',
         }}
-        dropdownErrorTextStyle={{color: 'red', fontWeight: 500}}
+        dropdownErrorTextStyle={{color: 'red', fontWeight: '500'}}
         error="An error has occurred"
         primaryColor={'green'}
       />
@@ -83,13 +83,16 @@ export default function App() {
         optionValue={'value'}
         selectedValue={item}
         onValueChange={(itemValue: any) => setItem(itemValue)}
-        labelStyle={{color: 'teal', fontSize: 15, fontWeight: 500}}
+        labelStyle={{color: 'teal', fontSize: 15, fontWeight: '500'}}
         dropdownHelperTextStyle={{
           color: 'green',
-          fontWeight: 900,
+          fontWeight: '900',
         }}
         modalBackgroundStyle={{backgroundColor: 'rgba(196, 198, 246, 0.5)'}}
         helperText="This is an helper text"
+        checkboxSize={20}
+        checkboxStyle={{backgroundColor: 'red', borderRadius: 5}}
+        checkboxLabelStyle={{color: 'red', fontSize: 30}}
       />
     </View>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SelectedItemsView from './SelectedItemsView';
-import { colors } from './styles/colors';
-import { typography } from './styles/typography';
+import { colors } from '../../styles/colors';
+import { typography } from '../../styles/typography';
 
 const Dropdown = ({
   label,
