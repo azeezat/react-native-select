@@ -1,9 +1,4 @@
-import type {
-  ViewStyle,
-  ColorValue,
-  TextStyle,
-  BackgroundPropType,
-} from 'react-native';
+import type { ViewStyle, ColorValue, TextStyle } from 'react-native';
 
 export type DropdownProps = {
   placeholder?: string;
