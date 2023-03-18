@@ -1,3 +1,5 @@
+[![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml)
+
 # react-native-input-select
 
 A fully customizable dropdown selection package for react-native for android and iOS with multiple select and search capabilities.
