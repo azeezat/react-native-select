@@ -11,7 +11,7 @@ yarn add react-native-input-select
 
 ## Demo
 
-<video src='https://github.com/azeezat/react-native-select/blob/917ff90d604908e1c10049c8725a9b4cb015d7ae/Screen%20Recording%202023-03-18%20at%202.15.09%20PM.mov' width=90/>
+|<video src='https://user-images.githubusercontent.com/9849221/148668734-a48aad4d-99bb-4942-a167-561ed59fe38e.mov' width=90/> |
 
 ## Basic Usage
 
