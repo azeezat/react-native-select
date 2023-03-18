@@ -51,7 +51,7 @@ export default function App() {
           borderStyle: 'solid',
         }}
         dropdownErrorTextStyle={{color: 'red', fontWeight: '500'}}
-        error="An error has occurred"
+        error={gender ? '' : 'Gender is required'}
         primaryColor={'green'}
       />
 
@@ -105,10 +105,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     paddingHorizontal: 20,
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
   },
 });

@@ -11,11 +11,11 @@ yarn add react-native-input-select
 
 ## Demo
 
-|                                                       Multiple Select                                                        |                                                        Single Select                                                         |                                                            Search                                                            |
-| :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
-| <video src='https://user-images.githubusercontent.com/9849221/148039859-9eb4ef87-60ca-4300-9899-fbe81dcb0fb6.mov' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148039800-9c30509a-6115-415e-aa3c-0402d64ec578.mov' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148668734-a48aad4d-99bb-4942-a167-561ed59fe38e.mov' width=90/> |
+<video src='https://github.com/azeezat/react-native-select/blob/917ff90d604908e1c10049c8725a9b4cb015d7ae/Screen%20Recording%202023-03-18%20at%202.15.09%20PM.mov' width=90/>
 
-## Usage
+## Basic Usage
+
+For more examples visit our (wiki page)[https://github.com/azeezat/react-native-select/wiki]
 
 ```js
 import React from 'react';
@@ -65,20 +65,21 @@ export default function App() {
 | isMultiple                | `Boolean`           | `true`                                                                     |
 | isSearchable              | `Boolean`           | `true`                                                                     |
 | disabled                  | `Boolean`           | `true`                                                                     |
-| labelStyle                | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
+| labelStyle                | `Object`            | `{color: 'red', borderRadius: 0, ...}`                                     |
 | dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
 | dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
 | searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
 | selectedItemStyle         | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
 | multipleSelectedItemStyle | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
-| modalBackgroundStyle      | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
+| modalBackgroundStyle      | `Object`            | `{backgroundColor: 'rgba(196, 198, 246, 0.5)'}`                            |
 | modalOptionsContainer     | `Object`            | `{padding: 5}`                                                             |
 | dropdownErrorStyle        | `Object`            | `{borderWidth: 2, borderStyle: 'solid'}`                                   |
-| dropdownErrorTextStyle    | `Object`            | `{color: 'red', fontWeight:500}`                                           |
-| dropdownHelperTextStyle   | `Object`            | `{color: 'green', fontWeight:500}`                                         |
+| dropdownErrorTextStyle    | `Object`            | `{color: 'red', fontWeight:'500'}`                                         |
+| dropdownHelperTextStyle   | `Object`            | `{color: 'green', fontWeight:'500'}`                                       |
 | primaryColor              | `string`            | `blue`                                                                     |
+| checkboxSize              | `number`            | `5`                                                                        |
 | checkboxStyle             | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
-| checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:500}`                                                                    |
+| checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:'500'`                                          |
 
 
 ## Contributing
