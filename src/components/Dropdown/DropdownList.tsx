@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, StyleSheet, Text } from 'react-native';
 import DropdownListItem from './DropdownListItem';
-import { colors } from './styles/colors';
+import { colors } from '../../styles/colors';
 
 const DropdownList = ({
   options,
@@ -13,6 +13,9 @@ const DropdownList = ({
   handleMultipleSelections,
   handleSingleSelection,
   primaryColor,
+  checkboxSize,
+  checkboxStyle,
+  checkboxLabelStyle,
 }: any) => {
   return (
     <FlatList
@@ -35,6 +38,9 @@ const DropdownList = ({
             ? handleMultipleSelections
             : handleSingleSelection,
           primaryColor,
+          checkboxSize,
+          checkboxStyle,
+          checkboxLabelStyle,
         })
       }
       keyExtractor={(_item, index) => `Options${index}`}
@@ -52,6 +58,9 @@ const _renderItem = ({ item }: any, props: any) => {
       selectedOption={props.selectedOption}
       onChange={props.onChange}
       primaryColor={props.primaryColor}
+      checkboxSize={props.checkboxSize}
+      checkboxStyle={props.checkboxStyle}
+      checkboxLabelStyle={props.checkboxLabelStyle}
     />
   );
 };

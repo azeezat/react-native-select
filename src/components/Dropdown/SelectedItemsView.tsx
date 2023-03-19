@@ -8,8 +8,8 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { colors } from './styles/colors';
-import { inputStyles } from './styles/input';
+import { colors } from '../../styles/colors';
+import { inputStyles } from '../../styles/input';
 
 const SelectedItemsView = ({
   placeholder,
@@ -91,7 +91,7 @@ const SelectedItemsView = ({
         )}
       </ScrollView>
       <View style={styles.iconStyle}>
-        <Image source={require('../src/asset/arrow-down.png')} />
+        <Image source={require('../../asset/arrow-down.png')} />
       </View>
     </Pressable>
   );

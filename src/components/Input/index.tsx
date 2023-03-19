@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
-import { inputStyles } from './styles/input';
+import { inputStyles } from '../../styles/input';
 
 export const Input = ({
   placeholder,
