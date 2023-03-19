@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-select",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "description": "A customizable dropdown selection package for react-native for android and iOS with multiple select and search capabilities.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -35,7 +35,6 @@
     "ios": "yarn example ios",
     "clean": "yarn example clean",
     "watchman:clear": "watchman watch-del-all"
-
   },
   "keywords": [
     "react-native",
