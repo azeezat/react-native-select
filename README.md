@@ -23,8 +23,6 @@ https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-8
   
 ## Basic Usage
 
-For more examples visit our (wiki page)[https://github.com/azeezat/react-native-select/wiki]
-
 ```js
 import React from 'react';
 import Dropdown from 'react-native-input-select';
@@ -56,6 +54,8 @@ export default function App() {
   );
 }
 ```
+For more examples visit our [wiki page](https://github.com/azeezat/react-native-select/wiki)
+
 
 ## Props
 
