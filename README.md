@@ -6,13 +6,18 @@ A fully customizable dropdown selection package for react-native android and iOS
 
 ## Installation
 
+With npm
 ```sh
 npm install react-native-input-select
+```
+With yarn
+
+```sh
 yarn add react-native-input-select
 ```
 
 ## Demo
-<video src='https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-888e-8b7093adcd63.mov' width=270/>
+|<video src='https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-888e-8b7093adcd63.mov' width=270/>|
 
 ## Basic Usage
 
