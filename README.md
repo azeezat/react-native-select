@@ -19,7 +19,7 @@ yarn add react-native-input-select
 ## Demo
 
 |<div align="center">
-  <video src="[myvideo.mp4](https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-888e-8b7093adcd63.mov)" width=400/>
+  <video src="https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-888e-8b7093adcd63.mov" width=400/>
 <div/>|
 <br> 
   
