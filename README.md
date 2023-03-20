@@ -12,10 +12,7 @@ yarn add react-native-input-select
 ```
 
 ## Demo
-
-|                                                       Multiple Select                                                        |                                                        Single Select                                                         |                                                            Search                                                            |
-| :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: |
-| <video src='https://user-images.githubusercontent.com/9849221/148039859-9eb4ef87-60ca-4300-9899-fbe81dcb0fb6.mov' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148039800-9c30509a-6115-415e-aa3c-0402d64ec578.mov' width=90/> | <video src='https://user-images.githubusercontent.com/9849221/148668734-a48aad4d-99bb-4942-a167-561ed59fe38e.mov' width=90/> |
+<video src='https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-888e-8b7093adcd63.mov' width=270/>
 
 ## Basic Usage
 
