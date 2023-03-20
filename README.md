@@ -2,7 +2,7 @@
 
 # react-native-input-select
 
-A fully customizable dropdown selection package for react-native android and iOS with multiple select and search capabilities.
+|A fully customizable dropdown selection package for react-native android and iOS with multiple select and search capabilities.
 
 ## Installation
 
@@ -17,7 +17,10 @@ yarn add react-native-input-select
 ```
 
 ## Demo
-|<video src='https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-888e-8b7093adcd63.mov' width=270/>|
+
+<div align="center">
+  <video src="[myvideo.mp4](https://user-images.githubusercontent.com/9849221/226240418-efa4fe9f-4055-4c03-888e-8b7093adcd63.mov)" width=400/>
+<div/>
 
 ## Basic Usage
 
