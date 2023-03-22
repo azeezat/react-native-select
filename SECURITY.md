@@ -14,4 +14,4 @@ currently being supported with security updates.
 
 Use this section to tell people how to report a vulnerability.
 
-To report a vlnerability, use the issue report template on github.
+To report a vlnerability, use the **Report a security vulnerability** template on github
