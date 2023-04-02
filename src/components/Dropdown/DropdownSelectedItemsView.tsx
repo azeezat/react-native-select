@@ -11,7 +11,7 @@ import {
 import { colors } from '../../styles/colors';
 import { inputStyles } from '../../styles/input';
 
-const SelectedItemsView = ({
+const DropdownSelectedItemsView = ({
   placeholder,
   error,
   getSelectedItemsLabel,
@@ -65,7 +65,7 @@ const SelectedItemsView = ({
                   style={[
                     styles.selectedItems,
                     { backgroundColor: primaryColor },
-                    multipleSelectedItemStyle,
+                    // multipleSelectedItemStyle,
                   ]}
                 >
                   {item}
@@ -107,8 +107,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: colors.primary,
     marginRight: 10,
+    overflow: 'hidden',
   },
   blackText: { color: colors.black },
 });
 
-export default SelectedItemsView;
+export default DropdownSelectedItemsView;

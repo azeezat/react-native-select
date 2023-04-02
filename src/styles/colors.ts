@@ -1,5 +1,5 @@
 export const colors: any = {
-  primary: '#EF8031',
+  primary: 'green',
   red: '#FA4169',
   black: '#000000',
   white: '#FFFFFF',

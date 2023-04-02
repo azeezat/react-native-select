@@ -66,17 +66,6 @@ const _renderItem = ({ item }: any, props: any) => {
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  modalBackgroundStyle: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
-  modalOptionsContainer: {
-    maxHeight: '50%',
-    backgroundColor: colors.white,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-  },
   itemSeparatorStyle: {
     backgroundColor: colors.gray,
     height: 1,

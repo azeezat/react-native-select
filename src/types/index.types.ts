@@ -7,7 +7,7 @@ export type DropdownProps = {
   helperText?: string;
   options: any[];
   optionLabel: string;
-  optionValue?: string;
+  optionValue: string;
   onValueChange: Function;
   selectedValue?: string | any[] | null;
   isMultiple?: boolean;

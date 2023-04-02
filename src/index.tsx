@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown/Dropdown';
 import DropdownList from './components/Dropdown/DropdownList';
 import CustomModal from './components/CustomModal';
+import { Input } from './components/Input';
+import CheckBox from './components/CheckBox';
+import { colors } from './styles/colors';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
 import type { DropdownProps } from './types/index.types';
-import { Input } from './components/Input';
-import { colors } from './styles/colors';
 
 export const DropdownSelect = ({
   placeholder,
@@ -39,6 +41,7 @@ export const DropdownSelect = ({
 }: DropdownProps) => {
   const [newOptions, setNewOptions] = useState(options ? options : []);
   const [open, setOpen] = useState(false);
+  const [selectAll, setSelectAll] = useState(false);
   const [selectedItem, setSelectedItem] = useState(selectedValue); //for single selection
   const [selectedItems, setSelectedItems] = useState(
     Array.isArray(selectedValue)
@@ -72,6 +75,28 @@ export const DropdownSelect = ({
     }
     setSelectedItems(selectedValues);
     onValueChange(selectedValues); //send value to parent
+
+    if (newOptions.length === selectedValues.length) {
+      setSelectAll(true);
+    } else {
+      setSelectAll(false);
+    }
+  };
+
+  const handleSelectAll = () => {
+    setSelectAll((prevVal) => {
+      const selectedValues = [];
+
+      if (!prevVal) {
+        for (let i = 0; i < newOptions.length; i++) {
+          selectedValues.push(newOptions[i][optionValue]);
+        }
+      }
+
+      setSelectedItems(selectedValues);
+      onValueChange(selectedValues); //send value to parent
+      return !prevVal;
+    });
   };
 
   /*===========================================
@@ -179,6 +204,21 @@ export const DropdownSelect = ({
             primaryColor={primary}
           />
         )}
+        {isMultiple && newOptions.length > 1 && (
+          <View style={styles.optionsContainerStyle}>
+            <TouchableOpacity onPress={() => {}}>
+              <CheckBox
+                value={selectAll}
+                label={selectAll ? 'Clear all' : 'Select all'}
+                onChange={() => handleSelectAll()}
+                primaryColor={primary}
+                checkboxSize={checkboxSize}
+                checkboxStyle={checkboxStyle}
+                checkboxLabelStyle={checkboxLabelStyle}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
         <DropdownList
           options={newOptions}
           optionLabel={optionLabel}
@@ -197,5 +237,13 @@ export const DropdownSelect = ({
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  optionsContainerStyle: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: 'row',
+  },
+});
 
 export default DropdownSelect;

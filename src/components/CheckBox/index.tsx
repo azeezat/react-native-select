@@ -14,7 +14,9 @@ const CheckBox = ({
   onChange,
 }: CheckboxProps) => {
   const fillColor = {
-    backgroundColor: value ? primaryColor || 'green' : 'white',
+    backgroundColor: value
+      ? checkboxStyle?.backgroundColor || primaryColor || 'green'
+      : 'white',
   };
   return (
     <Pressable

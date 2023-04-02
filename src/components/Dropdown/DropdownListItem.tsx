@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import CheckBox from '../CheckBox';
-import { colors } from '../../styles/colors';
 
 const DropdownListItem = ({
   item,
@@ -18,7 +17,7 @@ const DropdownListItem = ({
   const selectedOptionValue = optionValue ?? 'value';
   return (
     <TouchableOpacity
-      style={styles.modalOptions}
+      style={styles.dropdownModalOptions}
       onPress={() => onChange(item[selectedOptionValue])}
     >
       <CheckBox
@@ -29,7 +28,7 @@ const DropdownListItem = ({
         }
         label={item[optionLabel ?? '']}
         onChange={() => onChange(item[selectedOptionValue])}
-        primaryColor={primaryColor || colors.primary}
+        primaryColor={primaryColor}
         checkboxSize={checkboxSize}
         checkboxStyle={checkboxStyle}
         checkboxLabelStyle={checkboxLabelStyle}
@@ -39,7 +38,7 @@ const DropdownListItem = ({
 };
 
 const styles = StyleSheet.create({
-  modalOptions: {
+  dropdownModalOptions: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     flexDirection: 'row',

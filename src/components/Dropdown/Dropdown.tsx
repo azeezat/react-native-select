@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import SelectedItemsView from './SelectedItemsView';
+import DropdownSelectedItemsView from './DropdownSelectedItemsView';
 import { colors } from '../../styles/colors';
 import { typography } from '../../styles/typography';
 
@@ -30,7 +30,7 @@ const Dropdown = ({
       {label && label !== '' && (
         <Text style={[styles.label, labelStyle]}>{label}</Text>
       )}
-      <SelectedItemsView
+      <DropdownSelectedItemsView
         placeholder={placeholder}
         error={error}
         getSelectedItemsLabel={getSelectedItemsLabel}
