@@ -65,7 +65,7 @@ const DropdownSelectedItemsView = ({
                   style={[
                     styles.selectedItems,
                     { backgroundColor: primaryColor },
-                    // multipleSelectedItemStyle,
+                    multipleSelectedItemStyle,
                   ]}
                 >
                   {item}
