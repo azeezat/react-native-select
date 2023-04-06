@@ -18,7 +18,9 @@ const DropdownListItem = ({
   return (
     <TouchableOpacity
       style={styles.dropdownModalOptions}
-      onPress={() => onChange(item[selectedOptionValue])}
+      onPress={
+        item.disabled ? () => {} : () => onChange(item[selectedOptionValue]) // intentionally didn't use the disable property
+      }
     >
       <CheckBox
         value={
@@ -32,6 +34,7 @@ const DropdownListItem = ({
         checkboxSize={checkboxSize}
         checkboxStyle={checkboxStyle}
         checkboxLabelStyle={checkboxLabelStyle}
+        disabled={item.disabled}
       />
     </TouchableOpacity>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, FlatList, StyleSheet, Text } from 'react-native';
 import DropdownListItem from './DropdownListItem';
@@ -8,6 +9,7 @@ const DropdownList = ({
   optionLabel,
   optionValue,
   isMultiple,
+  isSearchable,
   selectedItems,
   selectedItem,
   handleMultipleSelections,
@@ -16,6 +18,7 @@ const DropdownList = ({
   checkboxSize,
   checkboxStyle,
   checkboxLabelStyle,
+  ...rest
 }: any) => {
   return (
     <FlatList
@@ -27,6 +30,9 @@ const DropdownList = ({
           <Text>No options available</Text>
         </View>
       }
+      contentContainerStyle={[
+        isSearchable ? { paddingTop: 0 } : styles.contentContainerStyle,
+      ]}
       ItemSeparatorComponent={() => <View style={styles.itemSeparatorStyle} />}
       renderItem={(item) =>
         _renderItem(item, {
@@ -44,6 +50,7 @@ const DropdownList = ({
         })
       }
       keyExtractor={(_item, index) => `Options${index}`}
+      {...rest}
     />
   );
 };
@@ -72,6 +79,7 @@ const styles = StyleSheet.create({
     opacity: 0.15,
   },
   emptyListStyle: { alignItems: 'center', width: '100%', marginVertical: 20 },
+  contentContainerStyle: { paddingTop: 20 },
 });
 
 export default DropdownList;

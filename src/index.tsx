@@ -76,7 +76,7 @@ export const DropdownSelect = ({
     setSelectedItems(selectedValues);
     onValueChange(selectedValues); //send value to parent
 
-    if (newOptions.length === selectedValues.length) {
+    if (options.length === selectedValues.length) {
       setSelectAll(true);
     } else {
       setSelectAll(false);
@@ -86,10 +86,10 @@ export const DropdownSelect = ({
   const handleSelectAll = () => {
     setSelectAll((prevVal) => {
       const selectedValues = [];
-
+      const filteredOptions = newOptions.filter((item) => !item.disabled); //don't select disabled items
       if (!prevVal) {
-        for (let i = 0; i < newOptions.length; i++) {
-          selectedValues.push(newOptions[i][optionValue]);
+        for (let i = 0; i < filteredOptions.length; i++) {
+          selectedValues.push(filteredOptions[i][optionValue]);
         }
       }
 
@@ -196,34 +196,39 @@ export const DropdownSelect = ({
         modalOptionsContainer={modalOptionsContainer}
         onRequestClose={() => {}}
       >
-        {isSearchable && (
-          <Input
-            value={searchValue}
-            onChangeText={(text: string) => onSearch(text)}
-            style={searchInputStyle}
-            primaryColor={primary}
-          />
-        )}
-        {isMultiple && newOptions.length > 1 && (
-          <View style={styles.optionsContainerStyle}>
-            <TouchableOpacity onPress={() => {}}>
-              <CheckBox
-                value={selectAll}
-                label={selectAll ? 'Clear all' : 'Select all'}
-                onChange={() => handleSelectAll()}
-                primaryColor={primary}
-                checkboxSize={checkboxSize}
-                checkboxStyle={checkboxStyle}
-                checkboxLabelStyle={checkboxLabelStyle}
-              />
-            </TouchableOpacity>
-          </View>
-        )}
         <DropdownList
+          ListHeaderComponent={
+            <>
+              {isSearchable && (
+                <Input
+                  value={searchValue}
+                  onChangeText={(text: string) => onSearch(text)}
+                  style={searchInputStyle}
+                  primaryColor={primary}
+                />
+              )}
+              {isMultiple && newOptions.length > 1 && (
+                <View style={styles.optionsContainerStyle}>
+                  <TouchableOpacity onPress={() => {}}>
+                    <CheckBox
+                      value={selectAll}
+                      label={selectAll ? 'Clear all' : 'Select all'}
+                      onChange={() => handleSelectAll()}
+                      primaryColor={primary}
+                      checkboxSize={checkboxSize}
+                      checkboxStyle={checkboxStyle}
+                      checkboxLabelStyle={checkboxLabelStyle}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </>
+          }
           options={newOptions}
           optionLabel={optionLabel}
           optionValue={optionValue}
           isMultiple={isMultiple}
+          isSearchable={isSearchable}
           selectedItems={selectedItems}
           selectedItem={selectedItem}
           handleMultipleSelections={handleMultipleSelections}

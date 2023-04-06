@@ -6,4 +6,5 @@ export const colors: any = {
   dark: '#11142D',
   gray: '#808191',
   lightGray: '#F7F7F7',
+  disabled: '#d3d3d3',
 };
