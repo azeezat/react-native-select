@@ -21,6 +21,7 @@ const DropdownSelectedItemsView = ({
   selectedItems,
   dropdownStyle,
   selectedItemStyle,
+  placeholderStyle,
   multipleSelectedItemStyle,
   dropdownErrorStyle,
   primaryColor,
@@ -85,7 +86,7 @@ const DropdownSelectedItemsView = ({
         </View>
 
         {!selectedItem && selectedItems?.length === 0 && (
-          <Text style={styles.blackText}>
+          <Text style={[styles.blackText, placeholderStyle]}>
             {placeholder ?? 'Select an option'}
           </Text>
         )}
