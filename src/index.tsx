@@ -37,6 +37,7 @@ export const DropdownSelect = ({
   checkboxSize,
   checkboxStyle,
   checkboxLabelStyle,
+  placeholderStyle,
   ...rest
 }: DropdownProps) => {
   const [newOptions, setNewOptions] = useState(options ? options : []);
@@ -187,6 +188,7 @@ export const DropdownSelect = ({
         isMultiple={isMultiple}
         primaryColor={primary}
         disabled={disabled}
+        placeholderStyle={placeholderStyle}
         {...rest}
       />
       <CustomModal
