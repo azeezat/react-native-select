@@ -82,6 +82,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | isSearchable              | `Boolean`           | `true`                                                                     |
 | disabled                  | `Boolean`           | `true`                                                                     |
 | labelStyle                | `Object`            | `{color: 'red', borderRadius: 0, ...}`                                     |
+| placeholderStyle          | `Object`            | `{color: 'red', borderRadius: 0, ...}`                                     |
 | dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
 | dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
 | searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
