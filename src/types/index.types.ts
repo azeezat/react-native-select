@@ -28,4 +28,5 @@ export type DropdownProps = {
   checkboxSize?: number;
   checkboxStyle?: ViewStyle;
   checkboxLabelStyle?: TextStyle;
+  placeholderStyle?:TextStyle;
 };
