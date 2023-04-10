@@ -81,8 +81,8 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | isMultiple                | `Boolean`           | `true`                                                                     |
 | isSearchable              | `Boolean`           | `true`                                                                     |
 | disabled                  | `Boolean`           | `true`                                                                     |
-| labelStyle                | `Object`            | `{color: 'red', borderRadius: 0, ...}`                                     |
-| placeholderStyle          | `Object`            | `{color: 'red', borderRadius: 0, ...}`                                     |
+| labelStyle                | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                          |
+| placeholderStyle          | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                          |
 | dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
 | dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
 | searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
@@ -94,9 +94,9 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | dropdownErrorTextStyle    | `Object`            | `{color: 'red', fontWeight:'500'}`                                         |
 | dropdownHelperTextStyle   | `Object`            | `{color: 'green', fontWeight:'500'}`                                       |
 | primaryColor              | `string`            | `blue`                                                                     |
-| checkboxSize              | `number`            | `5`                                                                        |
-| checkboxStyle             | `Object`            | `{backgroundColor: 'blue', ...}`                                           |
-| checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:'500'`                                          |
+| checkboxSize              | `number`            | `20`                                                                       |
+| checkboxStyle             | `Object`            | `{backgroundColor: 'blue', borderRadius: 30, padding: 10}`                 |
+| checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:'500'}`                                         |
 
 
 ## Contributing

@@ -75,7 +75,7 @@ export default function App() {
           />
 
           <DropdownSelect
-            label="some items in this list are disabled"
+            label="Meal preferences"
             placeholder="Select your meal preferences"
             options={[
               { name: '🍛 Rice', value: '1', disabled: true },
@@ -94,7 +94,7 @@ export default function App() {
             modalBackgroundStyle={{
               backgroundColor: 'rgba(196, 198, 246, 0.5)',
             }}
-            helperText="This is an helper text"
+            helperText="Some items in this list are disabled"
             checkboxSize={20}
             isMultiple
           />
@@ -110,6 +110,11 @@ export default function App() {
             optionValue={'value'}
             selectedValue={item}
             onValueChange={(itemValue: any) => setItem(itemValue)}
+            placeholderStyle={{
+              color: 'purple',
+              fontSize: 15,
+              fontWeight: '500',
+            }}
             labelStyle={{ color: 'teal', fontSize: 15, fontWeight: '500' }}
             dropdownHelperTextStyle={{
               color: 'green',
@@ -118,7 +123,7 @@ export default function App() {
             modalBackgroundStyle={{
               backgroundColor: 'rgba(196, 198, 246, 0.5)',
             }}
-            helperText="This is an helper text"
+            helperText="The placeholder has been styled"
             checkboxSize={20}
             checkboxStyle={{
               backgroundColor: 'purple',
