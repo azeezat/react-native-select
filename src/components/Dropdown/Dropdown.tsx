@@ -18,6 +18,7 @@ const Dropdown = ({
   dropdownStyle,
   dropdownContainerStyle,
   selectedItemStyle,
+  placeholderStyle,
   multipleSelectedItemStyle,
   dropdownErrorStyle,
   dropdownErrorTextStyle,
@@ -44,6 +45,7 @@ const Dropdown = ({
         dropdownErrorStyle={dropdownErrorStyle}
         primaryColor={primaryColor}
         disabled={disabled}
+        placeholderStyle={placeholderStyle}
       />
 
       {error && error !== '' && (
