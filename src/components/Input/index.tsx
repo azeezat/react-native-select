@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View } from 'react-native';
+import { TextInput, StyleSheet, View, Platform } from 'react-native';
 import { inputStyles } from '../../styles/input';
 
 export const Input = ({
@@ -18,13 +18,15 @@ export const Input = ({
         placeholder={placeholder}
         style={[
           inputStyles.input,
-          isFocused &&
-            inputStyles.inputFocusState && { borderColor: primaryColor },
+          Platform.select({
+            web: {
+              outlineColor: primaryColor,
+            },
+          }),
+          isFocused && { borderColor: primaryColor },
           style,
         ]}
-        onFocus={() => {
-          setFocus(true);
-        }}
+        onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         value={value}
         onChangeText={onChangeText}

@@ -77,7 +77,9 @@ export const DropdownSelect = ({
     setSelectedItems(selectedValues);
     onValueChange(selectedValues); //send value to parent
 
-    if (options.length === selectedValues.length) {
+    if (
+      options.filter((item) => !item.disabled).length === selectedValues.length
+    ) {
       setSelectAll(true);
     } else {
       setSelectAll(false);

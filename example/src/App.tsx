@@ -17,7 +17,7 @@ export default function App() {
             label="Country"
             placeholder="Select multiple options..."
             options={[
-              { name: 'Albania', code: 'AL' },
+              { name: 'Nigeria', code: 'NG' },
               { name: 'Åland Islands', code: 'AX' },
               { name: 'Algeria', code: 'DZ' },
               { name: 'American Samoa', code: 'AS' },
