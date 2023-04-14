@@ -1,7 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Alert,
+} from 'react-native';
 import DropdownSelect from 'react-native-input-select';
+import { countries } from './data';
 
 export default function App() {
   const [country, setCountry] = React.useState<any>('');
@@ -132,6 +141,43 @@ export default function App() {
             }}
             checkboxLabelStyle={{ color: 'red', fontSize: 30 }}
           />
+
+          <DropdownSelect
+            label="Customized components in list"
+            placeholder="Select multiple options..."
+            options={countries}
+            optionLabel={'name'}
+            optionValue={'code'}
+            selectedValue={country.slice(0, 3)}
+            onValueChange={(itemValue: any) => setCountry(itemValue)}
+            isMultiple
+            isSearchable
+            primaryColor={'orange'}
+            listHeaderComponent={
+              <View style={styles.customComponentContainer}>
+                <Text style={styles.text}>
+                  💡 You can add any component to the top of this list
+                </Text>
+                <View style={styles.fixToText}>
+                  <Button
+                    title="Left button"
+                    onPress={() => Alert.alert('Left button pressed')}
+                  />
+                  <Button
+                    title="Right button"
+                    onPress={() => Alert.alert('Right button pressed')}
+                  />
+                </View>
+              </View>
+            }
+            listFooterComponent={
+              <View style={styles.customComponentContainer}>
+                <Text>
+                  You can add any component to the bottom of this list
+                </Text>
+              </View>
+            }
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -145,5 +191,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     paddingHorizontal: 20,
+  },
+  customComponentContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  text: {
+    marginBottom: 20,
+  },
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

@@ -22,6 +22,7 @@ export const DropdownSelect = ({
   isMultiple,
   isSearchable,
   labelStyle,
+  placeholderStyle,
   dropdownStyle,
   dropdownContainerStyle,
   dropdownErrorStyle,
@@ -37,7 +38,8 @@ export const DropdownSelect = ({
   checkboxSize,
   checkboxStyle,
   checkboxLabelStyle,
-  placeholderStyle,
+  listHeaderComponent,
+  listFooterComponent,
   ...rest
 }: DropdownProps) => {
   const [newOptions, setNewOptions] = useState(options ? options : []);
@@ -211,6 +213,7 @@ export const DropdownSelect = ({
                   primaryColor={primary}
                 />
               )}
+              {listHeaderComponent}
               {isMultiple && newOptions.length > 1 && (
                 <View style={styles.optionsContainerStyle}>
                   <TouchableOpacity onPress={() => {}}>
@@ -228,6 +231,7 @@ export const DropdownSelect = ({
               )}
             </>
           }
+          ListFooterComponent={listFooterComponent}
           options={newOptions}
           optionLabel={optionLabel}
           optionValue={optionValue}

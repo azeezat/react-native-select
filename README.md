@@ -97,7 +97,8 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | checkboxSize              | `number`            | `20`                                                                       |
 | checkboxStyle             | `Object`            | `{backgroundColor: 'blue', borderRadius: 30, padding: 10}`                 |
 | checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:'500'}`                                         |
-
+| listHeaderComponent       | `React Component`   | `<Text You can add any component to the top of this list <Text>`           |
+| listFooterComponent       | `React Component`   | `<Text You can add any component to the bottom of this list <Text>`        |
 
 ## Contributing
 
