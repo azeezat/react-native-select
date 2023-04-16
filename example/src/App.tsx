@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    verticalAlign: 'middle',
     backgroundColor: 'white',
     paddingHorizontal: 20,
   },

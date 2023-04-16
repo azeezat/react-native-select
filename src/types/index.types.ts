@@ -18,7 +18,7 @@ export type DropdownProps = {
   dropdownErrorStyle?: ViewStyle;
   dropdownErrorTextStyle?: TextStyle;
   dropdownHelperTextStyle?: TextStyle;
-  selectedItemStyle?: ViewStyle;
+  selectedItemStyle?: TextStyle;
   multipleSelectedItemStyle?: ViewStyle;
   modalBackgroundStyle?: ViewStyle;
   modalOptionsContainer?: ViewStyle;

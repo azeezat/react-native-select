@@ -75,18 +75,18 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | optionLabel               | `string`            | `name`                                                                     |
 | optionValue               | `string`            | `code`                                                                     |
 | error                     | `string`            | `This is a required field`                                                 |
-| helperText                | `string`            | `Only countries in the east are listed`                                    |
+| helperText                | `string`            | `Only few countries are listed`                                            |
 | selectedValue             | `string` or `Array` | `AL` or `[AL, AX]`                                                         |
 | onValueChange             | `function`          | `()=>{}`                                                                   |
 | isMultiple                | `Boolean`           | `true`                                                                     |
 | isSearchable              | `Boolean`           | `true`                                                                     |
 | disabled                  | `Boolean`           | `true`                                                                     |
 | labelStyle                | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                          |
-| placeholderStyle          | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                          |
+| placeholderStyle          | `Object`            | `{color: 'blue', fontSize: 15, fontWeight: '500'}`                         |
 | dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
 | dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
 | searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
-| selectedItemStyle         | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
+| selectedItemStyle         | `Object`            | `{fontWeight: '600', color: 'yellow', ...}`                                |
 | multipleSelectedItemStyle | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
 | modalBackgroundStyle      | `Object`            | `{backgroundColor: 'rgba(196, 198, 246, 0.5)'}`                            |
 | modalOptionsContainer     | `Object`            | `{padding: 5}`                                                             |
@@ -97,8 +97,8 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | checkboxSize              | `number`            | `20`                                                                       |
 | checkboxStyle             | `Object`            | `{backgroundColor: 'blue', borderRadius: 30, padding: 10}`                 |
 | checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:'500'}`                                         |
-| listHeaderComponent       | `React Component`   | `<Text You can add any component to the top of this list <Text>`           |
-| listFooterComponent       | `React Component`   | `<Text You can add any component to the bottom of this list <Text>`        |
+| listHeaderComponent       | `React Component`   | `<Text> You can add any component to the top of this list <Text>`          |
+| listFooterComponent       | `React Component`   | `<Text> You can add any component to the bottom of this list <Text>`       |
 
 ## Contributing
 
@@ -109,5 +109,5 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 MIT
 
 # Video Demo
-https://user-images.githubusercontent.com/9849221/230516294-a1aca5a7-65f5-4d9c-9b7f-a057807cf35f.mov
+https://user-images.githubusercontent.com/9849221/232344214-55fa5557-cfdd-42c4-a334-f93c15341b0b.mov
 
