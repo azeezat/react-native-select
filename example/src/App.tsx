@@ -145,13 +145,12 @@ export default function App() {
           <DropdownSelect
             label="Customized components in list"
             placeholder="Select multiple options..."
-            options={countries}
+            options={countries.slice(0, 3)}
             optionLabel={'name'}
             optionValue={'code'}
-            selectedValue={country.slice(0, 3)}
+            selectedValue={country}
             onValueChange={(itemValue: any) => setCountry(itemValue)}
             isMultiple
-            isSearchable
             primaryColor={'orange'}
             listHeaderComponent={
               <View style={styles.customComponentContainer}>
@@ -162,6 +161,7 @@ export default function App() {
                   <Button
                     title="Left button"
                     onPress={() => Alert.alert('Left button pressed')}
+                    color="#007AFF"
                   />
                   <Button
                     title="Right button"
