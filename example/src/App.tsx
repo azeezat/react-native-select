@@ -44,7 +44,21 @@ export default function App() {
             isSearchable
             primaryColor={'deepskyblue'}
           />
-
+          <DropdownSelect
+            label="Border has been removed"
+            placeholder="Select multiple options..."
+            options={countries}
+            optionLabel={'name'}
+            optionValue={'code'}
+            selectedValue={country}
+            onValueChange={(itemValue: any) => setCountry(itemValue)}
+            isMultiple
+            isSearchable
+            primaryColor={'deepskyblue'}
+            dropdownStyle={{
+              borderWidth: 0, // To remove border, set borderWidth to 0
+            }}
+          />
           <DropdownSelect
             label="Gender"
             placeholder="Select an option..."
@@ -152,6 +166,9 @@ export default function App() {
             onValueChange={(itemValue: any) => setCountry(itemValue)}
             isMultiple
             primaryColor={'orange'}
+            dropdownStyle={{
+              borderWidth: 0, // To remove border, set borderWidth to 0
+            }}
             listHeaderComponent={
               <View style={styles.customComponentContainer}>
                 <Text style={styles.text}>

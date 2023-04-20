@@ -63,11 +63,6 @@ const Dropdown = ({
 
 const styles = StyleSheet.create({
   label: { marginBottom: 16, color: colors.gray, ...typography.caption },
-  inputFocusErrorState: {
-    borderWidth: 2,
-    borderStyle: 'solid',
-    borderColor: colors.red,
-  },
   error: { color: colors.red, marginTop: 8, ...typography.caption },
   helper: { marginTop: 8, color: colors.primary, ...typography.caption },
   dropdownInputContainer: { marginBottom: 23, width: '100%' },
