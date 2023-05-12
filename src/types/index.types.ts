@@ -14,6 +14,7 @@ export type DropdownProps = {
   isSearchable?: boolean;
   labelStyle?: TextStyle;
   dropdownStyle?: ViewStyle;
+  dropdownIconStyle?: ViewStyle;
   dropdownContainerStyle?: ViewStyle;
   dropdownErrorStyle?: ViewStyle;
   dropdownErrorTextStyle?: TextStyle;

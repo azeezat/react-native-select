@@ -20,6 +20,7 @@ const DropdownSelectedItemsView = ({
   selectedItem,
   selectedItems,
   dropdownStyle,
+  dropdownIconStyle,
   selectedItemStyle,
   placeholderStyle,
   multipleSelectedItemStyle,
@@ -91,7 +92,7 @@ const DropdownSelectedItemsView = ({
           </Text>
         )}
       </ScrollView>
-      <View style={styles.iconStyle}>
+      <View style={[styles.iconStyle, dropdownIconStyle]}>
         <Image source={require('../../asset/arrow-down.png')} />
       </View>
     </Pressable>

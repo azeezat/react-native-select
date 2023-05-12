@@ -24,6 +24,7 @@ export const DropdownSelect = ({
   labelStyle,
   placeholderStyle,
   dropdownStyle,
+  dropdownIconStyle,
   dropdownContainerStyle,
   dropdownErrorStyle,
   dropdownErrorTextStyle,
@@ -183,6 +184,7 @@ export const DropdownSelect = ({
         handleToggleModal={handleToggleModal}
         labelStyle={labelStyle}
         dropdownStyle={dropdownStyle}
+        dropdownIconStyle={dropdownIconStyle}
         dropdownContainerStyle={dropdownContainerStyle}
         dropdownErrorStyle={dropdownErrorStyle}
         dropdownErrorTextStyle={dropdownErrorTextStyle}
