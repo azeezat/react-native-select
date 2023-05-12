@@ -12,6 +12,7 @@ export type DropdownProps = {
   selectedValue?: string | any[] | null;
   isMultiple?: boolean;
   isSearchable?: boolean;
+  dropdownIcon?: React.ReactNode;
   labelStyle?: TextStyle;
   dropdownStyle?: ViewStyle;
   dropdownIconStyle?: ViewStyle;

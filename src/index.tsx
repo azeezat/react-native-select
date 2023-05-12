@@ -21,6 +21,7 @@ export const DropdownSelect = ({
   selectedValue,
   isMultiple,
   isSearchable,
+  dropdownIcon,
   labelStyle,
   placeholderStyle,
   dropdownStyle,
@@ -183,6 +184,7 @@ export const DropdownSelect = ({
         selectedItems={selectedItems}
         handleToggleModal={handleToggleModal}
         labelStyle={labelStyle}
+        dropdownIcon={dropdownIcon}
         dropdownStyle={dropdownStyle}
         dropdownIconStyle={dropdownIconStyle}
         dropdownContainerStyle={dropdownContainerStyle}

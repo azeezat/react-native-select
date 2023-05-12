@@ -14,6 +14,7 @@ const Dropdown = ({
   isMultiple,
   selectedItem,
   selectedItems,
+  dropdownIcon,
   labelStyle,
   dropdownStyle,
   dropdownIconStyle,
@@ -40,6 +41,7 @@ const Dropdown = ({
         isMultiple={isMultiple}
         selectedItem={selectedItem}
         selectedItems={selectedItems}
+        dropdownIcon={dropdownIcon}
         dropdownStyle={dropdownStyle}
         dropdownIconStyle={dropdownIconStyle}
         selectedItemStyle={selectedItemStyle}

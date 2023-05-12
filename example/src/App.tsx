@@ -8,6 +8,7 @@ import {
   Text,
   Button,
   Alert,
+  Image,
 } from 'react-native';
 import DropdownSelect from 'react-native-input-select';
 import { countries } from './data';
@@ -169,6 +170,15 @@ export default function App() {
             dropdownStyle={{
               borderWidth: 0, // To remove border, set borderWidth to 0
             }}
+            dropdownIcon={
+              <Image
+                style={styles.tinyLogo}
+                source={{
+                  uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+                }}
+              />
+            }
+            dropdownIconStyle={{ top: 20, right: 20 }}
             listHeaderComponent={
               <View style={styles.customComponentContainer}>
                 <Text style={styles.text}>
@@ -220,5 +230,9 @@ const styles = StyleSheet.create({
   fixToText: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  tinyLogo: {
+    width: 20,
+    height: 20,
   },
 });

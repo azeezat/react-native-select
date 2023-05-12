@@ -155,11 +155,12 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | isMultiple                | `Boolean`           | `true`                                                                     |
 | isSearchable              | `Boolean`           | `true`                                                                     |
 | disabled                  | `Boolean`           | `true`                                                                     |
+| dropdownIcon              | `React Component`   | `Image` or `<Text> Show <Text>`       |
 | labelStyle                | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                          |
 | placeholderStyle          | `Object`            | `{color: 'blue', fontSize: 15, fontWeight: '500'}`                         |
 | dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
 | dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
-| dropdownIconStyle         | `Object`            | `{top: 10 , right: 10, ...}`                              |
+| dropdownIconStyle         | `Object`            | `{top: 10 , right: 10, ...}`                                               |
 | searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
 | selectedItemStyle         | `Object`            | `{fontWeight: '600', color: 'yellow', ...}`                                |
 | multipleSelectedItemStyle | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
