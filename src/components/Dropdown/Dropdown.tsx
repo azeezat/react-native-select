@@ -16,6 +16,7 @@ const Dropdown = ({
   selectedItems,
   labelStyle,
   dropdownStyle,
+  dropdownIconStyle,
   dropdownContainerStyle,
   selectedItemStyle,
   placeholderStyle,
@@ -40,6 +41,7 @@ const Dropdown = ({
         selectedItem={selectedItem}
         selectedItems={selectedItems}
         dropdownStyle={dropdownStyle}
+        dropdownIconStyle={dropdownIconStyle}
         selectedItemStyle={selectedItemStyle}
         multipleSelectedItemStyle={multipleSelectedItemStyle}
         dropdownErrorStyle={dropdownErrorStyle}
