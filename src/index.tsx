@@ -33,7 +33,7 @@ export const DropdownSelect = ({
   selectedItemStyle,
   multipleSelectedItemStyle,
   modalBackgroundStyle,
-  modalOptionsContainer,
+  modalOptionsContainerStyle,
   searchInputStyle,
   primaryColor,
   disabled,
@@ -203,7 +203,7 @@ export const DropdownSelect = ({
         open={open}
         handleToggleModal={handleToggleModal}
         modalBackgroundStyle={modalBackgroundStyle}
-        modalOptionsContainer={modalOptionsContainer}
+        modalOptionsContainerStyle={modalOptionsContainerStyle}
         onRequestClose={() => {}}
       >
         <DropdownList

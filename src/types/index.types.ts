@@ -23,7 +23,7 @@ export type DropdownProps = {
   selectedItemStyle?: TextStyle;
   multipleSelectedItemStyle?: ViewStyle;
   modalBackgroundStyle?: ViewStyle;
-  modalOptionsContainer?: ViewStyle;
+  modalOptionsContainerStyle?: ViewStyle;
   searchInputStyle?: ViewStyle;
   primaryColor?: ColorValue;
   disabled?: boolean;

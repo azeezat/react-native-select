@@ -57,6 +57,7 @@ export default function App() {
 ```js
 import React from 'react';
 import Dropdown from 'react-native-input-select';
+import { View, StyleSheet, Text, Button, Alert, Image } from 'react-native';
 
 export default function App() {
   const [country, setCountry] = React.useState();
@@ -96,6 +97,15 @@ export default function App() {
         padding: 10,
       }}
       checkboxLabelStyle={{ color: 'red', fontSize: 30 }}
+      dropdownIcon={
+        <Image
+          style={styles.tinyLogo}
+          source={{
+            uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+          }}
+        />
+      }
+      dropdownIconStyle={{ top: 20, right: 20 }}
       listHeaderComponent={
         <View style={styles.customComponentContainer}>
           <Text style={styles.text}>
@@ -119,9 +129,28 @@ export default function App() {
           <Text>You can add any component to the bottom of this list</Text>
         </View>
       }
+      modalOptionsContainerStyle={{ padding: 10, backgroundColor: 'cyan' }}
     />
   );
 }
+
+const styles = StyleSheet.create({
+  customComponentContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  text: {
+    marginBottom: 20,
+  },
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  tinyLogo: {
+    width: 20,
+    height: 20,
+  },
+});
 ```
 
 For more examples visit our [wiki page](https://github.com/azeezat/react-native-select/wiki)
@@ -135,46 +164,46 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 
 # Android
 
-|                                                                                                                                                                        |                                                                                                                                                                        |                                                                                                                                                                        |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img width="456" alt="Screenshot 2023-03-23 at 5 25 07 PM" src="https://user-images.githubusercontent.com/9849221/227393546-3aba8a28-f437-4f8f-9611-bf300c5af8f2.png"> | <img width="456" alt="Screenshot 2023-03-23 at 5 26 58 PM" src="https://user-images.githubusercontent.com/9849221/227393548-28796d7b-9760-43a9-8ed3-fb1618cd1b7d.png"> | <img width="456" alt="Screenshot 2023-03-23 at 5 28 49 PM" src="https://user-images.githubusercontent.com/9849221/227393554-91ed1a92-d229-4814-84d8-5f9095e8d048.png"> |
+|                                                                                                                                                                      |                                                                                                                                                                        |                                                                                                                                                                        |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="456" alt="Screenshot 2023-05-16 at 6 17 09 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/d695657f-d840-4368-b841-42af479d6543"> | <img width="456" alt="Screenshot 2023-03-23 at 5 26 58 PM" src="https://user-images.githubusercontent.com/9849221/227393548-28796d7b-9760-43a9-8ed3-fb1618cd1b7d.png"> | <img width="456" alt="Screenshot 2023-03-23 at 5 28 49 PM" src="https://user-images.githubusercontent.com/9849221/227393554-91ed1a92-d229-4814-84d8-5f9095e8d048.png"> |
 
 ## Props
 
-| Proptypes                 | Datatype            | Example                                                                    |
-| ------------------------- | ------------------- | -------------------------------------------------------------------------- |
-| label                     | `string`            | `Countries`                                                                |
-| placeholder               | `string`            | `Select a country`                                                         |
-| options                   | `Array`             | `[{ name: 'Albania', code: 'AL' }, { name: 'Åland Islands', code: 'AX' }]` |
-| optionLabel               | `string`            | `name`                                                                     |
-| optionValue               | `string`            | `code`                                                                     |
-| error                     | `string`            | `This is a required field`                                                 |
-| helperText                | `string`            | `Only few countries are listed`                                            |
-| selectedValue             | `string` or `Array` | `AL` or `[AL, AX]`                                                         |
-| onValueChange             | `function`          | `()=>{}`                                                                   |
-| isMultiple                | `Boolean`           | `true`                                                                     |
-| isSearchable              | `Boolean`           | `true`                                                                     |
-| disabled                  | `Boolean`           | `true`                                                                     |
-| dropdownIcon              | `React Component`   | `Image` or `<Text> Show <Text>`       |
-| labelStyle                | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                          |
-| placeholderStyle          | `Object`            | `{color: 'blue', fontSize: 15, fontWeight: '500'}`                         |
-| dropdownStyle             | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                      |
-| dropdownContainerStyle    | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                              |
-| dropdownIconStyle         | `Object`            | `{top: 10 , right: 10, ...}`                                               |
-| searchInputStyle          | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                           |
-| selectedItemStyle         | `Object`            | `{fontWeight: '600', color: 'yellow', ...}`                                |
-| multipleSelectedItemStyle | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                           |
-| modalBackgroundStyle      | `Object`            | `{backgroundColor: 'rgba(196, 198, 246, 0.5)'}`                            |
-| modalOptionsContainer     | `Object`            | `{padding: 5}`                                                             |
-| dropdownErrorStyle        | `Object`            | `{borderWidth: 2, borderStyle: 'solid'}`                                   |
-| dropdownErrorTextStyle    | `Object`            | `{color: 'red', fontWeight:'500'}`                                         |
-| dropdownHelperTextStyle   | `Object`            | `{color: 'green', fontWeight:'500'}`                                       |
-| primaryColor              | `string`            | `blue`                                                                     |
-| checkboxSize              | `number`            | `20`                                                                       |
-| checkboxStyle             | `Object`            | `{backgroundColor: 'blue', borderRadius: 30, padding: 10}`                 |
-| checkboxLabelStyle        | `Object`            | `{color: 'red', fontWeight:'500'}`                                         |
-| listHeaderComponent       | `React Component`   | `<Text> You can add any component to the top of this list <Text>`          |
-| listFooterComponent       | `React Component`   | `<Text> You can add any component to the bottom of this list <Text>`       |
+| Proptypes                  | Datatype            | Example                                                              |
+| -------------------------- | ------------------- | -------------------------------------------------------------------- |
+| label                      | `string`            | `Countries`                                                          |
+| placeholder                | `string`            | `Select a country`                                                   |
+| options                    | `Array`             | `[{ name: 'Nigeria', code: 'NG' }, { name: 'Albania', code: 'AL' }]` |
+| optionLabel                | `string`            | `name`                                                               |
+| optionValue                | `string`            | `code`                                                               |
+| error                      | `string`            | `This is a requiredfield`                                            |
+| helperText                 | `string`            | `Only few countries are listed`                                      |
+| selectedValue              | `string` or `Array` | `AL` or `[AL, AX]`                                                   |
+| onValueChange              | `function`          | `()=>{}`                                                             |
+| isMultiple                 | `Boolean`           | `true`                                                               |
+| isSearchable               | `Boolean`           | `true`                                                               |
+| disabled                   | `Boolean`           | `true`                                                               |
+| dropdownIcon               | `React Component`   | `Image` or `<Text> Show <Text>`                                      |
+| labelStyle                 | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                    |
+| placeholderStyle           | `Object`            | `{color: 'blue', fontSize: 15, fontWeight: '500'}`                   |
+| dropdownStyle              | `Object`            | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                |
+| dropdownContainerStyle     | `Object`            | `{backgroundColor: 'red', width: '30%', ...}`                        |
+| dropdownIconStyle          | `Object`            | `{top: 10 , right: 10, ...}`                                         |
+| searchInputStyle           | `Object`            | `{backgroundColor: 'red', borderRadius: 0, ...}`                     |
+| selectedItemStyle          | `Object`            | `{fontWeight: '600', color: 'yellow', ...}`                          |
+| multipleSelectedItemStyle  | `Object`            | `{backgroundColor: 'red', color: 'yellow', ...}`                     |
+| modalBackgroundStyle       | `Object`            | `{backgroundColor: 'rgba(196, 198, 246, 0.5)'}`                      |
+| modalOptionsContainerStyle | `Object`            | `{padding: 10, backgroundColor: 'cyan',}`                            |
+| dropdownErrorStyle         | `Object`            | `{borderWidth: 2, borderStyle: 'solid'}`                             |
+| dropdownErrorTextStyle     | `Object`            | `{color: 'red', fontWeight:'500'}`                                   |
+| dropdownHelperTextStyle    | `Object`            | `{color: 'green', fontWeight:'500'}`                                 |
+| primaryColor               | `string`            | `blue`                                                               |
+| checkboxSize               | `number`            | `20`                                                                 |
+| checkboxStyle              | `Object`            | `{backgroundColor: 'blue', borderRadius: 30, padding: 10}`           |
+| checkboxLabelStyle         | `Object`            | `{color: 'red', fontWeight:'500'}`                                   |
+| listHeaderComponent        | `React Component`   | `<Text> You can add any component here`                              |
+| listFooterComponent        | `React Component`   | `<Text> You can add any component here`                              |
 
 ## Contributing
 
