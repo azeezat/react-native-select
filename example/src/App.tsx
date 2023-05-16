@@ -204,6 +204,10 @@ export default function App() {
                 </Text>
               </View>
             }
+            modalOptionsContainerStyle={{
+              padding: 10,
+              backgroundColor: 'cyan',
+            }}
           />
         </View>
       </ScrollView>
