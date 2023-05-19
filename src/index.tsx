@@ -57,6 +57,10 @@ export const DropdownSelect = ({
   ); //for multiple selection
   const [searchValue, setSearchValue] = useState('');
 
+  React.useEffect(() => {
+    setSelectedItem(selectedValue);
+  }, [selectedValue]);
+
   /*===========================================
    * Selection handlers
    *==========================================*/
