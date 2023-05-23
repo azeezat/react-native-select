@@ -9,7 +9,14 @@ export type DropdownProps = {
   optionLabel: string;
   optionValue: string;
   onValueChange: Function;
-  selectedValue?: string | any[] | null;
+  selectedValue?:
+    | string
+    | boolean
+    | number
+    | string[]
+    | boolean[]
+    | number[]
+    | null;
   isMultiple?: boolean;
   isSearchable?: boolean;
   dropdownIcon?: React.ReactNode;

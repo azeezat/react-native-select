@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import Dropdown from './components/Dropdown/Dropdown';
 import DropdownList from './components/Dropdown/DropdownList';
@@ -9,7 +9,7 @@ import { colors } from './styles/colors';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
 import type { DropdownProps } from './types/index.types';
 
-export const DropdownSelect = ({
+export const DropdownSelect: React.FC<DropdownProps> = ({
   placeholder,
   label,
   error,
@@ -43,23 +43,25 @@ export const DropdownSelect = ({
   listHeaderComponent,
   listFooterComponent,
   ...rest
-}: DropdownProps) => {
-  const [newOptions, setNewOptions] = useState(options ? options : []);
-  const [open, setOpen] = useState(false);
-  const [selectAll, setSelectAll] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(selectedValue); //for single selection
-  const [selectedItems, setSelectedItems] = useState(
-    Array.isArray(selectedValue)
-      ? selectedValue
-      : selectedValue === '' || selectedValue === undefined
-      ? []
-      : [selectedValue]
-  ); //for multiple selection
-  const [searchValue, setSearchValue] = useState('');
+}) => {
+  const [newOptions, setNewOptions] = useState<any[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
+  const [selectAll, setSelectAll] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<any>(''); //for single selection
+  const [selectedItems, setSelectedItems] = useState<any[]>([]); //for multiple selection
+  const [searchValue, setSearchValue] = useState<string>('');
 
-  React.useEffect(() => {
-    setSelectedItem(selectedValue);
-  }, [selectedValue]);
+  useEffect(() => {
+    if (options) {
+      setNewOptions(options);
+    }
+  }, [options]);
+
+  useEffect(() => {
+    isMultiple
+      ? setSelectedItems(Array.isArray(selectedValue) ? selectedValue : [])
+      : setSelectedItem(selectedValue);
+  }, [selectedValue, isMultiple, onValueChange]);
 
   /*===========================================
    * Selection handlers
@@ -75,23 +77,29 @@ export const DropdownSelect = ({
   };
 
   const handleMultipleSelections = (value: any) => {
-    let selectedValues = [...selectedItems];
+    setSelectedItems((prevVal) => {
+      let selectedValues = [...prevVal];
 
-    if (selectedValues.includes(value)) {
-      selectedValues = selectedValues.filter((item) => item !== value);
-    } else {
-      selectedValues.push(value);
-    }
-    setSelectedItems(selectedValues);
-    onValueChange(selectedValues); //send value to parent
+      if (selectedValues?.includes(value)) {
+        selectedValues = selectedValues.filter((item) => item !== value);
+      } else {
+        selectedValues.push(value);
+      }
 
-    if (
-      options.filter((item) => !item.disabled).length === selectedValues.length
-    ) {
-      setSelectAll(true);
-    } else {
-      setSelectAll(false);
-    }
+      setSelectedItems(selectedValues);
+      onValueChange(selectedValues); //send value to parent
+
+      //select all checkbox should not be checked if the list contains disabled values
+      if (
+        options.filter((item) => !item.disabled).length ===
+        selectedValues.length
+      ) {
+        setSelectAll(true);
+      } else {
+        setSelectAll(false);
+      }
+      return selectedValues;
+    });
   };
 
   const handleSelectAll = () => {
@@ -114,18 +122,16 @@ export const DropdownSelect = ({
    * Get label handler
    *==========================================*/
   const getSelectedItemsLabel = () => {
-    if (isMultiple) {
+    if (isMultiple && Array.isArray(selectedItems)) {
       let selectedLabels: Array<string> = [];
-      selectedItems &&
-        selectedItems.forEach((element) => {
-          let selectedItemLabel =
-            options &&
-            options.find(
-              (item: any) =>
-                item[optionValue ?? DEFAULT_OPTION_VALUE] === element
-            )?.[optionLabel];
-          selectedLabels.push(selectedItemLabel);
-        });
+      selectedItems?.forEach((element: any) => {
+        let selectedItemLabel =
+          options &&
+          options.find(
+            (item: any) => item[optionValue ?? DEFAULT_OPTION_VALUE] === element
+          )?.[optionLabel];
+        selectedLabels.push(selectedItemLabel);
+      });
       return selectedLabels;
     }
 

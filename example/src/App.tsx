@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,37 +14,37 @@ import DropdownSelect from 'react-native-input-select';
 import { countries } from './data';
 
 export default function App() {
-  const [country, setCountry] = React.useState<any>('');
-  const [gender, setGender] = React.useState<any>('');
-  const [currency, setCurrency] = React.useState<any>('');
-  const [item, setItem] = React.useState<any>('');
+  const [country, setCountry] = useState<any>('');
+  const [gender, setGender] = useState<any>('');
+  const [currency, setCurrency] = useState<any>('');
+  const [meals, setMeals] = useState<any>('');
+  const [item, setItem] = useState<any>('');
+
+  useEffect(() => {
+    setCountry(['NG']);
+  }, []);
 
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
           <DropdownSelect
-            label="Country"
-            placeholder="Select multiple options..."
+            label="Currency"
+            placeholder="Select multiple currencies..."
             options={[
-              { name: 'Nigeria', code: 'NG' },
-              { name: 'Åland Islands', code: 'AX' },
-              { name: 'Algeria', code: 'DZ' },
-              { name: 'American Samoa', code: 'AS' },
-              { name: 'Andorra', code: 'AD' },
-              { name: 'Angola', code: 'AO' },
-              { name: 'Anguilla', code: 'AI' },
-              { name: 'Antarctica', code: 'AQ' },
-              { name: 'Antigua and Barbuda', code: 'AG' },
+              { name: 'Naira (NGN) \u20A6', code: 'NGN' },
+              { name: 'Dollar (USD) \u0024', code: 'USD' },
+              { name: 'Euro (EUR) \u20AC', code: 'EUR' },
             ]}
             optionLabel={'name'}
             optionValue={'code'}
-            selectedValue={country}
-            onValueChange={(itemValue: any) => setCountry(itemValue)}
+            selectedValue={currency}
+            onValueChange={(itemValue: any) => setCurrency(itemValue)}
             isMultiple
             isSearchable
             primaryColor={'deepskyblue'}
           />
+
           <DropdownSelect
             label="Border has been removed"
             placeholder="Select multiple options..."
@@ -55,11 +55,12 @@ export default function App() {
             onValueChange={(itemValue: any) => setCountry(itemValue)}
             isMultiple
             isSearchable
-            primaryColor={'deepskyblue'}
+            primaryColor={'purple'}
             dropdownStyle={{
               borderWidth: 0, // To remove border, set borderWidth to 0
             }}
           />
+
           <DropdownSelect
             label="Gender"
             placeholder="Select an option..."
@@ -82,6 +83,31 @@ export default function App() {
           />
 
           <DropdownSelect
+            label="Meal preferences"
+            placeholder="Select your meal preferences"
+            options={[
+              { name: '🍛 Rice', value: '1', disabled: true },
+              { name: '🍗 Chicken', value: '2' },
+              { name: '🥦 Brocoli', value: '3', disabled: true },
+              { name: '🍕 Pizza', value: '4' },
+            ]}
+            optionLabel={'name'}
+            optionValue={'value'}
+            selectedValue={meals}
+            onValueChange={(itemValue: any) => setMeals(itemValue)}
+            dropdownHelperTextStyle={{
+              color: 'green',
+              fontWeight: '900',
+            }}
+            modalBackgroundStyle={{
+              backgroundColor: 'rgba(196, 198, 246, 0.5)',
+            }}
+            helperText="Some items in this list are disabled"
+            checkboxSize={20}
+            isMultiple
+          />
+
+          <DropdownSelect
             label="Currency"
             placeholder="Select multiple currencies..."
             options={[
@@ -99,36 +125,11 @@ export default function App() {
           />
 
           <DropdownSelect
-            label="Meal preferences"
-            placeholder="Select your meal preferences"
-            options={[
-              { name: '🍛 Rice', value: '1', disabled: true },
-              { name: '🍗 Chicken', value: '2' },
-              { name: '🥦 Brocoli', value: '3', disabled: true },
-              { name: '🍕 Pizza', value: '4' },
-            ]}
-            optionLabel={'name'}
-            optionValue={'value'}
-            selectedValue={item}
-            onValueChange={(itemValue: any) => setItem(itemValue)}
-            dropdownHelperTextStyle={{
-              color: 'green',
-              fontWeight: '900',
-            }}
-            modalBackgroundStyle={{
-              backgroundColor: 'rgba(196, 198, 246, 0.5)',
-            }}
-            helperText="Some items in this list are disabled"
-            checkboxSize={20}
-            isMultiple
-          />
-
-          <DropdownSelect
-            label="Item"
+            label="This label has been styled"
             placeholder="Select an item..."
             options={[
-              { name: 'Male', value: '1' },
-              { name: 'Female', value: '2' },
+              { name: 'Customized Item 1', value: '1' },
+              { name: 'Customized Item 2', value: '2' },
             ]}
             optionLabel={'name'}
             optionValue={'value'}
@@ -160,12 +161,13 @@ export default function App() {
           <DropdownSelect
             label="Customized components in list"
             placeholder="Select multiple options..."
-            options={countries.slice(0, 3)}
+            options={countries}
             optionLabel={'name'}
             optionValue={'code'}
             selectedValue={country}
             onValueChange={(itemValue: any) => setCountry(itemValue)}
             isMultiple
+            isSearchable
             primaryColor={'orange'}
             dropdownStyle={{
               borderWidth: 0, // To remove border, set borderWidth to 0

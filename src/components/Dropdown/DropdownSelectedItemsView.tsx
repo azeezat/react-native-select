@@ -58,7 +58,7 @@ const DropdownSelectedItemsView = ({
           onStartShouldSetResponder={() => true}
         >
           {isMultiple ? (
-            getSelectedItemsLabel().map((item: any, i: Number) => (
+            getSelectedItemsLabel()?.map((item: any, i: Number) => (
               <TouchableOpacity
                 onPress={() => handleToggleModal()}
                 key={`react-native-input-select-${Math.random()}-${i}`}
