@@ -104,7 +104,11 @@ const DropdownSelectedItemsView = ({
 
 const styles = StyleSheet.create({
   iconStyle: { position: 'absolute', right: 25, top: 25 },
-  selectedItemsContainer: { flexDirection: 'row', flexWrap: 'nowrap' },
+  selectedItemsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+  },
   selectedItems: {
     color: colors.white,
     paddingHorizontal: 10,
