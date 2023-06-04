@@ -42,6 +42,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   checkboxLabelStyle,
   listHeaderComponent,
   listFooterComponent,
+  hideModal = false,
   ...rest
 }) => {
   const [newOptions, setNewOptions] = useState<any[]>([]);
@@ -180,6 +181,12 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     setSearchValue('');
     setNewOptions(options);
   };
+
+  useEffect(() => {
+    if (hideModal) {
+      setOpen(false);
+    }
+  }, [hideModal]);
 
   let primary = primaryColor || colors.gray;
   return (

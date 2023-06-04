@@ -40,4 +40,5 @@ export type DropdownProps = {
   placeholderStyle?: TextStyle;
   listHeaderComponent?: React.ReactNode;
   listFooterComponent?: React.ReactNode;
+  hideModal?: boolean;
 };
