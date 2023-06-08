@@ -69,6 +69,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const handleSingleSelection = (value: any) => {
     if (selectedItem === value) {
       setSelectedItem(null);
+      onValueChange(null); //send value to parent
     } else {
       setSelectedItem(value);
       onValueChange(value); //send value to parent
