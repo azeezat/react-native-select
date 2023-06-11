@@ -216,3 +216,9 @@ MIT
 # Video Demo
 
 https://user-images.githubusercontent.com/9849221/232344214-55fa5557-cfdd-42c4-a334-f93c15341b0b.mov
+
+<a href="https://github.com/azeezat/react-native-select/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=azeezat/react-native-select" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
