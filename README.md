@@ -184,6 +184,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | isMultiple                 | `Boolean`           | `true`                                                               |
 | isSearchable               | `Boolean`           | `true`                                                               |
 | disabled                   | `Boolean`           | `true`                                                               |
+| hideModal                  | `Boolean`           | default is `false`. setting this prop to true will hided the modal    |
 | dropdownIcon               | `React Component`   | `Image` or `<Text> Show <Text>`                                      |
 | labelStyle                 | `Object`            | `{color: 'red', fontSize: 15, fontWeight: '500'}`                    |
 | placeholderStyle           | `Object`            | `{color: 'blue', fontSize: 15, fontWeight: '500'}`                   |
