@@ -209,6 +209,12 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
+<a href="https://github.com/azeezat/react-native-select/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=azeezat/react-native-select" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
 ## License
 
 MIT
@@ -216,9 +222,3 @@ MIT
 # Video Demo
 
 https://user-images.githubusercontent.com/9849221/232344214-55fa5557-cfdd-42c4-a334-f93c15341b0b.mov
-
-<a href="https://github.com/azeezat/react-native-select/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=azeezat/react-native-select" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
