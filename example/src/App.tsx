@@ -210,6 +210,10 @@ export default function App() {
               padding: 10,
               backgroundColor: 'cyan',
             }}
+            modalProps={{
+              supportedOrientations: ['landscape-left', 'landscape-right'],
+              transparent: false
+            }}
           />
         </View>
       </ScrollView>

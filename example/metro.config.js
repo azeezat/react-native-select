@@ -1,3 +1,10 @@
+/**
+ * Metro configuration for React Native
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+
 const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
 const escape = require('escape-string-regexp');
