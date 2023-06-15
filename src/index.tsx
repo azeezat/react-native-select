@@ -42,6 +42,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   checkboxLabelStyle,
   listHeaderComponent,
   listFooterComponent,
+  modalProps,
   hideModal = false,
   ...rest
 }) => {
@@ -223,6 +224,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         modalBackgroundStyle={modalBackgroundStyle}
         modalOptionsContainerStyle={modalOptionsContainerStyle}
         onRequestClose={() => {}}
+        modalProps={modalProps}
       >
         <DropdownList
           ListHeaderComponent={

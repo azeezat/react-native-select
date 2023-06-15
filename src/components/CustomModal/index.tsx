@@ -13,6 +13,7 @@ const CustomModal = ({
   onRequestClose,
   modalBackgroundStyle,
   modalOptionsContainerStyle,
+  modalProps,
   children,
 }: any) => {
   return (
@@ -21,6 +22,7 @@ const CustomModal = ({
       visible={open}
       onRequestClose={() => onRequestClose()}
       animationType="fade"
+      {...modalProps}
     >
       <TouchableOpacity
         onPress={() => handleToggleModal()}

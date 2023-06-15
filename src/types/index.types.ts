@@ -1,4 +1,9 @@
-import type { ViewStyle, ColorValue, TextStyle } from 'react-native';
+import type {
+  ViewStyle,
+  ColorValue,
+  TextStyle,
+  ModalProps,
+} from 'react-native';
 
 export type DropdownProps = {
   placeholder?: string;
@@ -41,4 +46,5 @@ export type DropdownProps = {
   listHeaderComponent?: React.ReactNode;
   listFooterComponent?: React.ReactNode;
   hideModal?: boolean;
+  modalProps?: ModalProps;
 };
