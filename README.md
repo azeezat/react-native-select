@@ -205,6 +205,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | checkboxLabelStyle         | `Object`                 | `{color: 'red', fontWeight:'500'}`                                   |
 | listHeaderComponent        | `React Component`        | `<Text> You can add any component here`                              |
 | listFooterComponent        | `React Component`        | `<Text> You can add any component here`                              |
+| hideModal                  | `Boolean`                | Use this to hide the modal  as needed                                |
 
 ## Contributing
 
