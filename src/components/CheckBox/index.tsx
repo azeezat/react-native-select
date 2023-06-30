@@ -21,7 +21,9 @@ const CheckBox = ({
       : value
       ? checkboxStyle?.backgroundColor || primaryColor || 'green'
       : 'white',
-    borderColor: disabled ? colors.disabled : styles.checkbox.borderColor,
+    borderColor: disabled
+      ? colors.disabled
+      : checkboxStyle?.borderColor || styles.checkbox.borderColor,
   };
 
   return (
