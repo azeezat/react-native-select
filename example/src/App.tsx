@@ -154,6 +154,7 @@ export default function App() {
               backgroundColor: 'purple',
               borderRadius: 30, // To get a circle - add the checkboxSize and the padding size
               padding: 10,
+              borderColor: 'blue',
             }}
             checkboxLabelStyle={{ color: 'red', fontSize: 30 }}
           />
@@ -210,10 +211,10 @@ export default function App() {
               padding: 10,
               backgroundColor: 'cyan',
             }}
-            modalProps={{
-              supportedOrientations: ['landscape-left', 'landscape-right'],
-              transparent: false
-            }}
+            // modalProps={{
+            //   supportedOrientations: ['landscape-left', 'landscape-right'],
+            //   transparent: false,
+            // }}
           />
         </View>
       </ScrollView>
