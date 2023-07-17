@@ -10,9 +10,9 @@ export type DropdownProps = {
   label?: string;
   error?: string;
   helperText?: string;
-  options: any[];
-  optionLabel: string;
-  optionValue: string;
+  options: TFlatList | TSectionList;
+  optionLabel?: string;
+  optionValue?: string;
   onValueChange: Function;
   selectedValue?:
     | string
@@ -33,7 +33,7 @@ export type DropdownProps = {
   dropdownErrorTextStyle?: TextStyle;
   dropdownHelperTextStyle?: TextStyle;
   selectedItemStyle?: TextStyle;
-  multipleSelectedItemStyle?: ViewStyle;
+  multipleSelectedItemStyle?: TextStyle;
   modalBackgroundStyle?: ViewStyle;
   modalOptionsContainerStyle?: ViewStyle;
   searchInputStyle?: ViewStyle;
@@ -42,9 +42,27 @@ export type DropdownProps = {
   checkboxSize?: number;
   checkboxStyle?: ViewStyle;
   checkboxLabelStyle?: TextStyle;
+  checkboxComponentStyles?: {
+    checkboxSize?: number;
+    checkboxStyle?: ViewStyle;
+    checkboxLabelStyle?: TextStyle;
+  };
   placeholderStyle?: TextStyle;
   listHeaderComponent?: React.ReactNode;
   listFooterComponent?: React.ReactNode;
   hideModal?: boolean;
   modalProps?: ModalProps;
+  listComponentStyles?: {
+    listEmptyComponentStyle?: TextStyle;
+    itemSeparatorStyle?: ViewStyle;
+    sectionHeaderStyle?: TextStyle;
+  };
 };
+
+export type TFlatList = TFlatListItem[];
+export type TFlatListItem = {
+  [key: string]: string | number | boolean;
+}
+
+export type TSectionList = TSectionListItem[];
+export type TSectionListItem = { title: string; data: TFlatList };

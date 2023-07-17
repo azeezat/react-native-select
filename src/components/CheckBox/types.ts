@@ -8,5 +8,10 @@ export type CheckboxProps = {
   checkboxSize?: number;
   checkboxStyle?: ViewStyle;
   checkboxLabelStyle?: TextStyle;
+  checkboxComponentStyles?: {
+    checkboxSize?: number;
+    checkboxStyle?: ViewStyle;
+    checkboxLabelStyle?: TextStyle;
+  };
   onChange?: (value: boolean | string | number) => void;
 };

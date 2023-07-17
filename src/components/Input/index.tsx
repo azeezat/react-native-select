@@ -39,3 +39,5 @@ export const Input = ({
 const styles = StyleSheet.create({
   container: { margin: 23 },
 });
+
+export default Input;

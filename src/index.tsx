@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, StyleSheet, View } from 'react-native';
-import Dropdown from './components/Dropdown/Dropdown';
-import DropdownList from './components/Dropdown/DropdownList';
-import CustomModal from './components/CustomModal';
-import { Input } from './components/Input';
+import Input from './components/Input';
 import CheckBox from './components/CheckBox';
+import Dropdown from './components/Dropdown/Dropdown';
+import DropdownFlatList from './components/Dropdown/DropdownFlatList';
+import DropdownSectionList from './components/Dropdown/DropdownSectionList';
+import CustomModal from './components/CustomModal';
 import { colors } from './styles/colors';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
-import type { DropdownProps } from './types/index.types';
+import type {
+  DropdownProps,
+  TFlatList,
+  TFlatListItem,
+  TSectionList,
+  TSectionListItem,
+} from './types/index.types';
+import {
+  extractPropertyFromArray,
+  getMaxLengthOfSectionListProperty,
+} from './utils';
 
 export const DropdownSelect: React.FC<DropdownProps> = ({
   placeholder,
@@ -37,16 +48,18 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   searchInputStyle,
   primaryColor,
   disabled,
-  checkboxSize,
-  checkboxStyle,
-  checkboxLabelStyle,
+  checkboxSize, // kept for backwards compatibility
+  checkboxStyle, // kept for backwards compatibility
+  checkboxLabelStyle, // kept for backwards compatibility
+  checkboxComponentStyles,
   listHeaderComponent,
   listFooterComponent,
+  listComponentStyles,
   modalProps,
   hideModal = false,
   ...rest
 }) => {
-  const [newOptions, setNewOptions] = useState<any[]>([]);
+  const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<any>(''); //for single selection
@@ -57,18 +70,38 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     if (options) {
       setNewOptions(options);
     }
+    return () => {};
   }, [options]);
 
   useEffect(() => {
     isMultiple
       ? setSelectedItems(Array.isArray(selectedValue) ? selectedValue : [])
       : setSelectedItem(selectedValue);
+
+    return () => {};
   }, [selectedValue, isMultiple, onValueChange]);
+
+  /*===========================================
+   * List type
+   *==========================================*/
+
+  const isSectionList = newOptions.some(
+    (item) => item.title && item.data && Array.isArray(item.data)
+  );
+
+  const ListTypeComponent = isSectionList
+    ? DropdownSectionList
+    : DropdownFlatList;
+  let modifiedSectionData = extractPropertyFromArray(newOptions, 'data').flat();
+  let modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
+
+  const optLabel = optionLabel || DEFAULT_OPTION_LABEL;
+  const optValue = optionValue || DEFAULT_OPTION_VALUE;
 
   /*===========================================
    * Selection handlers
    *==========================================*/
-  const handleSingleSelection = (value: any) => {
+  const handleSingleSelection = (value: string | number) => {
     if (selectedItem === value) {
       setSelectedItem(null);
       onValueChange(null); //send value to parent
@@ -79,7 +112,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     }
   };
 
-  const handleMultipleSelections = (value: any) => {
+  const handleMultipleSelections = (value: string[] | number[]) => {
     setSelectedItems((prevVal) => {
       let selectedValues = [...prevVal];
 
@@ -94,8 +127,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
       //select all checkbox should not be checked if the list contains disabled values
       if (
-        options.filter((item) => !item.disabled).length ===
-        selectedValues.length
+        modifiedOptions.filter((item: TFlatListItem) => !item.disabled)
+          .length === selectedValues.length
       ) {
         setSelectAll(true);
       } else {
@@ -108,10 +141,15 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const handleSelectAll = () => {
     setSelectAll((prevVal) => {
       const selectedValues = [];
-      const filteredOptions = newOptions.filter((item) => !item.disabled); //don't select disabled items
+
+      //don't select disabled items
+      const filteredOptions = modifiedOptions.filter(
+        (item: TFlatListItem) => !item.disabled
+      );
+
       if (!prevVal) {
         for (let i = 0; i < filteredOptions.length; i++) {
-          selectedValues.push(filteredOptions[i][optionValue]);
+          selectedValues.push(filteredOptions[i][optValue]);
         }
       }
 
@@ -127,24 +165,20 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const getSelectedItemsLabel = () => {
     if (isMultiple && Array.isArray(selectedItems)) {
       let selectedLabels: Array<string> = [];
-      selectedItems?.forEach((element: any) => {
-        let selectedItemLabel =
-          options &&
-          options.find(
-            (item: any) => item[optionValue ?? DEFAULT_OPTION_VALUE] === element
-          )?.[optionLabel];
+
+      selectedItems?.forEach((element: number | string) => {
+        let selectedItemLabel = modifiedOptions?.find(
+          (item: TFlatListItem) => item[optValue] === element
+        )?.[optLabel];
         selectedLabels.push(selectedItemLabel);
       });
       return selectedLabels;
     }
 
-    let selectedItemLabel =
-      options &&
-      options.find(
-        (item: any) =>
-          item[optionValue ?? DEFAULT_OPTION_VALUE] === selectedItem
-      );
-    return selectedItemLabel?.[optionLabel ?? DEFAULT_OPTION_LABEL];
+    let selectedItemLabel = modifiedOptions?.find(
+      (item: TFlatListItem) => item[optValue] === selectedItem
+    );
+    return selectedItemLabel?.[optLabel];
   };
 
   /*===========================================
@@ -157,22 +191,47 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
     const regexFilter = new RegExp(searchText, 'i');
 
-    const searchResults = options.filter((item: any) => {
+    //Because Search mutates the initial state, we have to search with a copy of the original array
+    const optionsCopy = JSON.parse(JSON.stringify(options));
+    const searchResults = isSectionList
+      ? searchSectionList(optionsCopy as TSectionList, regexFilter)
+      : searchFlatList(optionsCopy as TFlatList, regexFilter);
+
+    setNewOptions(searchResults);
+  };
+
+  const searchFlatList = (flatList: TFlatList, regexFilter: RegExp) => {
+    const searchResults = flatList.filter((item: TFlatListItem) => {
       if (
-        item[optionLabel ?? DEFAULT_OPTION_LABEL]
-          .toString()
-          .toLowerCase()
-          .search(regexFilter) !== -1 ||
-        item[optionValue ?? DEFAULT_OPTION_VALUE]
-          .toString(regexFilter)
-          .toLowerCase()
-          .search(regexFilter) !== -1
+        item[optLabel].toString().toLowerCase().search(regexFilter) !== -1 ||
+        item[optValue].toString().toLowerCase().search(regexFilter) !== -1
       ) {
         return item;
       }
+      return;
+    });
+    return searchResults;
+  };
+
+  const searchSectionList = (
+    sectionList: TSectionList,
+    regexFilter: RegExp
+  ) => {
+    const searchResults = sectionList.map((listItem: TSectionListItem) => {
+      listItem.data = listItem.data.filter((item: TFlatListItem) => {
+        if (
+          item[optLabel].toString().toLowerCase().search(regexFilter) !== -1 ||
+          item[optValue].toString().toLowerCase().search(regexFilter) !== -1
+        ) {
+          return listItem.data.push(item);
+        }
+        return;
+      });
+
+      return listItem;
     });
 
-    setNewOptions(searchResults);
+    return searchResults;
   };
 
   /*===========================================
@@ -188,9 +247,20 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     if (hideModal) {
       setOpen(false);
     }
+    return () => {};
   }, [hideModal]);
 
   let primary = primaryColor || colors.gray;
+
+  const sectionListMaxLength = getMaxLengthOfSectionListProperty(
+    newOptions as TSectionList,
+    'data'
+  );
+
+  const listIsEmpty = isSectionList
+    ? sectionListMaxLength > 1
+    : newOptions.length > 1;
+
   return (
     <>
       <Dropdown
@@ -226,7 +296,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         onRequestClose={() => {}}
         modalProps={modalProps}
       >
-        <DropdownList
+        <ListTypeComponent
           ListHeaderComponent={
             <>
               {isSearchable && (
@@ -238,7 +308,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                 />
               )}
               {listHeaderComponent}
-              {isMultiple && newOptions.length > 1 && (
+              {isMultiple && listIsEmpty && (
                 <View style={styles.optionsContainerStyle}>
                   <TouchableOpacity onPress={() => {}}>
                     <CheckBox
@@ -249,6 +319,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                       checkboxSize={checkboxSize}
                       checkboxStyle={checkboxStyle}
                       checkboxLabelStyle={checkboxLabelStyle}
+                      checkboxComponentStyles={checkboxComponentStyles}
                     />
                   </TouchableOpacity>
                 </View>
@@ -256,9 +327,10 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
             </>
           }
           ListFooterComponent={listFooterComponent}
+          listComponentStyles={listComponentStyles}
           options={newOptions}
-          optionLabel={optionLabel}
-          optionValue={optionValue}
+          optionLabel={optLabel}
+          optionValue={optValue}
           isMultiple={isMultiple}
           isSearchable={isSearchable}
           selectedItems={selectedItems}
@@ -269,6 +341,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           checkboxSize={checkboxSize}
           checkboxStyle={checkboxStyle}
           checkboxLabelStyle={checkboxLabelStyle}
+          checkboxComponentStyles={checkboxComponentStyles}
         />
       </CustomModal>
     </>
