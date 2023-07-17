@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import DropdownListItem from './DropdownListItem';
-import { colors } from '../../styles/colors';
+import { ItemSeparatorComponent, ListEmptyComponent } from '../Others';
 
-const DropdownList = ({
+const DropdownFlatList = ({
   options,
   optionLabel,
   optionValue,
@@ -15,9 +15,11 @@ const DropdownList = ({
   handleMultipleSelections,
   handleSingleSelection,
   primaryColor,
-  checkboxSize,
-  checkboxStyle,
-  checkboxLabelStyle,
+  checkboxSize, // kept for backwards compatibility to be removed in future release
+  checkboxStyle, // kept for backwards compatibility to be removed in future release
+  checkboxLabelStyle, // kept for backwards compatibility to be removed  in future release
+  checkboxComponentStyles,
+  listComponentStyles,
   ...rest
 }: any) => {
   return (
@@ -26,14 +28,18 @@ const DropdownList = ({
       extraData={isMultiple ? selectedItems : selectedItem}
       initialNumToRender={5}
       ListEmptyComponent={
-        <View style={styles.emptyListStyle}>
-          <Text>No options available</Text>
-        </View>
+        <ListEmptyComponent
+          listEmptyComponentStyle={listComponentStyles?.listEmptyComponentStyle}
+        />
       }
       contentContainerStyle={[
         isSearchable ? { paddingTop: 0 } : styles.contentContainerStyle,
       ]}
-      ItemSeparatorComponent={() => <View style={styles.itemSeparatorStyle} />}
+      ItemSeparatorComponent={() => (
+        <ItemSeparatorComponent
+          itemSeparatorStyle={listComponentStyles?.itemSeparatorStyle}
+        />
+      )}
       renderItem={(item) =>
         _renderItem(item, {
           optionLabel,
@@ -44,9 +50,10 @@ const DropdownList = ({
             ? handleMultipleSelections
             : handleSingleSelection,
           primaryColor,
-          checkboxSize,
-          checkboxStyle,
-          checkboxLabelStyle,
+          checkboxSize, // kept for backwards compatibility
+          checkboxStyle, // kept for backwards compatibility
+          checkboxLabelStyle, // kept for backwards compatibility
+          checkboxComponentStyles,
         })
       }
       keyExtractor={(_item, index) => `Options${index}`}
@@ -68,18 +75,13 @@ const _renderItem = ({ item }: any, props: any) => {
       checkboxSize={props.checkboxSize}
       checkboxStyle={props.checkboxStyle}
       checkboxLabelStyle={props.checkboxLabelStyle}
+      checkboxComponentStyles={props.checkboxComponentStyles}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  itemSeparatorStyle: {
-    backgroundColor: colors.gray,
-    height: 1,
-    opacity: 0.15,
-  },
-  emptyListStyle: { alignItems: 'center', width: '100%', marginVertical: 20 },
   contentContainerStyle: { paddingTop: 20 },
 });
 
-export default DropdownList;
+export default DropdownFlatList;

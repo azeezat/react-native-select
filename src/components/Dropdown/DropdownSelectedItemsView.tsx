@@ -6,7 +6,6 @@ import {
   ScrollView,
   StyleSheet,
   Image,
-  TouchableOpacity,
 } from 'react-native';
 import { colors } from '../../styles/colors';
 import { inputStyles } from '../../styles/input';
@@ -59,39 +58,28 @@ const DropdownSelectedItemsView = ({
         >
           {isMultiple ? (
             getSelectedItemsLabel()?.map((item: any, i: Number) => (
-              <TouchableOpacity
-                onPress={() => handleToggleModal()}
+              <Text
                 key={`react-native-input-select-${Math.random()}-${i}`}
-                disabled={disabled}
+                style={[
+                  styles.selectedItems,
+                  { backgroundColor: primaryColor },
+                  multipleSelectedItemStyle,
+                ]}
               >
-                <Text
-                  style={[
-                    styles.selectedItems,
-                    { backgroundColor: primaryColor },
-                    multipleSelectedItemStyle,
-                  ]}
-                >
-                  {item}
-                </Text>
-              </TouchableOpacity>
+                {item}
+              </Text>
             ))
           ) : (
-            <TouchableOpacity
-              onPress={() => handleToggleModal()}
-              disabled={disabled}
-            >
-              <Text style={[styles.blackText, selectedItemStyle]}>
-                {getSelectedItemsLabel()}
-              </Text>
-            </TouchableOpacity>
+            <Text style={[styles.blackText, selectedItemStyle]}>
+              {getSelectedItemsLabel()}
+            </Text>
+          )}
+          {!selectedItem && selectedItems?.length === 0 && (
+            <Text style={[styles.blackText, placeholderStyle]}>
+              {placeholder ?? 'Select an option'}
+            </Text>
           )}
         </View>
-
-        {!selectedItem && selectedItems?.length === 0 && (
-          <Text style={[styles.blackText, placeholderStyle]}>
-            {placeholder ?? 'Select an option'}
-          </Text>
-        )}
       </ScrollView>
       <View style={[styles.iconStyle, dropdownIconStyle]}>
         {dropdownIcon || (

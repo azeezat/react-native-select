@@ -32,18 +32,12 @@ export default function App() {
       label="Country"
       placeholder="Select an option..."
       options={[
-        { name: 'Albania', code: 'AL' },
-        { name: 'Åland Islands', code: 'AX' },
-        { name: 'Algeria', code: 'DZ' },
-        { name: 'American Samoa', code: 'AS' },
-        { name: 'Andorra', code: 'AD' },
-        { name: 'Angola', code: 'AO' },
-        { name: 'Anguilla', code: 'AI' },
-        { name: 'Antarctica', code: 'AQ' },
-        { name: 'Antigua and Barbuda', code: 'AG' },
+        { label: 'Nigeria', value: 'NG' },
+        { label: 'Åland Islands', value: 'AX' },
+        { label: 'Algeria', value: 'DZ' },
+        { label: 'American Samoa', value: 'AS' },
+        { label: 'Andorra', value: 'AD' },
       ]}
-      optionLabel={'name'}
-      optionValue={'code'}
       selectedValue={country}
       onValueChange={(value) => setCountry(value)}
       primaryColor={'green'}
@@ -52,7 +46,7 @@ export default function App() {
 }
 ```
 
-## Advanced Usage
+## Advanced Usage With Flat List
 
 ```js
 import React from 'react';
@@ -66,7 +60,17 @@ export default function App() {
     <Dropdown
       label="Customized components in list"
       placeholder="Select multiple options..."
-      options={countries.slice(0, 3)}
+      options={[
+        { name: 'Albania', code: 'AL' },
+        { name: 'Nigeria', code: 'NG' },
+        { name: 'Algeria', code: 'DZ' },
+        { name: 'American Samoa', code: 'AS' },
+        { name: 'Andorra', code: 'AD' },
+        { name: 'Angola', code: 'AO' },
+        { name: 'Anguilla', code: 'AI' },
+        { name: 'Antarctica', code: 'AQ' },
+        { name: 'Antigua and Barbuda', code: 'AG' },
+      ]}
       optionLabel={'name'}
       optionValue={'code'}
       selectedValue={country}
@@ -90,13 +94,16 @@ export default function App() {
         backgroundColor: 'rgba(196, 198, 246, 0.5)',
       }}
       helperText="The placeholder has been styled"
-      checkboxSize={20}
-      checkboxStyle={{
-        backgroundColor: 'purple',
-        borderRadius: 30, // To get a circle - add the checkboxSize and the padding size
-        padding: 10,
+      checkboxComponentStyles={{
+        checkboxSize: 20,
+        checkboxStyle: {
+          backgroundColor: 'purple',
+          borderRadius: 30, // To get a circle - add the checkboxSize and the padding size
+          padding: 10,
+          borderColor: 'blue',
+        },
+        checkboxLabelStyle: { color: 'red', fontSize: 20 },
       }}
-      checkboxLabelStyle={{ color: 'red', fontSize: 30 }}
       dropdownIcon={
         <Image
           style={styles.tinyLogo}
@@ -153,14 +160,61 @@ const styles = StyleSheet.create({
 });
 ```
 
+## Advanced Usage with Section List
+
+```js
+<DropdownSelect
+  label="Menu"
+  placeholder="Select multiple dishes..."
+  options={[
+    {
+      title: 'Main dishes',
+      data: [
+        { label: 'Pizza', value: 'A' },
+        { label: 'Burger', value: 'B' },
+        { label: 'Risotto', value: 'C' },
+      ],
+    },
+    {
+      title: 'Sides',
+      data: [
+        { label: 'Ice cream', value: 'D' },
+        { label: 'Cheesecake', value: 'E' },
+      ],
+    },
+    {
+      title: 'Drinks',
+      data: [
+        { label: 'Water', value: 'F' },
+        { label: 'Coke', value: 'G' },
+        { label: 'Juice', value: 'H' },
+      ],
+    },
+  ]}
+  selectedValue={menu}
+  onValueChange={(itemValue: any) => setMenu(itemValue)}
+  isMultiple
+  isSearchable
+  primaryColor={'deepskyblue'}
+  listComponentStyles={{
+    sectionHeaderStyle: {
+      padding: 10,
+      backgroundColor: 'green',
+      color: 'white',
+      width: '30%',
+    },
+  }}
+/>
+```
+
 For more examples visit our [wiki page](https://github.com/azeezat/react-native-select/wiki)
 
 # iOS
 
-|                                                                                                                                                                         |                                                                                                                                                                        |                                                                                                                                                                        |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img width="529" alt="Screenshot 2023-04-18 at 10 06 15 AM" src="https://user-images.githubusercontent.com/9849221/232854077-d5f8436a-55d8-4826-af44-5a7d47626765.png"> | <img width="529" alt="Screenshot 2023-03-23 at 5 00 19 PM" src="https://user-images.githubusercontent.com/9849221/227391036-44b5e935-bc5e-48d6-a3a9-7a285a4879fd.png"> | <img width="529" alt="Screenshot 2023-03-23 at 5 00 29 PM" src="https://user-images.githubusercontent.com/9849221/227391040-45772980-e51c-4ebf-aabf-30886ff06e7c.png"> |
-| <img width="529" alt="Screenshot 2023-03-23 at 5 00 35 PM" src="https://user-images.githubusercontent.com/9849221/227391043-9e5fe1aa-86aa-438c-9e84-8c38975d3d57.png">  | <img width="529" alt="Screenshot 2023-03-23 at 5 11 54 PM" src="https://user-images.githubusercontent.com/9849221/227391594-f672b97a-c3c0-466c-b615-a887e4a8a6c0.png"> | <img width="529" alt="Screenshot 2023-04-06 at 5 26 46 PM" src="https://user-images.githubusercontent.com/9849221/230516858-b11168be-3144-4914-a31a-15663c5d0404.png"> |
+|                                                                                                                                                                       |                                                                                                                                                                       |                                                                                                                                                                       |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="529" alt="Screenshot 2023-07-08 at 12 34 23 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/5bf518bc-573e-4db8-90ec-7ad061e4f3d7"> | <img width="499" alt="Screenshot 2023-07-08 at 12 39 51 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/9d42460f-e4ec-48d0-960d-bb3bcd76331e"> | <img width="529" alt="Screenshot 2023-07-08 at 12 29 16 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/81bde8f7-b88b-4c11-bd3e-33ff2dbb0628"> |
+| <img width="529" alt="Screenshot 2023-07-08 at 12 28 57 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/46627375-cb28-4ae1-827f-a0ba84817faa"> | <img width="529" alt="Screenshot 2023-07-08 at 12 20 52 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/bf42254d-3c3d-4f0f-9730-a6263136f78e"> | <img width="529" alt="Screenshot 2023-07-08 at 12 21 06 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/a572d625-dc65-4bf3-8b07-0e057cc8739b"> |
 
 # Android
 
@@ -200,12 +254,31 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | dropdownErrorTextStyle     | `Object`                 | `{color: 'red', fontWeight:'500'}`                                   |
 | dropdownHelperTextStyle    | `Object`                 | `{color: 'green', fontWeight:'500'}`                                 |
 | primaryColor               | `string`                 | `blue`                                                               |
-| checkboxSize               | `number`                 | `20`                                                                 |
-| checkboxStyle              | `Object`                 | `{backgroundColor: 'blue', borderRadius: 30, padding: 10}`           |
-| checkboxLabelStyle         | `Object`                 | `{color: 'red', fontWeight:'500'}`                                   |
-| listHeaderComponent        | `React Component`        | `<Text> You can add any component here`                              |
-| listFooterComponent        | `React Component`        | `<Text> You can add any component here`                              |
-| hideModal                  | `Boolean`                | Use this to hide the modal  as needed                                |
+| listHeaderComponent        | `React Component`        | `<Text> You can add any component here </Text>`                      |
+| listFooterComponent        | `React Component`        | `<Text> You can add any component here <Text>`                       |
+| hideModal                  | `Boolean`                | Use this to hide the modal as needed                                 |
+| listComponentStyles        | `Object`                 | `{listEmptyComponentStyle: ViewStyle, itemSeparatorStyle: ViewStyle, sectionHeaderStyle: TextStyle}` |
+| checkboxComponentStyles    | `Object`                 | `{checkboxSize?: number, checkboxStyle?: ViewStyle, checkboxLabelStyle: TextStyle}` |
+
+
+## Deprecation Notice
+
+The following props would be removed in coming releases.
+
+- Individual props `checkboxSize`, `checkboxStyle`, `checkboxLabelStyle` would be replaced with a single object `checkboxComponentStyles` e.g
+
+```js
+const checkboxComponentStyles = {
+  checkboxSize: 20,
+  checkboxStyle: {
+    backgroundColor: 'purple',
+    borderRadius: 30,
+    padding: 10,
+    borderColor: 'red',
+  },
+  checkboxLabelStyle: { color: 'red', fontSize: 20 },
+};
+```
 
 ## Contributing
 
@@ -223,4 +296,4 @@ MIT
 
 # Video Demo
 
-https://user-images.githubusercontent.com/9849221/232344214-55fa5557-cfdd-42c4-a334-f93c15341b0b.mov
+https://github.com/azeezat/react-native-select/assets/9849221/194bf5cf-1a2d-4ca6-9585-05d6bb987aba

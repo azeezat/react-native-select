@@ -13,27 +13,29 @@ const DropdownListItem = ({
   checkboxSize,
   checkboxStyle,
   checkboxLabelStyle,
+  checkboxComponentStyles,
 }: any) => {
-  const selectedOptionValue = optionValue ?? 'value';
   return (
     <TouchableOpacity
-      style={styles.dropdownModalOptions}
+      style={styles.listItemContainerStyle}
       onPress={
-        item.disabled ? () => {} : () => onChange(item[selectedOptionValue]) // intentionally didn't use the disable property
+        item.disabled ? () => {} : () => onChange(item[optionValue]) // intentionally didn't use the disable property
       }
     >
       <CheckBox
         value={
           isMultiple
-            ? selectedOption.includes(item[selectedOptionValue])
-            : [selectedOption].includes(item[selectedOptionValue])
+            ? selectedOption.includes(item[optionValue])
+            : [selectedOption].includes(item[optionValue])
         }
-        label={item[optionLabel ?? '']}
-        onChange={() => onChange(item[selectedOptionValue])}
+        label={item[optionLabel]}
+        onChange={() => onChange(item[optionValue])}
         primaryColor={primaryColor}
-        checkboxSize={checkboxSize}
-        checkboxStyle={checkboxStyle}
-        checkboxLabelStyle={checkboxLabelStyle}
+        checkboxSize={checkboxComponentStyles?.checkboxSize || checkboxSize}
+        checkboxStyle={checkboxComponentStyles?.checkboxStyle || checkboxStyle}
+        checkboxLabelStyle={
+          checkboxComponentStyles?.checkboxLabelStyle || checkboxLabelStyle
+        }
         disabled={item.disabled}
       />
     </TouchableOpacity>
@@ -41,7 +43,7 @@ const DropdownListItem = ({
 };
 
 const styles = StyleSheet.create({
-  dropdownModalOptions: {
+  listItemContainerStyle: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     flexDirection: 'row',

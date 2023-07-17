@@ -5,6 +5,12 @@ import { colors } from '../../styles/colors';
 import { CHECKBOX_SIZE } from '../../constants';
 import type { CheckboxProps } from './types';
 
+/**
+ *
+ *`checkboxSize`, `checkboxStyle`,`checkboxLabelStyle` Will be deleted in version 1.0.
+ * and replaced with `checkboxComponentStyles`
+ */
+
 const CheckBox = ({
   label,
   value,
@@ -13,17 +19,25 @@ const CheckBox = ({
   checkboxSize,
   checkboxStyle,
   checkboxLabelStyle,
+  checkboxComponentStyles,
   onChange,
 }: CheckboxProps) => {
+  // const { checkboxSize, checkboxStyle, checkboxLabelStyle } =
+  //   checkboxComponentStyles;
   const fillColor = {
     backgroundColor: disabled
       ? '#d3d3d3'
       : value
-      ? checkboxStyle?.backgroundColor || primaryColor || 'green'
+      ? checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
+        checkboxStyle?.backgroundColor ||
+        primaryColor ||
+        'green'
       : 'white',
     borderColor: disabled
       ? colors.disabled
-      : checkboxStyle?.borderColor || styles.checkbox.borderColor,
+      : checkboxComponentStyles?.checkboxStyle?.borderColor ||
+        checkboxStyle?.borderColor ||
+        styles.checkbox.borderColor,
   };
 
   return (
@@ -37,14 +51,27 @@ const CheckBox = ({
           source={require('../../asset/check.png')}
           style={[
             {
-              height: checkboxSize || CHECKBOX_SIZE,
-              width: checkboxSize || CHECKBOX_SIZE,
+              height:
+                checkboxComponentStyles?.checkboxSize ||
+                checkboxSize ||
+                CHECKBOX_SIZE,
+              width:
+                checkboxComponentStyles?.checkboxSize ||
+                checkboxSize ||
+                CHECKBOX_SIZE,
             },
           ]}
         />
       </View>
       {label && (
-        <Text style={[checkboxLabelStyle, styles.labelStyle]}>{label}</Text>
+        <Text
+          style={[
+            checkboxComponentStyles?.checkboxLabelStyle || checkboxLabelStyle,
+            styles.labelStyle,
+          ]}
+        >
+          {label}
+        </Text>
       )}
     </Pressable>
   );
