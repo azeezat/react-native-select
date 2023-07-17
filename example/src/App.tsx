@@ -22,10 +22,10 @@ export default function App() {
   const [item, setItem] = useState<any>('');
   const [menu, setMenu] = useState<any>('');
 
-  // useEffect(() => {
-  //   setCurrency(['NGN']);
-  //   setMenu(['F']);
-  // }, []);
+  useEffect(() => {
+    setCurrency(['NGN']);
+    setMenu(['F']);
+  }, []);
 
   return (
     <SafeAreaView>
