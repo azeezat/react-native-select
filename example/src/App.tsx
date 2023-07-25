@@ -100,9 +100,13 @@ export default function App() {
             selectedValue={meals}
             onValueChange={(itemValue: any) => setMeals(itemValue)}
             dropdownStyle={{
-              borderWidth: 0, // To remove border, set borderWidth to 0
               backgroundColor: 'yellow',
+              paddingVertical: 5,
+              paddingHorizontal: 5,
+              minHeight: 40,
+              borderColor: 'green',
             }}
+            dropdownIconStyle={{ top: 15, right: 10 }}
             dropdownContainerStyle={{ marginBottom: 40 }}
             dropdownHelperTextStyle={{
               color: 'green',
@@ -152,8 +156,8 @@ export default function App() {
 
           <DropdownSelect
             label="Customized components in list"
-            placeholder="Select multiple options..."
-            options={countries.slice(0, 2)}
+            placeholder="Select multiple countries..."
+            options={countries.slice(0, 30)}
             optionLabel={'name'}
             optionValue={'code'}
             selectedValue={country}

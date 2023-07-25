@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import DropdownListItem from './DropdownListItem';
 import { ItemSeparatorComponent, ListEmptyComponent } from '../Others';
+import { TFlatList } from 'src/types/index.types';
 
 const DropdownFlatList = ({
   options,
@@ -20,8 +21,22 @@ const DropdownFlatList = ({
   checkboxLabelStyle, // kept for backwards compatibility to be removed  in future release
   checkboxComponentStyles,
   listComponentStyles,
+  listIndex,
   ...rest
 }: any) => {
+  const flatlistRef = useRef<FlatList<TFlatList>>(null);
+
+  const scrollToItem = (index: number) => {
+    flatlistRef.current?.scrollToIndex({
+      index,
+      animated: true,
+    });
+  };
+
+  useEffect(() => {
+    scrollToItem(listIndex.itemIndex);
+  }, [listIndex]);
+
   return (
     <FlatList
       data={options}
@@ -49,6 +64,7 @@ const DropdownFlatList = ({
           onChange: isMultiple
             ? handleMultipleSelections
             : handleSingleSelection,
+          scrollToItem,
           primaryColor,
           checkboxSize, // kept for backwards compatibility
           checkboxStyle, // kept for backwards compatibility
@@ -57,6 +73,12 @@ const DropdownFlatList = ({
         })
       }
       keyExtractor={(_item, index) => `Options${index}`}
+      ref={flatlistRef}
+      onScrollToIndexFailed={({ index }) => {
+        setTimeout(() => {
+          scrollToItem(index);
+        }, 500);
+      }}
       {...rest}
     />
   );
@@ -75,6 +97,7 @@ const _renderItem = ({ item }: any, props: any) => {
       checkboxSize={props.checkboxSize}
       checkboxStyle={props.checkboxStyle}
       checkboxLabelStyle={props.checkboxLabelStyle}
+      scrollToItem={props.scrollToItem}
       checkboxComponentStyles={props.checkboxComponentStyles}
     />
   );

@@ -27,12 +27,14 @@ const Dropdown = ({
   dropdownHelperTextStyle,
   primaryColor,
   disabled,
+  setIndexOfSelectedItem,
 }: any) => {
   return (
     <View style={[styles.dropdownInputContainer, dropdownContainerStyle]}>
       {label && label !== '' && (
         <Text style={[styles.label, labelStyle]}>{label}</Text>
       )}
+
       <DropdownSelectedItemsView
         placeholder={placeholder}
         error={error}
@@ -50,6 +52,7 @@ const Dropdown = ({
         primaryColor={primaryColor}
         disabled={disabled}
         placeholderStyle={placeholderStyle}
+        setIndexOfSelectedItem={setIndexOfSelectedItem}
       />
 
       {error && error !== '' && (

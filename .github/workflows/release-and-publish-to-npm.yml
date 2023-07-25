@@ -26,7 +26,6 @@ jobs:
       - name: Release
         run: npm run release --ci
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: End Message
         run: echo "All done"

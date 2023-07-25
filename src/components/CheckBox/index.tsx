@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { Pressable, Text, StyleSheet, Image, View } from 'react-native';
 import { colors } from '../../styles/colors';
@@ -6,10 +5,22 @@ import { CHECKBOX_SIZE } from '../../constants';
 import type { CheckboxProps } from './types';
 
 /**
- *
- *`checkboxSize`, `checkboxStyle`,`checkboxLabelStyle` Will be deleted in version 1.0.
- * and replaced with `checkboxComponentStyles`
- */
+  * Individual props `checkboxSize`, `checkboxStyle`, `checkboxLabelStyle` would be replaced in future releases
+  * and replaced with a single object `checkboxComponentStyles` e.g
+
+```js
+const checkboxComponentStyles = {
+  checkboxSize: 20,
+  checkboxStyle: {
+    backgroundColor: 'purple',
+    borderRadius: 30,
+    padding: 10,
+    borderColor: 'red',
+  },
+  checkboxLabelStyle: { color: 'red', fontSize: 20 },
+};
+```
+  */
 
 const CheckBox = ({
   label,
@@ -23,7 +34,7 @@ const CheckBox = ({
   onChange,
 }: CheckboxProps) => {
   // const { checkboxSize, checkboxStyle, checkboxLabelStyle } =
-  //   checkboxComponentStyles;
+  //   checkboxComponentStyles || undefined;
   const fillColor = {
     backgroundColor: disabled
       ? '#d3d3d3'

@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import { colors } from '../../styles/colors';
 import { inputStyles } from '../../styles/input';
@@ -27,6 +28,7 @@ const DropdownSelectedItemsView = ({
   dropdownErrorStyle,
   primaryColor,
   disabled,
+  setIndexOfSelectedItem,
 }: any) => {
   return (
     <Pressable
@@ -36,8 +38,7 @@ const DropdownSelectedItemsView = ({
           ...inputStyles.inputFocusState,
           borderColor: primaryColor,
         },
-        inputStyles.input,
-        dropdownStyle,
+        { ...inputStyles.input, ...dropdownStyle },
         error && //this must be last
           error !== '' &&
           !pressed && {
@@ -57,27 +58,37 @@ const DropdownSelectedItemsView = ({
           onStartShouldSetResponder={() => true}
         >
           {isMultiple ? (
-            getSelectedItemsLabel()?.map((item: any, i: Number) => (
-              <Text
+            getSelectedItemsLabel()?.map((label: string, i: Number) => (
+              <DropdownContent
+                onPress={() => {
+                  handleToggleModal();
+                  setIndexOfSelectedItem(label); // immediately scrolls to list item with the specified label when modal
+                }}
                 key={`react-native-input-select-${Math.random()}-${i}`}
                 style={[
                   styles.selectedItems,
                   { backgroundColor: primaryColor },
                   multipleSelectedItemStyle,
                 ]}
-              >
-                {item}
-              </Text>
+                label={label}
+              />
             ))
           ) : (
-            <Text style={[styles.blackText, selectedItemStyle]}>
-              {getSelectedItemsLabel()}
-            </Text>
+            <DropdownContent
+              onPress={() => {
+                handleToggleModal();
+                setIndexOfSelectedItem(getSelectedItemsLabel()); // immediately scrolls to list item with the specified label when modal
+              }}
+              style={[styles.blackText, selectedItemStyle]}
+              label={getSelectedItemsLabel()}
+            />
           )}
           {!selectedItem && selectedItems?.length === 0 && (
-            <Text style={[styles.blackText, placeholderStyle]}>
-              {placeholder ?? 'Select an option'}
-            </Text>
+            <DropdownContent
+              onPress={() => handleToggleModal()}
+              style={[styles.blackText, placeholderStyle]}
+              label={placeholder ?? 'Select an option'}
+            />
           )}
         </View>
       </ScrollView>
@@ -87,6 +98,14 @@ const DropdownSelectedItemsView = ({
         )}
       </View>
     </Pressable>
+  );
+};
+
+const DropdownContent = ({ onPress, style, label, ...rest }: any) => {
+  return (
+    <TouchableOpacity onPress={() => onPress()} {...rest}>
+      <Text style={style}>{label}</Text>
+    </TouchableOpacity>
   );
 };
 
