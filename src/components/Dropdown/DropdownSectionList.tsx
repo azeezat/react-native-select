@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { SectionList, StyleSheet } from 'react-native';
 import DropdownListItem from './DropdownListItem';
 import {
@@ -8,6 +8,7 @@ import {
   SectionHeaderTitle,
 } from '../Others';
 import { extractPropertyFromArray } from '../../utils';
+import { TSectionList } from 'src/types/index.types';
 
 const DropdownSectionList = ({
   options,
@@ -25,6 +26,7 @@ const DropdownSectionList = ({
   checkboxLabelStyle,
   checkboxComponentStyles,
   listComponentStyles,
+  listIndex,
   ...rest
 }: any) => {
   const [expandedSections, setExpandedSections] = useState(new Set());
@@ -52,6 +54,24 @@ const DropdownSectionList = ({
       return next;
     });
   };
+
+  /**
+   * @description Scroll to item location
+   */
+
+  const sectionlistRef = useRef<SectionList<TSectionList>>(null);
+
+  const scrollToLocation = (listIndex: any) => {
+    sectionlistRef.current?.scrollToLocation({
+      sectionIndex: listIndex.sectionIndex,
+      animated: true,
+      itemIndex: listIndex.itemIndex,
+    });
+  };
+
+  useEffect(() => {
+    scrollToLocation(listIndex);
+  }, [listIndex]);
 
   return (
     <SectionList
@@ -100,6 +120,12 @@ const DropdownSectionList = ({
       }
       keyExtractor={(_item, index) => `Options${index}`}
       stickySectionHeadersEnabled={false}
+      ref={sectionlistRef}
+      onScrollToIndexFailed={() => {
+        setTimeout(() => {
+          scrollToLocation(listIndex);
+        }, 500);
+      }}
       {...rest}
     />
   );

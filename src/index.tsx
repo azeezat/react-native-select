@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import Input from './components/Input';
 import CheckBox from './components/CheckBox';
@@ -62,9 +62,13 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [selectAll, setSelectAll] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<any>(''); //for single selection
-  const [selectedItems, setSelectedItems] = useState<any[]>([]); //for multiple selection
+  const [selectedItem, setSelectedItem] = useState<any>(''); // for single selection
+  const [selectedItems, setSelectedItems] = useState<any[]>([]); // for multiple selection
   const [searchValue, setSearchValue] = useState<string>('');
+  const [listIndex, setListIndex] = useState<{
+    sectionIndex?: number;
+    itemIndex: number;
+  }>({ itemIndex: 0 }); // for scrollToIndex in Sectionlist and Flatlist
 
   useEffect(() => {
     if (options) {
@@ -92,11 +96,15 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const ListTypeComponent = isSectionList
     ? DropdownSectionList
     : DropdownFlatList;
-  let modifiedSectionData = extractPropertyFromArray(newOptions, 'data').flat();
-  let modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
+  const modifiedSectionData = extractPropertyFromArray(
+    newOptions,
+    'data'
+  ).flat();
+  const modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
 
   const optLabel = optionLabel || DEFAULT_OPTION_LABEL;
   const optValue = optionValue || DEFAULT_OPTION_VALUE;
+  const optionsCopy = JSON.parse(JSON.stringify(options)); //copy of the original options array
 
   /*===========================================
    * Selection handlers
@@ -121,19 +129,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       } else {
         selectedValues.push(value);
       }
-
-      setSelectedItems(selectedValues);
       onValueChange(selectedValues); //send value to parent
-
-      //select all checkbox should not be checked if the list contains disabled values
-      if (
-        modifiedOptions.filter((item: TFlatListItem) => !item.disabled)
-          .length === selectedValues.length
-      ) {
-        setSelectAll(true);
-      } else {
-        setSelectAll(false);
-      }
       return selectedValues;
     });
   };
@@ -158,6 +154,32 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       return !prevVal;
     });
   };
+
+  /*===========================================
+   * Handle side effects
+   *==========================================*/
+  const checkSelectAll = useCallback(
+    (selectedValues: any[]) => {
+      //if the list contains disabled values, those values will not be selected
+      if (
+        modifiedOptions.filter((item: TFlatListItem) => !item.disabled)
+          .length === selectedValues.length
+      ) {
+        setSelectAll(true);
+      } else {
+        setSelectAll(false);
+      }
+    },
+    [modifiedOptions]
+  );
+
+  // anytime the selected items change, check if it is time to set `selectAll` to true
+  useEffect(() => {
+    if (isMultiple) {
+      checkSelectAll(selectedItems);
+    }
+    return () => {};
+  }, [checkSelectAll, isMultiple, selectedItems]);
 
   /*===========================================
    * Get label handler
@@ -192,7 +214,6 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     const regexFilter = new RegExp(searchText, 'i');
 
     //Because Search mutates the initial state, we have to search with a copy of the original array
-    const optionsCopy = JSON.parse(JSON.stringify(options));
     const searchResults = isSectionList
       ? searchSectionList(optionsCopy as TSectionList, regexFilter)
       : searchFlatList(optionsCopy as TFlatList, regexFilter);
@@ -241,6 +262,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     setOpen(!open);
     setSearchValue('');
     setNewOptions(options);
+    setListIndex({ itemIndex: 0, sectionIndex: 0 });
   };
 
   useEffect(() => {
@@ -260,6 +282,25 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const listIsEmpty = isSectionList
     ? sectionListMaxLength > 1
     : newOptions.length > 1;
+
+  /*===========================================
+   * setIndexOfSelectedItem - For ScrollToIndex
+   *==========================================*/
+  const setIndexOfSelectedItem = (selectedLabel: string) => {
+    isSectionList
+      ? optionsCopy.map((item: TSectionListItem, sectionIndex: number) => {
+          item.data?.find((dataItem: TFlatListItem, itemIndex: number) => {
+            if (dataItem[optLabel] === selectedLabel) {
+              setListIndex({ sectionIndex, itemIndex });
+            }
+          });
+        })
+      : optionsCopy?.find((item: TFlatListItem, itemIndex: number) => {
+          if (item[optLabel] === selectedLabel) {
+            setListIndex({ itemIndex });
+          }
+        });
+  };
 
   return (
     <>
@@ -286,6 +327,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         primaryColor={primary}
         disabled={disabled}
         placeholderStyle={placeholderStyle}
+        setIndexOfSelectedItem={setIndexOfSelectedItem}
         {...rest}
       />
       <CustomModal
@@ -342,6 +384,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           checkboxStyle={checkboxStyle}
           checkboxLabelStyle={checkboxLabelStyle}
           checkboxComponentStyles={checkboxComponentStyles}
+          listIndex={listIndex}
         />
       </CustomModal>
     </>
