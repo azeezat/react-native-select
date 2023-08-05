@@ -20,6 +20,9 @@ With yarn
 yarn add react-native-input-select
 ```
 
+## Sandbox
+[Sandbox](https://azeezat.github.io/react-native-select/)
+
 ## Basic Usage
 
 ```js
