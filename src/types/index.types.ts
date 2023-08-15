@@ -47,6 +47,7 @@ export type DropdownProps = {
     checkboxStyle?: ViewStyle;
     checkboxLabelStyle?: TextStyle;
   };
+  checkboxComponent?: React.ReactNode;
   placeholderStyle?: TextStyle;
   listHeaderComponent?: React.ReactNode;
   listFooterComponent?: React.ReactNode;

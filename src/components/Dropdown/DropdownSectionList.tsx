@@ -25,6 +25,7 @@ const DropdownSectionList = ({
   checkboxStyle,
   checkboxLabelStyle,
   checkboxComponentStyles,
+  checkboxComponent,
   listComponentStyles,
   listIndex,
   ...rest
@@ -105,6 +106,7 @@ const DropdownSectionList = ({
           checkboxStyle, // kept for backwards compatibility
           checkboxLabelStyle, // kept for backwards compatibility
           checkboxComponentStyles,
+          checkboxComponent,
           expandedSections,
         })
       }
@@ -150,6 +152,7 @@ const _renderItem = ({ section: { title }, item }: any, props: any) => {
       checkboxStyle={props.checkboxStyle}
       checkboxLabelStyle={props.checkboxLabelStyle}
       checkboxComponentStyles={props.checkboxComponentStyles}
+      checkboxComponent={props.checkboxComponent}
     />
   );
 };

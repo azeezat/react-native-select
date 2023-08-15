@@ -52,6 +52,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   checkboxStyle, // kept for backwards compatibility
   checkboxLabelStyle, // kept for backwards compatibility
   checkboxComponentStyles,
+  checkboxComponent,
   listHeaderComponent,
   listFooterComponent,
   listComponentStyles,
@@ -362,6 +363,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                       checkboxStyle={checkboxStyle}
                       checkboxLabelStyle={checkboxLabelStyle}
                       checkboxComponentStyles={checkboxComponentStyles}
+                      checkboxComponent={checkboxComponent}
                     />
                   </TouchableOpacity>
                 </View>
@@ -384,6 +386,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           checkboxStyle={checkboxStyle}
           checkboxLabelStyle={checkboxLabelStyle}
           checkboxComponentStyles={checkboxComponentStyles}
+          checkboxComponent={checkboxComponent}
           listIndex={listIndex}
         />
       </CustomModal>

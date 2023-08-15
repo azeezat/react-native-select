@@ -31,6 +31,7 @@ const CheckBox = ({
   checkboxStyle,
   checkboxLabelStyle,
   checkboxComponentStyles,
+  checkboxComponent,
   onChange,
 }: CheckboxProps) => {
   // const { checkboxSize, checkboxStyle, checkboxLabelStyle } =
@@ -57,22 +58,30 @@ const CheckBox = ({
       style={[styles.checkboxContainer]}
       disabled={disabled}
     >
-      <View style={[styles.checkbox, checkboxStyle, fillColor]}>
-        <Image
-          source={require('../../asset/check.png')}
-          style={[
-            {
-              height:
-                checkboxComponentStyles?.checkboxSize ||
-                checkboxSize ||
-                CHECKBOX_SIZE,
-              width:
-                checkboxComponentStyles?.checkboxSize ||
-                checkboxSize ||
-                CHECKBOX_SIZE,
-            },
-          ]}
-        />
+      <View
+        style={[
+          styles.checkbox,
+          checkboxComponentStyles?.checkboxStyle || checkboxStyle,
+          fillColor,
+        ]}
+      >
+        {checkboxComponent || (
+          <Image
+            source={require('../../asset/check.png')}
+            style={[
+              {
+                height:
+                  checkboxComponentStyles?.checkboxSize ||
+                  checkboxSize ||
+                  CHECKBOX_SIZE,
+                width:
+                  checkboxComponentStyles?.checkboxSize ||
+                  checkboxSize ||
+                  CHECKBOX_SIZE,
+              },
+            ]}
+          />
+        )}
       </View>
       {label && (
         <Text
