@@ -78,12 +78,19 @@ export default function App() {
             ]}
             selectedValue={users}
             onValueChange={(itemValue: any) => setUsers(itemValue)}
-            isMultiple
             isSearchable
             primaryColor={'purple'}
             dropdownStyle={{
               borderWidth: 0, // To remove border, set borderWidth to 0
             }}
+            dropdownIcon={
+              users && (
+                <View style={styles.outerCircle}>
+                  <View style={styles.innerCircle} />
+                </View>
+              )
+            }
+            dropdownIconStyle={users && { top: 20, right: 15 }}
           />
 
           <DropdownSelect
@@ -117,6 +124,15 @@ export default function App() {
             }}
             helperText="Some items in this list are disabled"
             isMultiple
+            checkboxComponent={<View style={styles.radioButton} />}
+            checkboxComponentStyles={{
+              checkboxStyle: {
+                backgroundColor: 'green',
+                borderRadius: 30,
+                borderColor: 'green',
+              },
+              checkboxLabelStyle: { color: 'green', fontSize: 20 },
+            }}
           />
 
           <DropdownSelect
@@ -142,15 +158,20 @@ export default function App() {
               backgroundColor: 'rgba(196, 198, 246, 0.5)',
             }}
             helperText="The placeholder has been styled"
+            checkboxComponent={<View style={styles.radioButton} />}
             checkboxComponentStyles={{
-              checkboxSize: 20,
+              checkboxSize: 15,
               checkboxStyle: {
                 backgroundColor: 'purple',
                 borderRadius: 30, // To get a circle - add the checkboxSize and the padding size
-                padding: 10,
+                padding: 5,
                 borderColor: 'red',
               },
               checkboxLabelStyle: { color: 'red', fontSize: 20 },
+            }}
+            selectedItemStyle={{
+              color: 'hotpink',
+              fontWeight: '900',
             }}
           />
 
@@ -311,5 +332,28 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 20,
     height: 20,
+  },
+  outerCircle: {
+    borderRadius: 30 / 2,
+    borderColor: 'green',
+    borderWidth: 2,
+    backgroundColor: 'white',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  innerCircle: {
+    width: 15,
+    height: 15,
+    borderRadius: 15 / 2,
+    backgroundColor: 'green',
+    margin: 5,
+  },
+  radioButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 20 / 2,
+    borderWidth: 3,
+    borderColor: 'white',
   },
 });

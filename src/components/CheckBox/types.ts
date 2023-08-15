@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ColorValue, ViewStyle, TextStyle } from 'react-native';
 
 export type CheckboxProps = {
@@ -13,5 +14,6 @@ export type CheckboxProps = {
     checkboxStyle?: ViewStyle;
     checkboxLabelStyle?: TextStyle;
   };
+  checkboxComponent?: React.ReactNode;
   onChange?: (value: boolean | string | number) => void;
 };

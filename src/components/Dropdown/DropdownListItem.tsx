@@ -14,6 +14,7 @@ const DropdownListItem = ({
   checkboxStyle,
   checkboxLabelStyle,
   checkboxComponentStyles,
+  checkboxComponent,
 }: any) => {
   return (
     <TouchableOpacity
@@ -37,6 +38,7 @@ const DropdownListItem = ({
           checkboxComponentStyles?.checkboxLabelStyle || checkboxLabelStyle
         }
         disabled={item.disabled}
+        checkboxComponent={checkboxComponent}
       />
     </TouchableOpacity>
   );
