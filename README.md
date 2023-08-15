@@ -96,6 +96,7 @@ export default function App() {
         backgroundColor: 'rgba(196, 198, 246, 0.5)',
       }}
       helperText="The placeholder has been styled"
+      checkboxComponent={<View style={styles.radioButton} />}
       checkboxComponentStyles={{
         checkboxSize: 20,
         checkboxStyle: {
@@ -158,6 +159,13 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 20,
     height: 20,
+  },
+   radioButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 20 / 2,
+    borderWidth: 3,
+    borderColor: 'white',
   },
 });
 ```
@@ -261,6 +269,10 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | hideModal                  | `Boolean`                | Use this to hide the modal as needed                                 |
 | listComponentStyles        | `Object`                 | `{listEmptyComponentStyle: ViewStyle, itemSeparatorStyle: ViewStyle, sectionHeaderStyle: TextStyle}` |
 | checkboxComponentStyles    | `Object`                 | `{checkboxSize?: number, checkboxStyle?: ViewStyle, checkboxLabelStyle: TextStyle}` |
+| checkboxComponent          | `React Component`        | `<View style={styles.radioButton} />`                                |
+
+
+
 
 
 ## Deprecation Notice
