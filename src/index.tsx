@@ -58,6 +58,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   listComponentStyles,
   modalProps,
   hideModal = false,
+  selectAllControls,
   ...rest
 }) => {
   const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
@@ -154,6 +155,20 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       onValueChange(selectedValues); //send value to parent
       return !prevVal;
     });
+
+    if (
+      typeof selectAllControls?.selectAllCallback === 'function' &&
+      !selectAll
+    ) {
+      selectAllControls.selectAllCallback();
+    }
+
+    if (
+      typeof selectAllControls?.unselectAllCallback === 'function' &&
+      selectAll
+    ) {
+      selectAllControls.unselectAllCallback();
+    }
   };
 
   /*===========================================
@@ -356,7 +371,11 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                   <TouchableOpacity onPress={() => {}}>
                     <CheckBox
                       value={selectAll}
-                      label={selectAll ? 'Clear all' : 'Select all'}
+                      label={
+                        selectAll
+                          ? selectAllControls?.unselectAllText || 'Clear all'
+                          : selectAllControls?.selectAllText || 'Select all'
+                      }
                       onChange={() => handleSelectAll()}
                       primaryColor={primary}
                       checkboxSize={checkboxSize}

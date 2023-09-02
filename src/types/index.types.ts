@@ -58,12 +58,18 @@ export type DropdownProps = {
     itemSeparatorStyle?: ViewStyle;
     sectionHeaderStyle?: TextStyle;
   };
+  selectAllControls?: {
+    selectAllText?: string;
+    unselectAllText?: string;
+    selectAllCallback?: () => void;
+    unselectAllCallback?: () => void;
+  };
 };
 
 export type TFlatList = TFlatListItem[];
 export type TFlatListItem = {
   [key: string]: string | number | boolean;
-}
+};
 
 export type TSectionList = TSectionListItem[];
 export type TSectionListItem = { title: string; data: TFlatList };

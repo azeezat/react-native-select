@@ -252,6 +252,12 @@ export default function App() {
                 backgroundColor: 'cyan',
               },
             }}
+            selectAllControls={{
+              selectAllText: 'Choose everything',
+              unselectAllText: 'Remove everything',
+              selectAllCallback: () => Alert.alert('You selected everything'),
+              unselectAllCallback: () => Alert.alert('You removed everything'),
+            }}
           />
 
           <DropdownSelect
