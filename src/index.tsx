@@ -58,7 +58,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   listComponentStyles,
   modalProps,
   hideModal = false,
-  selectAllControls,
+  listControls,
   ...rest
 }) => {
   const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
@@ -157,17 +157,17 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     });
 
     if (
-      typeof selectAllControls?.selectAllCallback === 'function' &&
+      typeof listControls?.selectAllCallback === 'function' &&
       !selectAll
     ) {
-      selectAllControls.selectAllCallback();
+      listControls.selectAllCallback();
     }
 
     if (
-      typeof selectAllControls?.unselectAllCallback === 'function' &&
+      typeof listControls?.unselectAllCallback === 'function' &&
       selectAll
     ) {
-      selectAllControls.unselectAllCallback();
+      listControls.unselectAllCallback();
     }
   };
 
@@ -373,8 +373,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                       value={selectAll}
                       label={
                         selectAll
-                          ? selectAllControls?.unselectAllText || 'Clear all'
-                          : selectAllControls?.selectAllText || 'Select all'
+                          ? listControls?.unselectAllText || 'Clear all'
+                          : listControls?.selectAllText || 'Select all'
                       }
                       onChange={() => handleSelectAll()}
                       primaryColor={primary}

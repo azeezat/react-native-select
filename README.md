@@ -138,7 +138,7 @@ export default function App() {
           backgroundColor: 'cyan',
         },
       }}
-      selectAllControls={{
+      listControls={{
         selectAllText: 'Choose everything',
         unselectAllText: 'Remove everything',
         selectAllCallback: () => Alert.alert('You selected everything'),
@@ -273,7 +273,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | listComponentStyles        | `Object`                 | `{listEmptyComponentStyle: ViewStyle, itemSeparatorStyle: ViewStyle, sectionHeaderStyle: TextStyle}` |
 | checkboxComponentStyles    | `Object`                 | `{checkboxSize?: number, checkboxStyle?: ViewStyle, checkboxLabelStyle: TextStyle}` |
 | checkboxComponent          | `React Component`        | `<View style={styles.radioButton} />`                                |
-| selectAllControls          | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback?: () => {}, unselectAllCallback?: () => {}}`   |
+| listControls          | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback?: () => {}, unselectAllCallback?: () => {}}`   |
 
 ## Deprecation Notice
 

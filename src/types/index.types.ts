@@ -58,7 +58,7 @@ export type DropdownProps = {
     itemSeparatorStyle?: ViewStyle;
     sectionHeaderStyle?: TextStyle;
   };
-  selectAllControls?: {
+  listControls?: {
     selectAllText?: string;
     unselectAllText?: string;
     selectAllCallback?: () => void;

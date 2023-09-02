@@ -133,6 +133,10 @@ export default function App() {
               },
               checkboxLabelStyle: { color: 'green', fontSize: 20 },
             }}
+            listControls={{
+              selectAllText: 'Select all that applies',
+              unselectAllText: 'Remove all',
+            }}
           />
 
           <DropdownSelect
@@ -252,7 +256,7 @@ export default function App() {
                 backgroundColor: 'cyan',
               },
             }}
-            selectAllControls={{
+            listControls={{
               selectAllText: 'Choose everything',
               unselectAllText: 'Remove everything',
               selectAllCallback: () => Alert.alert('You selected everything'),
