@@ -21,6 +21,7 @@ yarn add react-native-input-select
 ```
 
 ## Sandbox
+
 [Sandbox](https://azeezat.github.io/react-native-select/)
 
 ## Basic Usage
@@ -64,51 +65,17 @@ export default function App() {
   return (
     <Dropdown
       label="Customized components in list"
-      placeholder="Select multiple options..."
-      options={[
-        { name: 'Albania', code: 'AL' },
-        { name: 'Nigeria', code: 'NG' },
-        { name: 'Algeria', code: 'DZ' },
-        { name: 'American Samoa', code: 'AS' },
-        { name: 'Andorra', code: 'AD' },
-        { name: 'Angola', code: 'AO' },
-        { name: 'Anguilla', code: 'AI' },
-        { name: 'Antarctica', code: 'AQ' },
-        { name: 'Antigua and Barbuda', code: 'AG' },
-      ]}
+      placeholder="Select multiple countries..."
+      options={countries.slice(0, 30)}
       optionLabel={'name'}
       optionValue={'code'}
       selectedValue={country}
       onValueChange={(itemValue: any) => setCountry(itemValue)}
       isMultiple
+      isSearchable
       primaryColor={'orange'}
       dropdownStyle={{
         borderWidth: 0, // To remove border, set borderWidth to 0
-      }}
-      placeholderStyle={{
-        color: 'purple',
-        fontSize: 15,
-        fontWeight: '500',
-      }}
-      labelStyle={{ color: 'teal', fontSize: 15, fontWeight: '500' }}
-      dropdownHelperTextStyle={{
-        color: 'green',
-        fontWeight: '900',
-      }}
-      modalBackgroundStyle={{
-        backgroundColor: 'rgba(196, 198, 246, 0.5)',
-      }}
-      helperText="The placeholder has been styled"
-      checkboxComponent={<View style={styles.radioButton} />}
-      checkboxComponentStyles={{
-        checkboxSize: 20,
-        checkboxStyle: {
-          backgroundColor: 'purple',
-          borderRadius: 30, // To get a circle - add the checkboxSize and the padding size
-          padding: 10,
-          borderColor: 'blue',
-        },
-        checkboxLabelStyle: { color: 'red', fontSize: 20 },
       }}
       dropdownIcon={
         <Image
@@ -142,7 +109,41 @@ export default function App() {
           <Text>You can add any component to the bottom of this list</Text>
         </View>
       }
-      modalOptionsContainerStyle={{ padding: 10, backgroundColor: 'cyan' }}
+      modalOptionsContainerStyle={{
+        padding: 10,
+        backgroundColor: 'cyan',
+      }}
+      modalProps={{
+        supportedOrientations: [
+          'portrait',
+          'portrait-upside-down',
+          'landscape',
+          'landscape-left',
+          'landscape-right',
+        ],
+        transparent: false,
+      }}
+      listComponentStyles={{
+        listEmptyComponentStyle: {
+          color: 'red',
+        },
+        itemSeparatorStyle: {
+          opacity: 0,
+          borderColor: 'white',
+          borderWidth: 2,
+          backgroundColor: 'cyan',
+        },
+        sectionHeaderStyle: {
+          padding: 10,
+          backgroundColor: 'cyan',
+        },
+      }}
+      selectAllControls={{
+        selectAllText: 'Choose everything',
+        unselectAllText: 'Remove everything',
+        selectAllCallback: () => Alert.alert('You selected everything'),
+        unselectAllCallback: () => Alert.alert('You removed everything'),
+      }}
     />
   );
 }
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-   radioButton: {
+  radioButton: {
     width: 20,
     height: 20,
     borderRadius: 20 / 2,
@@ -236,11 +237,10 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | <img width="456" alt="Screenshot 2023-05-16 at 6 17 09 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/d695657f-d840-4368-b841-42af479d6543"> | <img width="456" alt="Screenshot 2023-03-23 at 5 26 58 PM" src="https://user-images.githubusercontent.com/9849221/227393548-28796d7b-9760-43a9-8ed3-fb1618cd1b7d.png"> | <img width="456" alt="Screenshot 2023-03-23 at 5 28 49 PM" src="https://user-images.githubusercontent.com/9849221/227393554-91ed1a92-d229-4814-84d8-5f9095e8d048.png"> |
 
 ## Props
-
 | Proptypes                  | Datatype                 | Example                                                              |
 | -------------------------- | ------------------------ | -------------------------------------------------------------------- |
-| label                      | `string`                 | `Countries`                                                          |
-| placeholder                | `string`                 | `Select a country`                                                   |
+| label                      | `string`                 | Countries                                                            |
+| placeholder                | `string`                 | Select a country                                                     |
 | options                    | `Array`                  | `[{ name: 'Nigeria', code: 'NG' }, { name: 'Albania', code: 'AL' }]` |
 | optionLabel                | `string`                 | `name`                                                               |
 | optionValue                | `string`                 | `code`                                                               |
@@ -273,10 +273,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | listComponentStyles        | `Object`                 | `{listEmptyComponentStyle: ViewStyle, itemSeparatorStyle: ViewStyle, sectionHeaderStyle: TextStyle}` |
 | checkboxComponentStyles    | `Object`                 | `{checkboxSize?: number, checkboxStyle?: ViewStyle, checkboxLabelStyle: TextStyle}` |
 | checkboxComponent          | `React Component`        | `<View style={styles.radioButton} />`                                |
-
-
-
-
+| selectAllControls          | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback?: () => {}, unselectAllCallback?: () => {}}`   |
 
 ## Deprecation Notice
 
