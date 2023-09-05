@@ -1,6 +1,6 @@
 [![NPM](https://nodei.co/npm/react-native-input-select.png?downloads=true)](https://nodei.co/npm/react-native-input-select/)
 
-[![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select)  [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-select?style=social)](https://github.com/azeezat/react-native-select/startgazers) [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml) 
+[![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select)  [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-select?style=social)](https://github.com/azeezat/react-native-select/stargazers) [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml) 
 
 
 # react-native-input-select
