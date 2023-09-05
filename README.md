@@ -2,7 +2,7 @@
 
 [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml)
 
-[![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select)  [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-input-select?style=social)](https://github.com/azeezat/react-native-input-select/stargazers)
+[![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select)  [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-input-select?style=social)](https://github.com/azeezat/react-native-input-select)
 
 
 # react-native-input-select
