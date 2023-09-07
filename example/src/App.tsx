@@ -91,6 +91,17 @@ export default function App() {
               )
             }
             dropdownIconStyle={users && { top: 20, right: 15 }}
+            searchControls={{
+              searchInputStyle: {
+                backgroundColor: 'yellow',
+                color: 'blue',
+                fontWeight: '900',
+              },
+              textInputProps: {
+                placeholder: 'Search anything here',
+                placeholderTextColor: 'gray',
+              },
+            }}
           />
 
           <DropdownSelect

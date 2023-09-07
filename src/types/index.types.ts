@@ -3,6 +3,7 @@ import type {
   ColorValue,
   TextStyle,
   ModalProps,
+  TextInputProps,
 } from 'react-native';
 
 export type DropdownProps = {
@@ -63,6 +64,10 @@ export type DropdownProps = {
     unselectAllText?: string;
     selectAllCallback?: () => void;
     unselectAllCallback?: () => void;
+  };
+  searchControls?: {
+    searchInputStyle?: ViewStyle | TextStyle;
+    textInputProps?: TextInputProps;
   };
 };
 

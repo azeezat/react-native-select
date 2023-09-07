@@ -1,7 +1,6 @@
 [![NPM](https://nodei.co/npm/react-native-input-select.png?downloads=true)](https://nodei.co/npm/react-native-input-select/)
 
-[![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select)  [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-select?style=social)](https://github.com/azeezat/react-native-select/stargazers) [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml) 
-
+[![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select) [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-select?style=social)](https://github.com/azeezat/react-native-select/stargazers) [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml)
 
 # react-native-input-select
 
@@ -238,6 +237,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | <img width="456" alt="Screenshot 2023-05-16 at 6 17 09 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/d695657f-d840-4368-b841-42af479d6543"> | <img width="456" alt="Screenshot 2023-03-23 at 5 26 58 PM" src="https://user-images.githubusercontent.com/9849221/227393548-28796d7b-9760-43a9-8ed3-fb1618cd1b7d.png"> | <img width="456" alt="Screenshot 2023-03-23 at 5 28 49 PM" src="https://user-images.githubusercontent.com/9849221/227393554-91ed1a92-d229-4814-84d8-5f9095e8d048.png"> |
 
 ## Props
+
 | Proptypes                  | Datatype                 | Example                                                              |
 | -------------------------- | ------------------------ | -------------------------------------------------------------------- |
 | label                      | `string`                 | Countries                                                            |
@@ -258,7 +258,6 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | dropdownStyle              | `Object`                 | `{borderColor: 'blue', margin: 5, borderWidth:0 ...}`                |
 | dropdownContainerStyle     | `Object`                 | `{backgroundColor: 'red', width: '30%', ...}`                        |
 | dropdownIconStyle          | `Object`                 | `{top: 10 , right: 10, ...}`                                         |
-| searchInputStyle           | `Object`                 | `{backgroundColor: 'red', borderRadius: 0, ...}`                     |
 | selectedItemStyle          | `Object`                 | `{fontWeight: '600', color: 'yellow', ...}`                          |
 | multipleSelectedItemStyle  | `Object`                 | `{backgroundColor: 'red', color: 'yellow', ...}`                     |
 | modalBackgroundStyle       | `Object`                 | `{backgroundColor: 'rgba(196, 198, 246, 0.5)'}`                      |
@@ -275,6 +274,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | checkboxComponentStyles    | `Object`                 | `{checkboxSize?: number, checkboxStyle?: ViewStyle, checkboxLabelStyle: TextStyle}` |
 | checkboxComponent          | `React Component`        | `<View style={styles.radioButton} />`                                |
 | listControls          | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback?: () => {}, unselectAllCallback?: () => {}}`   |
+| searchControls             | `Object`                 | `{ searchInputStyle?: ViewStyle | TextStyle, textInputProps: TextInputProps}`                |
 
 ## Deprecation Notice
 
@@ -283,7 +283,7 @@ The following props would be removed in coming releases.
 - Individual props `checkboxSize`, `checkboxStyle`, `checkboxLabelStyle` would be replaced with a single object `checkboxComponentStyles` e.g
 
 ```js
-const checkboxComponentStyles = {
+checkboxComponentStyles = {
   checkboxSize: 20,
   checkboxStyle: {
     backgroundColor: 'purple',
@@ -293,6 +293,22 @@ const checkboxComponentStyles = {
   },
   checkboxLabelStyle: { color: 'red', fontSize: 20 },
 };
+```
+
+- `searchInputStyle` would now be inside `searchControls`
+
+```js
+searchControls={{
+  searchInputStyle: {
+    backgroundColor: 'yellow',
+    color: 'blue',
+    fontWeight: '900',
+  },
+  textInputProps: {
+    placeholder: 'Search anything here',
+    placeholderTextColor: 'gray',
+  },
+}}
 ```
 
 ## Contributing
