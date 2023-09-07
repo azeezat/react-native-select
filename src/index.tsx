@@ -15,10 +15,7 @@ import type {
   TSectionList,
   TSectionListItem,
 } from './types/index.types';
-import {
-  extractPropertyFromArray,
-  getMaxLengthOfSectionListProperty,
-} from './utils';
+import { extractPropertyFromArray } from './utils';
 
 export const DropdownSelect: React.FC<DropdownProps> = ({
   placeholder,
@@ -104,6 +101,11 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     newOptions,
     'data'
   ).flat();
+
+  /**
+   *`modifiedOptions` should only be used for computations newOptions remains the default array.
+   * At this point modifiedOptions now has the same structure for both `FlatList` and `SectionList`
+   */
   const modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
 
   const optLabel = optionLabel || DEFAULT_OPTION_LABEL;
@@ -147,7 +149,11 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       const selectedValues = [];
 
       // don't select disabled items
-      const filteredOptions = removeDisabledItems(optionsCopy);
+      const filteredOptions = removeDisabledItems(
+        isSectionList
+          ? extractPropertyFromArray(optionsCopy, 'data').flat()
+          : optionsCopy
+      );
 
       if (!prevVal) {
         for (let i = 0; i < filteredOptions.length; i++) {
@@ -287,15 +293,6 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
   let primary = primaryColor || colors.gray;
 
-  const sectionListMaxLength = getMaxLengthOfSectionListProperty(
-    newOptions as TSectionList,
-    'data'
-  );
-
-  const listIsEmpty = isSectionList
-    ? sectionListMaxLength > 1
-    : newOptions.length > 1;
-
   /*===========================================
    * setIndexOfSelectedItem - For ScrollToIndex
    *==========================================*/
@@ -365,7 +362,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                 />
               )}
               {listHeaderComponent}
-              {isMultiple && listIsEmpty && (
+              {isMultiple && modifiedOptions.length > 1 && (
                 <View style={styles.optionsContainerStyle}>
                   <TouchableOpacity onPress={() => {}}>
                     <CheckBox
