@@ -92,10 +92,19 @@ export default function App() {
             }
             dropdownIconStyle={users && { top: 20, right: 15 }}
             searchControls={{
-              searchInputStyle: {
-                backgroundColor: 'yellow',
+              textInputStyle: {
                 color: 'blue',
-                fontWeight: '900',
+                fontWeight: '500',
+                minHeight: 10,
+                paddingVertical: 10,
+                paddingHorizontal: 5,
+                width: '50%',
+                textAlign: 'center',
+              },
+              textInputContainerStyle: {
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
               },
               textInputProps: {
                 placeholder: 'Search anything here',

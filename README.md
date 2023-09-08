@@ -271,10 +271,10 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | listFooterComponent        | `React Component`        | `<Text> You can add any component here <Text>`                       |
 | hideModal                  | `Boolean`                | Use this to hide the modal as needed                                 |
 | listComponentStyles        | `Object`                 | `{listEmptyComponentStyle: ViewStyle, itemSeparatorStyle: ViewStyle, sectionHeaderStyle: TextStyle}` |
-| checkboxComponentStyles    | `Object`                 | `{checkboxSize?: number, checkboxStyle?: ViewStyle, checkboxLabelStyle: TextStyle}` |
+| checkboxComponentStyles    | `Object`                 | `{checkboxSize: number, checkboxStyle: ViewStyle, checkboxLabelStyle: TextStyle}` |
 | checkboxComponent          | `React Component`        | `<View style={styles.radioButton} />`                                |
-| listControls          | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback?: () => {}, unselectAllCallback?: () => {}}`   |
-| searchControls             | `Object`                 | `{ searchInputStyle?: ViewStyle | TextStyle, textInputProps: TextInputProps}`                |
+| listControls               | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback: () => {}, unselectAllCallback: () => {}}`   |
+| searchControls             | `Object`                 | `{ textInputStyle: ViewStyle \| TextStyle,  textInputContainerStyle: ViewStyle, textInputProps: TextInputProps}` |
 
 ## Deprecation Notice
 
@@ -295,20 +295,29 @@ checkboxComponentStyles = {
 };
 ```
 
-- `searchInputStyle` would now be inside `searchControls`
+- `searchInputStyle` would now be inside replaced with `textInputStyle` in the `searchControls` object
 
 ```js
-searchControls={{
-  searchInputStyle: {
-    backgroundColor: 'yellow',
+searchControls={
+  textInputStyle: {
     color: 'blue',
-    fontWeight: '900',
+    fontWeight: '500',
+    minHeight: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+    width: '50%',
+    textAlign: 'center',
+  },
+  textInputContainerStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textInputProps: {
     placeholder: 'Search anything here',
     placeholderTextColor: 'gray',
   },
-}}
+}
 ```
 
 ## Contributing

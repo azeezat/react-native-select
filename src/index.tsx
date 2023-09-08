@@ -70,10 +70,12 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     itemIndex: number;
   }>({ itemIndex: 0 }); // for scrollToIndex in Sectionlist and Flatlist
 
+  if (!options || options.length === 0) {
+    throw new Error('Options array cannot be empty or undefined');
+  }
+
   useEffect(() => {
-    if (options) {
-      setNewOptions(options);
-    }
+    setNewOptions(options);
     return () => {};
   }, [options]);
 
@@ -342,22 +344,25 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       />
       <CustomModal
         open={open}
-        handleToggleModal={handleToggleModal}
         modalBackgroundStyle={modalBackgroundStyle}
         modalOptionsContainerStyle={modalOptionsContainerStyle}
-        onRequestClose={() => {}}
+        onRequestClose={() => handleToggleModal()}
         modalProps={modalProps}
       >
         <ListTypeComponent
-          keyboardShouldPersistTaps="always"
+          removeClippedSubviews={false}
           ListHeaderComponent={
             <>
               {isSearchable && (
                 <Input
                   value={searchValue}
                   onChangeText={(text: string) => onSearch(text)}
-                  style={searchControls?.searchInputStyle || searchInputStyle}
+                  style={searchControls?.textInputStyle || searchInputStyle}
                   primaryColor={primary}
+                  textInputContainerStyle={
+                    searchControls?.textInputContainerStyle
+                  }
+                  openModal={() => setOpen(true)} // There seems to a known issue on expo web that closes the modal when the input is focused
                   {...searchControls?.textInputProps}
                 />
               )}

@@ -66,7 +66,8 @@ export type DropdownProps = {
     unselectAllCallback?: () => void;
   };
   searchControls?: {
-    searchInputStyle?: ViewStyle | TextStyle;
+    textInputStyle?: ViewStyle | TextStyle;
+    textInputContainerStyle?: ViewStyle;
     textInputProps?: TextInputProps;
   };
 };
