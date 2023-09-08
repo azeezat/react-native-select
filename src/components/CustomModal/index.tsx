@@ -9,7 +9,6 @@ import { colors } from '../../styles/colors';
 
 const CustomModal = ({
   open,
-  handleToggleModal,
   onRequestClose,
   modalBackgroundStyle,
   modalOptionsContainerStyle,
@@ -25,7 +24,7 @@ const CustomModal = ({
       {...modalProps}
     >
       <TouchableOpacity
-        onPress={() => handleToggleModal()}
+        onPress={() => onRequestClose()}
         style={[
           styles.modalContainer,
           styles.modalBackgroundStyle,

@@ -8,12 +8,14 @@ export const Input = ({
   onChangeText,
   style,
   primaryColor,
+  textInputContainerStyle,
+  openModal,
   ...rest
 }: any) => {
   const [isFocused, setFocus] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, textInputContainerStyle]}>
       <TextInput
         placeholder={placeholder}
         style={[
@@ -26,7 +28,10 @@ export const Input = ({
           isFocused && { borderColor: primaryColor },
           style,
         ]}
-        onFocus={() => setFocus(true)}
+        onFocus={() => {
+          setFocus(true);
+          openModal();
+        }}
         onBlur={() => setFocus(false)}
         value={value}
         onChangeText={onChangeText}
