@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StyleSheet,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { colors } from '../../styles/colors';
 
@@ -31,11 +32,14 @@ const CustomModal = ({
           modalBackgroundStyle,
         ]}
       >
-        <SafeAreaView
-          style={[styles.modalOptionsContainer, modalOptionsContainerStyle]}
-        >
-          {children}
-        </SafeAreaView>
+        {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
+        <TouchableWithoutFeedback onPress={() => {}}>
+          <SafeAreaView
+            style={[styles.modalOptionsContainer, modalOptionsContainerStyle]}
+          >
+            {children}
+          </SafeAreaView>
+        </TouchableWithoutFeedback>
       </TouchableOpacity>
     </Modal>
   );
@@ -52,6 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
+    zIndex: 5,
   },
 });
 
