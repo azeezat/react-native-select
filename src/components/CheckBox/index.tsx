@@ -83,7 +83,7 @@ const CheckBox = ({
           />
         )}
       </View>
-      {label && (
+      {label && label !== '' && (
         <Text
           style={[
             checkboxComponentStyles?.checkboxLabelStyle || checkboxLabelStyle,

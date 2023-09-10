@@ -35,8 +35,10 @@ const DropdownFlatList = ({
   };
 
   useEffect(() => {
-    scrollToItem(listIndex.itemIndex);
-  }, [listIndex]);
+    if (options?.length) {
+      scrollToItem(listIndex.itemIndex);
+    }
+  }, [listIndex, options]);
 
   return (
     <FlatList
@@ -71,7 +73,7 @@ const DropdownFlatList = ({
           checkboxStyle, // kept for backwards compatibility
           checkboxLabelStyle, // kept for backwards compatibility
           checkboxComponentStyles,
-          checkboxComponent
+          checkboxComponent,
         })
       }
       keyExtractor={(_item, index) => `Options${index}`}

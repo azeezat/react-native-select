@@ -71,8 +71,10 @@ const DropdownSectionList = ({
   };
 
   useEffect(() => {
-    scrollToLocation(listIndex);
-  }, [listIndex]);
+    if (options?.length) {
+      scrollToLocation(listIndex);
+    }
+  }, [listIndex, options]);
 
   return (
     <SectionList
@@ -111,7 +113,8 @@ const DropdownSectionList = ({
         })
       }
       renderSectionHeader={({ section: { title, data } }) =>
-        data.length > 0 && (
+        data?.length &&
+        title && (
           <SectionHeaderTitle
             title={title}
             sectionHeaderStyle={listComponentStyles?.sectionHeaderStyle}

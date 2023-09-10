@@ -305,8 +305,9 @@ searchControls={
     minHeight: 10,
     paddingVertical: 10,
     paddingHorizontal: 5,
-    width: '50%',
+    width: '70%',
     textAlign: 'center',
+    backgroundColor: 'pink',
   },
   textInputContainerStyle: {
     flex: 1,
@@ -315,7 +316,7 @@ searchControls={
   },
   textInputProps: {
     placeholder: 'Search anything here',
-    placeholderTextColor: 'gray',
+    placeholderTextColor: 'white',
   },
 }
 ```
