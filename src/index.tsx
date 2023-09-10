@@ -246,7 +246,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       ) {
         return true;
       }
-      return;
+      return false;
     });
     return searchResults;
   };
@@ -256,17 +256,17 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     regexFilter: RegExp
   ) => {
     const searchResults = sectionList.map((listItem: TSectionListItem) => {
-      listItem.data = listItem.data.filter((item: TFlatListItem) => {
+      const filteredData = listItem.data.filter((item: TFlatListItem) => {
         if (
           item[optLabel].toString().toLowerCase().search(regexFilter) !== -1 ||
           item[optValue].toString().toLowerCase().search(regexFilter) !== -1
         ) {
-          return listItem.data.push(item);
+          return true;
         }
-        return;
+        return false;
       });
 
-      return listItem;
+      return { ...listItem, data: filteredData };
     });
 
     return searchResults;

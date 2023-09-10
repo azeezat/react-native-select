@@ -112,17 +112,14 @@ const DropdownSectionList = ({
           expandedSections,
         })
       }
-      renderSectionHeader={({ section: { title, data } }) =>
-        data?.length &&
-        title && (
-          <SectionHeaderTitle
-            title={title}
-            sectionHeaderStyle={listComponentStyles?.sectionHeaderStyle}
-            onPress={() => handleToggleListExpansion(title)}
-            isExpanded={expandedSections.has(title)}
-          />
-        )
-      }
+      renderSectionHeader={({ section: { title } }) => (
+        <SectionHeaderTitle
+          title={title}
+          sectionHeaderStyle={listComponentStyles?.sectionHeaderStyle}
+          onPress={() => handleToggleListExpansion(title)}
+          isExpanded={expandedSections.has(title)}
+        />
+      )}
       keyExtractor={(_item, index) => `Options${index}`}
       stickySectionHeadersEnabled={false}
       ref={sectionlistRef}
