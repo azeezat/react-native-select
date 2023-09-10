@@ -391,7 +391,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
               )}
             </>
           }
-          ListFooterComponent={listFooterComponent || <></>}
+          ListFooterComponent={listFooterComponent}
           listComponentStyles={listComponentStyles}
           options={newOptions}
           optionLabel={optLabel}
