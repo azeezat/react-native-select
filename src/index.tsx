@@ -68,11 +68,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const [listIndex, setListIndex] = useState<{
     sectionIndex?: number;
     itemIndex: number;
-  }>({ itemIndex: 0 }); // for scrollToIndex in Sectionlist and Flatlist
-
-  if (!options || options.length === 0) {
-    throw new Error('Options array cannot be empty or undefined');
-  }
+  }>({ itemIndex: 0, sectionIndex: 0 }); // for scrollToIndex in Sectionlist and Flatlist
 
   useEffect(() => {
     setNewOptions(options);
@@ -92,7 +88,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    *==========================================*/
 
   // check the structure of the new options array to determine if it is a section list or a
-  const isSectionList = newOptions.some(
+  const isSectionList = newOptions?.some(
     (item) => item.title && item.data && Array.isArray(item.data)
   );
 
@@ -102,17 +98,17 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const modifiedSectionData = extractPropertyFromArray(
     newOptions,
     'data'
-  ).flat();
+  )?.flat();
 
   /**
-   *`modifiedOptions` should only be used for computations newOptions remains the default array.
-   * At this point modifiedOptions now has the same structure for both `FlatList` and `SectionList`
+   * `options` is the original array, it never changes. (Do not use except you really need the original array) .
+   * `newOptions` is a copy of options but can be mutated by `setNewOptions`, as a result, the value many change.
+   * `modifiedOptions` should only be used for computations. It has the same structure for both `FlatList` and `SectionList`
    */
   const modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
 
   const optLabel = optionLabel || DEFAULT_OPTION_LABEL;
   const optValue = optionValue || DEFAULT_OPTION_VALUE;
-  const optionsCopy = JSON.parse(JSON.stringify(options)); // copy of the original options array
 
   /*===========================================
    * Selection handlers
@@ -143,7 +139,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   };
 
   const removeDisabledItems = (items: TFlatList) => {
-    return items.filter((item: TFlatListItem) => !item.disabled);
+    return items?.filter((item: TFlatListItem) => !item.disabled);
   };
 
   const handleSelectAll = () => {
@@ -153,8 +149,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       // don't select disabled items
       const filteredOptions = removeDisabledItems(
         isSectionList
-          ? extractPropertyFromArray(optionsCopy, 'data').flat()
-          : optionsCopy
+          ? extractPropertyFromArray(options, 'data').flat()
+          : options
       );
 
       if (!prevVal) {
@@ -184,7 +180,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     (selectedValues: any[]) => {
       //if the list contains disabled values, those values will not be selected
       if (
-        removeDisabledItems(modifiedOptions).length === selectedValues.length
+        removeDisabledItems(modifiedOptions)?.length === selectedValues?.length
       ) {
         setSelectAll(true);
       } else {
@@ -234,10 +230,10 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
     const regexFilter = new RegExp(searchText, 'i');
 
-    // Because the options array will be mutated after Search, we have to search with a copy of the original array
+    // Because the options array will be mutated while searching, we have to search with the original array
     const searchResults = isSectionList
-      ? searchSectionList(optionsCopy as TSectionList, regexFilter)
-      : searchFlatList(optionsCopy as TFlatList, regexFilter);
+      ? searchSectionList(options as TSectionList, regexFilter)
+      : searchFlatList(options as TFlatList, regexFilter);
 
     setNewOptions(searchResults);
   };
@@ -300,18 +296,22 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    *==========================================*/
   const setIndexOfSelectedItem = (selectedLabel: string) => {
     isSectionList
-      ? optionsCopy.map((item: TSectionListItem, sectionIndex: number) => {
-          item.data?.find((dataItem: TFlatListItem, itemIndex: number) => {
-            if (dataItem[optLabel] === selectedLabel) {
-              setListIndex({ sectionIndex, itemIndex });
-            }
-          });
-        })
-      : optionsCopy?.find((item: TFlatListItem, itemIndex: number) => {
-          if (item[optLabel] === selectedLabel) {
-            setListIndex({ itemIndex });
+      ? (options as TSectionListItem[] | undefined)?.map(
+          (item: TSectionListItem, sectionIndex: number) => {
+            item?.data?.find((dataItem: TFlatListItem, itemIndex: number) => {
+              if (dataItem[optLabel] === selectedLabel) {
+                setListIndex({ sectionIndex, itemIndex });
+              }
+            });
           }
-        });
+        )
+      : (options as TFlatListItem[] | undefined)?.find(
+          (item: TFlatListItem, itemIndex: number) => {
+            if (item[optLabel] === selectedLabel) {
+              setListIndex({ itemIndex });
+            }
+          }
+        );
   };
 
   return (
@@ -350,7 +350,6 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         modalProps={modalProps}
       >
         <ListTypeComponent
-          removeClippedSubviews={false}
           ListHeaderComponent={
             <>
               {isSearchable && (
@@ -362,12 +361,14 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                   textInputContainerStyle={
                     searchControls?.textInputContainerStyle
                   }
-                  openModal={() => setOpen(true)} // There seems to a known issue on expo web that closes the modal when the input is focused
+                  placeholder={
+                    searchControls?.textInputProps?.placeholder || 'Search'
+                  }
                   {...searchControls?.textInputProps}
                 />
               )}
               {listHeaderComponent}
-              {isMultiple && modifiedOptions.length > 1 && (
+              {isMultiple && modifiedOptions?.length > 1 && (
                 <View style={styles.optionsContainerStyle}>
                   <TouchableOpacity onPress={() => {}}>
                     <CheckBox

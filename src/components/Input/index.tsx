@@ -9,7 +9,6 @@ export const Input = ({
   style,
   primaryColor,
   textInputContainerStyle,
-  openModal,
   ...rest
 }: any) => {
   const [isFocused, setFocus] = useState(false);
@@ -30,7 +29,6 @@ export const Input = ({
         ]}
         onFocus={() => {
           setFocus(true);
-          openModal();
         }}
         onBlur={() => setFocus(false)}
         value={value}
