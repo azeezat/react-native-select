@@ -282,6 +282,7 @@ export default function App() {
               unselectAllText: 'Remove everything',
               selectAllCallback: () => Alert.alert('You selected everything'),
               unselectAllCallback: () => Alert.alert('You removed everything'),
+              emptyListMessage: 'No record found',
             }}
           />
 

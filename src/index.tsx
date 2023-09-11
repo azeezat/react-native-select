@@ -409,6 +409,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           checkboxComponentStyles={checkboxComponentStyles}
           checkboxComponent={checkboxComponent}
           listIndex={listIndex}
+          emptyListMessage={listControls?.emptyListMessage}
         />
       </CustomModal>
     </>

@@ -23,6 +23,7 @@ const DropdownFlatList = ({
   checkboxComponent,
   listComponentStyles,
   listIndex,
+  emptyListMessage,
   ...rest
 }: any) => {
   const flatlistRef = useRef<FlatList<TFlatList>>(null);
@@ -48,6 +49,7 @@ const DropdownFlatList = ({
       ListEmptyComponent={
         <ListEmptyComponent
           listEmptyComponentStyle={listComponentStyles?.listEmptyComponentStyle}
+          emptyListMessage={emptyListMessage}
         />
       }
       contentContainerStyle={[
