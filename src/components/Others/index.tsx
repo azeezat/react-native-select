@@ -10,10 +10,15 @@ import {
 } from 'react-native';
 import { colors } from '../../styles/colors';
 
-export const ListEmptyComponent = ({ listEmptyComponentStyle }: any) => {
+export const ListEmptyComponent = ({
+  listEmptyComponentStyle,
+  emptyListMessage,
+}: any) => {
   return (
     <View style={styles.listEmptyComponentStyle}>
-      <Text style={listEmptyComponentStyle}>No options available</Text>
+      <Text style={listEmptyComponentStyle}>
+        {emptyListMessage || 'No options available'}
+      </Text>
     </View>
   );
 };

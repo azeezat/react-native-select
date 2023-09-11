@@ -28,6 +28,7 @@ const DropdownSectionList = ({
   checkboxComponent,
   listComponentStyles,
   listIndex,
+  emptyListMessage,
   ...rest
 }: any) => {
   const [expandedSections, setExpandedSections] = useState(new Set());
@@ -84,6 +85,7 @@ const DropdownSectionList = ({
       ListEmptyComponent={
         <ListEmptyComponent
           listEmptyComponentStyle={listComponentStyles?.listEmptyComponentStyle}
+          emptyListMessage={emptyListMessage}
         />
       }
       contentContainerStyle={[
