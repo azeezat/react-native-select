@@ -64,6 +64,7 @@ export type DropdownProps = {
     unselectAllText?: string;
     selectAllCallback?: () => void;
     unselectAllCallback?: () => void;
+    hideSelectAll?: boolean;
     emptyListMessage?: string;
   };
   searchControls?: {

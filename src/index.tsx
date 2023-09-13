@@ -368,27 +368,29 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                 />
               )}
               {listHeaderComponent}
-              {isMultiple && modifiedOptions?.length > 1 && (
-                <View style={styles.optionsContainerStyle}>
-                  <TouchableOpacity onPress={() => {}}>
-                    <CheckBox
-                      value={selectAll}
-                      label={
-                        selectAll
-                          ? listControls?.unselectAllText || 'Clear all'
-                          : listControls?.selectAllText || 'Select all'
-                      }
-                      onChange={() => handleSelectAll()}
-                      primaryColor={primary}
-                      checkboxSize={checkboxSize}
-                      checkboxStyle={checkboxStyle}
-                      checkboxLabelStyle={checkboxLabelStyle}
-                      checkboxComponentStyles={checkboxComponentStyles}
-                      checkboxComponent={checkboxComponent}
-                    />
-                  </TouchableOpacity>
-                </View>
-              )}
+              {!listControls?.hideSelectAll &&
+                isMultiple &&
+                modifiedOptions?.length > 1 && (
+                  <View style={styles.optionsContainerStyle}>
+                    <TouchableOpacity onPress={() => {}}>
+                      <CheckBox
+                        value={selectAll}
+                        label={
+                          selectAll
+                            ? listControls?.unselectAllText || 'Clear all'
+                            : listControls?.selectAllText || 'Select all'
+                        }
+                        onChange={() => handleSelectAll()}
+                        primaryColor={primary}
+                        checkboxSize={checkboxSize}
+                        checkboxStyle={checkboxStyle}
+                        checkboxLabelStyle={checkboxLabelStyle}
+                        checkboxComponentStyles={checkboxComponentStyles}
+                        checkboxComponent={checkboxComponent}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                )}
             </>
           }
           ListFooterComponent={listFooterComponent}

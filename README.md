@@ -274,7 +274,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | listComponentStyles        | `Object`                 | `{listEmptyComponentStyle: ViewStyle, itemSeparatorStyle: ViewStyle, sectionHeaderStyle: TextStyle}`                        |
 | checkboxComponentStyles    | `Object`                 | `{checkboxSize: number, checkboxStyle: ViewStyle, checkboxLabelStyle: TextStyle}`                                           |
 | checkboxComponent          | `React Component`        | `<View style={styles.radioButton} />`                                                                                       |
-| listControls               | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback: () => {}, unselectAllCallback: () => {}, emptyListMessage: 'No record found'}` |
+| listControls               | `Object`                 | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback: () => {}, unselectAllCallback: () => {}, hideSelectAll: boolean, emptyListMessage: 'No record found'}` |
 | searchControls             | `Object`                 | `{ textInputStyle: ViewStyle \| TextStyle,  textInputContainerStyle: ViewStyle, textInputProps: TextInputProps}`            |
 
 ## Deprecation Notice
