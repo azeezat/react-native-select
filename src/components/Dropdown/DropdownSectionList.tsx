@@ -72,10 +72,10 @@ const DropdownSectionList = ({
   };
 
   useEffect(() => {
-    if (options?.length) {
+    if (listIndex.itemIndex >= 0 && listIndex.sectionIndex >= 0) {
       scrollToLocation(listIndex);
     }
-  }, [listIndex, options]);
+  }, [listIndex]);
 
   return (
     <SectionList

@@ -68,7 +68,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const [listIndex, setListIndex] = useState<{
     sectionIndex?: number;
     itemIndex: number;
-  }>({ itemIndex: 0, sectionIndex: 0 }); // for scrollToIndex in Sectionlist and Flatlist
+  }>({ itemIndex: -1, sectionIndex: -1 }); // for scrollToIndex in Sectionlist and Flatlist
 
   useEffect(() => {
     setNewOptions(options);
@@ -279,7 +279,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     setOpen(!open);
     setSearchValue('');
     setNewOptions(options);
-    setListIndex({ itemIndex: 0, sectionIndex: 0 });
+    setListIndex({ itemIndex: -1, sectionIndex: -1 });
   };
 
   useEffect(() => {

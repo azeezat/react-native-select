@@ -36,10 +36,10 @@ const DropdownFlatList = ({
   };
 
   useEffect(() => {
-    if (options?.length) {
+    if (listIndex.itemIndex >= 0) {
       scrollToItem(listIndex.itemIndex);
     }
-  }, [listIndex, options]);
+  }, [listIndex]);
 
   return (
     <FlatList
