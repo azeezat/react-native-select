@@ -33,6 +33,13 @@ export default function App() {
         <View style={styles.container}>
           <DropdownSelect
             label="Currency"
+            placeholder="Empty State"
+            options={[]}
+            onValueChange={() => {}}
+          />
+
+          <DropdownSelect
+            label="Currency"
             placeholder="Select multiple currencies..."
             options={[
               { name: 'Naira (NGN) \u20A6', code: 'NGN' },
