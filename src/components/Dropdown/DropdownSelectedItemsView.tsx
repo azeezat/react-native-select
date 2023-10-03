@@ -71,6 +71,7 @@ const DropdownSelectedItemsView = ({
                   multipleSelectedItemStyle,
                 ]}
                 label={label}
+                disabled={disabled}
               />
             ))
           ) : (
@@ -81,6 +82,7 @@ const DropdownSelectedItemsView = ({
               }}
               style={[styles.blackText, selectedItemStyle]}
               label={getSelectedItemsLabel()}
+              disabled={disabled}
             />
           )}
           {!selectedItem && selectedItems?.length === 0 && (
@@ -88,6 +90,7 @@ const DropdownSelectedItemsView = ({
               onPress={() => handleToggleModal()}
               style={[styles.blackText, placeholderStyle]}
               label={placeholder ?? 'Select an option'}
+              disabled={disabled}
             />
           )}
         </View>
