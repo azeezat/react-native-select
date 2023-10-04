@@ -276,6 +276,9 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    * Modal
    *==========================================*/
   const handleToggleModal = () => {
+    if (disabled){ // protecting any toggleModal invocation when Dropdown is disabled by not activating state
+      return; 
+    }
     setOpen(!open);
     setSearchValue('');
     setNewOptions(options);
