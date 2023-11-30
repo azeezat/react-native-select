@@ -7,3 +7,7 @@ export const extractPropertyFromArray = (arr: any, property: string) => {
 
   return extractedValue;
 };
+
+export const escapeRegExp = (text: string) => {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};

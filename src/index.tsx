@@ -15,7 +15,7 @@ import type {
   TSectionList,
   TSectionListItem,
 } from './types/index.types';
-import { extractPropertyFromArray } from './utils';
+import { escapeRegExp, extractPropertyFromArray } from './utils';
 
 export const DropdownSelect: React.FC<DropdownProps> = ({
   placeholder,
@@ -226,7 +226,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const onSearch = (value: string) => {
     setSearchValue(value);
 
-    let searchText = value.toString().toLocaleLowerCase().trim();
+    let searchText = escapeRegExp(value).toString().toLocaleLowerCase().trim();
 
     const regexFilter = new RegExp(searchText, 'i');
 
@@ -276,8 +276,9 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    * Modal
    *==========================================*/
   const handleToggleModal = () => {
-    if (disabled){ // protecting any toggleModal invocation when Dropdown is disabled by not activating state
-      return; 
+    if (disabled) {
+      // protecting any toggleModal invocation when Dropdown is disabled by not activating state
+      return;
     }
     setOpen(!open);
     setSearchValue('');
