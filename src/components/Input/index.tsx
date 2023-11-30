@@ -33,6 +33,7 @@ export const Input = ({
         onBlur={() => setFocus(false)}
         value={value}
         onChangeText={onChangeText}
+        returnKeyType="search"
         {...rest}
       />
     </View>
