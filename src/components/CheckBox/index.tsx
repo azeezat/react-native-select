@@ -2,25 +2,7 @@ import React from 'react';
 import { Pressable, Text, StyleSheet, Image, View } from 'react-native';
 import { colors } from '../../styles/colors';
 import { CHECKBOX_SIZE } from '../../constants';
-import type { CheckboxProps } from './types';
-
-/**
-  * Individual props `checkboxSize`, `checkboxStyle`, `checkboxLabelStyle` would be replaced in future releases
-  * and replaced with a single object `checkboxComponentStyles` e.g
-
-```js
-const checkboxComponentStyles = {
-  checkboxSize: 20,
-  checkboxStyle: {
-    backgroundColor: 'purple',
-    borderRadius: 30,
-    padding: 10,
-    borderColor: 'red',
-  },
-  checkboxLabelStyle: { color: 'red', fontSize: 20 },
-};
-```
-  */
+import type { CheckboxProps } from './checkbox.types';
 
 const CheckBox = ({
   label,
@@ -32,22 +14,23 @@ const CheckBox = ({
   checkboxLabelStyle,
   checkboxComponentStyles,
   checkboxComponent,
+  checkboxControls,
   onChange,
 }: CheckboxProps) => {
-  // const { checkboxSize, checkboxStyle, checkboxLabelStyle } =
-  //   checkboxComponentStyles || undefined;
   const fillColor = {
     backgroundColor: disabled
       ? '#d3d3d3'
       : value
-      ? checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
+      ? checkboxControls?.checkboxStyle?.backgroundColor ||
+        checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
         checkboxStyle?.backgroundColor ||
         primaryColor ||
         'green'
       : 'white',
     borderColor: disabled
       ? colors.disabled
-      : checkboxComponentStyles?.checkboxStyle?.borderColor ||
+      : checkboxControls?.checkboxStyle?.borderColor ||
+        checkboxComponentStyles?.checkboxStyle?.borderColor ||
         checkboxStyle?.borderColor ||
         styles.checkbox.borderColor,
   };
@@ -61,20 +44,24 @@ const CheckBox = ({
       <View
         style={[
           styles.checkbox,
-          checkboxComponentStyles?.checkboxStyle || checkboxStyle,
+          checkboxControls?.checkboxStyle ||
+            checkboxComponentStyles?.checkboxStyle ||
+            checkboxStyle,
           fillColor,
         ]}
       >
-        {checkboxComponent || (
+        {checkboxControls?.checkboxComponent || checkboxComponent || (
           <Image
             source={require('../../asset/check.png')}
             style={[
               {
                 height:
+                  checkboxControls?.checkboxSize ||
                   checkboxComponentStyles?.checkboxSize ||
                   checkboxSize ||
                   CHECKBOX_SIZE,
                 width:
+                  checkboxControls?.checkboxSize ||
                   checkboxComponentStyles?.checkboxSize ||
                   checkboxSize ||
                   CHECKBOX_SIZE,
@@ -86,7 +73,9 @@ const CheckBox = ({
       {label && label !== '' && (
         <Text
           style={[
-            checkboxComponentStyles?.checkboxLabelStyle || checkboxLabelStyle,
+            checkboxControls?.checkboxLabelStyle ||
+              checkboxComponentStyles?.checkboxLabelStyle ||
+              checkboxLabelStyle,
             styles.labelStyle,
           ]}
         >

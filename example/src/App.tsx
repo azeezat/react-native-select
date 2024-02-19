@@ -14,18 +14,22 @@ import DropdownSelect from 'react-native-input-select';
 import { countries } from './data';
 
 export default function App() {
-  const [users, setUsers] = useState<any>('');
+  const [users, setUsers] = useState<string[]>([]);
   const [country, setCountry] = useState<any>('');
-  const [gender, setGender] = useState<any>('');
-  const [currency, setCurrency] = useState<any>('');
-  const [meals, setMeals] = useState<any>('');
+  const [gender, setGender] = useState<number>();
+  const [currency, setCurrency] = useState<string[]>([]);
+  const [meals, setMeals] = useState<string[]>([]);
   const [item, setItem] = useState<any>('');
-  const [menu, setMenu] = useState<any>('');
+  const [menu, setMenu] = useState<string[]>([]);
 
   useEffect(() => {
     setCurrency(['NGN']);
     setMenu(['F']);
   }, []);
+
+  const logMovies = async () => {
+    console.log('You can make an API call when the modal opens.');
+  };
 
   return (
     <SafeAreaView>
@@ -74,6 +78,9 @@ export default function App() {
             dropdownErrorTextStyle={{ color: 'red', fontWeight: '500' }}
             error={gender ? '' : 'Gender is required'}
             primaryColor={'green'}
+            modalControls={{
+              modalProps: { onShow: () => logMovies() },
+            }}
           />
 
           <DropdownSelect
@@ -147,19 +154,21 @@ export default function App() {
               color: 'green',
               fontWeight: '900',
             }}
-            modalBackgroundStyle={{
-              backgroundColor: 'rgba(196, 198, 246, 0.5)',
+            modalControls={{
+              modalBackgroundStyle: {
+                backgroundColor: 'rgba(196, 198, 246, 0.5)',
+              },
             }}
             helperText="Some items in this list are disabled"
             isMultiple
-            checkboxComponent={<View style={styles.radioButton} />}
-            checkboxComponentStyles={{
+            checkboxControls={{
               checkboxStyle: {
                 backgroundColor: 'green',
                 borderRadius: 30,
                 borderColor: 'green',
               },
               checkboxLabelStyle: { color: 'green', fontSize: 20 },
+              checkboxComponent: <View style={styles.radioButton} />,
             }}
             listControls={{
               hideSelectAll: true,
@@ -185,12 +194,13 @@ export default function App() {
               color: 'green',
               fontWeight: '900',
             }}
-            modalBackgroundStyle={{
-              backgroundColor: 'rgba(196, 198, 246, 0.5)',
+            modalControls={{
+              modalBackgroundStyle: {
+                backgroundColor: 'rgba(196, 198, 246, 0.5)',
+              },
             }}
             helperText="The placeholder has been styled"
-            checkboxComponent={<View style={styles.radioButton} />}
-            checkboxComponentStyles={{
+            checkboxControls={{
               checkboxSize: 15,
               checkboxStyle: {
                 backgroundColor: 'purple',
@@ -199,6 +209,7 @@ export default function App() {
                 borderColor: 'red',
               },
               checkboxLabelStyle: { color: 'red', fontSize: 20 },
+              checkboxComponent: <View style={styles.radioButton} />,
             }}
             selectedItemStyle={{
               color: 'hotpink',
@@ -254,19 +265,21 @@ export default function App() {
                 </Text>
               </View>
             }
-            modalOptionsContainerStyle={{
-              padding: 10,
-              backgroundColor: 'cyan',
-            }}
-            modalProps={{
-              supportedOrientations: [
-                'portrait',
-                'portrait-upside-down',
-                'landscape',
-                'landscape-left',
-                'landscape-right',
-              ],
-              transparent: false,
+            modalControls={{
+              modalOptionsContainerStyle: {
+                padding: 10,
+                backgroundColor: 'cyan',
+              },
+              modalProps: {
+                supportedOrientations: [
+                  'portrait',
+                  'portrait-upside-down',
+                  'landscape',
+                  'landscape-left',
+                  'landscape-right',
+                ],
+                transparent: false,
+              },
             }}
             listComponentStyles={{
               listEmptyComponentStyle: {

@@ -40,8 +40,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   dropdownHelperTextStyle,
   selectedItemStyle,
   multipleSelectedItemStyle,
-  modalBackgroundStyle,
-  modalOptionsContainerStyle,
+  modalBackgroundStyle, // kept for backwards compatibility
+  modalOptionsContainerStyle, // kept for backwards compatibility
   searchInputStyle, // kept for backwards compatibility
   primaryColor,
   disabled,
@@ -53,10 +53,12 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   listHeaderComponent,
   listFooterComponent,
   listComponentStyles,
-  modalProps,
+  modalProps, // kept for backwards compatibility
   hideModal = false,
   listControls,
   searchControls,
+  modalControls,
+  checkboxControls,
   ...rest
 }) => {
   const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
@@ -276,8 +278,9 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    * Modal
    *==========================================*/
   const handleToggleModal = () => {
-    if (disabled){ // protecting any toggleModal invocation when Dropdown is disabled by not activating state
-      return; 
+    if (disabled) {
+      // protecting any toggleModal invocation when Dropdown is disabled by not activating state
+      return;
     }
     setOpen(!open);
     setSearchValue('');
@@ -346,11 +349,12 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         {...rest}
       />
       <CustomModal
-        open={open}
-        modalBackgroundStyle={modalBackgroundStyle}
-        modalOptionsContainerStyle={modalOptionsContainerStyle}
+        visible={open}
+        modalBackgroundStyle={modalBackgroundStyle} // kept for backwards compatibility
+        modalOptionsContainerStyle={modalOptionsContainerStyle} // kept for backwards compatibility
         onRequestClose={() => handleToggleModal()}
-        modalProps={modalProps}
+        modalControls={modalControls}
+        modalProps={modalProps} // kept for backwards compatibility
       >
         <ListTypeComponent
           ListHeaderComponent={
@@ -413,6 +417,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           checkboxLabelStyle={checkboxLabelStyle}
           checkboxComponentStyles={checkboxComponentStyles}
           checkboxComponent={checkboxComponent}
+          checkboxControls={checkboxControls}
           listIndex={listIndex}
           emptyListMessage={listControls?.emptyListMessage}
         />

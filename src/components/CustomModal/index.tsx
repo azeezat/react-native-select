@@ -5,37 +5,45 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableWithoutFeedback,
+  ModalProps,
 } from 'react-native';
 import { colors } from '../../styles/colors';
+import { TCustomModalControls } from 'src/types/index.types';
 
 const CustomModal = ({
-  open,
+  visible,
   onRequestClose,
-  modalBackgroundStyle,
-  modalOptionsContainerStyle,
-  modalProps,
+  modalBackgroundStyle, //kept for backwards compatibility
+  modalOptionsContainerStyle, //kept for backwards compatibility
+  modalControls,
+  modalProps, //kept for backwards compatibility
   children,
-}: any) => {
+}: TCustomModalControls & ModalProps) => {
   return (
     <Modal
       transparent={true}
-      visible={open}
-      onRequestClose={() => onRequestClose()}
+      visible={visible}
+      onRequestClose={() => onRequestClose?.()}
       animationType="fade"
-      {...modalProps}
+      {...modalControls?.modalProps}
+      {...modalProps} //kept for backwards compatibility
     >
       <TouchableOpacity
-        onPress={() => onRequestClose()}
+        onPress={() => onRequestClose?.()}
         style={[
           styles.modalContainer,
           styles.modalBackgroundStyle,
-          modalBackgroundStyle,
+          modalControls?.modalBackgroundStyle || modalBackgroundStyle,
         ]}
       >
         {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
         <TouchableWithoutFeedback onPress={() => {}}>
           <SafeAreaView
-            style={[styles.modalOptionsContainer, modalOptionsContainerStyle]}
+            style={[
+              styles.modalOptionsContainer,
+              modalControls?.modalOptionsContainerStyle ||
+                modalOptionsContainerStyle,
+            ]}
           >
             {children}
           </SafeAreaView>

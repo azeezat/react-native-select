@@ -23,7 +23,11 @@ export const ListEmptyComponent = ({
   );
 };
 
-export const ItemSeparatorComponent = ({ itemSeparatorStyle }: any) => {
+export const ItemSeparatorComponent = ({
+  itemSeparatorStyle,
+}: {
+  itemSeparatorStyle: ViewStyle;
+}) => {
   return <View style={[styles.itemSeparatorStyle, itemSeparatorStyle]} />;
 };
 

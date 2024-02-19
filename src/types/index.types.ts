@@ -6,11 +6,15 @@ import type {
   TextInputProps,
 } from 'react-native';
 
-export type DropdownProps = {
-  placeholder?: string;
+export type DropdownProps = CommonDropdownProps &
+  TDropdownInputProps &
+  TSearchControls &
+  TCheckboxControls &
+  TCustomModalControls &
+  TListControls;
+
+export type CommonDropdownProps = {
   label?: string;
-  error?: string;
-  helperText?: string;
   options: TFlatList | TSectionList;
   optionLabel?: string;
   optionValue?: string;
@@ -23,6 +27,12 @@ export type DropdownProps = {
     | boolean[]
     | number[]
     | null;
+};
+
+export type TDropdownInputProps = {
+  placeholder?: string;
+  error?: string;
+  helperText?: string;
   isMultiple?: boolean;
   isSearchable?: boolean;
   dropdownIcon?: React.ReactNode;
@@ -35,25 +45,61 @@ export type DropdownProps = {
   dropdownHelperTextStyle?: TextStyle;
   selectedItemStyle?: TextStyle;
   multipleSelectedItemStyle?: TextStyle;
-  modalBackgroundStyle?: ViewStyle;
-  modalOptionsContainerStyle?: ViewStyle;
-  searchInputStyle?: ViewStyle;
   primaryColor?: ColorValue;
   disabled?: boolean;
+  placeholderStyle?: TextStyle;
+  hideModal?: boolean;
+};
+
+export type TSearchControls = {
+  /** @deprecated Use `searchControls = {{textInputStyle: ViewStyle | TextStyle }}` instead.*/
+  searchInputStyle?: ViewStyle;
+  searchControls?: {
+    textInputStyle?: ViewStyle | TextStyle;
+    textInputContainerStyle?: ViewStyle;
+    textInputProps?: TextInputProps;
+  };
+};
+export type TCheckboxControls = {
+  /** @deprecated Use `checkboxControls = {{checkboxSize: number }}` instead.*/
   checkboxSize?: number;
+  /** @deprecated Use `checkboxControls = {{checkboxStyle: ViewStyle }}` instead.*/
   checkboxStyle?: ViewStyle;
+  /** @deprecated Use `checkboxControls = {{checkboxLabelStyle: TextStyle }}` instead.*/
   checkboxLabelStyle?: TextStyle;
+  /** @deprecated Use `checkboxControls` instead.*/
   checkboxComponentStyles?: {
     checkboxSize?: number;
     checkboxStyle?: ViewStyle;
     checkboxLabelStyle?: TextStyle;
   };
+  /** @deprecated Use `checkboxControls = {{checkboxComponent: <View></View> }}` instead.*/
   checkboxComponent?: React.ReactNode;
-  placeholderStyle?: TextStyle;
+  checkboxControls?: {
+    checkboxSize?: number;
+    checkboxStyle?: ViewStyle;
+    checkboxLabelStyle?: TextStyle;
+    checkboxComponent?: React.ReactNode;
+  };
+};
+
+export type TCustomModalControls = {
+  /** @deprecated Use `modalControls = {{modalBackgroundStyle: ViewStyle}} instead.*/
+  modalBackgroundStyle?: ViewStyle;
+  /** @deprecated Use `modalControls = {{ modalOptionsContainerStyle: ViewStyle}} instead.*/
+  modalOptionsContainerStyle?: ViewStyle;
+  /** @deprecated Use `modalControls = {{modalProps: ModalProps }}` instead.*/
+  modalProps?: ModalProps;
+  modalControls?: {
+    modalBackgroundStyle?: ViewStyle;
+    modalOptionsContainerStyle?: ViewStyle;
+    modalProps?: ModalProps;
+  };
+};
+
+export type TListControls = {
   listHeaderComponent?: React.ReactNode;
   listFooterComponent?: React.ReactNode;
-  hideModal?: boolean;
-  modalProps?: ModalProps;
   listComponentStyles?: {
     listEmptyComponentStyle?: TextStyle;
     itemSeparatorStyle?: ViewStyle;
@@ -66,11 +112,6 @@ export type DropdownProps = {
     unselectAllCallback?: () => void;
     hideSelectAll?: boolean;
     emptyListMessage?: string;
-  };
-  searchControls?: {
-    textInputStyle?: ViewStyle | TextStyle;
-    textInputContainerStyle?: ViewStyle;
-    textInputProps?: TextInputProps;
   };
 };
 
