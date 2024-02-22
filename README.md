@@ -109,19 +109,21 @@ export default function App() {
           <Text>You can add any component to the bottom of this list</Text>
         </View>
       }
-      modalOptionsContainerStyle={{
-        padding: 10,
-        backgroundColor: 'cyan',
-      }}
-      modalProps={{
-        supportedOrientations: [
-          'portrait',
-          'portrait-upside-down',
-          'landscape',
-          'landscape-left',
-          'landscape-right',
-        ],
-        transparent: false,
+      modalControls={{
+        modalOptionsContainerStyle: {
+          padding: 10,
+          backgroundColor: 'cyan',
+        },
+        modalProps: {
+          supportedOrientations: [
+            'portrait',
+            'portrait-upside-down',
+            'landscape',
+            'landscape-left',
+            'landscape-right',
+          ],
+          transparent: false,
+        },
       }}
       listComponentStyles={{
         listEmptyComponentStyle: {
@@ -322,13 +324,13 @@ searchControls = {
 };
 ```
 
-Individual props `modalBackgroundStyle`, `modalOptionsContainerStyle`, `modalProps` would be replaced with a single object `modalControls`
+- Individual props `modalBackgroundStyle`, `modalOptionsContainerStyle`, `modalProps` would be replaced with a single object `modalControls`
 
 ```js
-modalControls={
-    modalBackgroundStyle: ViewStyle,
-    modalOptionsContainerStyle: ViewStyle,
-    modalProps: ModalProps, //Use this to pass in react-native default modal props
+modalControls = {
+  modalBackgroundStyle: ViewStyle,
+  modalOptionsContainerStyle: ViewStyle,
+  modalProps: ModalProps, //Use this to pass in react-native default modal props
 };
 ```
 

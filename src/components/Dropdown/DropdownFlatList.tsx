@@ -21,6 +21,7 @@ const DropdownFlatList = ({
   checkboxLabelStyle, // kept for backwards compatibility to be removed  in future release
   checkboxComponentStyles,
   checkboxComponent,
+  checkboxControls,
   listComponentStyles,
   listIndex,
   emptyListMessage,
@@ -74,8 +75,9 @@ const DropdownFlatList = ({
           checkboxSize, // kept for backwards compatibility
           checkboxStyle, // kept for backwards compatibility
           checkboxLabelStyle, // kept for backwards compatibility
-          checkboxComponentStyles,
-          checkboxComponent,
+          checkboxComponentStyles, // kept for backwards compatibility
+          checkboxComponent, // kept for backwards compatibility
+          checkboxControls,
         })
       }
       keyExtractor={(_item, index) => `Options${index}`}
@@ -106,6 +108,7 @@ const _renderItem = ({ item }: any, props: any) => {
       scrollToItem={props.scrollToItem}
       checkboxComponentStyles={props.checkboxComponentStyles}
       checkboxComponent={props.checkboxComponent}
+      checkboxControls={props.checkboxControls}
     />
   );
 };

@@ -15,6 +15,7 @@ const DropdownListItem = ({
   checkboxLabelStyle,
   checkboxComponentStyles,
   checkboxComponent,
+  checkboxControls,
 }: any) => {
   return (
     <TouchableOpacity
@@ -32,6 +33,7 @@ const DropdownListItem = ({
         label={item[optionLabel]}
         onChange={() => onChange(item[optionValue])}
         primaryColor={primaryColor}
+        checkboxControls={checkboxControls}
         checkboxSize={checkboxComponentStyles?.checkboxSize || checkboxSize}
         checkboxStyle={checkboxComponentStyles?.checkboxStyle || checkboxStyle}
         checkboxLabelStyle={

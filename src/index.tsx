@@ -48,8 +48,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   checkboxSize, // kept for backwards compatibility
   checkboxStyle, // kept for backwards compatibility
   checkboxLabelStyle, // kept for backwards compatibility
-  checkboxComponentStyles,
-  checkboxComponent,
+  checkboxComponentStyles, // kept for backwards compatibility
+  checkboxComponent, // kept for backwards compatibility
   listHeaderComponent,
   listFooterComponent,
   listComponentStyles,
@@ -389,6 +389,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                         }
                         onChange={() => handleSelectAll()}
                         primaryColor={primary}
+                        checkboxControls={checkboxControls}
                         checkboxSize={checkboxSize}
                         checkboxStyle={checkboxStyle}
                         checkboxLabelStyle={checkboxLabelStyle}
