@@ -1,14 +1,44 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
   Modal,
   TouchableOpacity,
   SafeAreaView,
   StyleSheet,
   TouchableWithoutFeedback,
-  ModalProps,
+  ModalProps, ViewStyle,
 } from 'react-native';
 import { colors } from '../../styles/colors';
 import { TCustomModalControls } from 'src/types/index.types';
+import {
+  KeyboardAvoidingView, Platform,
+} from 'react-native';
+
+type ScreenWrapperProps = {
+  children: React.ReactNode;
+  style: (ViewStyle | undefined)[];
+};
+
+const ScreenWrapper = ({ children, style }: ScreenWrapperProps): ReactElement => {
+  return (
+    <SafeAreaView {...style}>
+      {
+        Platform.OS === 'ios'
+          ? (
+            <KeyboardAvoidingView style={{ flex: 1 }}
+                                  enabled
+                                  keyboardVerticalOffset={Platform.select({ ios: 5, android: 500 })} behavior="padding">
+              {children}
+            </KeyboardAvoidingView>
+          )
+          : (
+            <>
+              {children}
+            </>
+          )
+      }
+    </SafeAreaView>
+  );
+};
 
 const CustomModal = ({
   visible,
@@ -38,7 +68,7 @@ const CustomModal = ({
       >
         {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
         <TouchableWithoutFeedback onPress={() => {}}>
-          <SafeAreaView
+          <ScreenWrapper
             style={[
               styles.modalOptionsContainer,
               modalControls?.modalOptionsContainerStyle ||
@@ -46,7 +76,7 @@ const CustomModal = ({
             ]}
           >
             {children}
-          </SafeAreaView>
+          </ScreenWrapper>
         </TouchableWithoutFeedback>
       </TouchableOpacity>
     </Modal>
