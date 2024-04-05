@@ -1,42 +1,34 @@
 import React, { ReactElement } from 'react';
 import {
+  KeyboardAvoidingView,
   Modal,
-  TouchableOpacity,
+  ModalProps,
+  Platform,
   SafeAreaView,
   StyleSheet,
+  TouchableOpacity,
   TouchableWithoutFeedback,
-  ModalProps, ViewStyle,
 } from 'react-native';
 import { colors } from '../../styles/colors';
 import { TCustomModalControls } from 'src/types/index.types';
-import {
-  KeyboardAvoidingView, Platform,
-} from 'react-native';
 
 type ScreenWrapperProps = {
   children: React.ReactNode;
-  style: (ViewStyle | undefined)[];
 };
 
-const ScreenWrapper = ({ children, style }: ScreenWrapperProps): ReactElement => {
+const ModalContentWrapper = ({ children }: ScreenWrapperProps): ReactElement => {
   return (
-    <SafeAreaView {...style}>
-      {
-        Platform.OS === 'ios'
-          ? (
-            <KeyboardAvoidingView style={{ flex: 1 }}
-                                  enabled
-                                  keyboardVerticalOffset={Platform.select({ ios: 5, android: 500 })} behavior="padding">
-              {children}
-            </KeyboardAvoidingView>
-          )
-          : (
-            <>
-              {children}
-            </>
-          )
-      }
-    </SafeAreaView>
+    Platform.OS === 'ios'
+      ? (
+        <KeyboardAvoidingView style={[{ flex: 1 }]} behavior="padding">
+          {children}
+        </KeyboardAvoidingView>
+      )
+      : (
+        <>
+          {children}
+        </>
+      )
   );
 };
 
@@ -58,27 +50,30 @@ const CustomModal = ({
       {...modalControls?.modalProps}
       {...modalProps} //kept for backwards compatibility
     >
-      <TouchableOpacity
-        onPress={() => onRequestClose?.()}
-        style={[
-          styles.modalContainer,
-          styles.modalBackgroundStyle,
-          modalControls?.modalBackgroundStyle || modalBackgroundStyle,
-        ]}
-      >
-        {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
-        <TouchableWithoutFeedback onPress={() => {}}>
-          <ScreenWrapper
-            style={[
-              styles.modalOptionsContainer,
-              modalControls?.modalOptionsContainerStyle ||
+      {/*Used to fix the select with search box behavior in iOS*/}
+      <ModalContentWrapper>
+        <TouchableOpacity
+          onPress={() => onRequestClose?.()}
+          style={[
+            styles.modalContainer,
+            styles.modalBackgroundStyle,
+            modalControls?.modalBackgroundStyle || modalBackgroundStyle,
+          ]}
+        >
+          {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
+          <TouchableWithoutFeedback onPress={() => {}}>
+            <SafeAreaView
+              style={[
+                styles.modalOptionsContainer,
+                modalControls?.modalOptionsContainerStyle ||
                 modalOptionsContainerStyle,
-            ]}
-          >
-            {children}
-          </ScreenWrapper>
-        </TouchableWithoutFeedback>
-      </TouchableOpacity>
+              ]}
+            >
+              {children}
+            </SafeAreaView>
+          </TouchableWithoutFeedback>
+        </TouchableOpacity>
+      </ModalContentWrapper>
     </Modal>
   );
 };
@@ -90,7 +85,7 @@ const styles = StyleSheet.create({
   },
   modalBackgroundStyle: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
   modalOptionsContainer: {
-    maxHeight: '50%',
+    maxHeight: '90%',
     backgroundColor: colors.white,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
