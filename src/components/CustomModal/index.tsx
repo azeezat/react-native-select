@@ -16,19 +16,15 @@ type ScreenWrapperProps = {
   children: React.ReactNode;
 };
 
-const ModalContentWrapper = ({ children }: ScreenWrapperProps): ReactElement => {
-  return (
-    Platform.OS === 'ios'
-      ? (
-        <KeyboardAvoidingView style={[{ flex: 1 }]} behavior="padding">
-          {children}
-        </KeyboardAvoidingView>
-      )
-      : (
-        <>
-          {children}
-        </>
-      )
+const ModalContentWrapper = ({
+  children,
+}: ScreenWrapperProps): ReactElement => {
+  return Platform.OS === 'ios' ? (
+    <KeyboardAvoidingView style={[{ flex: 1 }]} behavior="padding">
+      {children}
+    </KeyboardAvoidingView>
+  ) : (
+    <>{children}</>
   );
 };
 
@@ -66,7 +62,7 @@ const CustomModal = ({
               style={[
                 styles.modalOptionsContainer,
                 modalControls?.modalOptionsContainerStyle ||
-                modalOptionsContainerStyle,
+                  modalOptionsContainerStyle,
               ]}
             >
               {children}
