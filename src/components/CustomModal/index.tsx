@@ -16,6 +16,8 @@ type ScreenWrapperProps = {
   children: React.ReactNode;
 };
 
+// In iOS, `SafeAreaView` does not automatically account on keyboard.
+// Therefore, for iOS we need to wrap the content in `KeyboardAvoidingView`.
 const ModalContentWrapper = ({
   children,
 }: ScreenWrapperProps): ReactElement => {
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
   },
   modalBackgroundStyle: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
   modalOptionsContainer: {
-    maxHeight: '90%',
+    maxHeight: '50%',
     backgroundColor: colors.white,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
