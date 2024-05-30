@@ -14,28 +14,27 @@ yarn
 
 While developing, you can run the [example app](/example/) to test your changes. Any changes you make in your library's JavaScript code will be reflected in the example app without a rebuild. If you change any native code, then you'll need to rebuild the example app.
 
+To setup project by installing all dependencies and pods:
+
+`yarn bootstrap`
+
+
 To start the packager:
 
 ```sh
-yarn example start
+yarn start
 ```
 
 To run the example app on Android:
 
 ```sh
-yarn example android
+yarn android
 ```
 
 To run the example app on iOS:
 
 ```sh
-yarn example ios
-```
-
-To run the example app on Web:
-
-```sh
-yarn example web
+yarn ios
 ```
 
 Make sure your code passes TypeScript and ESLint. Run the following to verify:

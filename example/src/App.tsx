@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import DropdownSelect from 'react-native-input-select';
-import { countries } from './data';
+import {countries} from './data';
 
 export default function App() {
   const [users, setUsers] = useState<string[]>([]);
@@ -46,9 +46,9 @@ export default function App() {
             label="Currency"
             placeholder="Select multiple currencies..."
             options={[
-              { name: 'Naira (NGN) \u20A6', code: 'NGN' },
-              { name: 'Dollar (USD) \u0024', code: 'USD' },
-              { name: 'Euro (EUR) \u20AC', code: 'EUR' },
+              {name: 'Naira (NGN) \u20A6', code: 'NGN'},
+              {name: 'Dollar (USD) \u0024', code: 'USD'},
+              {name: 'Euro (EUR) \u20AC', code: 'EUR'},
             ]}
             optionLabel={'name'}
             optionValue={'code'}
@@ -63,8 +63,8 @@ export default function App() {
             label="Gender"
             placeholder="Select an option..."
             options={[
-              { name: 'Male', id: '1' },
-              { name: 'Female', id: '2' },
+              {name: 'Male', id: '1'},
+              {name: 'Female', id: '2'},
             ]}
             optionLabel={'name'}
             optionValue={'id'}
@@ -75,11 +75,11 @@ export default function App() {
               borderWidth: 2,
               borderStyle: 'solid',
             }}
-            dropdownErrorTextStyle={{ color: 'red', fontWeight: '500' }}
+            dropdownErrorTextStyle={{color: 'red', fontWeight: '500'}}
             error={gender ? '' : 'Gender is required'}
             primaryColor={'green'}
             modalControls={{
-              modalProps: { onShow: () => logMovies() },
+              modalProps: {onShow: () => logMovies()},
             }}
           />
 
@@ -87,8 +87,8 @@ export default function App() {
             label="Border has been removed"
             placeholder="Select users"
             options={[
-              { label: 'John Doe', value: '12' },
-              { label: 'James Bond', value: '13' },
+              {label: 'John Doe', value: '12'},
+              {label: 'James Bond', value: '13'},
             ]}
             selectedValue={users}
             onValueChange={(itemValue: any) => setUsers(itemValue)}
@@ -104,7 +104,7 @@ export default function App() {
                 </View>
               )
             }
-            dropdownIconStyle={users && { top: 20, right: 15 }}
+            dropdownIconStyle={users && {top: 20, right: 15}}
             searchControls={{
               textInputStyle: {
                 color: 'blue',
@@ -132,10 +132,10 @@ export default function App() {
             label="Meal preferences"
             placeholder="Select your meal preferences"
             options={[
-              { name: '🍛 Rice', value: '1', disabled: true },
-              { name: '🍗 Chicken', value: '2' },
-              { name: '🥦 Brocoli', value: '3', disabled: true },
-              { name: '🍕 Pizza', value: '4' },
+              {name: '🍛 Rice', value: '1', disabled: true},
+              {name: '🍗 Chicken', value: '2'},
+              {name: '🥦 Brocoli', value: '3', disabled: true},
+              {name: '🍕 Pizza', value: '4'},
             ]}
             optionLabel={'name'}
             optionValue={'value'}
@@ -148,8 +148,8 @@ export default function App() {
               minHeight: 40,
               borderColor: 'green',
             }}
-            dropdownIconStyle={{ top: 15, right: 10 }}
-            dropdownContainerStyle={{ marginBottom: 40 }}
+            dropdownIconStyle={{top: 15, right: 10}}
+            dropdownContainerStyle={{marginBottom: 40}}
             dropdownHelperTextStyle={{
               color: 'green',
               fontWeight: '900',
@@ -167,7 +167,7 @@ export default function App() {
                 borderRadius: 30,
                 borderColor: 'green',
               },
-              checkboxLabelStyle: { color: 'green', fontSize: 20 },
+              checkboxLabelStyle: {color: 'green', fontSize: 20},
               checkboxComponent: <View style={styles.radioButton} />,
             }}
             listControls={{
@@ -179,8 +179,8 @@ export default function App() {
             label="This label has been styled"
             placeholder="Select an item..."
             options={[
-              { label: 'Customized Item 1', value: '1' },
-              { label: 'Customized Item 2', value: '2' },
+              {label: 'Customized Item 1', value: '1'},
+              {label: 'Customized Item 2', value: '2'},
             ]}
             selectedValue={item}
             onValueChange={(itemValue: any) => setItem(itemValue)}
@@ -189,7 +189,7 @@ export default function App() {
               fontSize: 15,
               fontWeight: '500',
             }}
-            labelStyle={{ color: 'teal', fontSize: 15, fontWeight: '500' }}
+            labelStyle={{color: 'teal', fontSize: 15, fontWeight: '500'}}
             dropdownHelperTextStyle={{
               color: 'green',
               fontWeight: '900',
@@ -208,7 +208,7 @@ export default function App() {
                 padding: 5,
                 borderColor: 'red',
               },
-              checkboxLabelStyle: { color: 'red', fontSize: 20 },
+              checkboxLabelStyle: {color: 'red', fontSize: 20},
               checkboxComponent: <View style={styles.radioButton} />,
             }}
             selectedItemStyle={{
@@ -239,7 +239,7 @@ export default function App() {
                 }}
               />
             }
-            dropdownIconStyle={{ top: 20, right: 20 }}
+            dropdownIconStyle={{top: 20, right: 20}}
             listHeaderComponent={
               <View style={styles.customComponentContainer}>
                 <Text style={styles.text}>
@@ -312,24 +312,24 @@ export default function App() {
               {
                 title: 'Main dishes',
                 data: [
-                  { label: 'Pizza', value: 'A' },
-                  { label: 'Burger', value: 'B' },
-                  { label: 'Risotto', value: 'C' },
+                  {label: 'Pizza', value: 'A'},
+                  {label: 'Burger', value: 'B'},
+                  {label: 'Risotto', value: 'C'},
                 ],
               },
               {
                 title: 'Sides',
                 data: [
-                  { label: 'Ice cream', value: 'D', disabled: true },
-                  { label: 'Cheesecake', value: 'E' },
+                  {label: 'Ice cream', value: 'D', disabled: true},
+                  {label: 'Cheesecake', value: 'E'},
                 ],
               },
               {
                 title: 'Drinks',
                 data: [
-                  { label: 'Water', value: 'F' },
-                  { label: 'Coke', value: 'G' },
-                  { label: 'Juice', value: 'H' },
+                  {label: 'Water', value: 'F'},
+                  {label: 'Coke', value: 'G'},
+                  {label: 'Juice', value: 'H'},
                 ],
               },
             ]}
