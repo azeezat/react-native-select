@@ -80,8 +80,8 @@ export default function App() {
             primaryColor={'green'}
             modalControls={{
               modalProps: {
-                onShow: () => logMovies(),
-                onDismiss: () => console.log('modal was dismissed'), //only works for ios
+                onShow: () => console.log('modal shown'),
+                onDismiss: () => console.log('modal was dismissed'),
               },
             }}
           />
