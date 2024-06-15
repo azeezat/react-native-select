@@ -43,7 +43,7 @@ const CustomModal = ({
     <Modal
       transparent={true}
       visible={visible}
-      onRequestClose={() => onRequestClose?.()}
+      onRequestClose={(e) => onRequestClose?.(e)}
       animationType="fade"
       {...modalControls?.modalProps}
       {...modalProps} //kept for backwards compatibility
@@ -51,7 +51,7 @@ const CustomModal = ({
       {/*Used to fix the select with search box behavior in iOS*/}
       <ModalContentWrapper>
         <TouchableOpacity
-          onPress={() => onRequestClose?.()}
+          onPress={(e) => onRequestClose?.(e)}
           style={[
             styles.modalContainer,
             styles.modalBackgroundStyle,

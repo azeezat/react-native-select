@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import DropdownSelect from 'react-native-input-select';
 
 // Define the type for our component props
@@ -27,7 +27,7 @@ class MyComponent extends React.Component<MyComponentProps, MyComponentState> {
   }
 
   render() {
-    const { country } = this.state;
+    const {country} = this.state;
 
     return (
       <View style={styles.container}>
@@ -35,15 +35,15 @@ class MyComponent extends React.Component<MyComponentProps, MyComponentState> {
           label="Country"
           placeholder="Select multiple options..."
           options={[
-            { name: 'Nigeria', code: 'NG' },
-            { name: 'Åland Islands', code: 'AX' },
-            { name: 'Algeria', code: 'DZ' },
-            { name: 'American Samoa', code: 'AS' },
-            { name: 'Andorra', code: 'AD' },
-            { name: 'Angola', code: 'AO' },
-            { name: 'Anguilla', code: 'AI' },
-            { name: 'Antarctica', code: 'AQ' },
-            { name: 'Antigua and Barbuda', code: 'AG' },
+            {name: 'Nigeria', code: 'NG'},
+            {name: 'Åland Islands', code: 'AX'},
+            {name: 'Algeria', code: 'DZ'},
+            {name: 'American Samoa', code: 'AS'},
+            {name: 'Andorra', code: 'AD'},
+            {name: 'Angola', code: 'AO'},
+            {name: 'Anguilla', code: 'AI'},
+            {name: 'Antarctica', code: 'AQ'},
+            {name: 'Antigua and Barbuda', code: 'AG'},
           ]}
           optionLabel={'name'}
           optionValue={'code'}
