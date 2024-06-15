@@ -79,7 +79,10 @@ export default function App() {
             error={gender ? '' : 'Gender is required'}
             primaryColor={'green'}
             modalControls={{
-              modalProps: {onShow: () => logMovies()},
+              modalProps: {
+                onShow: () => logMovies(),
+                onDismiss: () => console.log('modal was dismissed'), //only works for ios
+              },
             }}
           />
 
@@ -279,6 +282,8 @@ export default function App() {
                   'landscape-right',
                 ],
                 transparent: false,
+                onShow: () => console.log('modal shown'),
+                onDismiss: () => console.log('modal was dismissed'), //only works for ios
               },
             }}
             listComponentStyles={{

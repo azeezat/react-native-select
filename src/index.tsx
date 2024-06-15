@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { TouchableOpacity, StyleSheet, View } from 'react-native';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { TouchableOpacity, StyleSheet, View, Platform } from 'react-native';
 import Input from './components/Input';
 import CheckBox from './components/CheckBox';
 import Dropdown from './components/Dropdown/Dropdown';
@@ -274,6 +274,27 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     return searchResults;
   };
 
+  /**
+   * To prevent triggering on modalProps.onDismiss on first render, we perform this check
+   */
+  const hasComponentBeenRendered = useRef(false);
+
+  /**
+   * Explicitly adding this here because the onDismiss only works on iOS Modals
+   * https://reactnative.dev/docs/modal#ondismiss-ios
+   */
+  useEffect(() => {
+    if (
+      hasComponentBeenRendered.current &&
+      !open &&
+      Platform.OS === 'android'
+    ) {
+      modalControls?.modalProps?.onDismiss?.();
+    }
+
+    hasComponentBeenRendered.current = true;
+  }, [open]);
+
   /*===========================================
    * Modal
    *==========================================*/
@@ -282,6 +303,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       // protecting any toggleModal invocation when Dropdown is disabled by not activating state
       return;
     }
+
     setOpen(!open);
     setSearchValue('');
     setNewOptions(options);
