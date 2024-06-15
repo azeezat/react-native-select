@@ -80,8 +80,8 @@ export default function App() {
             primaryColor={'green'}
             modalControls={{
               modalProps: {
-                onShow: () => console.log('modal shown'),
-                onDismiss: () => console.log('modal was dismissed'),
+                onShow: () => logMovies(),
+                onDismiss: () => console.log('modal was dismissed'), //only works for ios
               },
             }}
           />
@@ -282,8 +282,8 @@ export default function App() {
                   'landscape-right',
                 ],
                 transparent: false,
-                onShow: () => console.log('modal shown'),
-                onDismiss: () => console.log('modal was dismissed'), //only works for ios
+                onShow: () => logMovies(),
+                onDismiss: () => console.log('modal was dismissed'),
               },
             }}
             listComponentStyles={{
