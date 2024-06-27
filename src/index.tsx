@@ -298,13 +298,20 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   /*===========================================
    * Modal
    *==========================================*/
-  const handleToggleModal = () => {
+  const openModal = () => {
     if (disabled) {
-      // protecting any toggleModal invocation when Dropdown is disabled by not activating state
       return;
     }
+    setOpen(true);
+    resetComponent();
+  };
 
-    setOpen(!open);
+  const closeModal = () => {
+    setOpen(false);
+    resetComponent();
+  };
+
+  const resetComponent = () => {
     setSearchValue('');
     setNewOptions(options);
     setListIndex({ itemIndex: -1, sectionIndex: -1 });
@@ -352,7 +359,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         getSelectedItemsLabel={getSelectedItemsLabel}
         selectedItem={selectedItem}
         selectedItems={selectedItems}
-        handleToggleModal={handleToggleModal}
+        openModal={openModal}
+        closeModal={closeModal}
         labelStyle={labelStyle}
         dropdownIcon={dropdownIcon}
         dropdownStyle={dropdownStyle}
@@ -374,7 +382,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         visible={open}
         modalBackgroundStyle={modalBackgroundStyle} // kept for backwards compatibility
         modalOptionsContainerStyle={modalOptionsContainerStyle} // kept for backwards compatibility
-        onRequestClose={() => handleToggleModal()}
+        closeModal={closeModal}
         modalControls={modalControls}
         modalProps={modalProps} // kept for backwards compatibility
       >

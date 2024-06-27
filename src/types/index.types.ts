@@ -93,9 +93,11 @@ export type TCustomModalControls = {
   modalControls?: {
     modalBackgroundStyle?: ViewStyle;
     modalOptionsContainerStyle?: ViewStyle;
-    modalProps?: ModalProps;
+    modalProps?: ModalProps & TCloseModal;
   };
-};
+} & TCloseModal;
+
+type TCloseModal = { closeModal?: () => void };
 
 export type TListControls = {
   listHeaderComponent?: React.ReactNode;

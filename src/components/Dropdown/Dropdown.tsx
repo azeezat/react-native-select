@@ -10,7 +10,8 @@ const Dropdown = ({
   helperText,
   error,
   getSelectedItemsLabel,
-  handleToggleModal,
+  openModal,
+  closeModal,
   isMultiple,
   selectedItem,
   selectedItems,
@@ -39,7 +40,8 @@ const Dropdown = ({
         placeholder={placeholder}
         error={error}
         getSelectedItemsLabel={getSelectedItemsLabel}
-        handleToggleModal={handleToggleModal}
+        openModal={openModal}
+        closeModal={closeModal}
         isMultiple={isMultiple}
         selectedItem={selectedItem}
         selectedItems={selectedItems}
