@@ -11,8 +11,8 @@
     "clean": "react-native start --reset-cache"
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-native": "0.74.1"
+    "react": "^18.3.1",
+    "react-native": "^0.74.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -32,7 +32,7 @@
     "jest": "^29.6.3",
     "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "2.8.8",
-    "react-test-renderer": "18.2.0",
+    "react-test-renderer": "^18.3.0",
     "typescript": "5.0.4"
   },
   "engines": {
