@@ -1,3 +1,4 @@
+import React from 'react';
 import type {
   ViewStyle,
   ColorValue,
@@ -27,6 +28,7 @@ export type CommonDropdownProps = {
     | boolean[]
     | number[]
     | null;
+  autoCloseOnSelect?: boolean;
 };
 
 export type TDropdownInputProps = {
@@ -119,7 +121,7 @@ export type TListControls = {
 
 export type TFlatList = TFlatListItem[];
 export type TFlatListItem = {
-  [key: string]: string | number | boolean;
+  [key: string]: string | number | boolean | React.JSX.Element;
 };
 
 export type TSectionList = TSectionListItem[];

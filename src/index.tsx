@@ -59,6 +59,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   searchControls,
   modalControls,
   checkboxControls,
+  autoCloseOnSelect=true,
   ...rest
 }) => {
   const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
@@ -122,7 +123,10 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     } else {
       setSelectedItem(value);
       onValueChange(value); // send value to parent
+
+      if(autoCloseOnSelect){
       setOpen(false); // close modal upon selection
+      }
     }
   };
 
@@ -390,7 +394,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           ListHeaderComponent={
             <>
               {isSearchable && (
-                <Input
+                <Input 
                   value={searchValue}
                   onChangeText={(text: string) => onSearch(text)}
                   style={searchControls?.textInputStyle || searchInputStyle}
