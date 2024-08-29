@@ -23,7 +23,6 @@ describe('Initial state of component', () => {
   test('show default styles', () => {
     render(defaultDropdown);
     const placeholderStyle = screen.getByText('Select an option');
-    console.log(placeholderStyle.props)
     expect(placeholderStyle.props.style).toMatchObject([
       { color: '#000000' },
       undefined,
