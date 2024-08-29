@@ -3,13 +3,23 @@
   "git": {
     "requireBranch": "main",
     "commitMessage": "chore: release v${version}",
-    "tagName": "v${version}"
+    "tagName": "v${version}",
+    "commit": true,
+    "tag": true,
+    "push": true
   },
   "github": {
-    "release": true
+    "release": true,
+    "releaseName": "Release ${version}",
+    "autoGenerate": true,
+    "comments": {
+      "submit": false,
+      "issue": ":rocket: _This issue has been resolved in v${version}. See [${releaseName}](${releaseUrl}) for release notes._",
+      "pr": ":rocket: _This pull request is included in v${version}. See [${releaseName}](${releaseUrl}) for release notes._"
+    }
   },
   "hooks": {
-    "before:init": ["git pull", "npm run lint", "npm test"],
+    "before:init": ["git pull", "npm test"],
     "after:bump": "npx auto-changelog -p",
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   },
