@@ -12,11 +12,12 @@ describe('Initial state of component', () => {
     jest.useRealTimers();
   });
   const defaultDropdown = (
-    <DropdownSelect options={[]} onValueChange={() => {}} />
+    <DropdownSelect options={[]} onValueChange={() => {}} testID='some-random-test-id' />
   );
 
   test('show default texts', () => {
     render(defaultDropdown);
+    expect(screen.getByTestId('some-random-test-id'));
     expect(screen.getByText('Select an option'));
   });
 

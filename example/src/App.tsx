@@ -46,10 +46,7 @@ export default function App() {
             label="Currency"
             placeholder="Select multiple currencies..."
             options={[
-              {
-                name: 'Naira (NGN) \u20A6',
-                code: 'NGN',
-              },
+              {name: 'Naira (NGN) \u20A6', code: 'NGN'},
               {name: 'Dollar (USD) \u0024', code: 'USD'},
               {name: 'Euro (EUR) \u20AC', code: 'EUR'},
             ]}
@@ -84,59 +81,18 @@ export default function App() {
             modalControls={{
               modalProps: {
                 onShow: () => logMovies(),
-                onDismiss: () => console.log('modal was dismissed'), //only works for ios
+                onDismiss: () => console.log('modal was dismissed'),
               },
             }}
-            autoCloseOnSelect={false}
           />
 
           <DropdownSelect
             label="Border has been removed"
             placeholder="Select users"
             options={[
-              {
-                value: '01',
-                labelComponent: (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Image
-                      style={styles.avatarStyle}
-                      source={{
-                        uri: 'https://avatar.iran.liara.run/public/boy?username=Ash',
-                      }}
-                    />
-
-                    <Text>John Doe</Text>
-                  </View>
-                ),
-              },
-              {
-                value: '02',
-                labelComponent: (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Image
-                      style={styles.avatarStyle}
-                      source={{
-                        uri: 'https://avatar.iran.liara.run/username?username=Azeezat+Raheem',
-                      }}
-                    />
-
-                    <Text>Azeezat Raheem</Text>
-                  </View>
-                ),
-              },
+              {label: 'John Doe', value: '12'},
+              {label: 'James Bond', value: '13'},
             ]}
-            optionLabel={'labelComponent'}
-            optionValue={'value'}
             selectedValue={users}
             onValueChange={(itemValue: any) => setUsers(itemValue)}
             isSearchable
@@ -455,11 +411,5 @@ const styles = StyleSheet.create({
     borderRadius: 20 / 2,
     borderWidth: 3,
     borderColor: 'white',
-  },
-  avatarStyle: {
-    height: 20,
-    width: 20,
-    borderRadius: 20,
-    marginRight: 5,
   },
 });

@@ -5,6 +5,7 @@ import { colors } from '../../styles/colors';
 import { typography } from '../../styles/typography';
 
 const Dropdown = ({
+  testID,
   label,
   placeholder,
   helperText,
@@ -31,7 +32,11 @@ const Dropdown = ({
   setIndexOfSelectedItem,
 }: any) => {
   return (
-    <View style={[styles.dropdownInputContainer, dropdownContainerStyle]}>
+    <View
+      style={[styles.dropdownInputContainer, dropdownContainerStyle]}
+      accessibilityRole="combobox"
+      testID={testID}
+    >
       {label && label !== '' && (
         <Text style={[styles.label, labelStyle]}>{label}</Text>
       )}

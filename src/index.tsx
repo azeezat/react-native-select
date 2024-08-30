@@ -18,6 +18,7 @@ import type {
 import { escapeRegExp, extractPropertyFromArray } from './utils';
 
 export const DropdownSelect: React.FC<DropdownProps> = ({
+  testID,
   placeholder,
   label,
   error,
@@ -59,7 +60,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   searchControls,
   modalControls,
   checkboxControls,
-  autoCloseOnSelect=true,
+  autoCloseOnSelect = true,
   ...rest
 }) => {
   const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
@@ -124,8 +125,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       setSelectedItem(value);
       onValueChange(value); // send value to parent
 
-      if(autoCloseOnSelect){
-      setOpen(false); // close modal upon selection
+      if (autoCloseOnSelect) {
+        setOpen(false); // close modal upon selection
       }
     }
   };
@@ -356,6 +357,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   return (
     <>
       <Dropdown
+        testID={testID}
         label={label}
         placeholder={placeholder}
         helperText={helperText}
@@ -394,7 +396,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           ListHeaderComponent={
             <>
               {isSearchable && (
-                <Input 
+                <Input
                   value={searchValue}
                   onChangeText={(text: string) => onSearch(text)}
                   style={searchControls?.textInputStyle || searchInputStyle}

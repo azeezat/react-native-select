@@ -15,6 +15,7 @@ export type DropdownProps = CommonDropdownProps &
   TListControls;
 
 export type CommonDropdownProps = {
+  testID?: string;
   label?: string;
   options: TFlatList | TSectionList;
   optionLabel?: string;
