@@ -24,8 +24,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   error,
   helperText,
   options,
-  optionLabel,
-  optionValue,
+  optionLabel = DEFAULT_OPTION_LABEL,
+  optionValue = DEFAULT_OPTION_VALUE,
   onValueChange,
   selectedValue,
   isMultiple,
@@ -54,6 +54,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   listHeaderComponent,
   listFooterComponent,
   listComponentStyles,
+  listEmptyComponent,
   modalProps, // kept for backwards compatibility
   hideModal = false,
   listControls,
@@ -111,9 +112,6 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    */
   const modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
 
-  const optLabel = optionLabel || DEFAULT_OPTION_LABEL;
-  const optValue = optionValue || DEFAULT_OPTION_VALUE;
-
   /*===========================================
    * Selection handlers
    *==========================================*/
@@ -162,7 +160,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
       if (!prevVal) {
         for (let i = 0; i < filteredOptions.length; i++) {
-          selectedValues.push(filteredOptions[i][optValue]);
+          selectedValues.push(filteredOptions[i][optionValue]);
         }
       }
 
@@ -214,17 +212,17 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
       selectedItems?.forEach((element: number | string) => {
         let selectedItemLabel = modifiedOptions?.find(
-          (item: TFlatListItem) => item[optValue] === element
-        )?.[optLabel];
+          (item: TFlatListItem) => item[optionValue] === element
+        )?.[optionLabel];
         selectedLabels.push(selectedItemLabel);
       });
       return selectedLabels;
     }
 
     let selectedItemLabel = modifiedOptions?.find(
-      (item: TFlatListItem) => item[optValue] === selectedItem
+      (item: TFlatListItem) => item[optionValue] === selectedItem
     );
-    return selectedItemLabel?.[optLabel];
+    return selectedItemLabel?.[optionLabel];
   };
 
   /*===========================================
@@ -232,6 +230,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    *==========================================*/
   const onSearch = (value: string) => {
     setSearchValue(value);
+    searchControls?.searchCallback?.(value);
 
     let searchText = escapeRegExp(value).toString().toLocaleLowerCase().trim();
 
@@ -248,8 +247,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const searchFlatList = (flatList: TFlatList, regexFilter: RegExp) => {
     const searchResults = flatList.filter((item: TFlatListItem) => {
       if (
-        item[optLabel].toString().toLowerCase().search(regexFilter) !== -1 ||
-        item[optValue].toString().toLowerCase().search(regexFilter) !== -1
+        item[optionLabel].toString().toLowerCase().search(regexFilter) !== -1 ||
+        item[optionValue].toString().toLowerCase().search(regexFilter) !== -1
       ) {
         return true;
       }
@@ -265,8 +264,9 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     const searchResults = sectionList.map((listItem: TSectionListItem) => {
       const filteredData = listItem.data.filter((item: TFlatListItem) => {
         if (
-          item[optLabel].toString().toLowerCase().search(regexFilter) !== -1 ||
-          item[optValue].toString().toLowerCase().search(regexFilter) !== -1
+          item[optionLabel].toString().toLowerCase().search(regexFilter) !==
+            -1 ||
+          item[optionValue].toString().toLowerCase().search(regexFilter) !== -1
         ) {
           return true;
         }
@@ -339,7 +339,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       ? (options as TSectionListItem[] | undefined)?.map(
           (item: TSectionListItem, sectionIndex: number) => {
             item?.data?.find((dataItem: TFlatListItem, itemIndex: number) => {
-              if (dataItem[optLabel] === selectedLabel) {
+              if (dataItem[optionLabel] === selectedLabel) {
                 setListIndex({ sectionIndex, itemIndex });
               }
             });
@@ -347,7 +347,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         )
       : (options as TFlatListItem[] | undefined)?.find(
           (item: TFlatListItem, itemIndex: number) => {
-            if (item[optLabel] === selectedLabel) {
+            if (item[optionLabel] === selectedLabel) {
               setListIndex({ itemIndex });
             }
           }
@@ -440,8 +440,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           ListFooterComponent={listFooterComponent}
           listComponentStyles={listComponentStyles}
           options={newOptions}
-          optionLabel={optLabel}
-          optionValue={optValue}
+          optionLabel={optionLabel}
+          optionValue={optionValue}
           isMultiple={isMultiple}
           isSearchable={isSearchable}
           selectedItems={selectedItems}
@@ -456,6 +456,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           checkboxComponent={checkboxComponent}
           checkboxControls={checkboxControls}
           listIndex={listIndex}
+          listEmptyComponent={listEmptyComponent}
           emptyListMessage={listControls?.emptyListMessage}
         />
       </CustomModal>
