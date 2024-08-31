@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useRef } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, FlatListProps, StyleSheet } from 'react-native';
 import DropdownListItem from './DropdownListItem';
 import { ItemSeparatorComponent, ListEmptyComponent } from '../Others';
 import { TFlatList } from 'src/types/index.types';
@@ -25,8 +25,9 @@ const DropdownFlatList = ({
   listComponentStyles,
   listIndex,
   emptyListMessage,
+  listEmptyComponent,
   ...rest
-}: any) => {
+}: any & FlatListProps<TFlatList>) => {
   const flatlistRef = useRef<FlatList<TFlatList>>(null);
 
   const scrollToItem = (index: number) => {
@@ -48,10 +49,14 @@ const DropdownFlatList = ({
       extraData={isMultiple ? selectedItems : selectedItem}
       initialNumToRender={5}
       ListEmptyComponent={
-        <ListEmptyComponent
-          listEmptyComponentStyle={listComponentStyles?.listEmptyComponentStyle}
-          emptyListMessage={emptyListMessage}
-        />
+        listEmptyComponent || (
+          <ListEmptyComponent
+            listEmptyComponentStyle={
+              listComponentStyles?.listEmptyComponentStyle
+            }
+            emptyListMessage={emptyListMessage}
+          />
+        )
       }
       contentContainerStyle={[
         isSearchable ? { paddingTop: 0 } : styles.contentContainerStyle,

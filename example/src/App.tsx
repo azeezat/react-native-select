@@ -9,6 +9,7 @@ import {
   Button,
   Alert,
   Image,
+  Pressable,
 } from 'react-native';
 import DropdownSelect from 'react-native-input-select';
 import {countries} from './data';
@@ -21,6 +22,13 @@ export default function App() {
   const [meals, setMeals] = useState<string[]>([]);
   const [item, setItem] = useState<any>('');
   const [menu, setMenu] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const [ingredient, setIngredient] = useState<string>('');
+  const [ingredientOptions, setIngredientOptions] = useState<any[]>([
+    {label: 'Pepper', value: '1'},
+    {label: 'Oil', value: '2'},
+  ]);
 
   useEffect(() => {
     setCurrency(['NGN']);
@@ -310,6 +318,7 @@ export default function App() {
             }}
           />
 
+          {/* Section list */}
           <DropdownSelect
             label="Menu"
             placeholder="Select multiple dishes..."
@@ -358,6 +367,46 @@ export default function App() {
               backgroundColor: 'hotpink',
               color: 'black',
             }}
+          />
+
+          {/* Add search item to list */}
+          <DropdownSelect
+            label="Ingredient"
+            placeholder="Select or add ingredients..."
+            options={ingredientOptions}
+            selectedValue={ingredient}
+            onValueChange={(itemValue: any) => setIngredient(itemValue)}
+            isMultiple
+            isSearchable
+            primaryColor={'deepskyblue'}
+            listEmptyComponent={
+              <View
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingVertical: 10,
+                }}>
+                <Pressable
+                  onPress={() =>
+                    setIngredientOptions([
+                      ...ingredientOptions,
+                      {label: searchTerm, value: searchTerm},
+                    ])
+                  }
+                  style={{
+                    backgroundColor: 'blue',
+                    borderRadius: 5,
+                    width: 120,
+                    padding: 5,
+                  }}>
+                  <Text style={{color: 'white', textAlign: 'center'}}>
+                    Add ingredient
+                  </Text>
+                </Pressable>
+              </View>
+            }
+            searchControls={{searchCallback: value => setSearchTerm(value)}}
           />
         </View>
       </ScrollView>

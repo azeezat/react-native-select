@@ -61,6 +61,7 @@ export type TSearchControls = {
     textInputStyle?: ViewStyle | TextStyle;
     textInputContainerStyle?: ViewStyle;
     textInputProps?: TextInputProps;
+    searchCallback?: (value:string) => void;
   };
 };
 export type TCheckboxControls = {
@@ -110,6 +111,7 @@ export type TListControls = {
     itemSeparatorStyle?: ViewStyle;
     sectionHeaderStyle?: TextStyle;
   };
+  listEmptyComponent?: React.ReactNode;
   listControls?: {
     selectAllText?: string;
     unselectAllText?: string;

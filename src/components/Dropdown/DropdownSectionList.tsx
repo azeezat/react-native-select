@@ -30,6 +30,7 @@ const DropdownSectionList = ({
   listComponentStyles,
   listIndex,
   emptyListMessage,
+  listEmptyComponent,
   ...rest
 }: any) => {
   const [expandedSections, setExpandedSections] = useState(new Set());
@@ -84,10 +85,14 @@ const DropdownSectionList = ({
       extraData={isMultiple ? selectedItems : selectedItem}
       initialNumToRender={5}
       ListEmptyComponent={
-        <ListEmptyComponent
-          listEmptyComponentStyle={listComponentStyles?.listEmptyComponentStyle}
-          emptyListMessage={emptyListMessage}
-        />
+        listEmptyComponent || (
+          <ListEmptyComponent
+            listEmptyComponentStyle={
+              listComponentStyles?.listEmptyComponentStyle
+            }
+            emptyListMessage={emptyListMessage}
+          />
+        )
       }
       contentContainerStyle={[
         isSearchable ? { paddingTop: 0 } : styles.contentContainerStyle,
