@@ -24,7 +24,7 @@ export default function App() {
   const [menu, setMenu] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const [ingredient, setIngredient] = useState<string>('');
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [ingredientOptions, setIngredientOptions] = useState<any[]>([
     {label: 'Pepper', value: '1'},
     {label: 'Oil', value: '2'},
@@ -374,8 +374,8 @@ export default function App() {
             label="Ingredient"
             placeholder="Select or add ingredients..."
             options={ingredientOptions}
-            selectedValue={ingredient}
-            onValueChange={(itemValue: any) => setIngredient(itemValue)}
+            selectedValue={ingredients}
+            onValueChange={(itemValue: any) => setIngredients(itemValue)}
             isMultiple
             isSearchable
             primaryColor={'deepskyblue'}
