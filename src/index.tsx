@@ -44,7 +44,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   modalBackgroundStyle, // kept for backwards compatibility
   modalOptionsContainerStyle, // kept for backwards compatibility
   searchInputStyle, // kept for backwards compatibility
-  primaryColor,
+  primaryColor = colors.gray,
   disabled,
   checkboxSize, // kept for backwards compatibility
   checkboxStyle, // kept for backwards compatibility
@@ -107,7 +107,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
   /**
    * `options` is the original array, it never changes. (Do not use except you really need the original array) .
-   * `newOptions` is a copy of options but can be mutated by `setNewOptions`, as a result, the value many change.
+   * `newOptions` is a copy of options but can be mutated by `setNewOptions`, as a result, the value may change.
    * `modifiedOptions` should only be used for computations. It has the same structure for both `FlatList` and `SectionList`
    */
   const modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
@@ -329,8 +329,6 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     return () => {};
   }, [hideModal]);
 
-  let primary = primaryColor || colors.gray;
-
   /*===========================================
    * setIndexOfSelectedItem - For ScrollToIndex
    *==========================================*/
@@ -378,7 +376,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         selectedItemStyle={selectedItemStyle}
         multipleSelectedItemStyle={multipleSelectedItemStyle}
         isMultiple={isMultiple}
-        primaryColor={primary}
+        primaryColor={primaryColor}
         disabled={disabled}
         placeholderStyle={placeholderStyle}
         setIndexOfSelectedItem={setIndexOfSelectedItem}
@@ -400,7 +398,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                   value={searchValue}
                   onChangeText={(text: string) => onSearch(text)}
                   style={searchControls?.textInputStyle || searchInputStyle}
-                  primaryColor={primary}
+                  primaryColor={primaryColor}
                   textInputContainerStyle={
                     searchControls?.textInputContainerStyle
                   }
@@ -424,7 +422,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                             : listControls?.selectAllText || 'Select all'
                         }
                         onChange={() => handleSelectAll()}
-                        primaryColor={primary}
+                        primaryColor={primaryColor}
                         checkboxControls={checkboxControls}
                         checkboxSize={checkboxSize}
                         checkboxStyle={checkboxStyle}
@@ -448,7 +446,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           selectedItem={selectedItem}
           handleMultipleSelections={handleMultipleSelections}
           handleSingleSelection={handleSingleSelection}
-          primaryColor={primary}
+          primaryColor={primaryColor}
           checkboxSize={checkboxSize}
           checkboxStyle={checkboxStyle}
           checkboxLabelStyle={checkboxLabelStyle}

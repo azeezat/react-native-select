@@ -61,7 +61,7 @@ export type TSearchControls = {
     textInputStyle?: ViewStyle | TextStyle;
     textInputContainerStyle?: ViewStyle;
     textInputProps?: TextInputProps;
-    searchCallback?: (value:string) => void;
+    searchCallback?: (value: string) => void;
   };
 };
 export type TCheckboxControls = {
@@ -84,6 +84,8 @@ export type TCheckboxControls = {
     checkboxStyle?: ViewStyle;
     checkboxLabelStyle?: TextStyle;
     checkboxComponent?: React.ReactNode;
+    checkboxDisabledStyle?: ViewStyle;
+    checkboxUnselectedColor?: ColorValue;
   };
 };
 
