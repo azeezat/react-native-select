@@ -28,6 +28,7 @@ export default function App() {
   const [ingredientOptions, setIngredientOptions] = useState<any[]>([
     {label: 'Pepper', value: '1'},
     {label: 'Oil', value: '2'},
+    {label: 'Fish', value: '3', disabled: true},
   ]);
 
   useEffect(() => {
@@ -85,7 +86,6 @@ export default function App() {
             }}
             dropdownErrorTextStyle={{color: 'red', fontWeight: '500'}}
             error={gender ? '' : 'Gender is required'}
-            primaryColor={'green'}
             modalControls={{
               modalProps: {
                 onShow: () => logMovies(),
@@ -179,6 +179,7 @@ export default function App() {
                 borderColor: 'green',
               },
               checkboxLabelStyle: {color: 'green', fontSize: 20},
+              checkboxUnselectedColor: 'black',
               checkboxComponent: <View style={styles.radioButton} />,
             }}
             listControls={{
@@ -352,6 +353,12 @@ export default function App() {
             isMultiple
             isSearchable
             primaryColor={'#1c2d6b'}
+            checkboxControls={{
+              checkboxDisabledStyle: {
+                borderColor: 'red',
+                backgroundColor: 'red',
+              },
+            }}
             listComponentStyles={{
               sectionHeaderStyle: {
                 paddingVertical: 6,
@@ -378,7 +385,6 @@ export default function App() {
             onValueChange={(itemValue: any) => setIngredients(itemValue)}
             isMultiple
             isSearchable
-            primaryColor={'deepskyblue'}
             listEmptyComponent={
               <View
                 style={{

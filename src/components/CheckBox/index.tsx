@@ -19,16 +19,16 @@ const CheckBox = ({
 }: CheckboxProps) => {
   const fillColor = {
     backgroundColor: disabled
-      ? '#d3d3d3'
+      ? checkboxControls?.checkboxDisabledStyle?.backgroundColor ||
+        colors.disabled
       : value
-      ? checkboxControls?.checkboxStyle?.backgroundColor ||
-        checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
-        checkboxStyle?.backgroundColor ||
-        primaryColor ||
-        'green'
-      : 'white',
+        ? checkboxControls?.checkboxStyle?.backgroundColor ||
+          checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
+          checkboxStyle?.backgroundColor ||
+          primaryColor
+        : checkboxControls?.checkboxUnselectedColor || 'white',
     borderColor: disabled
-      ? colors.disabled
+      ? checkboxControls?.checkboxDisabledStyle?.borderColor || colors.disabled
       : checkboxControls?.checkboxStyle?.borderColor ||
         checkboxComponentStyles?.checkboxStyle?.borderColor ||
         checkboxStyle?.borderColor ||
