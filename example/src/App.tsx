@@ -15,7 +15,7 @@ import DropdownSelect from 'react-native-input-select';
 import {countries} from './data';
 
 export default function App() {
-  const [users, setUsers] = useState<string[]>([]);
+  const [user, setUser] = useState<string>('');
   const [country, setCountry] = useState<any>('');
   const [gender, setGender] = useState<number>();
   const [currency, setCurrency] = useState<string[]>([]);
@@ -96,26 +96,26 @@ export default function App() {
 
           <DropdownSelect
             label="Border has been removed"
-            placeholder="Select users"
+            placeholder="Select user"
             options={[
               {label: 'John Doe', value: '12'},
               {label: 'James Bond', value: '13'},
             ]}
-            selectedValue={users}
-            onValueChange={(itemValue: any) => setUsers(itemValue)}
+            selectedValue={user}
+            onValueChange={(itemValue: any) => setUser(itemValue)}
             isSearchable
             primaryColor={'purple'}
             dropdownStyle={{
               borderWidth: 0, // To remove border, set borderWidth to 0
             }}
             dropdownIcon={
-              users && (
+              user && (
                 <View style={styles.outerCircle}>
                   <View style={styles.innerCircle} />
                 </View>
               )
             }
-            dropdownIconStyle={users && {top: 20, right: 15}}
+            dropdownIconStyle={user ? {top: 20, right: 15} : {}}
             searchControls={{
               textInputStyle: {
                 color: 'blue',
@@ -321,7 +321,7 @@ export default function App() {
 
           {/* Section list */}
           <DropdownSelect
-            label="Menu"
+            label="Section list"
             placeholder="Select multiple dishes..."
             options={[
               {

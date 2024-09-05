@@ -14,6 +14,7 @@ import type {
   TFlatListItem,
   TSectionList,
   TSectionListItem,
+  TSelectedItem,
 } from './types/index.types';
 import { escapeRegExp, extractPropertyFromArray } from './utils';
 
@@ -67,8 +68,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [selectAll, setSelectAll] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<any>(''); // for single selection
-  const [selectedItems, setSelectedItems] = useState<any[]>([]); // for multiple selection
+  const [selectedItem, setSelectedItem] = useState<TSelectedItem>(''); // for single selection
+  const [selectedItems, setSelectedItems] = useState<TSelectedItem[]>([]); // for multiple selection
   const [searchValue, setSearchValue] = useState<string>('');
   const [listIndex, setListIndex] = useState<{
     sectionIndex?: number;
@@ -83,7 +84,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   useEffect(() => {
     isMultiple
       ? setSelectedItems(Array.isArray(selectedValue) ? selectedValue : [])
-      : setSelectedItem(selectedValue);
+      : setSelectedItem((selectedValue as TSelectedItem) || '');
 
     return () => {};
   }, [selectedValue, isMultiple, onValueChange]);
@@ -115,9 +116,9 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   /*===========================================
    * Selection handlers
    *==========================================*/
-  const handleSingleSelection = (value: string | number) => {
+  const handleSingleSelection = (value: TSelectedItem) => {
     if (selectedItem === value) {
-      setSelectedItem(null);
+      setSelectedItem('');
       onValueChange(null); // send value to parent
     } else {
       setSelectedItem(value);
@@ -129,7 +130,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     }
   };
 
-  const handleMultipleSelections = (value: string[] | number[]) => {
+  const handleMultipleSelections = (value: TSelectedItem) => {
     setSelectedItems((prevVal) => {
       let selectedValues = [...prevVal];
 
@@ -149,7 +150,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
 
   const handleSelectAll = () => {
     setSelectAll((prevVal) => {
-      const selectedValues = [];
+      let selectedValues: TSelectedItem[] = [];
 
       // don't select disabled items
       const filteredOptions = removeDisabledItems(
@@ -159,9 +160,9 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
       );
 
       if (!prevVal) {
-        for (let i = 0; i < filteredOptions.length; i++) {
-          selectedValues.push(filteredOptions[i][optionValue]);
-        }
+        selectedValues = filteredOptions.map(
+          (obj) => obj[optionValue]
+        ) as TSelectedItem[];
       }
 
       setSelectedItems(selectedValues);
@@ -182,7 +183,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
    * Handle side effects
    *==========================================*/
   const checkSelectAll = useCallback(
-    (selectedValues: any[]) => {
+    (selectedValues: TSelectedItem[]) => {
       //if the list contains disabled values, those values will not be selected
       if (
         removeDisabledItems(modifiedOptions)?.length === selectedValues?.length
@@ -210,7 +211,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     if (isMultiple && Array.isArray(selectedItems)) {
       let selectedLabels: Array<string> = [];
 
-      selectedItems?.forEach((element: number | string) => {
+      selectedItems?.forEach((element: TSelectedItem) => {
         let selectedItemLabel = modifiedOptions?.find(
           (item: TFlatListItem) => item[optionValue] === element
         )?.[optionLabel];

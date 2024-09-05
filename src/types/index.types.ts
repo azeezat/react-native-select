@@ -21,14 +21,7 @@ export type CommonDropdownProps = {
   optionLabel?: string;
   optionValue?: string;
   onValueChange: Function;
-  selectedValue?:
-    | string
-    | boolean
-    | number
-    | string[]
-    | boolean[]
-    | number[]
-    | null;
+  selectedValue?: TSelectedItem | TSelectedItem[];
   autoCloseOnSelect?: boolean;
 };
 
@@ -124,9 +117,11 @@ export type TListControls = {
   };
 };
 
+export type TSelectedItem = string | number | boolean;
+
 export type TFlatList = TFlatListItem[];
 export type TFlatListItem = {
-  [key: string]: string | number | boolean | React.JSX.Element;
+  [key: string]: TSelectedItem | React.JSX.Element;
 };
 
 export type TSectionList = TSectionListItem[];
