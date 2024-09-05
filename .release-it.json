@@ -10,7 +10,6 @@
   },
   "github": {
     "release": true,
-    "tokenRef": "PAT",
     "releaseName": "Release ${version}",
     "autoGenerate": true,
     "comments": {
