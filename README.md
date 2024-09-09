@@ -277,6 +277,8 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | listControls              | `Object`                     | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback: () => {}, unselectAllCallback: () => {}, hideSelectAll: boolean, emptyListMessage: 'No record found'}`        |
 | searchControls            | `Object`                     | `{ textInputStyle: ViewStyle \| TextStyle,  textInputContainerStyle: ViewStyle, textInputProps: TextInputProps, searchCallback:(value)=>{}}`                                                    |
 | modalControls             | `Object`                     | `{ modalBackgroundStyle: ViewStyle, modalOptionsContainerStyle: ViewStyle, modalProps: ModalProps}`                                                                                             |
+| maxSelectableItems             | `number`                     | 5                      |
+
 
 ## Deprecation Notice
 

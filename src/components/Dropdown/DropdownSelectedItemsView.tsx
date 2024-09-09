@@ -47,6 +47,8 @@ const DropdownSelectedItemsView = ({
           },
       ]}
       disabled={disabled}
+      aria-disabled={disabled}
+      testID="dropdown-input-container"
     >
       <ScrollView
         horizontal

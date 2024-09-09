@@ -20,9 +20,10 @@ export type CommonDropdownProps = {
   options: TFlatList | TSectionList;
   optionLabel?: string;
   optionValue?: string;
-  onValueChange: Function;
-  selectedValue?: TSelectedItem | TSelectedItem[];
+  onValueChange: (selectedItems: TSelectedItem | TSelectedItem[]) => void;
+  selectedValue: TSelectedItem | TSelectedItem[];
   autoCloseOnSelect?: boolean;
+  maxSelectableItems?: number;
 };
 
 export type TDropdownInputProps = {
@@ -118,10 +119,11 @@ export type TListControls = {
 };
 
 export type TSelectedItem = string | number | boolean;
+export type TSelectedItemWithReactComponent = TSelectedItem | React.JSX.Element;
 
 export type TFlatList = TFlatListItem[];
 export type TFlatListItem = {
-  [key: string]: TSelectedItem | React.JSX.Element;
+  [key: string]: TSelectedItemWithReactComponent;
 };
 
 export type TSectionList = TSectionListItem[];

@@ -22,11 +22,11 @@ const CheckBox = ({
       ? checkboxControls?.checkboxDisabledStyle?.backgroundColor ||
         colors.disabled
       : value
-        ? checkboxControls?.checkboxStyle?.backgroundColor ||
-          checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
-          checkboxStyle?.backgroundColor ||
-          primaryColor
-        : checkboxControls?.checkboxUnselectedColor || 'white',
+      ? checkboxControls?.checkboxStyle?.backgroundColor ||
+        checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
+        checkboxStyle?.backgroundColor ||
+        primaryColor
+      : checkboxControls?.checkboxUnselectedColor || 'white',
     borderColor: disabled
       ? checkboxControls?.checkboxDisabledStyle?.borderColor || colors.disabled
       : checkboxControls?.checkboxStyle?.borderColor ||

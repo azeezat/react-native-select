@@ -17,7 +17,7 @@ import {countries} from './data';
 export default function App() {
   const [user, setUser] = useState<string>('');
   const [country, setCountry] = useState<any>('');
-  const [gender, setGender] = useState<number>();
+  const [gender, setGender] = useState<number>(0);
   const [currency, setCurrency] = useState<string[]>([]);
   const [meals, setMeals] = useState<string[]>([]);
   const [item, setItem] = useState<any>('');
@@ -45,6 +45,7 @@ export default function App() {
       <ScrollView>
         <View style={styles.container}>
           <DropdownSelect
+            selectedValue=""
             label="Currency"
             placeholder="Empty State"
             options={[]}
@@ -72,8 +73,36 @@ export default function App() {
             label="Gender"
             placeholder="Select an option..."
             options={[
-              {name: 'Male', id: '1'},
-              {name: 'Female', id: '2'},
+              {
+                name: (
+                  <View style={styles.itemStyle}>
+                    <Image
+                      style={styles.avatarStyle}
+                      source={{
+                        uri: 'https://avatar.iran.liara.run/username?username=Azeezat+Raheem',
+                      }}
+                    />
+
+                    <Text>Male</Text>
+                  </View>
+                ),
+                id: 1,
+              },
+              {
+                name: (
+                  <View style={styles.itemStyle}>
+                    <Image
+                      style={styles.avatarStyle}
+                      source={{
+                        uri: 'https://avatar.iran.liara.run/public/boy?username=Ash',
+                      }}
+                    />
+
+                    <Text>Female</Text>
+                  </View>
+                ),
+                id: 2,
+              },
             ]}
             optionLabel={'name'}
             optionValue={'id'}
@@ -143,15 +172,20 @@ export default function App() {
             label="Meal preferences"
             placeholder="Select your meal preferences"
             options={[
-              {name: '🍛 Rice', value: '1', disabled: true},
+              {name: '🍛 Rice', value: '1', disabled: false},
               {name: '🍗 Chicken', value: '2'},
-              {name: '🥦 Brocoli', value: '3', disabled: true},
+              {name: '🥦 Brocoli', value: '3', disabled: false},
               {name: '🍕 Pizza', value: '4'},
             ]}
+            maxSelectableItems={2}
             optionLabel={'name'}
             optionValue={'value'}
             selectedValue={meals}
-            onValueChange={(itemValue: any) => setMeals(itemValue)}
+            onValueChange={(itemValue: any) => {
+              meals.length === 2 && console.log('You can only select 2 meals');
+
+              setMeals(itemValue);
+            }}
             dropdownStyle={{
               backgroundColor: 'yellow',
               paddingVertical: 5,
@@ -466,5 +500,16 @@ const styles = StyleSheet.create({
     borderRadius: 20 / 2,
     borderWidth: 3,
     borderColor: 'white',
+  },
+  avatarStyle: {
+    height: 20,
+    width: 20,
+    borderRadius: 20,
+    marginRight: 5,
+  },
+  itemStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

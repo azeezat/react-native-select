@@ -13,7 +13,10 @@ describe('Initial state of component', () => {
     jest.useRealTimers();
   });
 
-  const options:TSectionList = [
+  const mockSearchCallback = jest.fn();
+  const placeholder = 'Select an option';
+
+  const options: TSectionList = [
     {
       title: 'Main dishes',
       data: [
@@ -41,9 +44,15 @@ describe('Initial state of component', () => {
 
   const sectionListDropdown = (
     <DropdownSelect
+      selectedValue=""
       options={options}
       onValueChange={() => {}}
       testID="section-list-test-id"
+      isSearchable
+      searchControls={{
+        textInputProps: { placeholder: 'Search anything here' },
+        searchCallback: mockSearchCallback,
+      }}
     />
   );
 
@@ -62,10 +71,36 @@ describe('Initial state of component', () => {
     ]);
   });
 
+  test('search', async () => {
+    const user = userEvent.setup();
+    render(sectionListDropdown);
+
+    //open modal
+    await user.press(screen.getByText(placeholder));
+
+    let totalCount = 0;
+
+    //search non-existent item
+    const searchPlaceholder = 'Search anything here';
+    const searchBox = screen.getByPlaceholderText(searchPlaceholder);
+    let text = 'hello';
+    totalCount += text.length;
+    await user.type(searchBox, text);
+    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
+
+    //search existent item
+    text = 'pizza';
+    totalCount += text.length;
+    await user.clear(searchBox);
+    await user.type(searchBox, text);
+    screen.getByText(text, { exact: false });
+    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount + 1); //adding 1 because the clear event also called the search callback
+  });
+
   test('open modal when dropdown is clicked', async () => {
     const user = userEvent.setup();
     render(sectionListDropdown);
-    await user.press(screen.getByText('Select an option'));
+    await user.press(screen.getByText(placeholder));
     expect(screen.getByText(options[0].title));
   });
 });

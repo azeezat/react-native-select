@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { TouchableOpacity, StyleSheet, View, Platform } from 'react-native';
 import Input from './components/Input';
 import CheckBox from './components/CheckBox';
@@ -8,15 +8,15 @@ import DropdownSectionList from './components/Dropdown/DropdownSectionList';
 import CustomModal from './components/CustomModal';
 import { colors } from './styles/colors';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
-import type {
-  DropdownProps,
-  TFlatList,
-  TFlatListItem,
-  TSectionList,
-  TSectionListItem,
-  TSelectedItem,
-} from './types/index.types';
-import { escapeRegExp, extractPropertyFromArray } from './utils';
+import type { DropdownProps, TSelectedItem } from './types/index.types';
+import { extractPropertyFromArray, getSelectedItemsLabel } from './utils';
+import {
+  useSelectionHandler,
+  useModal,
+  useSearch,
+  useIndexOfSelectedItem,
+  useSelectAll,
+} from './hooks';
 
 export const DropdownSelect: React.FC<DropdownProps> = ({
   testID,
@@ -28,8 +28,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   optionLabel = DEFAULT_OPTION_LABEL,
   optionValue = DEFAULT_OPTION_VALUE,
   onValueChange,
-  selectedValue,
-  isMultiple,
+  isMultiple = false,
+  selectedValue = isMultiple ? [] : '',
   isSearchable,
   dropdownIcon,
   labelStyle,
@@ -46,7 +46,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   modalOptionsContainerStyle, // kept for backwards compatibility
   searchInputStyle, // kept for backwards compatibility
   primaryColor = colors.gray,
-  disabled,
+  disabled = false,
   checkboxSize, // kept for backwards compatibility
   checkboxStyle, // kept for backwards compatibility
   checkboxLabelStyle, // kept for backwards compatibility
@@ -63,222 +63,65 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   modalControls,
   checkboxControls,
   autoCloseOnSelect = true,
+  maxSelectableItems,
   ...rest
 }) => {
-  const [newOptions, setNewOptions] = useState<TFlatList | TSectionList>([]);
-  const [open, setOpen] = useState<boolean>(false);
-  const [selectAll, setSelectAll] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<TSelectedItem>(''); // for single selection
-  const [selectedItems, setSelectedItems] = useState<TSelectedItem[]>([]); // for multiple selection
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [listIndex, setListIndex] = useState<{
-    sectionIndex?: number;
-    itemIndex: number;
-  }>({ itemIndex: -1, sectionIndex: -1 }); // for scrollToIndex in Sectionlist and Flatlist
-
-  useEffect(() => {
-    setNewOptions(options);
-    return () => {};
-  }, [options]);
-
-  useEffect(() => {
-    isMultiple
-      ? setSelectedItems(Array.isArray(selectedValue) ? selectedValue : [])
-      : setSelectedItem((selectedValue as TSelectedItem) || '');
-
-    return () => {};
-  }, [selectedValue, isMultiple, onValueChange]);
-
-  /*===========================================
-   * List type
-   *==========================================*/
-
-  // check the structure of the new options array to determine if it is a section list or a
-  const isSectionList = newOptions?.some(
-    (item) => item.title && item.data && Array.isArray(item.data)
-  );
-
-  const ListTypeComponent = isSectionList
-    ? DropdownSectionList
-    : DropdownFlatList;
-  const modifiedSectionData = extractPropertyFromArray(
-    newOptions,
-    'data'
-  )?.flat();
-
-  /**
-   * `options` is the original array, it never changes. (Do not use except you really need the original array) .
-   * `newOptions` is a copy of options but can be mutated by `setNewOptions`, as a result, the value may change.
-   * `modifiedOptions` should only be used for computations. It has the same structure for both `FlatList` and `SectionList`
-   */
-  const modifiedOptions = isSectionList ? modifiedSectionData : newOptions;
-
-  /*===========================================
-   * Selection handlers
-   *==========================================*/
-  const handleSingleSelection = (value: TSelectedItem) => {
-    if (selectedItem === value) {
-      setSelectedItem('');
-      onValueChange(null); // send value to parent
-    } else {
-      setSelectedItem(value);
-      onValueChange(value); // send value to parent
-
-      if (autoCloseOnSelect) {
-        setOpen(false); // close modal upon selection
-      }
-    }
-  };
-
-  const handleMultipleSelections = (value: TSelectedItem) => {
-    setSelectedItems((prevVal) => {
-      let selectedValues = [...prevVal];
-
-      if (selectedValues?.includes(value)) {
-        selectedValues = selectedValues.filter((item) => item !== value);
-      } else {
-        selectedValues.push(value);
-      }
-      onValueChange(selectedValues); // send value to parent
-      return selectedValues;
-    });
-  };
-
-  const removeDisabledItems = (items: TFlatList) => {
-    return items?.filter((item: TFlatListItem) => !item.disabled);
-  };
-
-  const handleSelectAll = () => {
-    setSelectAll((prevVal) => {
-      let selectedValues: TSelectedItem[] = [];
-
-      // don't select disabled items
-      const filteredOptions = removeDisabledItems(
-        isSectionList
-          ? extractPropertyFromArray(options, 'data').flat()
-          : options
-      );
-
-      if (!prevVal) {
-        selectedValues = filteredOptions.map(
-          (obj) => obj[optionValue]
-        ) as TSelectedItem[];
-      }
-
-      setSelectedItems(selectedValues);
-      onValueChange(selectedValues); // send value to parent
-      return !prevVal;
-    });
-
-    if (typeof listControls?.selectAllCallback === 'function' && !selectAll) {
-      listControls.selectAllCallback();
-    }
-
-    if (typeof listControls?.unselectAllCallback === 'function' && selectAll) {
-      listControls.unselectAllCallback();
-    }
-  };
-
-  /*===========================================
-   * Handle side effects
-   *==========================================*/
-  const checkSelectAll = useCallback(
-    (selectedValues: TSelectedItem[]) => {
-      //if the list contains disabled values, those values will not be selected
-      if (
-        removeDisabledItems(modifiedOptions)?.length === selectedValues?.length
-      ) {
-        setSelectAll(true);
-      } else {
-        setSelectAll(false);
-      }
-    },
-    [modifiedOptions]
-  );
-
-  // anytime the selected items change, check if it is time to set `selectAll` to true
-  useEffect(() => {
-    if (isMultiple) {
-      checkSelectAll(selectedItems);
-    }
-    return () => {};
-  }, [checkSelectAll, isMultiple, selectedItems]);
-
-  /*===========================================
-   * Get label handler
-   *==========================================*/
-  const getSelectedItemsLabel = () => {
-    if (isMultiple && Array.isArray(selectedItems)) {
-      let selectedLabels: Array<string> = [];
-
-      selectedItems?.forEach((element: TSelectedItem) => {
-        let selectedItemLabel = modifiedOptions?.find(
-          (item: TFlatListItem) => item[optionValue] === element
-        )?.[optionLabel];
-        selectedLabels.push(selectedItemLabel);
-      });
-      return selectedLabels;
-    }
-
-    let selectedItemLabel = modifiedOptions?.find(
-      (item: TFlatListItem) => item[optionValue] === selectedItem
-    );
-    return selectedItemLabel?.[optionLabel];
-  };
-
   /*===========================================
    * Search
    *==========================================*/
-  const onSearch = (value: string) => {
-    setSearchValue(value);
-    searchControls?.searchCallback?.(value);
+  const {
+    searchValue,
+    setSearchValue,
+    onSearch,
+    setFilteredOptions,
+    filteredOptions,
+    isSectionList,
+  } = useSearch({
+    initialOptions: options,
+    optionLabel,
+    optionValue,
+    searchCallback: useCallback(
+      (value) => searchControls?.searchCallback?.(value),
+      [searchControls]
+    ),
+  });
 
-    let searchText = escapeRegExp(value).toString().toLocaleLowerCase().trim();
-
-    const regexFilter = new RegExp(searchText, 'i');
-
-    // Because the options array will be mutated while searching, we have to search with the original array
-    const searchResults = isSectionList
-      ? searchSectionList(options as TSectionList, regexFilter)
-      : searchFlatList(options as TFlatList, regexFilter);
-
-    setNewOptions(searchResults);
-  };
-
-  const searchFlatList = (flatList: TFlatList, regexFilter: RegExp) => {
-    const searchResults = flatList.filter((item: TFlatListItem) => {
-      if (
-        item[optionLabel].toString().toLowerCase().search(regexFilter) !== -1 ||
-        item[optionValue].toString().toLowerCase().search(regexFilter) !== -1
-      ) {
-        return true;
-      }
-      return false;
-    });
-    return searchResults;
-  };
-
-  const searchSectionList = (
-    sectionList: TSectionList,
-    regexFilter: RegExp
-  ) => {
-    const searchResults = sectionList.map((listItem: TSectionListItem) => {
-      const filteredData = listItem.data.filter((item: TFlatListItem) => {
-        if (
-          item[optionLabel].toString().toLowerCase().search(regexFilter) !==
-            -1 ||
-          item[optionValue].toString().toLowerCase().search(regexFilter) !== -1
-        ) {
-          return true;
-        }
-        return false;
-      });
-
-      return { ...listItem, data: filteredData };
+  /*===========================================
+   * setIndexOfSelectedItem - For ScrollToIndex
+   *==========================================*/
+  const { listIndex, setListIndex, setIndexOfSelectedItem } =
+    useIndexOfSelectedItem({
+      options,
+      optionLabel,
+      isSectionList,
     });
 
-    return searchResults;
-  };
+  /*===========================================
+   * Reset component states
+   *==========================================*/
+  const resetOptionsRelatedState = useCallback(() => {
+    setSearchValue('');
+    setFilteredOptions(options);
+    setListIndex({ itemIndex: -1, sectionIndex: -1 });
+  }, [filteredOptions, setFilteredOptions, setListIndex, setSearchValue]);
+
+  /*===========================================
+   * Modal
+   *==========================================*/
+  const { open, setOpen, openModal, closeModal } = useModal({
+    hideModal,
+    modalProps,
+    onDismiss: modalControls?.modalProps?.onDismiss,
+    resetOptionsRelatedState,
+    disabled,
+  });
+
+  useEffect(() => {
+    if (hideModal) {
+      setOpen(false);
+    }
+    return () => {};
+  }, [hideModal, setOpen]);
 
   /**
    * To prevent triggering on modalProps.onDismiss on first render, we perform this check
@@ -299,59 +142,70 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     }
 
     hasComponentBeenRendered.current = true;
-  }, [open]);
+  }, [open, modalControls?.modalProps]);
 
   /*===========================================
-   * Modal
+   * Single and multiple selection Hook
    *==========================================*/
-  const openModal = () => {
-    if (disabled) {
-      return;
-    }
-    setOpen(true);
-    resetComponent();
-  };
-
-  const closeModal = () => {
-    setOpen(false);
-    resetComponent();
-  };
-
-  const resetComponent = () => {
-    setSearchValue('');
-    setNewOptions(options);
-    setListIndex({ itemIndex: -1, sectionIndex: -1 });
-  };
+  const {
+    selectedItem,
+    selectedItems,
+    setSelectedItem,
+    setSelectedItems,
+    handleSingleSelection,
+    handleMultipleSelections,
+  } = useSelectionHandler({
+    initialSelectedValue: selectedValue,
+    isMultiple,
+    maxSelectableItems,
+    onValueChange,
+    setOpen,
+    autoCloseOnSelect,
+  });
 
   useEffect(() => {
-    if (hideModal) {
-      setOpen(false);
-    }
+    isMultiple
+      ? setSelectedItems(Array.isArray(selectedValue) ? selectedValue : [])
+      : setSelectedItem((selectedValue as TSelectedItem) || '');
+
     return () => {};
-  }, [hideModal]);
+  }, [
+    selectedValue,
+    setSelectedItems,
+    setSelectedItem,
+    isMultiple,
+    onValueChange,
+  ]);
 
   /*===========================================
-   * setIndexOfSelectedItem - For ScrollToIndex
+   * List type
    *==========================================*/
-  const setIndexOfSelectedItem = (selectedLabel: string) => {
-    isSectionList
-      ? (options as TSectionListItem[] | undefined)?.map(
-          (item: TSectionListItem, sectionIndex: number) => {
-            item?.data?.find((dataItem: TFlatListItem, itemIndex: number) => {
-              if (dataItem[optionLabel] === selectedLabel) {
-                setListIndex({ sectionIndex, itemIndex });
-              }
-            });
-          }
-        )
-      : (options as TFlatListItem[] | undefined)?.find(
-          (item: TFlatListItem, itemIndex: number) => {
-            if (item[optionLabel] === selectedLabel) {
-              setListIndex({ itemIndex });
-            }
-          }
-        );
-  };
+  const ListTypeComponent = isSectionList
+    ? DropdownSectionList
+    : DropdownFlatList;
+  const modifiedSectionData = extractPropertyFromArray(
+    filteredOptions,
+    'data'
+  )?.flat();
+
+  /**
+   * `options` is the original array, it never changes. (Do not use except you really need the original array) .
+   * `filteredOptions` is a copy of options but can be mutated by `setFilteredOptions`, as a result, the value may change.
+   * `modifiedOptions` should only be used for computations. It has the same structure for both `FlatList` and `SectionList`
+   */
+  const modifiedOptions = isSectionList ? modifiedSectionData : filteredOptions;
+
+  /*===========================================
+   * Select all Hook
+   *==========================================*/
+  const { selectAll, handleSelectAll } = useSelectAll({
+    options: modifiedOptions,
+    selectedItems,
+    isMultiple,
+    onValueChange,
+    listControls,
+    optionValue,
+  });
 
   return (
     <>
@@ -361,7 +215,16 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         placeholder={placeholder}
         helperText={helperText}
         error={error}
-        getSelectedItemsLabel={getSelectedItemsLabel}
+        getSelectedItemsLabel={() =>
+          getSelectedItemsLabel({
+            isMultiple,
+            optionLabel,
+            optionValue,
+            selectedItem,
+            selectedItems,
+            modifiedOptions,
+          })
+        }
         selectedItem={selectedItem}
         selectedItems={selectedItems}
         openModal={openModal}
@@ -406,6 +269,9 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                   placeholder={
                     searchControls?.textInputProps?.placeholder || 'Search'
                   }
+                  aria-label={
+                    searchControls?.textInputProps?.placeholder || 'Search'
+                  }
                   {...searchControls?.textInputProps}
                 />
               )}
@@ -438,7 +304,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
           }
           ListFooterComponent={listFooterComponent}
           listComponentStyles={listComponentStyles}
-          options={newOptions}
+          options={filteredOptions}
           optionLabel={optionLabel}
           optionValue={optionValue}
           isMultiple={isMultiple}

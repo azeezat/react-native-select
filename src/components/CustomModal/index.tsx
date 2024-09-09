@@ -59,6 +59,7 @@ const CustomModal = ({
             styles.modalBackgroundStyle,
             modalControls?.modalBackgroundStyle || modalBackgroundStyle,
           ]}
+          aria-label="close modal"
         >
           {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
           <TouchableWithoutFeedback onPress={() => {}}>
