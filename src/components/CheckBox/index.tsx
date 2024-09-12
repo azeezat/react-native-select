@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, Text, StyleSheet, Image, View } from 'react-native';
 import { colors } from '../../styles/colors';
 import { CHECKBOX_SIZE } from '../../constants';
-import type { CheckboxProps } from './checkbox.types';
+import { CheckboxProps } from './checkbox.types';
 
 const CheckBox = ({
   label,
@@ -40,6 +40,7 @@ const CheckBox = ({
       onPress={onChange ? () => onChange(!value) : null}
       style={[styles.checkboxContainer]}
       disabled={disabled}
+      aria-label={label}
     >
       <View
         style={[
@@ -49,6 +50,7 @@ const CheckBox = ({
             checkboxStyle,
           fillColor,
         ]}
+        aria-checked={value}
       >
         {checkboxControls?.checkboxComponent || checkboxComponent || (
           <Image

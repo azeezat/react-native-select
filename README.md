@@ -1,6 +1,7 @@
 [![NPM](https://nodei.co/npm/react-native-input-select.png?downloads=true)](https://nodei.co/npm/react-native-input-select/)
 
 [![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select) [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-select?style=social)](https://github.com/azeezat/react-native-select/stargazers) [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml)
+[![react-native-input-select](https://snyk.io/advisor/npm-package/react-native-input-select/badge.svg)](https://snyk.io/advisor/npm-package/react-native-input-select)
 
 # react-native-input-select
 
@@ -277,8 +278,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | listControls              | `Object`                     | `{ selectAllText: 'Choose all', unselectAllText: 'Remove all', selectAllCallback: () => {}, unselectAllCallback: () => {}, hideSelectAll: boolean, emptyListMessage: 'No record found'}`        |
 | searchControls            | `Object`                     | `{ textInputStyle: ViewStyle \| TextStyle,  textInputContainerStyle: ViewStyle, textInputProps: TextInputProps, searchCallback:(value)=>{}}`                                                    |
 | modalControls             | `Object`                     | `{ modalBackgroundStyle: ViewStyle, modalOptionsContainerStyle: ViewStyle, modalProps: ModalProps}`                                                                                             |
-| maxSelectableItems             | `number`                     | 5                      |
-
+| maxSelectableItems        | `number`                     | 5                                                                                                                                                                                               |
 
 ## Deprecation Notice
 

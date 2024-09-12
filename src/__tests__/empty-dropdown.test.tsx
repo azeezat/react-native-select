@@ -2,6 +2,14 @@ import React from 'react';
 import DropdownSelect from '../index';
 import { render, screen, userEvent } from '@testing-library/react-native';
 import '@testing-library/jest-dom';
+import { PlatformOSType } from 'react-native';
+
+export const mockPlatform = (OS: PlatformOSType) => {
+  jest.doMock('react-native/Libraries/Utilities/Platform', () => ({
+    OS,
+    select: (config: { [x: string]: any }) => config[OS],
+  }));
+};
 
 describe('Initial state of component', () => {
   beforeAll(() => {
@@ -11,6 +19,8 @@ describe('Initial state of component', () => {
   afterAll(() => {
     jest.useRealTimers();
   });
+
+  const user = userEvent.setup();
 
   // TODO: test these mocks once you are able to simulate specific device types like android and iOS
   const mockOpenModal = jest.fn();
@@ -56,7 +66,6 @@ describe('Initial state of component', () => {
   });
 
   test('open and close modal', async () => {
-    const user = userEvent.setup();
     render(defaultDropdown);
 
     //open modal when dropdown is clicked
@@ -67,6 +76,10 @@ describe('Initial state of component', () => {
     const closeModal = screen.getByLabelText('close modal');
     await user.press(closeModal);
     expect(screen.getByText(placeholder));
+
+    //check if callback was called on android
+    mockPlatform('android');
+    expect(mockCloseModal).toHaveBeenCalledTimes(1);
   });
 
   const disabledDropdown = (
@@ -91,7 +104,6 @@ describe('Initial state of component', () => {
   });
 
   test('Disabled dropdown should not be clickable', async () => {
-    const user = userEvent.setup();
     render(disabledDropdown);
 
     let dropdownInput = screen.getByTestId('dropdown-input-container');

@@ -8,7 +8,7 @@ import {
   SectionHeaderTitle,
 } from '../Others';
 import { extractPropertyFromArray } from '../../utils';
-import { TSectionList } from 'src/types/index.types';
+import { TSectionList } from '../../types/index.types';
 
 const DropdownSectionList = ({
   options,
@@ -79,6 +79,12 @@ const DropdownSectionList = ({
     }
   }, [listIndex]);
 
+  const itemSeparator = () => (
+    <ItemSeparatorComponent
+      itemSeparatorStyle={listComponentStyles?.itemSeparatorStyle}
+    />
+  );
+
   return (
     <SectionList
       sections={options}
@@ -97,11 +103,7 @@ const DropdownSectionList = ({
       contentContainerStyle={[
         isSearchable ? { paddingTop: 0 } : styles.contentContainerStyle,
       ]}
-      ItemSeparatorComponent={() => (
-        <ItemSeparatorComponent
-          itemSeparatorStyle={listComponentStyles?.itemSeparatorStyle}
-        />
-      )}
+      ItemSeparatorComponent={itemSeparator}
       renderItem={(item) =>
         _renderItem(item, {
           optionLabel,

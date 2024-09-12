@@ -4,7 +4,7 @@ import {
   TFlatListItem,
   TSectionList,
   TSelectedItemWithReactComponent,
-} from 'src/types/index.types';
+} from '../types/index.types';
 
 export const extractPropertyFromArray = (arr: any[], property: string) => {
   let extractedValue = arr?.map((item: any) => item[property]);

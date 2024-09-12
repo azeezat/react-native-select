@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { FlatList, FlatListProps, StyleSheet } from 'react-native';
 import DropdownListItem from './DropdownListItem';
 import { ItemSeparatorComponent, ListEmptyComponent } from '../Others';
-import { TFlatList } from 'src/types/index.types';
+import { TFlatList } from '../../types/index.types';
 
 const DropdownFlatList = ({
   options,
@@ -31,7 +31,7 @@ const DropdownFlatList = ({
   const flatlistRef = useRef<FlatList<TFlatList>>(null);
 
   const scrollToItem = (index: number) => {
-    flatlistRef.current?.scrollToIndex({
+    flatlistRef?.current?.scrollToIndex({
       index,
       animated: true,
     });
@@ -42,6 +42,12 @@ const DropdownFlatList = ({
       scrollToItem(listIndex.itemIndex);
     }
   }, [listIndex]);
+
+  const itemSeparator = () => (
+    <ItemSeparatorComponent
+      itemSeparatorStyle={listComponentStyles?.itemSeparatorStyle}
+    />
+  );
 
   return (
     <FlatList
@@ -61,11 +67,7 @@ const DropdownFlatList = ({
       contentContainerStyle={[
         isSearchable ? { paddingTop: 0 } : styles.contentContainerStyle,
       ]}
-      ItemSeparatorComponent={() => (
-        <ItemSeparatorComponent
-          itemSeparatorStyle={listComponentStyles?.itemSeparatorStyle}
-        />
-      )}
+      ItemSeparatorComponent={itemSeparator}
       renderItem={(item) =>
         _renderItem(item, {
           optionLabel,

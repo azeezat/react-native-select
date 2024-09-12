@@ -1,5 +1,5 @@
 import type { ColorValue } from 'react-native';
-import { TCheckboxControls } from 'src/types/index.types';
+import { TCheckboxControls } from '../../types/index.types';
 
 export type CheckboxProps = {
   label?: string;

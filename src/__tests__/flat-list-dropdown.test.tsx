@@ -14,6 +14,8 @@ describe('Initial state of component', () => {
     jest.useRealTimers();
   });
 
+  const user = userEvent.setup();
+
   const options: TFlatList = [
     { name: '🍛 Rice', value: '1', disabled: true },
     { name: <Text>🍗 Chicken</Text>, value: '2' },
@@ -21,10 +23,12 @@ describe('Initial state of component', () => {
     { name: '🍕 Pizza', value: '4' },
   ];
 
-  const mockOnValueChange = jest.fn();
   const placeholder = 'Select food';
   const testId = 'section-list-test-id';
+  const mockOnValueChange = jest.fn();
   const mockSearchCallback = jest.fn();
+  const mockSelectAllCallback = jest.fn();
+  const mockUnselectAllCallback = jest.fn();
 
   const flatListDropdown = (
     <DropdownSelect
@@ -87,7 +91,6 @@ describe('Initial state of component', () => {
 
   describe('Single select', () => {
     test('open modal when dropdown is clicked and select a single item', async () => {
-      const user = userEvent.setup();
       render(flatListDropdown);
       await user.press(screen.getByText(placeholder));
       expect(screen.getByText(options[0].name as string));
@@ -115,11 +118,14 @@ describe('Initial state of component', () => {
         optionValue="value"
         isMultiple
         isSearchable
+        listControls={{
+          selectAllCallback: mockSelectAllCallback,
+          unselectAllCallback: mockUnselectAllCallback,
+        }}
       />
     );
 
     test('open modal when dropdown is clicked and select a multiple items', async () => {
-      const user = userEvent.setup();
       render(flatListDropdownWithMultiSelect);
       await user.press(screen.getByText(placeholder));
 
@@ -137,13 +143,30 @@ describe('Initial state of component', () => {
       await user.press(thirdSelection);
 
       const forthSelection = screen.getByText(options[3].name as string);
-      expect(thirdSelection);
+      expect(forthSelection);
       await user.press(forthSelection);
 
       expect(mockOnValueChangeMultiSelect).toHaveBeenCalledTimes(2);
 
       //`Clear All` should now be visible since all items in the list have been selected
       screen.getByText('Clear all');
+    });
+
+    test('select all / unselect all', async () => {
+      const user = userEvent.setup();
+      render(flatListDropdownWithMultiSelect);
+      await user.press(screen.getByText(placeholder));
+
+      // select all
+      const selectAll = screen.getByText('Select all');
+      await user.press(selectAll);
+      expect(mockSelectAllCallback).toHaveBeenCalledTimes(1);
+
+      // unselect all
+      const clearAll = screen.getByText('Clear all'); //`Clear all` should now be visible since all items in the list have been selected
+      await user.press(clearAll);
+      expect(mockUnselectAllCallback).toHaveBeenCalledTimes(1); //`Select all` should now be visible since all items in the list have been deselected
+      screen.getByText('Select all'); //`Select all` should now be visible since all items in the list have been deselected
     });
   });
 });

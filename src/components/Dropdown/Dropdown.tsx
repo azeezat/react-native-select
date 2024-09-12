@@ -35,6 +35,7 @@ const Dropdown = ({
     <View
       style={[styles.dropdownInputContainer, dropdownContainerStyle]}
       accessibilityRole="combobox"
+      pointerEvents="box-none"
       testID={testID}
     >
       {label && label !== '' && (

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { TouchableOpacity, StyleSheet, View, Platform } from 'react-native';
+import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import Input from './components/Input';
 import CheckBox from './components/CheckBox';
 import Dropdown from './components/Dropdown/Dropdown';
 import DropdownFlatList from './components/Dropdown/DropdownFlatList';
 import DropdownSectionList from './components/Dropdown/DropdownSectionList';
-import CustomModal from './components/CustomModal';
+import CustomModal, { CustomModalHandle } from './components/CustomModal';
 import { colors } from './styles/colors';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
 import type { DropdownProps, TSelectedItem } from './types/index.types';
@@ -57,7 +57,6 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   listComponentStyles,
   listEmptyComponent,
   modalProps, // kept for backwards compatibility
-  hideModal = false,
   listControls,
   searchControls,
   modalControls,
@@ -103,46 +102,18 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     setSearchValue('');
     setFilteredOptions(options);
     setListIndex({ itemIndex: -1, sectionIndex: -1 });
-  }, [filteredOptions, setFilteredOptions, setListIndex, setSearchValue]);
+  }, [options, setFilteredOptions, setListIndex, setSearchValue]);
 
   /*===========================================
    * Modal
    *==========================================*/
-  const { open, setOpen, openModal, closeModal } = useModal({
-    hideModal,
-    modalProps,
-    onDismiss: modalControls?.modalProps?.onDismiss,
+  const modalRef = useRef<CustomModalHandle | null>(null);
+
+  const { openModal, closeModal } = useModal({
     resetOptionsRelatedState,
     disabled,
+    modalRef,
   });
-
-  useEffect(() => {
-    if (hideModal) {
-      setOpen(false);
-    }
-    return () => {};
-  }, [hideModal, setOpen]);
-
-  /**
-   * To prevent triggering on modalProps.onDismiss on first render, we perform this check
-   */
-  const hasComponentBeenRendered = useRef(false);
-
-  /**
-   * Explicitly adding this here because the onDismiss only works on iOS Modals
-   * https://reactnative.dev/docs/modal#ondismiss-ios
-   */
-  useEffect(() => {
-    if (
-      hasComponentBeenRendered.current &&
-      !open &&
-      Platform.OS === 'android'
-    ) {
-      modalControls?.modalProps?.onDismiss?.();
-    }
-
-    hasComponentBeenRendered.current = true;
-  }, [open, modalControls?.modalProps]);
 
   /*===========================================
    * Single and multiple selection Hook
@@ -159,7 +130,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     isMultiple,
     maxSelectableItems,
     onValueChange,
-    setOpen,
+    closeModal,
     autoCloseOnSelect,
   });
 
@@ -227,8 +198,8 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         }
         selectedItem={selectedItem}
         selectedItems={selectedItems}
-        openModal={openModal}
-        closeModal={closeModal}
+        openModal={() => openModal()}
+        closeModal={() => closeModal()}
         labelStyle={labelStyle}
         dropdownIcon={dropdownIcon}
         dropdownStyle={dropdownStyle}
@@ -247,12 +218,11 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         {...rest}
       />
       <CustomModal
-        visible={open}
         modalBackgroundStyle={modalBackgroundStyle} // kept for backwards compatibility
         modalOptionsContainerStyle={modalOptionsContainerStyle} // kept for backwards compatibility
-        closeModal={closeModal}
         modalControls={modalControls}
         modalProps={modalProps} // kept for backwards compatibility
+        ref={modalRef}
       >
         <ListTypeComponent
           ListHeaderComponent={

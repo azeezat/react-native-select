@@ -6,7 +6,7 @@ interface UseSelectionHandlerProps {
   isMultiple: boolean;
   maxSelectableItems?: number;
   onValueChange: (selectedItems: TSelectedItem | TSelectedItem[]) => void;
-  setOpen: (value: boolean) => void;
+  closeModal: () => void;
   autoCloseOnSelect: boolean;
 }
 
@@ -15,7 +15,7 @@ export const useSelectionHandler = ({
   isMultiple,
   maxSelectableItems,
   onValueChange,
-  setOpen,
+  closeModal,
   autoCloseOnSelect,
 }: UseSelectionHandlerProps) => {
   // Initialize state based on whether it's multiple selection or not
@@ -36,11 +36,11 @@ export const useSelectionHandler = ({
         onValueChange(value); // Send selected value to parent
 
         if (autoCloseOnSelect) {
-          setOpen(false); // close modal upon selection
+          closeModal(); // close modal upon selection
         }
       }
     },
-    [selectedItem, onValueChange, autoCloseOnSelect, setOpen]
+    [selectedItem, onValueChange, autoCloseOnSelect, closeModal]
   );
 
   const handleMultipleSelections = useCallback(

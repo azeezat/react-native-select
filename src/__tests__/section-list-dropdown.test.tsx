@@ -13,8 +13,13 @@ describe('Initial state of component', () => {
     jest.useRealTimers();
   });
 
-  const mockSearchCallback = jest.fn();
+  const user = userEvent.setup();
+
   const placeholder = 'Select an option';
+  const mockOnValueChange = jest.fn();
+  const mockSearchCallback = jest.fn();
+  const mockSelectAllCallback = jest.fn();
+  const mockUnselectAllCallback = jest.fn();
 
   const options: TSectionList = [
     {
@@ -46,7 +51,7 @@ describe('Initial state of component', () => {
     <DropdownSelect
       selectedValue=""
       options={options}
-      onValueChange={() => {}}
+      onValueChange={mockOnValueChange}
       testID="section-list-test-id"
       isSearchable
       searchControls={{
@@ -97,10 +102,82 @@ describe('Initial state of component', () => {
     expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount + 1); //adding 1 because the clear event also called the search callback
   });
 
-  test('open modal when dropdown is clicked', async () => {
-    const user = userEvent.setup();
-    render(sectionListDropdown);
-    await user.press(screen.getByText(placeholder));
-    expect(screen.getByText(options[0].title));
+  describe('Single select', () => {
+    test('open modal when dropdown is clicked and select a single item', async () => {
+      render(sectionListDropdown);
+      await user.press(screen.getByText(placeholder));
+      expect(screen.getByText(options[0].data[0].label as string));
+      const optionToTestFor = screen.getByText(
+        options[0].data[2].label as string,
+        { exact: false }
+      );
+
+      expect(optionToTestFor);
+
+      //select one option
+      await user.press(optionToTestFor);
+      expect(mockOnValueChange).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe.skip('Multiple select', () => {
+    let mockOnValueChangeMultiSelect = jest.fn();
+
+    const sectionListDropdownWithMultiSelect = (
+      <DropdownSelect
+        options={options}
+        selectedValue={[]}
+        onValueChange={mockOnValueChangeMultiSelect}
+        testID="section-list-test-id"
+        placeholder={placeholder}
+        isMultiple
+        isSearchable
+        listControls={{
+          selectAllCallback: mockSelectAllCallback,
+          unselectAllCallback: mockUnselectAllCallback,
+        }}
+      />
+    );
+
+    test('open modal when dropdown is clicked and select a multiple items', async () => {
+      const user = userEvent.setup();
+      render(sectionListDropdownWithMultiSelect);
+      await user.press(screen.getByText(placeholder));
+
+      let count = 0;
+
+      // if there is a disabled item in the list, expect no call
+      options.map(async (section, i) => {
+        section.data.map(async (item, j) => {
+          const listItem = screen.getByText(item.label.toString());
+          expect(listItem);
+          await user.press(listItem);
+          if (!item.disabled) {
+            count += 1;
+          }
+        });
+      });
+
+      expect(mockOnValueChangeMultiSelect).toHaveBeenCalledTimes(count);
+
+      //`Clear All` should now be visible since all items in the list have been selected
+      screen.getByText('Clear all');
+    });
+
+    test('select all / unselect all', async () => {
+      render(sectionListDropdownWithMultiSelect);
+      await user.press(screen.getByText(placeholder));
+
+      // select all
+      const selectAll = screen.getByText('Select all');
+      await user.press(selectAll);
+      expect(mockSelectAllCallback).toHaveBeenCalledTimes(1);
+
+      // unselect all
+      const clearAll = screen.getByText('Clear all'); //`Clear all` should now be visible since all items in the list have been selected
+      await user.press(clearAll);
+      expect(mockUnselectAllCallback).toHaveBeenCalledTimes(1);
+      screen.getByText('Select all'); //`Select all` should now be visible since all items in the list have been deselected
+    });
   });
 });

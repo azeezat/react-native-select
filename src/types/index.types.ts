@@ -93,11 +93,12 @@ export type TCustomModalControls = {
   modalControls?: {
     modalBackgroundStyle?: ViewStyle;
     modalOptionsContainerStyle?: ViewStyle;
-    modalProps?: ModalProps & TCloseModal;
+    modalProps?: ModalProps & {
+      /** @deprecated Use `onDismiss` instead.*/
+      closeModal?: () => void;
+    };
   };
-} & TCloseModal;
-
-type TCloseModal = { closeModal?: () => void };
+};
 
 export type TListControls = {
   listHeaderComponent?: React.ReactNode;
@@ -119,7 +120,9 @@ export type TListControls = {
 };
 
 export type TSelectedItem = string | number | boolean;
-export type TSelectedItemWithReactComponent = TSelectedItem | React.JSX.Element;
+export type TSelectedItemWithReactComponent =
+  | TSelectedItem
+  | React.ReactElement;
 
 export type TFlatList = TFlatListItem[];
 export type TFlatListItem = {
