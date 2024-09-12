@@ -147,8 +147,8 @@ describe('Initial state of component', () => {
       let count = 0;
 
       // if there is a disabled item in the list, expect no call
-      options.map(async (section, i) => {
-        section.data.map(async (item, j) => {
+      options.map(async (section) => {
+        section.data.map(async (item) => {
           const listItem = screen.getByText(item.label.toString());
           expect(listItem);
           await user.press(listItem);
