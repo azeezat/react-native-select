@@ -67,6 +67,7 @@ const CustomModal = forwardRef<CustomModalHandle, CustomModalProps>(
 
     return (
       <Modal
+        testID="react-native-input-select-modal"
         transparent={true}
         visible={isVisible}
         onRequestClose={() => closeEvents()}

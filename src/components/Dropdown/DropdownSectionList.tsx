@@ -87,6 +87,7 @@ const DropdownSectionList = ({
 
   return (
     <SectionList
+      testID="react-native-input-select-section-list"
       sections={options}
       extraData={isMultiple ? selectedItems : selectedItem}
       initialNumToRender={5}

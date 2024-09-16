@@ -51,6 +51,7 @@ const DropdownFlatList = ({
 
   return (
     <FlatList
+      testID="react-native-input-select-flat-list"
       data={options}
       extraData={isMultiple ? selectedItems : selectedItem}
       initialNumToRender={5}

@@ -180,4 +180,23 @@ describe('Initial state of component', () => {
       screen.getByText('Select all'); //`Select all` should now be visible since all items in the list have been deselected
     });
   });
+
+  test('auto scroll to index of selected item in section list', async () => {
+    const selectedItem = options[0].data[2];
+
+    const flatListDropdownWithMultiSelectWithSelectedItem = (
+      <DropdownSelect
+        options={options}
+        selectedValue={[selectedItem.value as string]}
+        onValueChange={() => {}}
+        placeholder={placeholder}
+        isMultiple
+      />
+    );
+    render(flatListDropdownWithMultiSelectWithSelectedItem);
+    await user.press(screen.getByTestId('dropdown-input-container'));
+
+    const itemCount = screen.getAllByText(selectedItem.label as string);
+    expect(itemCount.length).toBe(2); //since the item is selected, it would show on the dropdown container hence the reason we have two items
+  });
 });

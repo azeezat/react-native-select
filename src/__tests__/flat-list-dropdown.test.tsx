@@ -63,7 +63,6 @@ describe('Initial state of component', () => {
   });
 
   test('search', async () => {
-    const user = userEvent.setup();
     render(flatListDropdown);
 
     //open modal
@@ -101,6 +100,29 @@ describe('Initial state of component', () => {
       //select one option
       await user.press(optionToTestFor);
       expect(mockOnValueChange).toHaveBeenCalledTimes(1);
+    });
+
+    test('autoCloseOnSelect', async () => {
+      const flatListDropdownWithAutoClose = (
+        <DropdownSelect
+          selectedValue=""
+          options={options}
+          onValueChange={mockOnValueChange}
+          testID={testId}
+          placeholder={placeholder}
+          optionLabel="name"
+          optionValue="value"
+          autoCloseOnSelect={false}
+        />
+      );
+
+      render(flatListDropdownWithAutoClose);
+      await user.press(screen.getByText(placeholder));
+
+      // select single option without closing the modal
+      await user.press(screen.getByText(options[0].name as string));
+      expect(mockOnValueChange).toHaveBeenCalledTimes(1);
+      screen.getByTestId('react-native-input-select-flat-list');
     });
   });
 
@@ -153,7 +175,6 @@ describe('Initial state of component', () => {
     });
 
     test('select all / unselect all', async () => {
-      const user = userEvent.setup();
       render(flatListDropdownWithMultiSelect);
       await user.press(screen.getByText(placeholder));
 
@@ -168,5 +189,26 @@ describe('Initial state of component', () => {
       expect(mockUnselectAllCallback).toHaveBeenCalledTimes(1); //`Select all` should now be visible since all items in the list have been deselected
       screen.getByText('Select all'); //`Select all` should now be visible since all items in the list have been deselected
     });
+  });
+
+  test('auto scroll to index of selected item in flat list', async () => {
+    const selectedItem = options[3];
+
+    const flatListDropdownWithMultiSelectWithSelectedItem = (
+      <DropdownSelect
+        options={options}
+        selectedValue={[selectedItem.value as string]}
+        onValueChange={() => {}}
+        testID="section-list-test-id"
+        placeholder={placeholder}
+        optionLabel="name"
+        isMultiple
+      />
+    );
+    render(flatListDropdownWithMultiSelectWithSelectedItem);
+    await user.press(screen.getByTestId('dropdown-input-container'));
+
+    const itemCount = screen.getAllByText(selectedItem.name as string);
+    expect(itemCount.length).toBe(2); //since the item is selected, it would show on the dropdown container hence the reason we have two items
   });
 });
