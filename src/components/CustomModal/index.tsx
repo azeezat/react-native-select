@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {
   forwardRef,
   PropsWithChildren,
@@ -94,7 +95,7 @@ const CustomModal = forwardRef<CustomModalHandle, CustomModalProps>(
                   modalControls?.modalOptionsContainerStyle ||
                     modalOptionsContainerStyle,
                 ]}
-                testID="modal-body"
+                testID="react-native-input-select-modal-body"
               >
                 {children}
               </SafeAreaView>

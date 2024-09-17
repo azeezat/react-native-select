@@ -3,8 +3,8 @@ import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import Input from './components/Input';
 import CheckBox from './components/CheckBox';
 import Dropdown from './components/Dropdown/Dropdown';
-import DropdownFlatList from './components/Dropdown/DropdownFlatList';
-import DropdownSectionList from './components/Dropdown/DropdownSectionList';
+import DropdownFlatList from './components/List/DropdownFlatList';
+import DropdownSectionList from './components/List/DropdownSectionList';
 import CustomModal, { CustomModalHandle } from './components/CustomModal';
 import { colors } from './styles/colors';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
@@ -250,7 +250,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
                 isMultiple &&
                 modifiedOptions?.length > 1 && (
                   <View style={styles.optionsContainerStyle}>
-                    <TouchableOpacity onPress={() => {}}>
+                    <TouchableOpacity onPress={() => {}} accessible={false}>
                       <CheckBox
                         value={selectAll}
                         label={

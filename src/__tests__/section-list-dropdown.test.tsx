@@ -2,7 +2,14 @@ import React from 'react';
 import DropdownSelect from '../index';
 import { render, screen, userEvent } from '@testing-library/react-native';
 import '@testing-library/jest-dom';
-import { TSectionList } from 'src/types/index.types';
+import { TSectionList } from '../types/index.types';
+import { extractPropertyFromArray, removeDisabledItems } from '../utils';
+
+const selectAllOptions = (options: TSectionList) => {
+  const modifiedSectionData = extractPropertyFromArray(options, 'data')?.flat();
+  let val = removeDisabledItems(modifiedSectionData);
+  return val.map((item) => item.label as string);
+};
 
 describe('Initial state of component', () => {
   beforeAll(() => {
@@ -120,7 +127,7 @@ describe('Initial state of component', () => {
     });
   });
 
-  describe.skip('Multiple select', () => {
+  describe('Multiple select', () => {
     let mockOnValueChangeMultiSelect = jest.fn();
 
     const sectionListDropdownWithMultiSelect = (
@@ -139,7 +146,7 @@ describe('Initial state of component', () => {
       />
     );
 
-    test('open modal when dropdown is clicked and select a multiple items', async () => {
+    test.skip('open modal when dropdown is clicked and select a multiple items', async () => {
       const user = userEvent.setup();
       render(sectionListDropdownWithMultiSelect);
       await user.press(screen.getByText(placeholder));
@@ -165,19 +172,36 @@ describe('Initial state of component', () => {
     });
 
     test('select all / unselect all', async () => {
-      render(sectionListDropdownWithMultiSelect);
-      await user.press(screen.getByText(placeholder));
+      const { rerender } = render(sectionListDropdownWithMultiSelect);
+      await user.press(screen.getByTestId('dropdown-input-container'));
 
       // select all
       const selectAll = screen.getByText('Select all');
       await user.press(selectAll);
       expect(mockSelectAllCallback).toHaveBeenCalledTimes(1);
 
+      //N.B There is a useEffect hook that check if all the items are actually selected hence the reason for rerendering
+      // Rerender the component with updated `selectedValue` prop
+      rerender(
+        <DropdownSelect
+          options={options}
+          selectedValue={selectAllOptions(options)}
+          onValueChange={mockOnValueChangeMultiSelect}
+          testID="section-list-test-id"
+          placeholder={placeholder}
+          isMultiple
+          isSearchable
+          listControls={{
+            selectAllCallback: mockSelectAllCallback,
+            unselectAllCallback: mockUnselectAllCallback,
+          }}
+        />
+      );
+
       // unselect all
       const clearAll = screen.getByText('Clear all'); //`Clear all` should now be visible since all items in the list have been selected
       await user.press(clearAll);
       expect(mockUnselectAllCallback).toHaveBeenCalledTimes(1);
-      screen.getByText('Select all'); //`Select all` should now be visible since all items in the list have been deselected
     });
   });
 

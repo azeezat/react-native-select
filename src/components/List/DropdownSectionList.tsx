@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState, useRef } from 'react';
 import { SectionList, StyleSheet } from 'react-native';
-import DropdownListItem from './DropdownListItem';
+import DropdownListItem from '../Dropdown/DropdownListItem';
 import {
   ItemSeparatorComponent,
   ListEmptyComponent,
