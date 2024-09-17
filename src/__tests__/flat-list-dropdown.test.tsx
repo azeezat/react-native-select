@@ -102,7 +102,7 @@ describe('Initial state of component', () => {
       expect(mockOnValueChange).toHaveBeenCalledTimes(1);
     });
 
-    test('autoCloseOnSelect', async () => {
+    test('autoCloseOnSelect=false should not close modal after selection', async () => {
       const flatListDropdownWithAutoClose = (
         <DropdownSelect
           selectedValue=""

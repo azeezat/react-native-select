@@ -40,7 +40,7 @@ const CheckBox = ({
       onPress={onChange ? () => onChange(!value) : null}
       style={[styles.checkboxContainer]}
       disabled={disabled}
-      aria-label={label}
+      aria-label={typeof label === 'string' ? label : ''}
     >
       <View
         style={[
