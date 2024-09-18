@@ -74,18 +74,18 @@ describe('Initial state of component', () => {
     const searchPlaceholder = 'Search anything here';
     const searchBox = screen.getByPlaceholderText(searchPlaceholder);
     let text = 'hello';
-    totalCount += text.length;
     await user.type(searchBox, text);
+    totalCount += text.length;
     screen.getByText('No options available');
     expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
 
     //search existent item
     text = 'rice';
-    totalCount += text.length;
     await user.clear(searchBox);
     await user.type(searchBox, text);
+    totalCount += text.length;
     screen.getByText(text, { exact: false });
-    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount + 1); //adding 1 because the clear event also called the search callback
+    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
   });
 
   describe('Single select', () => {
@@ -206,7 +206,7 @@ describe('Initial state of component', () => {
       />
     );
     render(flatListDropdownWithMultiSelectWithSelectedItem);
-    await user.press(screen.getByTestId('dropdown-input-container'));
+    await user.press(screen.getByTestId('react-native-input-select-dropdown-input-container'));
 
     const itemCount = screen.getAllByText(selectedItem.name as string);
     expect(itemCount.length).toBe(2); //since the item is selected, it would show on the dropdown container hence the reason we have two items

@@ -14,7 +14,7 @@ import { inputStyles } from '../../styles/input';
 const DropdownSelectedItemsView = ({
   placeholder,
   error,
-  getSelectedItemsLabel,
+  labelsOfSelectedItems,
   openModal,
   isMultiple,
   selectedItem,
@@ -48,7 +48,7 @@ const DropdownSelectedItemsView = ({
       ]}
       disabled={disabled}
       aria-disabled={disabled}
-      testID="dropdown-input-container"
+      testID="react-native-input-select-dropdown-input-container"
     >
       <ScrollView
         horizontal
@@ -60,13 +60,13 @@ const DropdownSelectedItemsView = ({
           onStartShouldSetResponder={() => true}
         >
           {isMultiple ? (
-            getSelectedItemsLabel()?.map((label: string, i: Number) => (
+            labelsOfSelectedItems?.map((label: string, i: Number) => (
               <DropdownContent
                 onPress={() => {
                   openModal();
                   setIndexOfSelectedItem(label); // immediately scrolls to list item with the specified label when modal
                 }}
-                key={`react-native-input-select-${Math.random()}-${i}`}
+                key={`react-native-input-select-list-item-${Math.random()}-${i}`}
                 style={[
                   styles.selectedItems,
                   { backgroundColor: primaryColor },
@@ -80,10 +80,10 @@ const DropdownSelectedItemsView = ({
             <DropdownContent
               onPress={() => {
                 openModal();
-                setIndexOfSelectedItem(getSelectedItemsLabel()); // immediately scrolls to list item with the specified label when modal
+                setIndexOfSelectedItem(labelsOfSelectedItems); // immediately scrolls to list item with the specified label when modal
               }}
               style={[styles.blackText, selectedItemStyle]}
-              label={getSelectedItemsLabel()}
+              label={labelsOfSelectedItems}
               disabled={disabled}
             />
           )}

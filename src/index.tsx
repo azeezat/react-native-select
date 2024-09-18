@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import Input from './components/Input';
 import CheckBox from './components/CheckBox';
 import Dropdown from './components/Dropdown/Dropdown';
 import DropdownFlatList from './components/List/DropdownFlatList';
 import DropdownSectionList from './components/List/DropdownSectionList';
-import CustomModal, { CustomModalHandle } from './components/CustomModal';
+import CustomModal from './components/CustomModal';
 import { colors } from './styles/colors';
 import { DEFAULT_OPTION_LABEL, DEFAULT_OPTION_VALUE } from './constants';
 import type { DropdownProps, TSelectedItem } from './types/index.types';
-import { extractPropertyFromArray, getSelectedItemsLabel } from './utils';
+import { extractPropertyFromArray, getLabelsOfSelectedItems } from './utils';
 import {
   useSelectionHandler,
   useModal,
@@ -71,7 +71,6 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   const {
     searchValue,
     setSearchValue,
-    onSearch,
     setFilteredOptions,
     filteredOptions,
     isSectionList,
@@ -107,12 +106,11 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
   /*===========================================
    * Modal
    *==========================================*/
-  const modalRef = useRef<CustomModalHandle | null>(null);
-
-  const { openModal, closeModal } = useModal({
+  const { isVisible, openModal, closeModal } = useModal({
     resetOptionsRelatedState,
     disabled,
-    modalRef,
+    modalProps,
+    modalControls,
   });
 
   /*===========================================
@@ -130,7 +128,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
     isMultiple,
     maxSelectableItems,
     onValueChange,
-    closeModal,
+    closeModal: () => closeModal(),
     autoCloseOnSelect,
   });
 
@@ -186,16 +184,14 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         placeholder={placeholder}
         helperText={helperText}
         error={error}
-        getSelectedItemsLabel={() =>
-          getSelectedItemsLabel({
-            isMultiple,
-            optionLabel,
-            optionValue,
-            selectedItem,
-            selectedItems,
-            modifiedOptions,
-          })
-        }
+        labelsOfSelectedItems={getLabelsOfSelectedItems({
+          isMultiple,
+          optionLabel,
+          optionValue,
+          selectedItem,
+          selectedItems,
+          modifiedOptions,
+        })}
         selectedItem={selectedItem}
         selectedItems={selectedItems}
         openModal={() => openModal()}
@@ -218,11 +214,12 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
         {...rest}
       />
       <CustomModal
+        visible={isVisible}
+        onRequestClose={() => closeModal()}
         modalBackgroundStyle={modalBackgroundStyle} // kept for backwards compatibility
         modalOptionsContainerStyle={modalOptionsContainerStyle} // kept for backwards compatibility
         modalControls={modalControls}
         modalProps={modalProps} // kept for backwards compatibility
-        ref={modalRef}
       >
         <ListTypeComponent
           ListHeaderComponent={
@@ -230,7 +227,7 @@ export const DropdownSelect: React.FC<DropdownProps> = ({
               {isSearchable && (
                 <Input
                   value={searchValue}
-                  onChangeText={(text: string) => onSearch(text)}
+                  onChangeText={(text: string) => setSearchValue(text)}
                   style={searchControls?.textInputStyle || searchInputStyle}
                   primaryColor={primaryColor}
                   textInputContainerStyle={

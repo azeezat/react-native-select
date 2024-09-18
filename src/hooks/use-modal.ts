@@ -1,29 +1,39 @@
+import { useState } from 'react';
+import { ModalProps } from 'react-native';
+import { TCustomModalControls } from '../types/index.types';
+
 interface UseModalProps {
   resetOptionsRelatedState: () => void;
   disabled?: boolean;
-  modalRef: any;
+  modalProps?: ModalProps;
+  modalControls?: TCustomModalControls;
 }
 
 export const useModal = ({
   resetOptionsRelatedState,
   disabled,
-  modalRef,
+  modalProps,
+  modalControls,
 }: UseModalProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+
   const openModal = () => {
-    if (disabled) {
-      return;
-    }
-    modalRef.current?.open();
+    if (disabled) return;
+    setIsVisible(true);
     resetOptionsRelatedState();
   };
 
   const closeModal = () => {
-    modalRef.current?.close();
+    setIsVisible(false);
     resetOptionsRelatedState();
+    modalControls?.modalProps?.closeModal?.(); //kept for backwards compatibility
+    modalProps?.onDismiss?.(); //kept for backwards compatibility
+    modalControls?.modalProps?.onDismiss?.();
   };
 
   return {
-    openModal,
-    closeModal,
+    isVisible,
+    openModal: () => openModal(),
+    closeModal: () => closeModal(),
   };
 };

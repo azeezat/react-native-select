@@ -59,7 +59,6 @@ export const useSearch = ({
 
   const onSearch = useCallback(
     (value: string) => {
-      setSearchValue(value);
       searchCallback?.(value);
 
       const searchText = escapeRegExp(value).toLowerCase().trim();
@@ -80,12 +79,17 @@ export const useSearch = ({
     ]
   );
 
+  useEffect(() => {
+    if (searchValue) {
+      onSearch(searchValue);
+    }
+  }, [onSearch, searchValue]);
+
   return {
     searchValue,
     setSearchValue,
     filteredOptions,
     setFilteredOptions,
-    onSearch,
     isSectionList: isSection,
   };
 };

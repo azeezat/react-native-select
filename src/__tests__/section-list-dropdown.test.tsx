@@ -96,17 +96,17 @@ describe('Initial state of component', () => {
     const searchPlaceholder = 'Search anything here';
     const searchBox = screen.getByPlaceholderText(searchPlaceholder);
     let text = 'hello';
-    totalCount += text.length;
     await user.type(searchBox, text);
+    totalCount += text.length;
     expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
 
     //search existent item
     text = 'pizza';
-    totalCount += text.length;
     await user.clear(searchBox);
     await user.type(searchBox, text);
+    totalCount += text.length;
     screen.getByText(text, { exact: false });
-    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount + 1); //adding 1 because the clear event also called the search callback
+    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
   });
 
   describe('Single select', () => {
@@ -146,6 +146,7 @@ describe('Initial state of component', () => {
       />
     );
 
+    // TODO: revisit
     test.skip('open modal when dropdown is clicked and select a multiple items', async () => {
       const user = userEvent.setup();
       render(sectionListDropdownWithMultiSelect);
@@ -173,7 +174,7 @@ describe('Initial state of component', () => {
 
     test('select all / unselect all', async () => {
       const { rerender } = render(sectionListDropdownWithMultiSelect);
-      await user.press(screen.getByTestId('dropdown-input-container'));
+      await user.press(screen.getByTestId('react-native-input-select-dropdown-input-container'));
 
       // select all
       const selectAll = screen.getByText('Select all');
@@ -218,7 +219,7 @@ describe('Initial state of component', () => {
       />
     );
     render(flatListDropdownWithMultiSelectWithSelectedItem);
-    await user.press(screen.getByTestId('dropdown-input-container'));
+    await user.press(screen.getByTestId('react-native-input-select-dropdown-input-container'));
 
     const itemCount = screen.getAllByText(selectedItem.label as string);
     expect(itemCount.length).toBe(2); //since the item is selected, it would show on the dropdown container hence the reason we have two items

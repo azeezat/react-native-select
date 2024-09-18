@@ -106,7 +106,7 @@ describe('Initial state of component', () => {
   test('Disabled dropdown should not be clickable', async () => {
     render(disabledDropdown);
 
-    let dropdownInput = screen.getByTestId('dropdown-input-container');
+    let dropdownInput = screen.getByTestId('react-native-input-select-dropdown-input-container');
     await user.press(dropdownInput);
 
     expect(dropdownInput.props?.accessibilityState?.disabled).toBe(true);

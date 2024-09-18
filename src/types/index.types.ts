@@ -89,7 +89,10 @@ export type TCustomModalControls = {
   /** @deprecated Use `modalControls = {{ modalOptionsContainerStyle: ViewStyle}} instead.*/
   modalOptionsContainerStyle?: ViewStyle;
   /** @deprecated Use `modalControls = {{modalProps: ModalProps }}` instead.*/
-  modalProps?: ModalProps;
+  modalProps?: ModalProps & {
+    /** @deprecated Use `onDismiss` instead.*/
+    closeModal?: () => void;
+  };
   modalControls?: {
     modalBackgroundStyle?: ViewStyle;
     modalOptionsContainerStyle?: ViewStyle;

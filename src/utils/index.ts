@@ -28,10 +28,10 @@ export const isSectionList = (options: TFlatList | TSectionList): boolean => {
 
 /**
  *
- * @description get the labels of the items that were selected from the options array
+ * @description get the labels of the items that were selected from the options array for either multiple or single selections
  * @returns
  */
-export const getSelectedItemsLabel = ({
+export const getLabelsOfSelectedItems = ({
   isMultiple,
   optionLabel,
   optionValue,
