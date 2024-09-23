@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ModalProps } from 'react-native';
+import { ModalProps, Platform } from 'react-native';
 import { TCustomModalControls } from '../types/index.types';
 
 interface UseModalProps {
@@ -26,9 +26,14 @@ export const useModal = ({
   const closeModal = () => {
     setIsVisible(false);
     resetOptionsRelatedState();
-    modalControls?.modalProps?.closeModal?.(); //kept for backwards compatibility
-    modalProps?.onDismiss?.(); //kept for backwards compatibility
-    modalControls?.modalProps?.onDismiss?.();
+
+    // iOS supports the onDismiss prop but android does not, so we do this explicitly here
+    // https://reactnative.dev/docs/modal#ondismiss-ios
+    if (Platform.OS === 'android') {
+      modalControls?.modalProps?.closeModal?.(); //kept for backwards compatibility
+      modalProps?.onDismiss?.(); //kept for backwards compatibility
+      modalControls?.modalProps?.onDismiss?.();
+    }
   };
 
   return {

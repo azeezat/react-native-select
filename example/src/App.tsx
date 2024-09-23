@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,9 +10,11 @@ import {
   Alert,
   Image,
   Pressable,
+  TouchableHighlight,
 } from 'react-native';
 import DropdownSelect from 'react-native-input-select';
 import {countries} from './data';
+import {DropdownSelectHandle} from '../../src/types/index.types';
 
 export default function App() {
   const [user, setUser] = useState<string>('');
@@ -39,6 +41,8 @@ export default function App() {
   const logMovies = async () => {
     console.log('You can make an API call when the modal opens.');
   };
+
+  const dropdownRef = useRef<DropdownSelectHandle | null>(null);
 
   return (
     <SafeAreaView>
@@ -262,7 +266,18 @@ export default function App() {
               fontWeight: '900',
             }}
           />
-
+          <TouchableHighlight
+            onPress={() => dropdownRef.current?.open()}
+            style={{
+              alignSelf: 'flex-start',
+              backgroundColor: 'green',
+              marginBottom: 20,
+              padding: 3,
+            }}>
+            <Text style={{color: 'white'}}>
+              Open the dropdown below by pressing this component
+            </Text>
+          </TouchableHighlight>
           <DropdownSelect
             label="Customized components in list"
             placeholder="Select multiple countries..."
@@ -295,6 +310,11 @@ export default function App() {
                   <Button
                     title="Left button"
                     onPress={() => Alert.alert('Left button pressed')}
+                    color="#007AFF"
+                  />
+                  <Button
+                    title="Close button"
+                    onPress={() => dropdownRef.current?.close()}
                     color="#007AFF"
                   />
                   <Button
@@ -351,6 +371,7 @@ export default function App() {
               unselectAllCallback: () => Alert.alert('You removed everything'),
               emptyListMessage: 'No record found',
             }}
+            ref={dropdownRef}
           />
 
           {/* Section list */}

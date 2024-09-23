@@ -11,7 +11,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { colors } from '../../styles/colors';
-import { TCustomModalControls } from 'src/types/index.types';
+import { TCustomModalControls, TCustomModalProps } from 'src/types/index.types';
 
 // In iOS, `SafeAreaView` does not automatically account on keyboard.
 // Therefore, for iOS we need to wrap the content in `KeyboardAvoidingView`.
@@ -33,7 +33,9 @@ const CustomModal = ({
   modalProps, //kept for backwards compatibility
   children,
   onRequestClose,
-}: TCustomModalControls & ModalProps) => {
+}: TCustomModalProps & {
+  modalControls?: TCustomModalControls;
+} & ModalProps) => {
   return (
     <Modal
       visible={visible}
