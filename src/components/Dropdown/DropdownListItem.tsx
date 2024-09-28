@@ -20,9 +20,7 @@ const DropdownListItem = ({
   return (
     <TouchableOpacity
       style={styles.listItemContainerStyle}
-      onPress={
-        item.disabled ? () => {} : () => onChange(item[optionValue]) // intentionally didn't use the disable property
-      }
+      onPress={item.disabled ? () => {} : () => onChange(item[optionValue])}
     >
       <CheckBox
         value={

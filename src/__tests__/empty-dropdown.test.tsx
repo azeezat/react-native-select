@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { act, createRef, useRef } from 'react';
 import DropdownSelect from '../index';
 import { render, screen, userEvent } from '@testing-library/react-native';
 import '@testing-library/jest-dom';
-import { PlatformOSType } from 'react-native';
+import { PlatformOSType, Pressable, Text } from 'react-native';
+import { DropdownSelectHandle } from 'src/types/index.types';
 
 export const mockPlatform = (OS: PlatformOSType) => {
   jest.doMock('react-native/Libraries/Utilities/Platform', () => ({
@@ -66,6 +67,8 @@ describe('Initial state of component', () => {
   });
 
   test('open and close modal', async () => {
+    mockPlatform('android');
+
     render(defaultDropdown);
 
     //open modal when dropdown is clicked
@@ -78,8 +81,43 @@ describe('Initial state of component', () => {
     expect(screen.getByText(placeholder));
 
     //check if callback was called on android
+    expect(mockCloseModal).toHaveBeenCalledTimes(1);
+  });
+
+  test('should open and close modal with useRef', async () => {
     mockPlatform('android');
-    expect(mockCloseModal).toHaveBeenCalledTimes(0); //revisit
+    const dropdownRef = createRef<DropdownSelectHandle>();
+    render(
+      <>
+        <Pressable onPress={() => dropdownRef.current?.open()}>
+          <Text>Open Modal</Text>
+        </Pressable>
+
+        <DropdownSelect
+          label="Default dropdown"
+          selectedValue={''}
+          options={[]}
+          onValueChange={() => {}}
+          testID={testId}
+          modalControls={{
+            modalProps: {
+              onShow: mockOpenModal,
+              onDismiss: mockCloseModal,
+            },
+          }}
+          ref={dropdownRef}
+          listHeaderComponent={
+            <Pressable onPress={() => dropdownRef.current?.close()}>
+              <Text>Close Modal</Text>
+            </Pressable>
+          }
+        />
+      </>
+    );
+    await user.press(screen.getByText('Open Modal'));
+    expect(screen.getByText('No options available'));
+    await user.press(screen.getByText('Close Modal'));
+    expect(mockCloseModal).toHaveBeenCalled();
   });
 
   const disabledDropdown = (

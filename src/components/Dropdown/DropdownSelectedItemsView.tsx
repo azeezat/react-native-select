@@ -30,6 +30,10 @@ const DropdownSelectedItemsView = ({
   disabled,
   setIndexOfSelectedItem,
 }: any) => {
+  const openActions = (label: string) => {
+    openModal();
+    setIndexOfSelectedItem(label); // immediately scrolls to list item with the specified label when modal
+  };
   return (
     <Pressable
       onPress={() => openModal()}
@@ -62,10 +66,7 @@ const DropdownSelectedItemsView = ({
           {isMultiple ? (
             labelsOfSelectedItems?.map((label: string, i: Number) => (
               <DropdownContent
-                onPress={() => {
-                  openModal();
-                  setIndexOfSelectedItem(label); // immediately scrolls to list item with the specified label when modal
-                }}
+                onPress={() => openActions(label)}
                 key={`react-native-input-select-list-item-${Math.random()}-${i}`}
                 style={[
                   styles.selectedItems,
@@ -78,10 +79,7 @@ const DropdownSelectedItemsView = ({
             ))
           ) : (
             <DropdownContent
-              onPress={() => {
-                openModal();
-                setIndexOfSelectedItem(labelsOfSelectedItems); // immediately scrolls to list item with the specified label when modal
-              }}
+              onPress={() => openActions(labelsOfSelectedItems)}
               style={[styles.blackText, selectedItemStyle]}
               label={labelsOfSelectedItems}
               disabled={disabled}

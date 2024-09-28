@@ -271,7 +271,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
                   isMultiple &&
                   modifiedOptions?.length > 1 && (
                     <View style={styles.optionsContainerStyle}>
-                      <TouchableOpacity onPress={() => {}} accessible={false}>
+                      <TouchableOpacity accessible={false}>
                         <CheckBox
                           value={selectAll}
                           label={

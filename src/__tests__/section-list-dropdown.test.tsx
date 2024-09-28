@@ -11,7 +11,7 @@ const selectAllOptions = (options: TSectionList) => {
   return val.map((item) => item.label as string);
 };
 
-describe('Initial state of component', () => {
+describe('Section list', () => {
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -67,46 +67,65 @@ describe('Initial state of component', () => {
       }}
     />
   );
+  describe('Initial state of component', () => {
+    test('show default texts', () => {
+      render(sectionListDropdown);
+      expect(screen.getByTestId('section-list-test-id'));
+      expect(screen.getByText('Select an option'));
+    });
 
-  test('show default texts', () => {
-    render(sectionListDropdown);
-    expect(screen.getByTestId('section-list-test-id'));
-    expect(screen.getByText('Select an option'));
-  });
+    test('show default styles', () => {
+      render(sectionListDropdown);
+      const placeholderStyle = screen.getByText('Select an option');
+      expect(placeholderStyle.props.style).toMatchObject([
+        { color: '#000000' },
+        undefined,
+      ]);
+    });
 
-  test('show default styles', () => {
-    render(sectionListDropdown);
-    const placeholderStyle = screen.getByText('Select an option');
-    expect(placeholderStyle.props.style).toMatchObject([
-      { color: '#000000' },
-      undefined,
-    ]);
-  });
+    test('search', async () => {
+      render(sectionListDropdown);
 
-  test('search', async () => {
-    const user = userEvent.setup();
-    render(sectionListDropdown);
+      //open modal
+      await user.press(screen.getByText(placeholder));
 
-    //open modal
-    await user.press(screen.getByText(placeholder));
+      let totalCount = 0;
 
-    let totalCount = 0;
+      //search non-existent item
+      const searchPlaceholder = 'Search anything here';
+      const searchBox = screen.getByPlaceholderText(searchPlaceholder);
+      let text = 'hello';
+      await user.type(searchBox, text);
+      totalCount += text.length;
+      expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
 
-    //search non-existent item
-    const searchPlaceholder = 'Search anything here';
-    const searchBox = screen.getByPlaceholderText(searchPlaceholder);
-    let text = 'hello';
-    await user.type(searchBox, text);
-    totalCount += text.length;
-    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
+      //search existent item
+      text = 'pizza';
+      await user.clear(searchBox);
+      await user.type(searchBox, text);
+      totalCount += text.length;
+      screen.getByText(text, { exact: false });
+      expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
+    });
 
-    //search existent item
-    text = 'pizza';
-    await user.clear(searchBox);
-    await user.type(searchBox, text);
-    totalCount += text.length;
-    screen.getByText(text, { exact: false });
-    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
+    test('toggle section list title', async () => {
+      render(sectionListDropdown);
+
+      //open modal
+      await user.press(screen.getByText(placeholder));
+
+      //close accordion, hides submenu
+      const title = options[0].title;
+      const titleBox = screen.getByText(title);
+
+      await user.press(titleBox);
+      const subMenuItem = options[0].data[0].label as string;
+      expect(screen.queryByText(subMenuItem)).toBeNull();
+
+      //open accordion, shows submenu
+      await user.press(titleBox);
+      expect(screen.getByText(subMenuItem));
+    });
   });
 
   describe('Single select', () => {
@@ -148,7 +167,6 @@ describe('Initial state of component', () => {
 
     // TODO: revisit
     test.skip('open modal when dropdown is clicked and select a multiple items', async () => {
-      const user = userEvent.setup();
       render(sectionListDropdownWithMultiSelect);
       await user.press(screen.getByText(placeholder));
 
@@ -172,9 +190,36 @@ describe('Initial state of component', () => {
       screen.getByText('Clear all');
     });
 
+    test('select option from dropdown and click selected item to reopen modal.', async () => {
+      render(sectionListDropdownWithMultiSelect);
+
+      //open modal
+      await user.press(screen.getByText(placeholder));
+
+      // select one option
+      let selectedOptionLabel = screen.getByLabelText('Pizza', {
+        exact: false,
+      });
+      await user.press(selectedOptionLabel);
+
+      // close the modal
+      const closeModal = screen.getByLabelText('close modal');
+      await user.press(closeModal);
+
+      // click selected
+      let selectedOption = screen.getByText('Pizza', { exact: false });
+      expect(selectedOption);
+      await user.press(selectedOption);
+
+      //modal should be open
+      expect(screen.getByTestId('react-native-input-select-modal'));
+    });
+
     test('select all / unselect all', async () => {
       const { rerender } = render(sectionListDropdownWithMultiSelect);
-      await user.press(screen.getByTestId('react-native-input-select-dropdown-input-container'));
+      await user.press(
+        screen.getByTestId('react-native-input-select-dropdown-input-container')
+      );
 
       // select all
       const selectAll = screen.getByText('Select all');
@@ -219,7 +264,9 @@ describe('Initial state of component', () => {
       />
     );
     render(flatListDropdownWithMultiSelectWithSelectedItem);
-    await user.press(screen.getByTestId('react-native-input-select-dropdown-input-container'));
+    await user.press(
+      screen.getByTestId('react-native-input-select-dropdown-input-container')
+    );
 
     const itemCount = screen.getAllByText(selectedItem.label as string);
     expect(itemCount.length).toBe(2); //since the item is selected, it would show on the dropdown container hence the reason we have two items

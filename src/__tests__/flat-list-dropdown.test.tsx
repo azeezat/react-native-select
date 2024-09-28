@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 import { TFlatList } from 'src/types/index.types';
 import { Text } from 'react-native';
 
-describe('Initial state of component', () => {
+describe('Flat List', () => {
   beforeAll(() => {
     jest.useFakeTimers();
   });
@@ -47,45 +47,47 @@ describe('Initial state of component', () => {
     />
   );
 
-  test('show default texts', () => {
-    render(flatListDropdown);
-    expect(screen.getByTestId(testId));
-    expect(screen.getByText(placeholder));
-  });
+  describe('Initial state of component', () => {
+    test('show default texts', () => {
+      render(flatListDropdown);
+      expect(screen.getByTestId(testId));
+      expect(screen.getByText(placeholder));
+    });
 
-  test('show default styles', () => {
-    render(flatListDropdown);
-    const placeholderStyle = screen.getByText(placeholder);
-    expect(placeholderStyle.props.style).toMatchObject([
-      { color: '#000000' },
-      undefined,
-    ]);
-  });
+    test('show default styles', () => {
+      render(flatListDropdown);
+      const placeholderStyle = screen.getByText(placeholder);
+      expect(placeholderStyle.props.style).toMatchObject([
+        { color: '#000000' },
+        undefined,
+      ]);
+    });
 
-  test('search', async () => {
-    render(flatListDropdown);
+    test('search', async () => {
+      render(flatListDropdown);
 
-    //open modal
-    await user.press(screen.getByText(placeholder));
+      //open modal
+      await user.press(screen.getByText(placeholder));
 
-    let totalCount = 0;
+      let totalCount = 0;
 
-    //search non-existent item
-    const searchPlaceholder = 'Search anything here';
-    const searchBox = screen.getByPlaceholderText(searchPlaceholder);
-    let text = 'hello';
-    await user.type(searchBox, text);
-    totalCount += text.length;
-    screen.getByText('No options available');
-    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
+      //search non-existent item
+      const searchPlaceholder = 'Search anything here';
+      const searchBox = screen.getByPlaceholderText(searchPlaceholder);
+      let text = 'hello';
+      await user.type(searchBox, text);
+      totalCount += text.length;
+      screen.getByText('No options available');
+      expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
 
-    //search existent item
-    text = 'rice';
-    await user.clear(searchBox);
-    await user.type(searchBox, text);
-    totalCount += text.length;
-    screen.getByText(text, { exact: false });
-    expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
+      //search existent item
+      text = 'rice';
+      await user.clear(searchBox);
+      await user.type(searchBox, text);
+      totalCount += text.length;
+      screen.getByText(text, { exact: false });
+      expect(mockSearchCallback).toHaveBeenCalledTimes(totalCount);
+    });
   });
 
   describe('Single select', () => {
@@ -124,17 +126,38 @@ describe('Initial state of component', () => {
       expect(mockOnValueChange).toHaveBeenCalledTimes(1);
       screen.getByTestId('react-native-input-select-flat-list');
     });
+
+    test('select an option from dropdown and click selected item to reopen modal.', async () => {
+      render(flatListDropdown);
+
+      //open modal
+      await user.press(screen.getByText(placeholder));
+
+      // select one option
+      let selectedOptionLabel = screen.getByLabelText('Pizza', {
+        exact: false,
+      });
+      await user.press(selectedOptionLabel);
+
+      // click selected
+      let selectedOption = screen.getByText('Pizza', { exact: false });
+      expect(selectedOption);
+      await user.press(selectedOption);
+
+      //modal should be open
+      expect(screen.getByTestId('react-native-input-select-modal'));
+    });
   });
 
   describe('Multiple select', () => {
-    let mockOnValueChangeMultiSelect = jest.fn();
+    const mockOnValueChangeMultiSelect = jest.fn();
 
     const flatListDropdownWithMultiSelect = (
       <DropdownSelect
         options={options}
         selectedValue={[]}
         onValueChange={mockOnValueChangeMultiSelect}
-        testID="section-list-test-id"
+        testID="flat-list-test-id"
         placeholder={placeholder}
         optionLabel="name"
         optionValue="value"
@@ -174,6 +197,31 @@ describe('Initial state of component', () => {
       screen.getByText('Clear all');
     });
 
+    test('select option from dropdown and click selected item to reopen modal.', async () => {
+      render(flatListDropdownWithMultiSelect);
+
+      //open modal
+      await user.press(screen.getByText(placeholder));
+
+      // select one option
+      let selectedOptionLabel = screen.getByLabelText('Pizza', {
+        exact: false,
+      });
+      await user.press(selectedOptionLabel);
+
+      // close the modal
+      const closeModal = screen.getByLabelText('close modal');
+      await user.press(closeModal);
+
+      // click selected
+      let selectedOption = screen.getByText('Pizza', { exact: false });
+      expect(selectedOption);
+      await user.press(selectedOption);
+
+      //modal should be open
+      expect(screen.getByTestId('react-native-input-select-modal'));
+    });
+
     test('select all / unselect all', async () => {
       render(flatListDropdownWithMultiSelect);
       await user.press(screen.getByText(placeholder));
@@ -206,7 +254,9 @@ describe('Initial state of component', () => {
       />
     );
     render(flatListDropdownWithMultiSelectWithSelectedItem);
-    await user.press(screen.getByTestId('react-native-input-select-dropdown-input-container'));
+    await user.press(
+      screen.getByTestId('react-native-input-select-dropdown-input-container')
+    );
 
     const itemCount = screen.getAllByText(selectedItem.name as string);
     expect(itemCount.length).toBe(2); //since the item is selected, it would show on the dropdown container hence the reason we have two items

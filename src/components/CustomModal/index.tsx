@@ -57,7 +57,7 @@ const CustomModal = ({
           aria-label="close modal"
         >
           {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
-          <TouchableWithoutFeedback onPress={() => {}} accessible={false}>
+          <TouchableWithoutFeedback accessible={false}>
             <SafeAreaView
               style={[
                 styles.modalOptionsContainer,
