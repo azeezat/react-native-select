@@ -1,4 +1,4 @@
-import React, { act, createRef, useRef } from 'react';
+import React, { createRef } from 'react';
 import DropdownSelect from '../index';
 import { render, screen, userEvent } from '@testing-library/react-native';
 import '@testing-library/jest-dom';
