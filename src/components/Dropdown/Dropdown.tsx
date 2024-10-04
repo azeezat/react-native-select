@@ -10,7 +10,7 @@ const Dropdown = ({
   placeholder,
   helperText,
   error,
-  getSelectedItemsLabel,
+  labelsOfSelectedItems,
   openModal,
   closeModal,
   isMultiple,
@@ -35,6 +35,7 @@ const Dropdown = ({
     <View
       style={[styles.dropdownInputContainer, dropdownContainerStyle]}
       accessibilityRole="combobox"
+      pointerEvents="box-none"
       testID={testID}
     >
       {label && label !== '' && (
@@ -44,7 +45,7 @@ const Dropdown = ({
       <DropdownSelectedItemsView
         placeholder={placeholder}
         error={error}
-        getSelectedItemsLabel={getSelectedItemsLabel}
+        labelsOfSelectedItems={labelsOfSelectedItems}
         openModal={openModal}
         closeModal={closeModal}
         isMultiple={isMultiple}

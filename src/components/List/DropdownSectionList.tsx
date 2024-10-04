@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState, useRef } from 'react';
 import { SectionList, StyleSheet } from 'react-native';
-import DropdownListItem from './DropdownListItem';
+import DropdownListItem from '../Dropdown/DropdownListItem';
 import {
   ItemSeparatorComponent,
   ListEmptyComponent,
   SectionHeaderTitle,
 } from '../Others';
 import { extractPropertyFromArray } from '../../utils';
-import { TSectionList } from 'src/types/index.types';
+import { TSectionList } from '../../types/index.types';
 
 const DropdownSectionList = ({
   options,
@@ -79,8 +79,15 @@ const DropdownSectionList = ({
     }
   }, [listIndex]);
 
+  const itemSeparator = () => (
+    <ItemSeparatorComponent
+      itemSeparatorStyle={listComponentStyles?.itemSeparatorStyle}
+    />
+  );
+
   return (
     <SectionList
+      testID="react-native-input-select-section-list"
       sections={options}
       extraData={isMultiple ? selectedItems : selectedItem}
       initialNumToRender={5}
@@ -97,11 +104,7 @@ const DropdownSectionList = ({
       contentContainerStyle={[
         isSearchable ? { paddingTop: 0 } : styles.contentContainerStyle,
       ]}
-      ItemSeparatorComponent={() => (
-        <ItemSeparatorComponent
-          itemSeparatorStyle={listComponentStyles?.itemSeparatorStyle}
-        />
-      )}
+      ItemSeparatorComponent={itemSeparator}
       renderItem={(item) =>
         _renderItem(item, {
           optionLabel,
