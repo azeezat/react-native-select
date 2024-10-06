@@ -16,11 +16,6 @@ const DropdownFlatList = ({
   handleMultipleSelections,
   handleSingleSelection,
   primaryColor,
-  checkboxSize, // kept for backwards compatibility to be removed in future release
-  checkboxStyle, // kept for backwards compatibility to be removed in future release
-  checkboxLabelStyle, // kept for backwards compatibility to be removed  in future release
-  checkboxComponentStyles,
-  checkboxComponent,
   checkboxControls,
   listComponentStyles,
   listIndex,
@@ -80,11 +75,6 @@ const DropdownFlatList = ({
             : handleSingleSelection,
           scrollToItem,
           primaryColor,
-          checkboxSize, // kept for backwards compatibility
-          checkboxStyle, // kept for backwards compatibility
-          checkboxLabelStyle, // kept for backwards compatibility
-          checkboxComponentStyles, // kept for backwards compatibility
-          checkboxComponent, // kept for backwards compatibility
           checkboxControls,
         })
       }
@@ -110,12 +100,7 @@ const _renderItem = ({ item }: any, props: any) => {
       selectedOption={props.selectedOption}
       onChange={props.onChange}
       primaryColor={props.primaryColor}
-      checkboxSize={props.checkboxSize}
-      checkboxStyle={props.checkboxStyle}
-      checkboxLabelStyle={props.checkboxLabelStyle}
       scrollToItem={props.scrollToItem}
-      checkboxComponentStyles={props.checkboxComponentStyles}
-      checkboxComponent={props.checkboxComponent}
       checkboxControls={props.checkboxControls}
     />
   );

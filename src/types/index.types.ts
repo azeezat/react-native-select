@@ -9,11 +9,8 @@ import type {
 
 export type DropdownProps = CommonDropdownProps &
   TDropdownInputProps &
-  TSearchProps &
-  TCheckboxProps &
-  TCustomModalProps &
-  TListProps &
-  TControls;
+  TControls &
+  TListProps;
 
 export type CommonDropdownProps = {
   testID?: string;
@@ -46,8 +43,6 @@ export type TDropdownInputProps = {
   primaryColor?: ColorValue;
   disabled?: boolean;
   placeholderStyle?: TextStyle;
-  /** @deprecated Use useRef to access the open and close props.*/
-  hideModal?: boolean;
 };
 
 type TControls = {
@@ -57,33 +52,11 @@ type TControls = {
   listControls?: TListControls;
 };
 
-export type TSearchProps = {
-  /** @deprecated Use `searchControls = {{textInputStyle: ViewStyle | TextStyle }}` instead.*/
-  searchInputStyle?: ViewStyle;
-};
-
 type TSearchControls = {
   textInputStyle?: ViewStyle | TextStyle;
   textInputContainerStyle?: ViewStyle;
   textInputProps?: TextInputProps;
   searchCallback?: (value: string) => void;
-};
-
-export type TCheckboxProps = {
-  /** @deprecated Use `checkboxControls = {{checkboxSize: number }}` instead.*/
-  checkboxSize?: number;
-  /** @deprecated Use `checkboxControls = {{checkboxStyle: ViewStyle }}` instead.*/
-  checkboxStyle?: ViewStyle;
-  /** @deprecated Use `checkboxControls = {{checkboxLabelStyle: TextStyle }}` instead.*/
-  checkboxLabelStyle?: TextStyle;
-  /** @deprecated Use `checkboxControls` instead.*/
-  checkboxComponentStyles?: {
-    checkboxSize?: number;
-    checkboxStyle?: ViewStyle;
-    checkboxLabelStyle?: TextStyle;
-  };
-  /** @deprecated Use `checkboxControls = {{checkboxComponent: <View></View> }}` instead.*/
-  checkboxComponent?: React.ReactNode;
 };
 
 export type TCheckboxControls = {
@@ -95,25 +68,10 @@ export type TCheckboxControls = {
   checkboxUnselectedColor?: ColorValue;
 };
 
-export type TCustomModalProps = {
-  /** @deprecated Use `modalControls = {{modalBackgroundStyle: ViewStyle}} instead.*/
-  modalBackgroundStyle?: ViewStyle;
-  /** @deprecated Use `modalControls = {{ modalOptionsContainerStyle: ViewStyle}} instead.*/
-  modalOptionsContainerStyle?: ViewStyle;
-  /** @deprecated Use `modalControls = {{modalProps: ModalProps }}` instead.*/
-  modalProps?: ModalProps & {
-    /** @deprecated Use `onDismiss` instead.*/
-    closeModal?: () => void;
-  };
-};
-
 export type TCustomModalControls = {
   modalBackgroundStyle?: ViewStyle;
   modalOptionsContainerStyle?: ViewStyle;
-  modalProps?: ModalProps & {
-    /** @deprecated Use `onDismiss` instead.*/
-    closeModal?: () => void;
-  };
+  modalProps?: ModalProps;
 };
 
 export type TListProps = {

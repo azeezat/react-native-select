@@ -27,10 +27,7 @@ const ModalContentWrapper = ({ children }: PropsWithChildren): ReactElement => {
 
 const CustomModal = ({
   visible,
-  modalBackgroundStyle, //kept for backwards compatibility
-  modalOptionsContainerStyle, //kept for backwards compatibility
   modalControls,
-  modalProps, //kept for backwards compatibility
   children,
   onRequestClose,
 }: TCustomModalProps & {
@@ -43,7 +40,6 @@ const CustomModal = ({
       transparent={true}
       animationType="fade"
       {...modalControls?.modalProps}
-      {...modalProps} //kept for backwards compatibility
     >
       {/*Used to fix the select with search box behavior in iOS*/}
       <ModalContentWrapper>
@@ -52,7 +48,7 @@ const CustomModal = ({
           style={[
             styles.modalContainer,
             styles.modalBackgroundStyle,
-            modalControls?.modalBackgroundStyle || modalBackgroundStyle,
+            modalControls?.modalBackgroundStyle,
           ]}
           aria-label="close modal"
         >
@@ -61,8 +57,7 @@ const CustomModal = ({
             <SafeAreaView
               style={[
                 styles.modalOptionsContainer,
-                modalControls?.modalOptionsContainerStyle ||
-                  modalOptionsContainerStyle,
+                modalControls?.modalOptionsContainerStyle,
               ]}
               testID="react-native-input-select-modal-body"
             >

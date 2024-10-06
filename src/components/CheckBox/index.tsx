@@ -9,30 +9,27 @@ const CheckBox = ({
   value,
   disabled,
   primaryColor,
-  checkboxSize,
-  checkboxStyle,
-  checkboxLabelStyle,
-  checkboxComponentStyles,
-  checkboxComponent,
   checkboxControls,
   onChange,
 }: CheckboxProps) => {
+  const {
+    checkboxSize,
+    checkboxComponent,
+    checkboxDisabledStyle,
+    checkboxStyle,
+    checkboxUnselectedColor,
+    checkboxLabelStyle,
+  } = checkboxControls ?? {};
+
   const fillColor = {
     backgroundColor: disabled
-      ? checkboxControls?.checkboxDisabledStyle?.backgroundColor ||
-        colors.disabled
+      ? checkboxDisabledStyle?.backgroundColor || colors.disabled
       : value
-      ? checkboxControls?.checkboxStyle?.backgroundColor ||
-        checkboxComponentStyles?.checkboxStyle?.backgroundColor ||
-        checkboxStyle?.backgroundColor ||
-        primaryColor
-      : checkboxControls?.checkboxUnselectedColor || 'white',
+      ? checkboxStyle?.backgroundColor || primaryColor
+      : checkboxUnselectedColor || 'white',
     borderColor: disabled
-      ? checkboxControls?.checkboxDisabledStyle?.borderColor || colors.disabled
-      : checkboxControls?.checkboxStyle?.borderColor ||
-        checkboxComponentStyles?.checkboxStyle?.borderColor ||
-        checkboxStyle?.borderColor ||
-        styles.checkbox.borderColor,
+      ? checkboxDisabledStyle?.borderColor || colors.disabled
+      : checkboxStyle?.borderColor || styles.checkbox.borderColor,
   };
 
   return (
@@ -43,46 +40,23 @@ const CheckBox = ({
       aria-label={typeof label === 'string' ? label : ''}
     >
       <View
-        style={[
-          styles.checkbox,
-          checkboxControls?.checkboxStyle ||
-            checkboxComponentStyles?.checkboxStyle ||
-            checkboxStyle,
-          fillColor,
-        ]}
+        style={[styles.checkbox, checkboxStyle, fillColor]}
         aria-checked={value}
       >
-        {checkboxControls?.checkboxComponent || checkboxComponent || (
+        {checkboxComponent || (
           <Image
             source={require('../../asset/check.png')}
             style={[
               {
-                height:
-                  checkboxControls?.checkboxSize ||
-                  checkboxComponentStyles?.checkboxSize ||
-                  checkboxSize ||
-                  CHECKBOX_SIZE,
-                width:
-                  checkboxControls?.checkboxSize ||
-                  checkboxComponentStyles?.checkboxSize ||
-                  checkboxSize ||
-                  CHECKBOX_SIZE,
+                height: checkboxSize || CHECKBOX_SIZE,
+                width: checkboxSize || CHECKBOX_SIZE,
               },
             ]}
           />
         )}
       </View>
       {label && label !== '' && (
-        <Text
-          style={[
-            checkboxControls?.checkboxLabelStyle ||
-              checkboxComponentStyles?.checkboxLabelStyle ||
-              checkboxLabelStyle,
-            styles.labelStyle,
-          ]}
-        >
-          {label}
-        </Text>
+        <Text style={[checkboxLabelStyle, styles.labelStyle]}>{label}</Text>
       )}
     </Pressable>
   );

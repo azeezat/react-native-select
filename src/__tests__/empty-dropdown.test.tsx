@@ -149,6 +149,7 @@ describe('Initial state of component', () => {
     );
     await user.press(dropdownInput);
 
+    expect(screen.queryByText('Close Modal')).toBeNull();
     expect(dropdownInput.props?.accessibilityState?.disabled).toBe(true);
   });
 });

@@ -21,11 +21,6 @@ const DropdownSectionList = ({
   handleMultipleSelections,
   handleSingleSelection,
   primaryColor,
-  checkboxSize,
-  checkboxStyle,
-  checkboxLabelStyle,
-  checkboxComponentStyles,
-  checkboxComponent,
   checkboxControls,
   listComponentStyles,
   listIndex,
@@ -115,11 +110,6 @@ const DropdownSectionList = ({
             ? handleMultipleSelections
             : handleSingleSelection,
           primaryColor,
-          checkboxSize, // kept for backwards compatibility
-          checkboxStyle, // kept for backwards compatibility
-          checkboxLabelStyle, // kept for backwards compatibility
-          checkboxComponentStyles, // kept for backwards compatibility
-          checkboxComponent, // kept for backwards compatibility
           checkboxControls,
           expandedSections,
         })
@@ -160,11 +150,6 @@ const _renderItem = ({ section: { title }, item }: any, props: any) => {
       selectedOption={props.selectedOption}
       onChange={props.onChange}
       primaryColor={props.primaryColor}
-      checkboxSize={props.checkboxSize}
-      checkboxStyle={props.checkboxStyle}
-      checkboxLabelStyle={props.checkboxLabelStyle}
-      checkboxComponentStyles={props.checkboxComponentStyles}
-      checkboxComponent={props.checkboxComponent}
       checkboxControls={props.checkboxControls}
     />
   );

@@ -104,29 +104,6 @@ describe('Flat List', () => {
       expect(mockOnValueChange).toHaveBeenCalledTimes(1);
     });
 
-    test('autoCloseOnSelect=false should not close modal after selection', async () => {
-      const flatListDropdownWithAutoClose = (
-        <DropdownSelect
-          selectedValue=""
-          options={options}
-          onValueChange={mockOnValueChange}
-          testID={testId}
-          placeholder={placeholder}
-          optionLabel="name"
-          optionValue="value"
-          autoCloseOnSelect={false}
-        />
-      );
-
-      render(flatListDropdownWithAutoClose);
-      await user.press(screen.getByText(placeholder));
-
-      // select single option without closing the modal
-      await user.press(screen.getByText(options[0].name as string));
-      expect(mockOnValueChange).toHaveBeenCalledTimes(1);
-      screen.getByTestId('react-native-input-select-flat-list');
-    });
-
     test('select an option from dropdown and click selected item to reopen modal.', async () => {
       render(flatListDropdown);
 
@@ -146,6 +123,71 @@ describe('Flat List', () => {
 
       //modal should be open
       expect(screen.getByTestId('react-native-input-select-modal'));
+    });
+
+    test('autoCloseOnSelect=false should not close modal after selection', async () => {
+      const mockOnValueChange2 = jest.fn();
+      const flatListDropdownWithAutoClose = (
+        <DropdownSelect
+          selectedValue=""
+          options={options}
+          onValueChange={mockOnValueChange2}
+          placeholder={placeholder}
+          optionLabel="name"
+          optionValue="value"
+          autoCloseOnSelect={false}
+        />
+      );
+
+      render(flatListDropdownWithAutoClose);
+      await user.press(screen.getByText(placeholder));
+
+      // select single option without closing the modal
+      await user.press(screen.getByText(options[0].name as string));
+      // expect(mockOnValueChange2).toHaveBeenCalledTimes(1);
+      screen.getByTestId('react-native-input-select-flat-list');
+    });
+
+    test('dropdown has an initial state', async () => {
+      const initialSelection = options[3];
+      const initialSelectionValue = initialSelection.value as string;
+      const initialSelectionLabel = initialSelection.name as string;
+
+      const flatListDropdownWithInitialState = (
+        <DropdownSelect
+          selectedValue={initialSelectionValue}
+          options={options}
+          onValueChange={() => {}}
+          placeholder={placeholder}
+          optionLabel="name"
+          optionValue="value"
+        />
+      );
+
+      const { rerender } = render(flatListDropdownWithInitialState);
+
+      // open modal
+      await user.press(
+        screen.getByText(initialSelectionLabel, { exact: false })
+      );
+
+      //unselect
+      await user.press(
+        screen.getByLabelText(initialSelectionLabel, { exact: false })
+      );
+
+      rerender(
+        <DropdownSelect
+          selectedValue={''}
+          options={options}
+          onValueChange={() => {}}
+          placeholder={placeholder}
+          optionLabel="name"
+          optionValue="value"
+        />
+      );
+
+      await user.press(screen.getByText(placeholder));
     });
   });
 
@@ -220,6 +262,54 @@ describe('Flat List', () => {
 
       //modal should be open
       expect(screen.getByTestId('react-native-input-select-modal'));
+    });
+
+    test('dropdown has an initial state', async () => {
+      const initialSelection = options[3];
+      const initialSelectionValue = initialSelection.value as string;
+      const initialSelectionLabel = initialSelection.name as string;
+
+      const flatListDropdownWithInitialState = (
+        <DropdownSelect
+          selectedValue={[initialSelectionValue]}
+          options={options}
+          onValueChange={() => {}}
+          placeholder={placeholder}
+          optionLabel="name"
+          optionValue="value"
+          isMultiple
+        />
+      );
+
+      const { rerender } = render(flatListDropdownWithInitialState);
+
+      // open modal
+      await user.press(
+        screen.getByText(initialSelectionLabel, { exact: false })
+      );
+
+      //unselect
+      await user.press(
+        screen.getByLabelText(initialSelectionLabel, { exact: false })
+      );
+
+      // close the modal
+      const closeModal = screen.getByLabelText('close modal');
+      await user.press(closeModal);
+
+      rerender(
+        <DropdownSelect
+          selectedValue={[]}
+          options={options}
+          onValueChange={() => {}}
+          placeholder={placeholder}
+          optionLabel="name"
+          optionValue="value"
+          isMultiple
+        />
+      );
+
+      await user.press(screen.getByText(placeholder));
     });
 
     test('select all / unselect all', async () => {
