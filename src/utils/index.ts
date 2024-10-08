@@ -55,7 +55,7 @@ export const getLabelsOfSelectedItems = ({
         (item: TFlatListItem) => item[optionValue] === element
       )?.[optionLabel];
 
-      if (selectedItemLabel) {
+      if (selectedItemLabel !== '') {
         selectedLabels.push(selectedItemLabel);
       }
     });
