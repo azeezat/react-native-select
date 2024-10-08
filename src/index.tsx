@@ -53,21 +53,12 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
       dropdownHelperTextStyle,
       selectedItemStyle,
       multipleSelectedItemStyle,
-      modalBackgroundStyle, // kept for backwards compatibility
-      modalOptionsContainerStyle, // kept for backwards compatibility
-      searchInputStyle, // kept for backwards compatibility
       primaryColor = colors.gray,
       disabled = false,
-      checkboxSize, // kept for backwards compatibility
-      checkboxStyle, // kept for backwards compatibility
-      checkboxLabelStyle, // kept for backwards compatibility
-      checkboxComponentStyles, // kept for backwards compatibility
-      checkboxComponent, // kept for backwards compatibility
       listHeaderComponent,
       listFooterComponent,
       listComponentStyles,
       listEmptyComponent,
-      modalProps, // kept for backwards compatibility
       listControls,
       searchControls,
       modalControls,
@@ -131,7 +122,6 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
     const { isVisible, openModal, closeModal } = useModal({
       resetOptionsRelatedState,
       disabled,
-      modalProps,
       modalControls,
     });
 
@@ -156,8 +146,8 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
 
     useEffect(() => {
       isMultiple
-        ? setSelectedItems(Array.isArray(selectedValue) ? selectedValue : [])
-        : setSelectedItem((selectedValue as TSelectedItem) || '');
+        ? setSelectedItems(selectedValue as TSelectedItem[])
+        : setSelectedItem(selectedValue as TSelectedItem);
 
       return () => {};
     }, [
@@ -240,10 +230,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
         <CustomModal
           visible={isVisible}
           onRequestClose={() => closeModal()}
-          modalBackgroundStyle={modalBackgroundStyle} // kept for backwards compatibility
-          modalOptionsContainerStyle={modalOptionsContainerStyle} // kept for backwards compatibility
           modalControls={modalControls}
-          modalProps={modalProps} // kept for backwards compatibility
         >
           <ListTypeComponent
             ListHeaderComponent={
@@ -252,7 +239,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
                   <Input
                     value={searchValue}
                     onChangeText={(text: string) => setSearchValue(text)}
-                    style={searchControls?.textInputStyle || searchInputStyle}
+                    style={searchControls?.textInputStyle}
                     primaryColor={primaryColor}
                     textInputContainerStyle={
                       searchControls?.textInputContainerStyle
@@ -282,11 +269,6 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
                           onChange={() => handleSelectAll()}
                           primaryColor={primaryColor}
                           checkboxControls={checkboxControls}
-                          checkboxSize={checkboxSize}
-                          checkboxStyle={checkboxStyle}
-                          checkboxLabelStyle={checkboxLabelStyle}
-                          checkboxComponentStyles={checkboxComponentStyles}
-                          checkboxComponent={checkboxComponent}
                         />
                       </TouchableOpacity>
                     </View>
@@ -305,11 +287,6 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
             handleMultipleSelections={handleMultipleSelections}
             handleSingleSelection={handleSingleSelection}
             primaryColor={primaryColor}
-            checkboxSize={checkboxSize}
-            checkboxStyle={checkboxStyle}
-            checkboxLabelStyle={checkboxLabelStyle}
-            checkboxComponentStyles={checkboxComponentStyles}
-            checkboxComponent={checkboxComponent}
             checkboxControls={checkboxControls}
             listIndex={listIndex}
             listEmptyComponent={listEmptyComponent}

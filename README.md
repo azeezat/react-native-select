@@ -1,6 +1,7 @@
 [![NPM](https://nodei.co/npm/react-native-input-select.png?downloads=true)](https://nodei.co/npm/react-native-input-select/)
 
 [![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select) [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-select?style=social)](https://github.com/azeezat/react-native-select/stargazers) [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml)
+[![coverage](https://github.com/azeezat/react-native-select/actions/workflows/coverage.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/coverage.yml)
 [![react-native-input-select](https://snyk.io/advisor/npm-package/react-native-input-select/badge.svg)](https://snyk.io/advisor/npm-package/react-native-input-select)
 
 # react-native-input-select
@@ -23,7 +24,7 @@ yarn add react-native-input-select
 
 ## Sandbox
 
-[Sandbox](https://azeezat.github.io/react-native-select/)
+See more examples in [Sandbox](https://azeezat.github.io/react-native-select/)
 
 # iOS
 
@@ -279,64 +280,6 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | modalControls             | `Object`                                     | `{ modalBackgroundStyle: ViewStyle, modalOptionsContainerStyle: ViewStyle, modalProps: ModalProps}`                                                                                             |
 | maxSelectableItems        | `number`                                     | 5                                                                                                                                                                                               |
 | ref                       | `useRef<DropdownSelectHandle \| null>(null)` | Use this to open or close the modal as needed e.g dropdownRef.current?.open() or dropdownRef.current?.close()                                                                                   |
-
-## Deprecation Notice
-
-The following props would be removed in coming releases.
-
-- Individual props `checkboxSize`, `checkboxStyle`, `checkboxLabelStyle`, `checkboxComponent` would be replaced with a single object `checkboxControls` e.g
-
-```js
-checkboxControls = {
-  checkboxSize: 20,
-  checkboxStyle: {
-    backgroundColor: 'purple',
-    borderRadius: 30,
-    padding: 10,
-    borderColor: 'red',
-  },
-  checkboxLabelStyle: { color: 'red', fontSize: 20 },
-  checkboxComponent: <View style={styles.radioButton} />
-  ...
-};
-```
-
-- `searchInputStyle` would now be replaced with `textInputStyle` in the `searchControls` object
-
-```js
-searchControls = {
-  textInputStyle: {
-    color: 'blue',
-    fontWeight: '500',
-    minHeight: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-    width: '70%',
-    textAlign: 'center',
-    backgroundColor: 'pink',
-  },
-  textInputContainerStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textInputProps: {
-    placeholder: 'Search anything here',
-    placeholderTextColor: 'white',
-  },
-  ...
-};
-```
-
-- Individual props `modalBackgroundStyle`, `modalOptionsContainerStyle`, `modalProps` would be replaced with a single object `modalControls`
-
-```js
-modalControls = {
-  modalBackgroundStyle: ViewStyle,
-  modalOptionsContainerStyle: ViewStyle,
-  modalProps: ModalProps, //Use this to pass in react-native default modal props
-};
-```
 
 ## Contributing
 
