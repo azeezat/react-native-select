@@ -85,7 +85,7 @@ const DropdownSelectedItemsView = ({
               disabled={disabled}
             />
           )}
-          {!selectedItem && selectedItems?.length === 0 && (
+          {selectedItem === '' && selectedItems?.length === 0 && (
             <DropdownContent
               onPress={() => openModal()}
               style={[styles.blackText, placeholderStyle]}
