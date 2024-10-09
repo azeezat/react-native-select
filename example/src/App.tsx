@@ -19,20 +19,18 @@ import {DropdownSelectHandle} from '../../src/types/index.types';
 export default function App() {
   const [user, setUser] = useState<string>('');
   const [country, setCountry] = useState<any>('');
-  const [gender, setGender] = useState<number>(0);
+  const [gender, setGender] = useState<number>();
   const [currency, setCurrency] = useState<string[]>([]);
   const [meals, setMeals] = useState<string[]>([]);
   const [item, setItem] = useState<any>('');
   const [menu, setMenu] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
-
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [ingredientOptions, setIngredientOptions] = useState<any[]>([
-    {label: 'Pepper', value: '1'},
-    {label: 'Oil', value: '2'},
-    {label: 'Fish', value: '3', disabled: true},
+    {label: 0, value: 0},
+    {label: 1, value: false},
+    {label: 2, value: 2, disabled: true},
   ]);
-
   useEffect(() => {
     setCurrency(['NGN']);
     setMenu(['F']);
@@ -90,7 +88,7 @@ export default function App() {
                     <Text>Male</Text>
                   </View>
                 ),
-                id: 1,
+                id: 0,
               },
               {
                 name: (
@@ -105,7 +103,7 @@ export default function App() {
                     <Text>Female</Text>
                   </View>
                 ),
-                id: 2,
+                id: 1,
               },
             ]}
             optionLabel={'name'}
@@ -118,7 +116,7 @@ export default function App() {
               borderStyle: 'solid',
             }}
             dropdownErrorTextStyle={{color: 'red', fontWeight: '500'}}
-            error={gender ? '' : 'Gender is required'}
+            error={gender === undefined ? 'Gender is required' : ''}
             modalControls={{
               modalProps: {
                 onShow: () => logMovies(),
