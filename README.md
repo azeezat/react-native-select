@@ -297,7 +297,7 @@ For discussion and feedback on this library. You can access it by heading over t
 
 | Title                                                                                                   | Topic                                                                |
 | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| [Announcements 📣](https://github.com/azeezat/react-native-select/discussions/categories/announcements) | General announcements about this working group.                      |
+| [Announcements 📣](https://github.com/azeezat/react-native-select/discussions/categories/announcements) | General announcements about this library.                      |
 | [Show and tell 🙌](https://github.com/azeezat/react-native-select/discussions/categories/show-and-tell) | Show off something you've made out of this library                   |
 | [Ideas 💡](https://github.com/azeezat/react-native-select/discussions/categories/ideas)                 | A place to Share ideas for new features.                             |
 | [Polls 🗳️](https://github.com/azeezat/react-native-select/discussions/categories/polls)                 | Take a vote from the community                                       |
