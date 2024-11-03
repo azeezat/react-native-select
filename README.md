@@ -291,6 +291,19 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 Made with [contrib.rocks](https://contrib.rocks).
 
+## Discussion
+
+For discussion and feedback on this library. You can access it by heading over to the [Discussions Tab on Github](https://github.com/azeezat/react-native-select/discussions). We've created some sections to keep the discussion focused.
+
+| Title                                                                                                   | Topic                                                                |
+| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [Announcements 📣](https://github.com/azeezat/react-native-select/discussions/categories/announcements) | General announcements about this working group.                      |
+| [Show and tell 🙌](https://github.com/azeezat/react-native-select/discussions/categories/show-and-tell) | Show off something you've made out of this library                   |
+| [Ideas 💡](https://github.com/azeezat/react-native-select/discussions/categories/ideas)                 | A place to Share ideas for new features.                             |
+| [Polls 🗳️](https://github.com/azeezat/react-native-select/discussions/categories/polls)                 | Take a vote from the community                                       |
+| [Q&A 🤝](https://github.com/azeezat/react-native-select/discussions/categories/q-a)                     | A place to ask the community for help on the New Architecture topics |
+| [General 💬](https://github.com/azeezat/react-native-select/discussions/categories/general)             | Chat about anything and everything here                              |
+
 ## License
 
 MIT
