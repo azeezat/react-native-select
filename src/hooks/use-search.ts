@@ -25,8 +25,12 @@ export const useSearch = ({
     TFlatList | TSectionList
   >(initialOptions);
 
+  const resetOptionsToDefault = (i: TFlatList | TSectionList) => {
+    setFilteredOptions(i);
+  };
+
   useEffect(() => {
-    setFilteredOptions(initialOptions);
+    resetOptionsToDefault(initialOptions);
     return () => {};
   }, [initialOptions]);
 
@@ -82,8 +86,10 @@ export const useSearch = ({
   useEffect(() => {
     if (searchValue) {
       onSearch(searchValue);
+    } else {
+      resetOptionsToDefault(initialOptions);
     }
-  }, [onSearch, searchValue]);
+  }, [onSearch, searchValue, initialOptions]);
 
   return {
     searchValue,
