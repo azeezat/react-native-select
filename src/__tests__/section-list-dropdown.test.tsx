@@ -32,24 +32,24 @@ describe('Section list', () => {
     {
       title: 'Main dishes',
       data: [
-        { label: 'Pizza', value: 'A' },
-        { label: 'Burger', value: 'B' },
-        { label: 'Risotto', value: 'C' },
+        { label: 'Pizza', value: 0 },
+        { label: 'Burger', value: 1 },
+        { label: 'Risotto', value: 2 },
       ],
     },
     {
       title: 'Sides',
       data: [
-        { label: 'Ice cream', value: 'D' },
-        { label: 'Cheesecake', value: 'E' },
+        { label: 'Ice cream', value: 3 },
+        { label: 'Cheesecake', value: 4 },
       ],
     },
     {
       title: 'Drinks',
       data: [
-        { label: 'Water', value: 'F', disabled: true },
-        { label: 'Coke', value: 'G' },
-        { label: 'Juice', value: 'H' },
+        { label: 'Water', value: 5, disabled: true },
+        { label: 'Coke', value: 6 },
+        { label: 'Juice', value: 7 },
       ],
     },
   ];
@@ -175,7 +175,7 @@ describe('Section list', () => {
       // if there is a disabled item in the list, expect no call
       options.map(async (section) => {
         section.data.map(async (item) => {
-          const listItem = screen.getByText(item.label.toString());
+          const listItem = screen.getByText(item?.label as string);
           expect(listItem);
           await user.press(listItem);
           if (!item.disabled) {

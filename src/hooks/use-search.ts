@@ -38,9 +38,9 @@ export const useSearch = ({
     (flatList: TFlatList, regexFilter: RegExp) => {
       return flatList.filter((item: TFlatListItem) => {
         return (
-          item[optionLabel].toString().toLowerCase().search(regexFilter) !==
+          item[optionLabel]?.toString().toLowerCase().search(regexFilter) !==
             -1 ||
-          item[optionValue].toString().toLowerCase().search(regexFilter) !== -1
+          item[optionValue]?.toString().toLowerCase().search(regexFilter) !== -1
         );
       });
     },

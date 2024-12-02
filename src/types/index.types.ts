@@ -94,7 +94,7 @@ type TListControls = {
   emptyListMessage?: string;
 };
 
-export type TSelectedItem = string | number | boolean;
+export type TSelectedItem = string | number | boolean | undefined;
 export type TSelectedItemWithReactComponent =
   | TSelectedItem
   | React.ReactElement;

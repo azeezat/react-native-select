@@ -31,7 +31,7 @@ const CheckBox = ({
       ? checkboxDisabledStyle?.borderColor || colors.disabled
       : checkboxStyle?.borderColor || styles.checkbox.borderColor,
   };
-
+  label = typeof label === 'object' ? label : String(label);
   return (
     <Pressable
       onPress={onChange ? () => onChange(!value) : null}
