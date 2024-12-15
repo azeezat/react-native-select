@@ -86,11 +86,10 @@ export const useSearch = ({
   useEffect(() => {
     if (searchValue) {
       onSearch(searchValue);
+    } else {
+      resetOptionsToDefault(initialOptions);
     }
-    else{
-      resetOptionsToDefault(initialOptions)
-    }
-  }, [onSearch, searchValue]);
+  }, [initialOptions, onSearch, searchValue]);
 
   return {
     searchValue,
