@@ -101,7 +101,8 @@
     ],
     "coverageReporters": [
       "html",
-      "text"
+      "text",
+      "lcov"
     ],
     "coverageThreshold": {
       "global": {
