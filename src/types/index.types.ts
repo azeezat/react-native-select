@@ -92,6 +92,7 @@ type TListControls = {
   unselectAllCallback?: () => void;
   hideSelectAll?: boolean;
   emptyListMessage?: string;
+  keyboardShouldPersistTaps?: "always" | "never" | "handled";
 };
 
 export type TSelectedItem = string | number | boolean | undefined;
