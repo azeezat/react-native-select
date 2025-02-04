@@ -291,6 +291,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
             listIndex={listIndex}
             listEmptyComponent={listEmptyComponent}
             emptyListMessage={listControls?.emptyListMessage}
+            keyboardShouldPersistTaps={listControls?.keyboardShouldPersistTaps}
           />
         </CustomModal>
       </>
