@@ -60,11 +60,11 @@ const DropdownSectionList = ({
 
   const sectionlistRef = useRef<SectionList<TSectionList>>(null);
 
-  const scrollToLocation = (listIndex: any) => {
+  const scrollToLocation = (index: any) => {
     sectionlistRef?.current?.scrollToLocation({
-      sectionIndex: listIndex.sectionIndex,
+      sectionIndex: index.sectionIndex,
       animated: true,
-      itemIndex: listIndex.itemIndex,
+      itemIndex: index.itemIndex,
     });
   };
 
