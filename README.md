@@ -2,8 +2,6 @@
 
 [![npm version](https://badge.fury.io/js/react-native-input-select.svg)](https://badge.fury.io/js/react-native-input-select) [![GitHub stars](https://img.shields.io/github/stars/azeezat/react-native-select?style=social)](https://github.com/azeezat/react-native-select/stargazers) [![CodeQL](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/codeql.yml) [![Release & Publish to NPM](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/release-and-publish-to-npm.yml)
 [![coverage](https://github.com/azeezat/react-native-select/actions/workflows/coverage.yml/badge.svg)](https://github.com/azeezat/react-native-select/actions/workflows/coverage.yml)
-[![react-native-input-select](https://snyk.io/advisor/npm-package/react-native-input-select/badge.svg)](https://snyk.io/advisor/npm-package/react-native-input-select)
-[![Coverage Status](https://coveralls.io/repos/github/azeezat/react-native-select/badge.svg?branch=main)](https://coveralls.io/github/azeezat/react-native-select?branch=main)
 
 # react-native-input-select
 
