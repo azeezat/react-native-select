@@ -1,5 +1,5 @@
 {
-  "name": "input-select-example",
+  "name": "InputSelectExample",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,31 +8,31 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "clean": "react-native start --reset-cache"
+     "clean": "react-native start --reset-cache"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-native": "^0.74.1"
+    "react": "19.1.0",
+    "react-native": "0.80.0",
+    "@react-native/new-app-screen": "0.80.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/plugin-transform-private-methods": "^7.24.6",
-    "@babel/preset-env": "^7.20.0",
-    "@babel/runtime": "^7.20.0",
-    "@react-native/babel-preset": "0.74.83",
-    "@react-native/eslint-config": "0.74.83",
-    "@react-native/metro-config": "0.74.83",
-    "@react-native/typescript-config": "0.74.83",
-    "@types/react": "^18.2.6",
-    "@types/react-test-renderer": "^18.0.0",
-    "babel-jest": "^29.6.3",
-    "babel-plugin-module-resolver": "^5.0.2",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/runtime": "^7.25.0",
+    "@react-native-community/cli": "19.0.0",
+    "@react-native-community/cli-platform-android": "19.0.0",
+    "@react-native-community/cli-platform-ios": "19.0.0",
+    "@react-native/babel-preset": "0.80.0",
+    "@react-native/eslint-config": "0.80.0",
+    "@react-native/metro-config": "0.80.0",
+    "@react-native/typescript-config": "0.80.0",
+    "@types/jest": "^29.5.13",
+    "@types/react": "^19.1.0",
+    "@types/react-test-renderer": "^19.1.0",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
-    "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "2.8.8",
-    "react-test-renderer": "^18.3.0",
+    "react-test-renderer": "19.1.0",
     "typescript": "5.0.4"
   },
   "engines": {
