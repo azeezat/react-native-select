@@ -2,15 +2,8 @@ import React, { createRef } from 'react';
 import DropdownSelect from '../index';
 import { render, screen, userEvent } from '@testing-library/react-native';
 import '@testing-library/jest-dom';
-import { PlatformOSType, Pressable, Text } from 'react-native';
+import { Platform, Pressable, Text } from 'react-native';
 import { DropdownSelectHandle } from 'src/types/index.types';
-
-export const mockPlatform = (OS: PlatformOSType) => {
-  jest.doMock('react-native/Libraries/Utilities/Platform', () => ({
-    OS,
-    select: (config: { [x: string]: any }) => config[OS],
-  }));
-};
 
 describe('Initial state of component', () => {
   beforeAll(() => {
@@ -67,7 +60,7 @@ describe('Initial state of component', () => {
   });
 
   test('open and close modal', async () => {
-    mockPlatform('android');
+    Platform.OS='android'
 
     render(defaultDropdown);
 
@@ -85,7 +78,7 @@ describe('Initial state of component', () => {
   });
 
   test('should open and close modal with useRef', async () => {
-    mockPlatform('android');
+    Platform.OS='android'
     const dropdownRef = createRef<DropdownSelectHandle>();
     render(
       <>
