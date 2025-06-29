@@ -1,4 +1,4 @@
-export const colors: any = {
+export const colors = {
   primary: 'green',
   red: '#FA4169',
   black: '#000000',
