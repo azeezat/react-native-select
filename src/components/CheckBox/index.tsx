@@ -17,7 +17,7 @@ const CheckBox = ({
     checkboxComponent,
     checkboxDisabledStyle,
     checkboxStyle,
-    checkboxUnselectedColor,
+    checkboxUnselectedColor = 'white',
     checkboxLabelStyle,
   } = checkboxControls ?? {};
 
@@ -26,12 +26,18 @@ const CheckBox = ({
       ? checkboxDisabledStyle?.backgroundColor || colors.disabled
       : value
       ? checkboxStyle?.backgroundColor || primaryColor
-      : checkboxUnselectedColor || 'white',
+      : checkboxUnselectedColor,
     borderColor: disabled
       ? checkboxDisabledStyle?.borderColor || colors.disabled
       : checkboxStyle?.borderColor || styles.checkbox.borderColor,
   };
   label = typeof label === 'object' ? label : String(label);
+
+  const checkBoxDimensions = {
+    height: checkboxSize || CHECKBOX_SIZE,
+    width: checkboxSize || CHECKBOX_SIZE,
+  };
+
   return (
     <Pressable
       onPress={onChange ? () => onChange(!value) : null}
@@ -44,15 +50,14 @@ const CheckBox = ({
         aria-checked={value}
       >
         {checkboxComponent || (
-          <Image
-            source={require('../../asset/check.png')}
-            style={[
-              {
-                height: checkboxSize || CHECKBOX_SIZE,
-                width: checkboxSize || CHECKBOX_SIZE,
-              },
-            ]}
-          />
+          <View style={checkBoxDimensions}>
+            {value ? (
+              <Image
+                source={require('../../asset/check.png')}
+                style={checkBoxDimensions}
+              />
+            ) : null}
+          </View>
         )}
       </View>
       {label && label !== '' && (
