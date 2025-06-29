@@ -32,6 +32,7 @@ const DropdownSelectedItem = ({
   showRemoveIcon,
   closeIconStyles,
   testId,
+  disabled,
   ...rest
 }: DropdownSelectedItemProps) => {
   return (
@@ -45,7 +46,7 @@ const DropdownSelectedItem = ({
 
       {showRemoveIcon && (
         <Pressable
-          onPress={() => onRemoveItem?.()}
+          onPress={disabled ? null : () => onRemoveItem?.()}
           testID={`dropdown-selected-item-remove-icon-${testId}`}
         >
           {removeItemIcon || (

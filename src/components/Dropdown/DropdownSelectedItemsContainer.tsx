@@ -104,7 +104,7 @@ const DropdownSelectedItemsContainer = ({
                       styles.selectedItems.color,
                   }}
                   label={label}
-                  disabled={disabled}
+                  disabled={disabled || (data.disabled as boolean)}
                   showRemoveIcon={selectedItemsControls?.showRemoveIcon || true}
                   removeItemIcon={selectedItemsControls?.removeItemIcon}
                   onRemoveItem={() => {

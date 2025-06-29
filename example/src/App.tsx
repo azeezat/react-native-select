@@ -391,7 +391,7 @@ export default function App() {
 
           {/* Section list */}
           <DropdownSelect
-            label="Section list"
+            label="Section list (Water cannot be removed)"
             placeholder="Select multiple dishes..."
             options={[
               {
@@ -412,7 +412,7 @@ export default function App() {
               {
                 title: 'Drinks',
                 data: [
-                  { label: 'Water', value: 'F' },
+                  { label: 'Water', value: 'F', disabled: true },
                   { label: 'Coke', value: 'G' },
                   { label: 'Juice', value: 'H' },
                 ],
@@ -428,6 +428,7 @@ export default function App() {
                 borderColor: 'red',
                 backgroundColor: 'red',
               },
+              checkboxUnselectedColor: 'green',
             }}
             listComponentStyles={{
               sectionHeaderStyle: {
