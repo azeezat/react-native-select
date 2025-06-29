@@ -57,10 +57,7 @@ describe('Flat List', () => {
     test('show default styles', () => {
       render(flatListDropdown);
       const placeholderStyle = screen.getByText(placeholder);
-      expect(placeholderStyle.props.style).toMatchObject([
-        { color: '#000000' },
-        undefined,
-      ]);
+      expect(placeholderStyle.props.style).toMatchObject({ color: '#000000' });
     });
 
     test('search', async () => {
@@ -121,8 +118,9 @@ describe('Flat List', () => {
       expect(selectedOption);
       await user.press(selectedOption);
 
-      //modal should be open
+      //modal should be open when you click the dropdown icon
       expect(screen.getByTestId('react-native-input-select-modal'));
+      expect(screen.getByText('Chicken', { exact: false }));
     });
 
     test('autoCloseOnSelect=false should not close modal after selection', async () => {
@@ -281,7 +279,7 @@ describe('Flat List', () => {
         />
       );
 
-      const { rerender } = render(flatListDropdownWithInitialState);
+      render(flatListDropdownWithInitialState);
 
       // open modal
       await user.press(
@@ -296,18 +294,6 @@ describe('Flat List', () => {
       // close the modal
       const closeModal = screen.getByLabelText('close modal');
       await user.press(closeModal);
-
-      rerender(
-        <DropdownSelect
-          selectedValue={[]}
-          options={options}
-          onValueChange={() => {}}
-          placeholder={placeholder}
-          optionLabel="name"
-          optionValue="value"
-          isMultiple
-        />
-      );
 
       await user.press(screen.getByText(placeholder));
     });
@@ -326,6 +312,39 @@ describe('Flat List', () => {
       await user.press(clearAll);
       expect(mockUnselectAllCallback).toHaveBeenCalledTimes(1); //`Select all` should now be visible since all items in the list have been deselected
       screen.getByText('Select all'); //`Select all` should now be visible since all items in the list have been deselected
+    });
+
+    test('clicking remove icon removes initially selected item', async () => {
+      const initialSelection = options[3];
+      const initialSelectionValue = initialSelection.value as string;
+      const initialSelectionLabel = initialSelection.name as string;
+      const mockRemoveSelectedItem = jest.fn();
+
+      const flatListDropdownWithInitialState = (
+        <DropdownSelect
+          selectedValue={[initialSelectionValue]}
+          options={options}
+          onValueChange={() => {}}
+          placeholder={placeholder}
+          optionLabel="name"
+          optionValue="value"
+          selectedItemsControls={{
+            onRemoveItem: mockRemoveSelectedItem,
+          }}
+          isMultiple
+        />
+      );
+
+      render(flatListDropdownWithInitialState);
+
+      // remove item and show placeholder
+      screen.getByText(initialSelectionLabel, { exact: false });
+      await user.press(
+        screen.getByTestId('dropdown-selected-item-remove-icon-0', {
+          exact: false,
+        })
+      );
+      await user.press(screen.getByText(placeholder));
     });
   });
 

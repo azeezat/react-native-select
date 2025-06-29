@@ -161,6 +161,18 @@ export default function App() {
         unselectAllCallback: () => Alert.alert('You removed everything'),
         emptyListMessage: 'No record found',
       }}
+      selectedItemsControls={{
+        removeItemIcon: (
+          <Image
+            source={{
+              uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA',
+            }}
+            style={{ tintColor: 'white', height: 12, width: 12 }}
+          />
+        ),
+        onRemoveItem: () => Alert.alert('Item was removed'),
+        showRemoveIcon: true,
+      }}
     />
   );
 }
@@ -279,6 +291,7 @@ For more examples visit our [wiki page](https://github.com/azeezat/react-native-
 | modalControls             | `Object`                                     | `{ modalBackgroundStyle: ViewStyle, modalOptionsContainerStyle: ViewStyle, modalProps: ModalProps}`                                                                                                                            |
 | minSelectableItems        | `number`                                     | 3                                                                                                                                                                                                                              |
 | maxSelectableItems        | `number`                                     | 5                                                                                                                                                                                                                              |
+| selectedItemsControls     | `Object`                                     | `{ removeItemIcon: ReactNode, onRemoveItem: ()=>{}, showRemoveIcon: boolean}`                                                                                                                                                  |
 | ref                       | `useRef<DropdownSelectHandle \| null>(null)` | Use this to open or close the modal as needed e.g dropdownRef.current?.open() or dropdownRef.current?.close()                                                                                                                  |
 
 ## Contributing

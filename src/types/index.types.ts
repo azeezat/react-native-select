@@ -13,19 +13,19 @@ export type DropdownProps = CommonDropdownProps &
   TListProps;
 
 export type CommonDropdownProps = {
-  testID?: string;
-  label?: string;
   options: TFlatList | TSectionList;
-  optionLabel?: string;
-  optionValue?: string;
   onValueChange: (selectedItems: TSelectedItem | TSelectedItem[]) => void;
   selectedValue: TSelectedItem | TSelectedItem[];
+  optionLabel?: string;
+  optionValue?: string;
   autoCloseOnSelect?: boolean;
   minSelectableItems?: number;
   maxSelectableItems?: number;
 };
 
 export type TDropdownInputProps = {
+  testID?: string;
+  label?: string;
   placeholder?: string;
   error?: string;
   helperText?: string;
@@ -39,8 +39,8 @@ export type TDropdownInputProps = {
   dropdownErrorStyle?: ViewStyle;
   dropdownErrorTextStyle?: TextStyle;
   dropdownHelperTextStyle?: TextStyle;
-  selectedItemStyle?: TextStyle;
-  multipleSelectedItemStyle?: TextStyle;
+  selectedItemStyle?: TextStyle | ViewStyle;
+  multipleSelectedItemStyle?: TextStyle | ViewStyle;
   primaryColor?: ColorValue;
   disabled?: boolean;
   placeholderStyle?: TextStyle;
@@ -51,6 +51,7 @@ type TControls = {
   checkboxControls?: TCheckboxControls;
   modalControls?: TCustomModalControls;
   listControls?: TListControls;
+  selectedItemsControls?: TSelectedItemsControls;
 };
 
 type TSearchControls = {
@@ -94,6 +95,12 @@ type TListControls = {
   hideSelectAll?: boolean;
   emptyListMessage?: string;
   keyboardShouldPersistTaps?: 'always' | 'never' | 'handled';
+};
+
+export type TSelectedItemsControls = {
+  showRemoveIcon?: boolean;
+  removeItemIcon?: React.ReactNode;
+  onRemoveItem?: () => void;
 };
 
 export type TSelectedItem = string | number | boolean | undefined;

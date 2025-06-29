@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import DropdownSelectedItemsView from './DropdownSelectedItemsView';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import DropdownSelectedItemsContainer, {
+  DropdownSelectedItemsContainerProps,
+} from './DropdownSelectedItemsContainer';
 import { colors } from '../../styles/colors';
 import { typography } from '../../styles/typography';
+import { TDropdownInputProps } from 'src/types/index.types';
 
 const Dropdown = ({
   testID,
@@ -10,12 +13,14 @@ const Dropdown = ({
   placeholder,
   helperText,
   error,
-  labelsOfSelectedItems,
+  selectionData,
   openModal,
-  closeModal,
   isMultiple,
   selectedItem,
   selectedItems,
+  optionLabel,
+  optionValue,
+  selectedItemsControls,
   dropdownIcon,
   labelStyle,
   dropdownStyle,
@@ -30,7 +35,8 @@ const Dropdown = ({
   primaryColor,
   disabled,
   setIndexOfSelectedItem,
-}: any) => {
+  handleMultipleSelections,
+}: TDropdownInputProps & DropdownSelectedItemsContainerProps) => {
   return (
     <View
       style={[styles.dropdownInputContainer, dropdownContainerStyle]}
@@ -42,18 +48,17 @@ const Dropdown = ({
         <Text style={[styles.label, labelStyle]}>{label}</Text>
       )}
 
-      <DropdownSelectedItemsView
+      <DropdownSelectedItemsContainer
         placeholder={placeholder}
         error={error}
-        labelsOfSelectedItems={labelsOfSelectedItems}
+        selectionData={selectionData}
         openModal={openModal}
-        closeModal={closeModal}
         isMultiple={isMultiple}
         selectedItem={selectedItem}
         selectedItems={selectedItems}
-        dropdownIcon={dropdownIcon}
+        optionLabel={optionLabel}
+        optionValue={optionValue}
         dropdownStyle={dropdownStyle}
-        dropdownIconStyle={dropdownIconStyle}
         selectedItemStyle={selectedItemStyle}
         multipleSelectedItemStyle={multipleSelectedItemStyle}
         dropdownErrorStyle={dropdownErrorStyle}
@@ -61,6 +66,8 @@ const Dropdown = ({
         disabled={disabled}
         placeholderStyle={placeholderStyle}
         setIndexOfSelectedItem={setIndexOfSelectedItem}
+        handleMultipleSelections={handleMultipleSelections}
+        selectedItemsControls={selectedItemsControls}
       />
 
       {error && error !== '' && (
@@ -72,6 +79,17 @@ const Dropdown = ({
           {helperText}
         </Text>
       )}
+
+      {/* Trailing Icon */}
+      <TouchableOpacity
+        style={[styles.iconStyle, dropdownIconStyle]}
+        onPress={() => openModal()}
+        testID="dropdown-trailing-icon"
+      >
+        {dropdownIcon || (
+          <Image source={require('../../asset/arrow-down.png')} />
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -82,6 +100,7 @@ const styles = StyleSheet.create({
   helper: { marginTop: 8, color: colors.primary, ...typography.caption },
   dropdownInputContainer: { marginBottom: 23, width: '100%' },
   blackText: { color: colors.black },
+  iconStyle: { position: 'absolute', right: 25, top: 60 },
 });
 
 export default Dropdown;

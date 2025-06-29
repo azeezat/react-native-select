@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from './colors';
 
-export const inputStyles: any = StyleSheet.create({
+export const inputStyles = StyleSheet.create({
   input: {
     paddingVertical: 18,
     paddingHorizontal: 23,

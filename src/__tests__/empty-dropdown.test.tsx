@@ -39,6 +39,7 @@ describe('Initial state of component', () => {
         },
       }}
       error={error}
+
     />
   );
 
@@ -53,14 +54,11 @@ describe('Initial state of component', () => {
   test('show default styles', () => {
     render(defaultDropdown);
     const placeholderStyle = screen.getByText(placeholder);
-    expect(placeholderStyle.props.style).toMatchObject([
-      { color: '#000000' },
-      undefined,
-    ]);
+    expect(placeholderStyle.props.style).toMatchObject({ color: '#000000' });
   });
 
   test('open and close modal', async () => {
-    Platform.OS='android'
+    Platform.OS = 'android';
 
     render(defaultDropdown);
 
@@ -75,10 +73,15 @@ describe('Initial state of component', () => {
 
     //check if callback was called on android
     expect(mockCloseModal).toHaveBeenCalledTimes(1);
+
+    //open modal when dropdown trailing icon is clicked
+    await user.press(screen.getByTestId('dropdown-trailing-icon'));
+    expect(screen.getByText('No options available'));
+    
   });
 
   test('should open and close modal with useRef', async () => {
-    Platform.OS='android'
+    Platform.OS = 'android';
     const dropdownRef = createRef<DropdownSelectHandle>();
     render(
       <>

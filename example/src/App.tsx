@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,8 +13,8 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import DropdownSelect from 'react-native-input-select';
-import {countries} from './data';
-import {DropdownSelectHandle} from '../../src/types/index.types';
+import { binIcon, countries } from './data';
+import { DropdownSelectHandle } from '../../src/types/index.types';
 
 export default function App() {
   const [user, setUser] = useState<string>('');
@@ -27,9 +27,9 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [ingredientOptions, setIngredientOptions] = useState<any[]>([
-    {label: 0, value: 0},
-    {label: 1, value: false},
-    {label: 2, value: 2, disabled: true},
+    { label: 0, value: 0 },
+    { label: 1, value: false },
+    { label: 2, value: 2, disabled: true },
   ]);
   useEffect(() => {
     setCurrency(['NGN']);
@@ -58,9 +58,9 @@ export default function App() {
             label="Currency"
             placeholder="Select multiple currencies..."
             options={[
-              {name: 'Naira (NGN) \u20A6', code: 'NGN'},
-              {name: 'Dollar (USD) \u0024', code: 'USD'},
-              {name: 'Euro (EUR) \u20AC', code: 'EUR'},
+              { name: 'Naira (NGN) \u20A6', code: 'NGN' },
+              { name: 'Dollar (USD) \u0024', code: 'USD' },
+              { name: 'Euro (EUR) \u20AC', code: 'EUR' },
             ]}
             optionLabel={'name'}
             optionValue={'code'}
@@ -69,6 +69,9 @@ export default function App() {
             isMultiple
             isSearchable
             primaryColor={'deepskyblue'}
+            selectedItemsControls={{
+              showRemoveIcon: true,
+            }}
           />
 
           <DropdownSelect
@@ -81,7 +84,7 @@ export default function App() {
                     <Image
                       style={styles.avatarStyle}
                       source={{
-                        uri: 'https://avatar.iran.liara.run/username?username=Azeezat+Raheem',
+                        uri: 'https://robohash.org/13c988d1766741bbe55e1edf78aa84fc?set=set4&bgset=&size=400x400',
                       }}
                     />
 
@@ -96,7 +99,7 @@ export default function App() {
                     <Image
                       style={styles.avatarStyle}
                       source={{
-                        uri: 'https://avatar.iran.liara.run/public/boy?username=Ash',
+                        uri: 'https://robohash.org/13c988d1766741bbe55e1edf78aa84fc?set=set1&bgset=bg1&size=400x400',
                       }}
                     />
 
@@ -115,7 +118,7 @@ export default function App() {
               borderWidth: 2,
               borderStyle: 'solid',
             }}
-            dropdownErrorTextStyle={{color: 'red', fontWeight: '500'}}
+            dropdownErrorTextStyle={{ color: 'red', fontWeight: '500' }}
             error={gender === undefined ? 'Gender is required' : ''}
             modalControls={{
               modalProps: {
@@ -123,14 +126,27 @@ export default function App() {
                 onDismiss: () => console.log('modal was dismissed'),
               },
             }}
+            isMultiple
+            selectedItemsControls={{
+              removeItemIcon: (
+                <Image
+                  source={{
+                    uri: binIcon,
+                  }}
+                  style={{ tintColor: 'white', height: 12, width: 12 }}
+                />
+              ),
+              onRemoveItem: () => Alert.alert('Item was removed'),
+              showRemoveIcon: true,
+            }}
           />
 
           <DropdownSelect
             label="Border has been removed"
             placeholder="Select user"
             options={[
-              {label: 'John Doe', value: '12'},
-              {label: 'James Bond', value: '13'},
+              { label: 'John Doe', value: '12' },
+              { label: 'James Bond', value: '13' },
             ]}
             selectedValue={user}
             onValueChange={(itemValue: any) => setUser(itemValue)}
@@ -146,7 +162,7 @@ export default function App() {
                 </View>
               )
             }
-            dropdownIconStyle={user ? {top: 20, right: 15} : {}}
+            dropdownIconStyle={user ? { top: 48, right: 15 } : {}}
             searchControls={{
               textInputStyle: {
                 color: 'blue',
@@ -174,10 +190,10 @@ export default function App() {
             label="Meal preferences"
             placeholder="Select your meal preferences"
             options={[
-              {name: '🍛 Rice', value: '1', disabled: false},
-              {name: '🍗 Chicken', value: '2'},
-              {name: '🥦 Brocoli', value: '3', disabled: false},
-              {name: '🍕 Pizza', value: '4'},
+              { name: '🍛 Rice', value: '1', disabled: false },
+              { name: '🍗 Chicken', value: '2' },
+              { name: '🥦 Brocoli', value: '3', disabled: false },
+              { name: '🍕 Pizza', value: '4' },
             ]}
             maxSelectableItems={2}
             optionLabel={'name'}
@@ -195,8 +211,8 @@ export default function App() {
               minHeight: 40,
               borderColor: 'green',
             }}
-            dropdownIconStyle={{top: 15, right: 10}}
-            dropdownContainerStyle={{marginBottom: 40}}
+            dropdownIconStyle={{ top: 47, right: 10 }}
+            dropdownContainerStyle={{ marginBottom: 40 }}
             dropdownHelperTextStyle={{
               color: 'green',
               fontWeight: '900',
@@ -214,7 +230,7 @@ export default function App() {
                 borderRadius: 30,
                 borderColor: 'green',
               },
-              checkboxLabelStyle: {color: 'green', fontSize: 20},
+              checkboxLabelStyle: { color: 'green', fontSize: 20 },
               checkboxUnselectedColor: 'black',
               checkboxComponent: <View style={styles.radioButton} />,
             }}
@@ -227,8 +243,8 @@ export default function App() {
             label="This label has been styled"
             placeholder="Select an item..."
             options={[
-              {label: 'Customized Item 1', value: '1'},
-              {label: 'Customized Item 2', value: '2'},
+              { label: 'Customized Item 1', value: '1' },
+              { label: 'Customized Item 2', value: '2' },
             ]}
             selectedValue={item}
             onValueChange={(itemValue: any) => setItem(itemValue)}
@@ -237,7 +253,7 @@ export default function App() {
               fontSize: 15,
               fontWeight: '500',
             }}
-            labelStyle={{color: 'teal', fontSize: 15, fontWeight: '500'}}
+            labelStyle={{ color: 'teal', fontSize: 15, fontWeight: '500' }}
             dropdownHelperTextStyle={{
               color: 'green',
               fontWeight: '900',
@@ -256,7 +272,7 @@ export default function App() {
                 padding: 5,
                 borderColor: 'red',
               },
-              checkboxLabelStyle: {color: 'red', fontSize: 20},
+              checkboxLabelStyle: { color: 'red', fontSize: 20 },
               checkboxComponent: <View style={styles.radioButton} />,
             }}
             selectedItemStyle={{
@@ -271,8 +287,9 @@ export default function App() {
               backgroundColor: 'green',
               marginBottom: 20,
               padding: 3,
-            }}>
-            <Text style={{color: 'white'}}>
+            }}
+          >
+            <Text style={{ color: 'white' }}>
               Open the dropdown below by pressing this component
             </Text>
           </TouchableHighlight>
@@ -298,7 +315,7 @@ export default function App() {
                 }}
               />
             }
-            dropdownIconStyle={{top: 20, right: 20}}
+            dropdownIconStyle={{ top: 52, right: 15 }}
             listHeaderComponent={
               <View style={styles.customComponentContainer}>
                 <Text style={styles.text}>
@@ -380,24 +397,24 @@ export default function App() {
               {
                 title: 'Main dishes',
                 data: [
-                  {label: 'Pizza', value: 'A'},
-                  {label: 'Burger', value: 'B'},
-                  {label: 'Risotto', value: 'C'},
+                  { label: 'Pizza', value: 'A' },
+                  { label: 'Burger', value: 'B' },
+                  { label: 'Risotto', value: 'C' },
                 ],
               },
               {
                 title: 'Sides',
                 data: [
-                  {label: 'Ice cream', value: 'D', disabled: true},
-                  {label: 'Cheesecake', value: 'E'},
+                  { label: 'Ice cream', value: 'D', disabled: true },
+                  { label: 'Cheesecake', value: 'E' },
                 ],
               },
               {
                 title: 'Drinks',
                 data: [
-                  {label: 'Water', value: 'F'},
-                  {label: 'Coke', value: 'G'},
-                  {label: 'Juice', value: 'H'},
+                  { label: 'Water', value: 'F' },
+                  { label: 'Coke', value: 'G' },
+                  { label: 'Juice', value: 'H' },
                 ],
               },
             ]}
@@ -445,12 +462,13 @@ export default function App() {
                   justifyContent: 'center',
                   alignItems: 'center',
                   paddingVertical: 10,
-                }}>
+                }}
+              >
                 <Pressable
                   onPress={() =>
                     setIngredientOptions([
                       ...ingredientOptions,
-                      {label: searchTerm, value: searchTerm},
+                      { label: searchTerm, value: searchTerm },
                     ])
                   }
                   style={{
@@ -458,14 +476,15 @@ export default function App() {
                     borderRadius: 5,
                     width: 120,
                     padding: 5,
-                  }}>
-                  <Text style={{color: 'white', textAlign: 'center'}}>
+                  }}
+                >
+                  <Text style={{ color: 'white', textAlign: 'center' }}>
                     Add ingredient
                   </Text>
                 </Pressable>
               </View>
             }
-            searchControls={{searchCallback: value => setSearchTerm(value)}}
+            searchControls={{ searchCallback: value => setSearchTerm(value) }}
           />
         </View>
       </ScrollView>

@@ -1,10 +1,6 @@
+import { TextStyle, ViewStyle } from 'react-native';
 import { TSelectedItem } from '../types/index.types';
-import {
-  TFlatList,
-  TFlatListItem,
-  TSectionList,
-  TSelectedItemWithReactComponent,
-} from '../types/index.types';
+import { TFlatList, TFlatListItem, TSectionList } from '../types/index.types';
 
 export const extractPropertyFromArray = (arr: any[], property: string) => {
   let extractedValue = arr?.map((item: any) => item[property]);
@@ -31,40 +27,76 @@ export const isSectionList = (options: TFlatList | TSectionList): boolean => {
  * @description get the labels of the items that were selected from the options array for either multiple or single selections
  * @returns
  */
-export const getLabelsOfSelectedItems = ({
+export const getSelectionsData = ({
   isMultiple,
-  optionLabel,
   optionValue,
   selectedItem,
   selectedItems,
   modifiedOptions,
 }: {
   isMultiple: boolean;
-  optionLabel: string;
   optionValue: string;
   selectedItem: TSelectedItem;
   selectedItems: TSelectedItem[];
   modifiedOptions: TFlatList;
-}) => {
+}): TFlatListItem | TFlatListItem[] => {
   // Multiple select
-  if (isMultiple && Array.isArray(selectedItems)) {
-    let selectedLabels: TSelectedItemWithReactComponent[] = [];
+  if (isMultiple) {
+    let currentSelections: TFlatListItem[] = [];
 
-    selectedItems?.forEach((element: TSelectedItem) => {
-      let selectedItemLabel = modifiedOptions?.find(
-        (item: TFlatListItem) => item[optionValue] === element
-      )?.[optionLabel];
+    Array.isArray(selectedItems) &&
+      selectedItems.forEach((element: TSelectedItem) => {
+        const currentSelection = modifiedOptions?.find(
+          (item: TFlatListItem) => item[optionValue] === element
+        );
 
-      if (selectedItemLabel !== '') {
-        selectedLabels.push(selectedItemLabel);
-      }
-    });
-    return selectedLabels;
+        // Only push if currentSelection is defined and is of the correct type
+        if (currentSelection) {
+          currentSelections.push(currentSelection);
+        }
+      });
+
+    return currentSelections;
   }
 
   // Single select
-  let selectedItemLabel = modifiedOptions?.find(
+  let current = modifiedOptions?.find(
     (item: TFlatListItem) => item[optionValue] === selectedItem
   );
-  return selectedItemLabel?.[optionLabel];
+  return current ? current : {};
+};
+
+const textStyleKeys = [
+  'color',
+  'fontSize',
+  'fontFamily',
+  'fontWeight',
+  'fontStyle',
+  'textAlign',
+  'lineHeight',
+  'textDecorationLine',
+  'textDecorationStyle',
+  'textDecorationColor',
+  'textShadowColor',
+  'textShadowOffset',
+  'textShadowRadius',
+  'letterSpacing',
+  'textTransform',
+];
+
+export const extractTextStylesFromArray = (
+  styleArray: (ViewStyle & TextStyle)[] = []
+) => {
+  const extractedStyles: Record<string, any> = {};
+  for (const styleObject of styleArray) {
+    if (styleObject && typeof styleObject === 'object') {
+      // Ensure it's a valid style object
+      for (const prop in styleObject) {
+        if (textStyleKeys.includes(prop)) {
+          extractedStyles[prop] = (styleObject as Record<string, any>)[prop];
+        }
+      }
+    }
+  }
+  return extractedStyles;
 };

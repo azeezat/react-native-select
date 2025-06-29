@@ -18,7 +18,7 @@ import type {
   DropdownSelectHandle,
   TSelectedItem,
 } from './types/index.types';
-import { extractPropertyFromArray, getLabelsOfSelectedItems } from './utils';
+import { extractPropertyFromArray, getSelectionsData } from './utils';
 import {
   useSelectionHandler,
   useModal,
@@ -63,6 +63,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
       searchControls,
       modalControls,
       checkboxControls,
+      selectedItemsControls,
       autoCloseOnSelect = true,
       minSelectableItems,
       maxSelectableItems,
@@ -151,14 +152,9 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
         ? setSelectedItems(selectedValue as TSelectedItem[])
         : setSelectedItem(selectedValue as TSelectedItem);
 
-      return () => {};
-    }, [
-      selectedValue,
-      setSelectedItems,
-      setSelectedItem,
-      isMultiple,
-      onValueChange,
-    ]);
+      // setSelectedItems already updates selectedValue, so omit it from dependency array to avoid infinite loop
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setSelectedItems, setSelectedItem, isMultiple, onValueChange]);
 
     /*===========================================
      * List type
@@ -200,18 +196,19 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
           placeholder={placeholder}
           helperText={helperText}
           error={error}
-          labelsOfSelectedItems={getLabelsOfSelectedItems({
+          selectionData={getSelectionsData({
             isMultiple,
-            optionLabel,
             optionValue,
             selectedItem,
             selectedItems,
             modifiedOptions,
           })}
+          optionLabel={optionLabel}
+          optionValue={optionValue}
           selectedItem={selectedItem}
           selectedItems={selectedItems}
+          selectedItemsControls={selectedItemsControls}
           openModal={() => openModal()}
-          closeModal={() => closeModal()}
           labelStyle={labelStyle}
           dropdownIcon={dropdownIcon}
           dropdownStyle={dropdownStyle}
@@ -227,6 +224,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
           disabled={disabled}
           placeholderStyle={placeholderStyle}
           setIndexOfSelectedItem={setIndexOfSelectedItem}
+          handleMultipleSelections={handleMultipleSelections}
           {...rest}
         />
         <CustomModal

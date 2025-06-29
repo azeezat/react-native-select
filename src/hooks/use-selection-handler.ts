@@ -20,7 +20,7 @@ export const useSelectionHandler = ({
   closeModal,
   autoCloseOnSelect,
 }: UseSelectionHandlerProps) => {
-  // Initialize state based on whether it's multiple selection or not
+  // Initialize state based on whether it is multiple selection or not
   const [selectedItem, setSelectedItem] = useState<TSelectedItem>(
     isMultiple ? '' : (initialSelectedValue as TSelectedItem)
   );
