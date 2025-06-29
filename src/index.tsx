@@ -64,6 +64,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
       modalControls,
       checkboxControls,
       autoCloseOnSelect = true,
+      minSelectableItems,
       maxSelectableItems,
       ...rest
     },
@@ -138,6 +139,7 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
     } = useSelectionHandler({
       initialSelectedValue: selectedValue,
       isMultiple,
+      minSelectableItems,
       maxSelectableItems,
       onValueChange,
       closeModal: () => closeModal(),

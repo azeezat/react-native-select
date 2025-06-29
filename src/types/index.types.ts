@@ -21,6 +21,7 @@ export type CommonDropdownProps = {
   onValueChange: (selectedItems: TSelectedItem | TSelectedItem[]) => void;
   selectedValue: TSelectedItem | TSelectedItem[];
   autoCloseOnSelect?: boolean;
+  minSelectableItems?: number;
   maxSelectableItems?: number;
 };
 

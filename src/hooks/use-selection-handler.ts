@@ -4,6 +4,7 @@ import { TSelectedItem } from '../types/index.types';
 interface UseSelectionHandlerProps {
   initialSelectedValue: TSelectedItem | TSelectedItem[]; // Can be a single value or an array
   isMultiple: boolean;
+  minSelectableItems?: number;
   maxSelectableItems?: number;
   onValueChange: (selectedItems: TSelectedItem | TSelectedItem[]) => void;
   closeModal: () => void;
@@ -13,6 +14,7 @@ interface UseSelectionHandlerProps {
 export const useSelectionHandler = ({
   initialSelectedValue,
   isMultiple,
+  minSelectableItems = 0,
   maxSelectableItems,
   onValueChange,
   closeModal,
@@ -29,8 +31,11 @@ export const useSelectionHandler = ({
   const handleSingleSelection = useCallback(
     (value: TSelectedItem) => {
       if (selectedItem === value) {
-        setSelectedItem('');
-        onValueChange(''); // Send null to parent when deselected
+        // Deselect item if minSelectableItems is not reached
+        if (minSelectableItems === 0) {
+          setSelectedItem('');
+          onValueChange(''); // Send null to parent when deselected
+        }
       } else {
         setSelectedItem(value);
         onValueChange(value); // Send selected value to parent
@@ -40,7 +45,13 @@ export const useSelectionHandler = ({
         }
       }
     },
-    [selectedItem, onValueChange, autoCloseOnSelect, closeModal]
+    [
+      selectedItem,
+      minSelectableItems,
+      onValueChange,
+      autoCloseOnSelect,
+      closeModal,
+    ]
   );
 
   const handleMultipleSelections = useCallback(
@@ -49,8 +60,10 @@ export const useSelectionHandler = ({
         let selectedValues = [...prevVal];
 
         if (selectedValues.includes(value)) {
-          // Remove item
-          selectedValues = selectedValues.filter((item) => item !== value);
+          // Only remove item if it doesn't drop below the minimum required
+          if (selectedValues.length > minSelectableItems) {
+            selectedValues = selectedValues.filter((item) => item !== value);
+          }
         } else {
           // Add item
           if (
@@ -66,7 +79,7 @@ export const useSelectionHandler = ({
         return selectedValues;
       });
     },
-    [maxSelectableItems, onValueChange]
+    [minSelectableItems, maxSelectableItems, onValueChange]
   );
 
   // Return the relevant state and handlers
