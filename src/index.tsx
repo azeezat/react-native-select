@@ -18,7 +18,11 @@ import type {
   DropdownSelectHandle,
   TSelectedItem,
 } from './types/index.types';
-import { extractPropertyFromArray, getSelectionsData } from './utils';
+import {
+  extractPropertyFromArray,
+  getSelectionsData,
+  removeDisabledItems,
+} from './utils';
 import {
   useSelectionHandler,
   useModal,
@@ -259,17 +263,20 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
                   modifiedOptions?.length > 1 && (
                     <View style={styles.optionsContainerStyle}>
                       <TouchableOpacity accessible={false}>
-                        <CheckBox
-                          value={selectAll}
-                          label={
-                            selectAll
-                              ? listControls?.unselectAllText || 'Clear all'
-                              : listControls?.selectAllText || 'Select all'
-                          }
-                          onChange={() => handleSelectAll()}
-                          primaryColor={primaryColor}
-                          checkboxControls={checkboxControls}
-                        />
+                        {/* only show this if all the items in the list are not disabled */}
+                        {removeDisabledItems(modifiedOptions)?.length !== 0 && (
+                          <CheckBox
+                            value={selectAll}
+                            label={
+                              selectAll
+                                ? listControls?.unselectAllText || 'Clear all'
+                                : listControls?.selectAllText || 'Select all'
+                            }
+                            onChange={() => handleSelectAll()}
+                            primaryColor={primaryColor}
+                            checkboxControls={checkboxControls}
+                          />
+                        )}
                       </TouchableOpacity>
                     </View>
                   )}

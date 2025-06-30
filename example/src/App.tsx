@@ -27,8 +27,8 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [ingredientOptions, setIngredientOptions] = useState<any[]>([
-    { label: 0, value: 0 },
-    { label: 1, value: false },
+    { label: 0, value: 0, disabled: true },
+    { label: 1, value: false, disabled: true },
     { label: 2, value: 2, disabled: true },
   ]);
   useEffect(() => {
@@ -190,9 +190,9 @@ export default function App() {
             label="Meal preferences"
             placeholder="Select your meal preferences"
             options={[
-              { name: '🍛 Rice', value: '1', disabled: false },
+              { name: '🍛 Rice', value: '1' },
               { name: '🍗 Chicken', value: '2' },
-              { name: '🥦 Brocoli', value: '3', disabled: false },
+              { name: '🥦 Brocoli', value: '3' },
               { name: '🍕 Pizza', value: '4' },
             ]}
             maxSelectableItems={2}
