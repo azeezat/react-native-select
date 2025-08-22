@@ -49,7 +49,7 @@ const CheckBox = ({
         style={[styles.checkbox, checkboxStyle, fillColor]}
         aria-checked={value}
       >
-        {checkboxComponent || (
+        {(value && checkboxComponent) || (
           <View style={checkBoxDimensions}>
             {value ? (
               <Image
