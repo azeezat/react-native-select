@@ -1,9 +1,11 @@
 {
   "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/Pods"],
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-input-select": ["../src/index"], //Add alias for package here
+      "react-native-input-select": ["../src/index"] //Add alias for package here
     }
   }
 }

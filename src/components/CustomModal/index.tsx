@@ -8,11 +8,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import { colors } from '../../styles/colors';
 import { TCustomModalControls } from 'src/types/index.types';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // In iOS, `SafeAreaView` does not automatically account on keyboard.
 // Therefore, for iOS we need to wrap the content in `KeyboardAvoidingView`.
@@ -34,6 +34,8 @@ const CustomModal = ({
 }: {
   modalControls?: TCustomModalControls;
 } & ModalProps) => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Modal
       visible={visible}
@@ -55,15 +57,16 @@ const CustomModal = ({
         >
           {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
           <TouchableWithoutFeedback accessible={false}>
-            <SafeAreaView
+            <View
               style={[
+                { paddingBottom: insets.bottom },
                 styles.modalOptionsContainer,
                 modalControls?.modalOptionsContainerStyle,
               ]}
               testID="react-native-input-select-modal-body"
             >
               {children}
-            </SafeAreaView>
+            </View>
           </TouchableWithoutFeedback>
         </TouchableOpacity>
       </ModalContentWrapper>

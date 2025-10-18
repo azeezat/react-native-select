@@ -116,7 +116,7 @@ export type TFlatListItem = {
 export type TSectionList = TSectionListItem[];
 export type TSectionListItem = { title: string; data: TFlatList };
 
-export interface DropdownSelectHandle {
+export type DropdownSelectHandle = {
   open: () => void;
   close: () => void;
-}
+};
