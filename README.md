@@ -38,30 +38,56 @@ See more examples in [Sandbox](https://azeezat.github.io/react-native-select/)
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | <img width="456" alt="Screenshot 2023-05-16 at 6 17 09 AM" src="https://github.com/azeezat/react-native-select/assets/9849221/d695657f-d840-4368-b841-42af479d6543"> | <img width="456" alt="Screenshot 2023-03-23 at 5 26 58 PM" src="https://user-images.githubusercontent.com/9849221/227393548-28796d7b-9760-43a9-8ed3-fb1618cd1b7d.png"> | <img width="456" alt="Screenshot 2023-03-23 at 5 28 49 PM" src="https://user-images.githubusercontent.com/9849221/227393554-91ed1a92-d229-4814-84d8-5f9095e8d048.png"> |
 
+## ⚠️ Important: Wrap Your App in SafeAreaProvider
+
+Starting from recent versions of React Native, certain safe area utilities have been deprecated, which may cause layout issues or warnings if not configured properly.
+
+To ensure consistent behavior across devices (especially on iOS with notches and status bars), you must wrap your root component with `SafeAreaProvider` from `react-native-safe-area-context`.
+
+✅ Example Setup
+
+```js
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import App from './App';
+
+export default function Root() {
+  return (
+    <SafeAreaProvider>
+      <App />
+    </SafeAreaProvider>
+  );
+}
+```
+
 ## Basic Usage
 
 ```js
 import React from 'react';
 import Dropdown from 'react-native-input-select';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [country, setCountry] = React.useState();
 
   return (
-    <Dropdown
-      label="Country"
-      placeholder="Select an option..."
-      options={[
-        { label: 'Nigeria', value: 'NG' },
-        { label: 'Åland Islands', value: 'AX' },
-        { label: 'Algeria', value: 'DZ' },
-        { label: 'American Samoa', value: 'AS' },
-        { label: 'Andorra', value: 'AD' },
-      ]}
-      selectedValue={country}
-      onValueChange={(value) => setCountry(value)}
-      primaryColor={'green'}
-    />
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <Dropdown
+          label="Country"
+          placeholder="Select an option..."
+          options={[
+            { label: 'Nigeria', value: 'NG' },
+            { label: 'Åland Islands', value: 'AX' },
+            { label: 'Algeria', value: 'DZ' },
+            { label: 'American Samoa', value: 'AS' },
+            { label: 'Andorra', value: 'AD' },
+          ]}
+          selectedValue={country}
+          onValueChange={(value) => setCountry(value)}
+          primaryColor={'green'}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 ```
@@ -72,108 +98,113 @@ export default function App() {
 import React from 'react';
 import Dropdown from 'react-native-input-select';
 import { View, StyleSheet, Text, Button, Alert, Image } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [country, setCountry] = React.useState();
 
   return (
-    <Dropdown
-      label="Customized components in list"
-      placeholder="Select multiple countries..."
-      options={countries.slice(0, 30)}
-      optionLabel={'name'}
-      optionValue={'code'}
-      selectedValue={country}
-      onValueChange={(itemValue: any) => setCountry(itemValue)}
-      isMultiple
-      isSearchable
-      primaryColor={'orange'}
-      dropdownStyle={{
-        borderWidth: 0, // To remove border, set borderWidth to 0
-      }}
-      dropdownIcon={
-        <Image
-          style={styles.tinyLogo}
-          source={{
-            uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <Dropdown
+          label="Customized components in list"
+          placeholder="Select multiple countries..."
+          options={countries.slice(0, 30)}
+          optionLabel={'name'}
+          optionValue={'code'}
+          selectedValue={country}
+          onValueChange={(itemValue: any) => setCountry(itemValue)}
+          isMultiple
+          isSearchable
+          primaryColor={'orange'}
+          dropdownStyle={{
+            borderWidth: 0, // To remove border, set borderWidth to 0
+          }}
+          dropdownIcon={
+            <Image
+              style={styles.tinyLogo}
+              source={{
+                uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+              }}
+            />
+          }
+          dropdownIconStyle={{ top: 20, right: 20 }}
+          listHeaderComponent={
+            <View style={styles.customComponentContainer}>
+              <Text style={styles.text}>
+                💡 You can add any component to the top of this list
+              </Text>
+              <View style={styles.fixToText}>
+                <Button
+                  title="Left button"
+                  onPress={() => Alert.alert('Left button pressed')}
+                  color="#007AFF"
+                />
+                <Button
+                  title="Right button"
+                  onPress={() => Alert.alert('Right button pressed')}
+                />
+              </View>
+            </View>
+          }
+          listFooterComponent={
+            <View style={styles.customComponentContainer}>
+              <Text>You can add any component to the bottom of this list</Text>
+            </View>
+          }
+          modalControls={{
+            modalOptionsContainerStyle: {
+              padding: 10,
+              backgroundColor: 'cyan',
+            },
+            modalProps: {
+              supportedOrientations: [
+                'portrait',
+                'portrait-upside-down',
+                'landscape',
+                'landscape-left',
+                'landscape-right',
+              ],
+              transparent: false,
+            },
+          }}
+          listComponentStyles={{
+            listEmptyComponentStyle: {
+              color: 'red',
+            },
+            itemSeparatorStyle: {
+              opacity: 0,
+              borderColor: 'white',
+              borderWidth: 2,
+              backgroundColor: 'cyan',
+            },
+            sectionHeaderStyle: {
+              padding: 10,
+              backgroundColor: 'cyan',
+            },
+          }}
+          listControls={{
+            selectAllText: 'Choose everything',
+            unselectAllText: 'Remove everything',
+            selectAllCallback: () => Alert.alert('You selected everything'),
+            unselectAllCallback: () => Alert.alert('You removed everything'),
+            emptyListMessage: 'No record found',
+          }}
+          selectedItemsControls={{
+            removeItemIcon: (
+              <Image
+                source={{
+                  uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA',
+                }}
+                style={{ tintColor: 'white', height: 12, width: 12 }}
+              />
+            ),
+            onRemoveItem: () => Alert.alert('Item was removed'),
+            showRemoveIcon: true,
           }}
         />
-      }
-      dropdownIconStyle={{ top: 20, right: 20 }}
-      listHeaderComponent={
-        <View style={styles.customComponentContainer}>
-          <Text style={styles.text}>
-            💡 You can add any component to the top of this list
-          </Text>
-          <View style={styles.fixToText}>
-            <Button
-              title="Left button"
-              onPress={() => Alert.alert('Left button pressed')}
-              color="#007AFF"
-            />
-            <Button
-              title="Right button"
-              onPress={() => Alert.alert('Right button pressed')}
-            />
-          </View>
-        </View>
-      }
-      listFooterComponent={
-        <View style={styles.customComponentContainer}>
-          <Text>You can add any component to the bottom of this list</Text>
-        </View>
-      }
-      modalControls={{
-        modalOptionsContainerStyle: {
-          padding: 10,
-          backgroundColor: 'cyan',
-        },
-        modalProps: {
-          supportedOrientations: [
-            'portrait',
-            'portrait-upside-down',
-            'landscape',
-            'landscape-left',
-            'landscape-right',
-          ],
-          transparent: false,
-        },
-      }}
-      listComponentStyles={{
-        listEmptyComponentStyle: {
-          color: 'red',
-        },
-        itemSeparatorStyle: {
-          opacity: 0,
-          borderColor: 'white',
-          borderWidth: 2,
-          backgroundColor: 'cyan',
-        },
-        sectionHeaderStyle: {
-          padding: 10,
-          backgroundColor: 'cyan',
-        },
-      }}
-      listControls={{
-        selectAllText: 'Choose everything',
-        unselectAllText: 'Remove everything',
-        selectAllCallback: () => Alert.alert('You selected everything'),
-        unselectAllCallback: () => Alert.alert('You removed everything'),
-        emptyListMessage: 'No record found',
-      }}
-      selectedItemsControls={{
-        removeItemIcon: (
-          <Image
-            source={{
-              uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA',
-            }}
-            style={{ tintColor: 'white', height: 12, width: 12 }}
-          />
-        ),
-        onRemoveItem: () => Alert.alert('Item was removed'),
-        showRemoveIcon: true,
-      }}
-    />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
