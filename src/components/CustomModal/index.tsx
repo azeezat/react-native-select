@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { PropsWithChildren, ReactElement } from 'react';
+import React from 'react';
 import {
   KeyboardAvoidingView,
   Modal,
@@ -13,18 +13,6 @@ import {
 import { colors } from '../../styles/colors';
 import { TCustomModalControls } from 'src/types/index.types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-// In iOS, `SafeAreaView` does not automatically account on keyboard.
-// Therefore, for iOS we need to wrap the content in `KeyboardAvoidingView`.
-const ModalContentWrapper = ({ children }: PropsWithChildren): ReactElement => {
-  return Platform.OS === 'ios' ? (
-    <KeyboardAvoidingView style={[{ flex: 1 }]} behavior="padding">
-      {children}
-    </KeyboardAvoidingView>
-  ) : (
-    <>{children}</>
-  );
-};
 
 const CustomModal = ({
   visible,
@@ -44,15 +32,13 @@ const CustomModal = ({
       animationType="fade"
       {...modalControls?.modalProps}
     >
-      {/*Used to fix the select with search box behavior in iOS*/}
-      <ModalContentWrapper>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
         <TouchableOpacity
           onPress={onRequestClose}
-          style={[
-            styles.modalContainer,
-            styles.modalBackgroundStyle,
-            modalControls?.modalBackgroundStyle,
-          ]}
+          style={[styles.modalContainer, modalControls?.modalBackgroundStyle]}
           aria-label="close modal"
         >
           {/* Added this `TouchableWithoutFeedback` wrapper because of the closing modal on expo web */}
@@ -69,7 +55,7 @@ const CustomModal = ({
             </View>
           </TouchableWithoutFeedback>
         </TouchableOpacity>
-      </ModalContentWrapper>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };
@@ -78,8 +64,8 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  modalBackgroundStyle: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
   modalOptionsContainer: {
     maxHeight: '50%',
     backgroundColor: colors.white,
