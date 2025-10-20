@@ -64,30 +64,25 @@ export default function Root() {
 ```js
 import React from 'react';
 import Dropdown from 'react-native-input-select';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [country, setCountry] = React.useState();
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <Dropdown
-          label="Country"
-          placeholder="Select an option..."
-          options={[
-            { label: 'Nigeria', value: 'NG' },
-            { label: 'Åland Islands', value: 'AX' },
-            { label: 'Algeria', value: 'DZ' },
-            { label: 'American Samoa', value: 'AS' },
-            { label: 'Andorra', value: 'AD' },
-          ]}
-          selectedValue={country}
-          onValueChange={(value) => setCountry(value)}
-          primaryColor={'green'}
-        />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <Dropdown
+      label="Country"
+      placeholder="Select an option..."
+      options={[
+        { label: 'Nigeria', value: 'NG' },
+        { label: 'Åland Islands', value: 'AX' },
+        { label: 'Algeria', value: 'DZ' },
+        { label: 'American Samoa', value: 'AS' },
+        { label: 'Andorra', value: 'AD' },
+      ]}
+      selectedValue={country}
+      onValueChange={(value) => setCountry(value)}
+      primaryColor={'green'}
+    />
   );
 }
 ```
@@ -98,113 +93,108 @@ export default function App() {
 import React from 'react';
 import Dropdown from 'react-native-input-select';
 import { View, StyleSheet, Text, Button, Alert, Image } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [country, setCountry] = React.useState();
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <Dropdown
-          label="Customized components in list"
-          placeholder="Select multiple countries..."
-          options={countries.slice(0, 30)}
-          optionLabel={'name'}
-          optionValue={'code'}
-          selectedValue={country}
-          onValueChange={(itemValue: any) => setCountry(itemValue)}
-          isMultiple
-          isSearchable
-          primaryColor={'orange'}
-          dropdownStyle={{
-            borderWidth: 0, // To remove border, set borderWidth to 0
-          }}
-          dropdownIcon={
-            <Image
-              style={styles.tinyLogo}
-              source={{
-                uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-              }}
-            />
-          }
-          dropdownIconStyle={{ top: 20, right: 20 }}
-          listHeaderComponent={
-            <View style={styles.customComponentContainer}>
-              <Text style={styles.text}>
-                💡 You can add any component to the top of this list
-              </Text>
-              <View style={styles.fixToText}>
-                <Button
-                  title="Left button"
-                  onPress={() => Alert.alert('Left button pressed')}
-                  color="#007AFF"
-                />
-                <Button
-                  title="Right button"
-                  onPress={() => Alert.alert('Right button pressed')}
-                />
-              </View>
-            </View>
-          }
-          listFooterComponent={
-            <View style={styles.customComponentContainer}>
-              <Text>You can add any component to the bottom of this list</Text>
-            </View>
-          }
-          modalControls={{
-            modalOptionsContainerStyle: {
-              padding: 10,
-              backgroundColor: 'cyan',
-            },
-            modalProps: {
-              supportedOrientations: [
-                'portrait',
-                'portrait-upside-down',
-                'landscape',
-                'landscape-left',
-                'landscape-right',
-              ],
-              transparent: false,
-            },
-          }}
-          listComponentStyles={{
-            listEmptyComponentStyle: {
-              color: 'red',
-            },
-            itemSeparatorStyle: {
-              opacity: 0,
-              borderColor: 'white',
-              borderWidth: 2,
-              backgroundColor: 'cyan',
-            },
-            sectionHeaderStyle: {
-              padding: 10,
-              backgroundColor: 'cyan',
-            },
-          }}
-          listControls={{
-            selectAllText: 'Choose everything',
-            unselectAllText: 'Remove everything',
-            selectAllCallback: () => Alert.alert('You selected everything'),
-            unselectAllCallback: () => Alert.alert('You removed everything'),
-            emptyListMessage: 'No record found',
-          }}
-          selectedItemsControls={{
-            removeItemIcon: (
-              <Image
-                source={{
-                  uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA',
-                }}
-                style={{ tintColor: 'white', height: 12, width: 12 }}
-              />
-            ),
-            onRemoveItem: () => Alert.alert('Item was removed'),
-            showRemoveIcon: true,
+    <Dropdown
+      label="Customized components in list"
+      placeholder="Select multiple countries..."
+      options={countries.slice(0, 30)}
+      optionLabel={'name'}
+      optionValue={'code'}
+      selectedValue={country}
+      onValueChange={(itemValue: any) => setCountry(itemValue)}
+      isMultiple
+      isSearchable
+      primaryColor={'orange'}
+      dropdownStyle={{
+        borderWidth: 0, // To remove border, set borderWidth to 0
+      }}
+      dropdownIcon={
+        <Image
+          style={styles.tinyLogo}
+          source={{
+            uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
           }}
         />
-      </SafeAreaView>
-    </SafeAreaProvider>
+      }
+      dropdownIconStyle={{ top: 20, right: 20 }}
+      listHeaderComponent={
+        <View style={styles.customComponentContainer}>
+          <Text style={styles.text}>
+            💡 You can add any component to the top of this list
+          </Text>
+          <View style={styles.fixToText}>
+            <Button
+              title="Left button"
+              onPress={() => Alert.alert('Left button pressed')}
+              color="#007AFF"
+            />
+            <Button
+              title="Right button"
+              onPress={() => Alert.alert('Right button pressed')}
+            />
+          </View>
+        </View>
+      }
+      listFooterComponent={
+        <View style={styles.customComponentContainer}>
+          <Text>You can add any component to the bottom of this list</Text>
+        </View>
+      }
+      modalControls={{
+        modalOptionsContainerStyle: {
+          padding: 10,
+          backgroundColor: 'cyan',
+        },
+        modalProps: {
+          supportedOrientations: [
+            'portrait',
+            'portrait-upside-down',
+            'landscape',
+            'landscape-left',
+            'landscape-right',
+          ],
+          transparent: false,
+        },
+      }}
+      listComponentStyles={{
+        listEmptyComponentStyle: {
+          color: 'red',
+        },
+        itemSeparatorStyle: {
+          opacity: 0,
+          borderColor: 'white',
+          borderWidth: 2,
+          backgroundColor: 'cyan',
+        },
+        sectionHeaderStyle: {
+          padding: 10,
+          backgroundColor: 'cyan',
+        },
+      }}
+      listControls={{
+        selectAllText: 'Choose everything',
+        unselectAllText: 'Remove everything',
+        selectAllCallback: () => Alert.alert('You selected everything'),
+        unselectAllCallback: () => Alert.alert('You removed everything'),
+        emptyListMessage: 'No record found',
+      }}
+      selectedItemsControls={{
+        removeItemIcon: (
+          <Image
+            source={{
+              uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA',
+            }}
+            style={{ tintColor: 'white', height: 12, width: 12 }}
+          />
+        ),
+        onRemoveItem: () => Alert.alert('Item was removed'),
+        showRemoveIcon: true,
+      }}
+    />
   );
 }
 
