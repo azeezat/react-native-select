@@ -6,11 +6,7 @@
  */
 
 import { StatusBar, StyleSheet, useColorScheme } from 'react-native';
-import {
-  SafeAreaProvider,
-  SafeAreaView,
-  // useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Examples } from './src/example';
 
 function App() {
@@ -19,20 +15,12 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <SafeAreaView style={styles.container}>
+        <Examples />
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
-
-const AppContent = () => {
-  // const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <Examples />
-    </SafeAreaView>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {

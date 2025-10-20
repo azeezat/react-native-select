@@ -102,6 +102,9 @@
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
     ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-setup.tsx"
+    ],
     "coverageReporters": [
       "html",
       "text",
