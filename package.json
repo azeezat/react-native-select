@@ -1,6 +1,6 @@
 {
   "name": "react-native-input-select",
-  "version": "2.1.8",
+  "version": "2.1.9-next.0",
   "description": "A customizable dropdown selection package for react-native for android and iOS with multiple select and search capabilities.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -28,6 +28,7 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
     "release": "release-it --ci",
+    "next-release": "release-it prerelease --preRelease=next",
     "example": "yarn --cwd example",
     "bootstrap": "yarn example && yarn",
     "start": "yarn example start",
