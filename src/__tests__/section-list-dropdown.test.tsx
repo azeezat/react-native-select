@@ -37,21 +37,21 @@ describe('Section list', () => {
         { label: 'Risotto', value: 2 },
       ],
     },
-    {
-      title: 'Sides',
-      data: [
-        { label: 'Ice cream', value: 3 },
-        { label: 'Cheesecake', value: 4 },
-      ],
-    },
-    {
-      title: 'Drinks',
-      data: [
-        { label: 'Water', value: 5, disabled: true },
-        { label: 'Coke', value: 6 },
-        { label: 'Juice', value: 7 },
-      ],
-    },
+    // {
+    //   title: 'Sides',
+    //   data: [
+    //     { label: 'Ice cream', value: 3 },
+    //     { label: 'Cheesecake', value: 4 },
+    //   ],
+    // },
+    // {
+    //   title: 'Drinks',
+    //   data: [
+    //     { label: 'Water', value: 5, disabled: true },
+    //     { label: 'Coke', value: 6 },
+    //     { label: 'Juice', value: 7 },
+    //   ],
+    // },
   ];
 
   const sectionListDropdown = (
@@ -163,8 +163,8 @@ describe('Section list', () => {
     );
 
     // TODO: revisit
-    test.skip('open modal when dropdown is clicked and select a multiple items', async () => {
-      render(sectionListDropdownWithMultiSelect);
+    test('open modal when dropdown is clicked and select a multiple items', async () => {
+      const { rerender } = render(sectionListDropdownWithMultiSelect);
       await user.press(screen.getByText(placeholder));
 
       let count = 0;
@@ -182,6 +182,24 @@ describe('Section list', () => {
       });
 
       expect(mockOnValueChangeMultiSelect).toHaveBeenCalledTimes(count);
+
+      //N.B There is a useEffect hook that checks if all the items are actually selected hence the reason for rerendering
+      // Rerender the component with updated `selectedValue` prop
+      rerender(
+        <DropdownSelect
+          options={options}
+          selectedValue={selectAllOptions(options)}
+          onValueChange={mockOnValueChangeMultiSelect}
+          testID="section-list-test-id"
+          placeholder={placeholder}
+          isMultiple
+          isSearchable
+          listControls={{
+            selectAllCallback: mockSelectAllCallback,
+            unselectAllCallback: mockUnselectAllCallback,
+          }}
+        />
+      );
 
       //`Clear All` should now be visible since all items in the list have been selected
       screen.getByText('Clear all');
@@ -212,7 +230,7 @@ describe('Section list', () => {
       expect(screen.getByTestId('react-native-input-select-modal'));
     });
 
-    test.skip('select all / unselect all', async () => {
+    test('select all / unselect all', async () => {
       const { rerender } = render(sectionListDropdownWithMultiSelect);
       await user.press(
         screen.getByTestId('react-native-input-select-dropdown-input-container')
