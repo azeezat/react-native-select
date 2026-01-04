@@ -10,9 +10,9 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ github.token }}
       - name: Install the dependencies
         uses: borales/actions-yarn@v4
         with:
