@@ -31,7 +31,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Release
-        run: yarn release-it --ci
+        run: yarn release --ci
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
