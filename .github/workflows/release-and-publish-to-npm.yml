@@ -2,6 +2,10 @@ name: 'Release & Publish to NPM'
 
 on: workflow_dispatch
 
+permissions:
+  id-token: write # Required for OIDC authentication
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -11,24 +15,30 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ github.token }}
-      - name: Install the dependencies
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
       - name: Initialize Git user
         run: |
           git config --global user.email "azeezat94@gmail.com"
           git config --global user.name "Release Workflow"
-      - name: Initialize npm config
-        run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Release
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm to latest
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish to npm
         run: npm run release --ci
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+
       - name: End Message
         run: echo "All done"
