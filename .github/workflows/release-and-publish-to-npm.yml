@@ -2,16 +2,12 @@ name: 'Release & Publish to NPM'
 
 on: workflow_dispatch
 
-permissions:
-  id-token: write # Required for OIDC authentication
-  contents: write
-
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      packages: write
-      contents: read
+      id-token: write # Required for OIDC authentication
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
