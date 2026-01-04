@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { colors } from '../../styles/colors';
-import { TCustomModalControls } from 'src/types/index.types';
+import { TCustomModalControls } from '../../types/index.types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CustomModal = ({

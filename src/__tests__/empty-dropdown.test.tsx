@@ -3,7 +3,7 @@ import DropdownSelect from '../index';
 import { render, screen, userEvent } from '@testing-library/react-native';
 import '@testing-library/jest-dom';
 import { Platform, Pressable, Text } from 'react-native';
-import { DropdownSelectHandle } from 'src/types/index.types';
+import { DropdownSelectHandle } from '../types/index.types';
 
 describe('Initial state of component', () => {
   beforeAll(() => {

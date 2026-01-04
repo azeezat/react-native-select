@@ -15,7 +15,7 @@ import {
   TSelectedItem,
   TSelectedItemsControls,
   TSelectedItemWithReactComponent,
-} from 'src/types/index.types';
+} from '../../types/index.types';
 
 export interface DropdownSelectedItemsContainerProps {
   openModal: () => void;

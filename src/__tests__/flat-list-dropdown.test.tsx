@@ -2,7 +2,7 @@ import React from 'react';
 import DropdownSelect from '../index';
 import { render, screen, userEvent } from '@testing-library/react-native';
 import '@testing-library/jest-dom';
-import { TFlatList } from 'src/types/index.types';
+import { TFlatList } from '../types/index.types';
 import { Text } from 'react-native';
 
 describe('Flat List', () => {

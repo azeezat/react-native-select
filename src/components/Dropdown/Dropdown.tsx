@@ -5,7 +5,7 @@ import DropdownSelectedItemsContainer, {
 } from './DropdownSelectedItemsContainer';
 import { colors } from '../../styles/colors';
 import { typography } from '../../styles/typography';
-import { TDropdownInputProps } from 'src/types/index.types';
+import { TDropdownInputProps } from '../../types/index.types';
 
 const Dropdown = ({
   testID,
