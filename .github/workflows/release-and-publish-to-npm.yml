@@ -21,27 +21,19 @@ jobs:
           git config --global user.email "azeezat94@gmail.com"
           git config --global user.name "Release Workflow"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
+          cache: 'yarn'
 
-      - name: Update npm to latest
-        run: npm install -g npm@latest
+      - name: Install dependencies
+        run: yarn install --immutable
 
-      - name: Install the dependencies
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
-
-      - name: Publish to npm
-        run: npm run release --cidr
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
+      - name: Release
+        run: yarn release-it --ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: End Message
         run: echo "All done"

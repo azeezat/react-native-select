@@ -24,6 +24,7 @@
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   },
   "npm": {
-    "publish": true
+    "publish": true,
+    "skipChecks": true
   }
 }
