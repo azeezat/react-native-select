@@ -62,7 +62,8 @@
   },
   "homepage": "https://github.com/azeezat/react-native-select#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@babel/plugin-transform-private-methods": "^7.24.7",
