@@ -22,6 +22,7 @@ import {
   extractPropertyFromArray,
   getSelectionsData,
   removeDisabledItems,
+  shallowArrayEqual,
 } from './utils';
 import {
   useSelectionHandler,
@@ -152,13 +153,17 @@ export const DropdownSelect = forwardRef<DropdownSelectHandle, DropdownProps>(
     });
 
     useEffect(() => {
-      isMultiple
-        ? setSelectedItems(selectedValue as TSelectedItem[])
-        : setSelectedItem(selectedValue as TSelectedItem);
-
-      // setSelectedItems already updates selectedValue, so omit it from dependency array to avoid infinite loop
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setSelectedItems, setSelectedItem, isMultiple, onValueChange]);
+      if (isMultiple) {
+        const next = (selectedValue as TSelectedItem[] | undefined) ?? [];
+        setSelectedItems((prev) =>
+          shallowArrayEqual(prev, next) ? prev : next
+        );
+      } else {
+        const next =
+          (selectedValue as TSelectedItem | undefined) ?? (null as any);
+        setSelectedItem((prev) => (Object.is(prev, next) ? prev : next));
+      }
+    }, [selectedValue, isMultiple, setSelectedItems, setSelectedItem]);
 
     /*===========================================
      * List type
