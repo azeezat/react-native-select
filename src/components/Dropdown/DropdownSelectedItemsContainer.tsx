@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   View,
-  Pressable,
   ScrollView,
   StyleSheet,
   TextStyle,
+  TouchableOpacity,
 } from 'react-native';
 import { colors } from '../../styles/colors';
 import { inputStyles } from '../../styles/input';
@@ -56,17 +56,16 @@ const DropdownSelectedItemsContainer = ({
   };
 
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={() => openModal()}
-      style={({ pressed }) => [
-        pressed && {
+      style={[
+        {
           ...inputStyles.inputFocusState,
           borderColor: primaryColor,
         },
         { ...inputStyles.input, ...dropdownStyle },
         error && //this must be last
-          error !== '' &&
-          !pressed && {
+          error !== '' && {
             ...inputStyles.inputFocusErrorState,
             ...dropdownErrorStyle,
           },
@@ -139,7 +138,7 @@ const DropdownSelectedItemsContainer = ({
           )}
         </View>
       </ScrollView>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
