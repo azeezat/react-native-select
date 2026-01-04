@@ -18,7 +18,7 @@ jobs:
 
       - name: Initialize Git user
         run: |
-          git config --global user.email "azeezat94@gmail.com"
+          git config user.name ${{github.actor}}
           git config --global user.name "Release Workflow"
 
       - uses: actions/setup-node@v4
