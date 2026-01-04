@@ -7249,7 +7249,7 @@ regjsparser@^0.13.0:
   dependencies:
     jsesc "~3.1.0"
 
-release-it@^19.0.0:
+release-it@^19.2.2:
   version "19.2.2"
   resolved "https://registry.yarnpkg.com/release-it/-/release-it-19.2.2.tgz#8709c937c433eb5499f7d65add1bc8f183096e27"
   integrity sha512-57TBUTBbBXLJsPufYS+Hsb1dSZKZ0ktiYgPkNc3Pmlq/QQtH9X0oD0SG2ib5CsXHTI11m19pyK60NXmvtE6cLg==
